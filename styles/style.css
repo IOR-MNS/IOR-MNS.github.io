@@ -1,23 +1,52 @@
 html {
 	font-size: 10px;
 	font-family: 'Montserrat', sans-serif;
-	background-color: lightblue; /*#FFA0D2*/
+	background-color: black; /*#FFA0D2*/
+	color: white;
 }
 
 body {
-	width: 600px;
+	/*width: 600px;*/
 	margin: 0 auto;
-	background-color: #FF9500;
+	/*background-color: #FF9500;*/
 	padding: 0 20px 20px 20px;
-	border: 5px solid black;
+	/*border: 5px solid black;*/
+}
+
+html:active {
+	color: lightpink;
+}
+a {
+	color: white;
+	text-decoration: none;
+}
+
+a:active {
+	color: lightpink;
+}
+/*
+a:visited {
+	color: white;
+}*/
+/*a:focus,
+a:hover,
+a:active {
+	color: black;
+}*/
+
+img {
+	display: block;
+	margin: 10px 0;
 }
 
 h1 {
 	margin: 0;
 	padding: 20px 0;
-	font-size: 60px;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 50px;
 	text-align: center;
-	text-shadow: 3px 3px 1px black;
+	text-shadow: 3px 3px 20px lightgray;
+	color: pink;
 }
 h2 {
 	font-size: 20px;
@@ -28,18 +57,4 @@ p, li {
 	font-size: 16px;
 	line-height: 2;
 	letter-spacing: 1px;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-}
-
-a:hover,
-a:active,
-a:focus {
-	color: black;
 }
