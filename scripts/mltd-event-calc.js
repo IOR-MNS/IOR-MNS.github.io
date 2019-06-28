@@ -49,7 +49,7 @@ var EXP_PER_LIVE = EXP_PER_MM;
 var MONEY_PER_LIVE = MONEY_PER_MM;
 var FAN_PER_LIVE = FAN_PER_MM;
 var AFFECTION_PER_LIVE = AFFECTION_PER_MM;
-var POvar_PER_LIVE;
+var POINT_PER_LIVE;
 var ITEM_PER_LIVE;
 
 // 영업 1회당 소모하는 스태미너에 따라 달라진다. 
@@ -57,7 +57,7 @@ var EXP_PER_WORK;
 var MONEY_PER_WORK;
 var FAN_PER_WORK;
 var AFFECTION_PER_WORK;
-var POvar_PER_WORK;
+var POINT_PER_WORK;
 var ITEM_PER_WORK;
 
 // 이벤트 유형에 따라 달라지는 변수가 있다. 
@@ -65,7 +65,7 @@ var EXP_PER_EVENT = EXP_PER_MM;
 var MONEY_PER_EVENT = MONEY_PER_MM;
 var FAN_PER_EVENT = FAN_PER_MM;
 var AFFECTION_PER_EVENT = AFFECTION_PER_MM;
-var POvar_PER_EVENT;
+var POINT_PER_EVENT;
 var ITEM_PER_EVENT;	// 이벤트 1회당 소모 재화
 
 // 이벤트 유형에 따라 달라진다. 
@@ -75,50 +75,37 @@ var DAILY_ITEM;		// 매일 지급되는 Item
 var PLAYTIME = LEAST_PLAYTIME;		// 사용자별 플레이할 곡의 길이 설정 
 var WORKTIME = MEAN_WORKTIME;		// 사용자별 영업 소요시간 설정 
 
-
-
-var maxExp = function ( level );
-
-
-var maxStamina = function ( level );
-
-
-var simulateEvent = function ( inData, outData );
-
 // 해당 레벨의 최대 경험치 
-var maxExp( var level )
+var maxExp = function( level )
 {
-	if( level < 1 ) prvarf("maxExp: 1 미만의 level 인자 (%d)\n", level); 
 	return ( level * 100 ) - 50;
 }
 
 // 해당 레벨의 최대 스태미너 
-var maxStamina( var level )
+var maxStamina = function( level )
 {
-	if( level < 1 ) prvarf("maxStamina: 1 미만의 level 인자 (%d)\n", level);
-	
 	if( level <= 58 )
-		return 60 + ( level / 2 );
+		return 60 + ( parseInt(level / 2) );
 	
 	else if( level <= 148 )
-		return 90 + ( ( level - 60 ) / 3 );
+		return 90 + ( parseInt(( level - 60 ) / 3) );
 	
 	else
-		return 120 + ( ( level - 150 ) / 4 );
+		return 120 + ( parseInt(( level - 150 ) / 4) );
 }
 
 // 시뮬레이션 함수 
-var *simulateEvent( var *inData, var *outData )
+var simulateEvent = function( inData, outData )
 {
 	////////////////////* 받아온 데이터 복사 *////////////////////
 	var level = inData[0],				exp = inData[1],				stamina = inData[2],		ticket = inData[3],			maxDrink = inData[4];
-	var item = inData[5],				povar = inData[6],				targetPovar = inData[7],	eventType = inData[8],		playType = inData[9];
+	var item = inData[5],				point = inData[6],				targetPoint = inData[7],	eventType = inData[8],		playType = inData[9];
 	var liveConsumption = inData[10],	workConsumption = inData[11],	eventConsumption = inData[12];
 	
 	
 	////////////////////* 추가 변수 선언  *////////////////////
 	var liveAffection = 0, workAffection = 0, money = 0, liveFan = 0, workFan = 0;
-	var reachablePovar = 0; 
+	var reachablePoint = 0; 
 	var liveCount = 0, workCount = 0, eventCount = 0;
 	var temp = 0;
 	
@@ -136,7 +123,7 @@ var *simulateEvent( var *inData, var *outData )
 		{
 			if( maxDrink == 0 )	// 최초로 자원이 모두 떨어진 순간의 점수를 기록. 플레이어의 현재 자원으로 도달 가능한 점수임. 
 			{
-				reachablePovar = povar;
+				reachablePoint = point;
 			}
 			
 			maxDrink--;
@@ -149,7 +136,7 @@ var *simulateEvent( var *inData, var *outData )
 		{
 			if( maxDrink == 0 )
 			{
-				reachablePovar = povar;
+				reachablePoint = point;
 			}
 			
 			maxDrink--;
@@ -162,7 +149,7 @@ var *simulateEvent( var *inData, var *outData )
 		{
 			if( maxDrink == 0 )
 			{
-				reachablePovar = povar;
+				reachablePoint = point;
 			}
 			
 			maxDrink--;
@@ -177,10 +164,10 @@ var *simulateEvent( var *inData, var *outData )
 	if( playType == LIVERUN )			//라이브런 
 	{
 		// 일반 라이브 실행
-		temp = stamina / liveConsumption;
+		temp = parseInt(stamina / liveConsumption);
 		
 		exp				+=	temp * EXP_PER_LIVE;
-		povar			+=	temp * POvar_PER_LIVE;
+		point			+=	temp * POINT_PER_LIVE;
 		item			+=	temp * ITEM_PER_LIVE;
 		money			+=	temp * MONEY_PER_LIVE;
 		liveAffection	+=	temp * AFFECTION_PER_LIVE;
@@ -192,7 +179,7 @@ var *simulateEvent( var *inData, var *outData )
 	else if( playType == WORKRUN )		//영업런
 	{
 		// 영업 실행
-		temp = stamina / workConsumption;
+		temp = parseInt(stamina / workConsumption);
 		
 		// 시어터 이벤트의 영업에서만 라이브 티켓을 획득함. 
 		if( eventType == THEATER )
@@ -203,7 +190,7 @@ var *simulateEvent( var *inData, var *outData )
 		// 투어 이벤트의 영업에서만 포인트와 재화를 획득함. 
 		if( eventType == TOUR )
 		{
-			povar	+=	temp * POvar_PER_WORK;
+			point	+=	temp * POINT_PER_WORK;
 			item	+=	temp * ITEM_PER_WORK;
 		}
 		
@@ -219,10 +206,10 @@ var *simulateEvent( var *inData, var *outData )
 		if( eventType == THEATER )
 		{
 			// 티켓 라이브 실행
-			temp = ticket / liveConsumption;
+			temp = parseInt(ticket / liveConsumption);
 			
 			// 티켓 라이브에선 exp와 money가 증가하지 않음. 
-			povar			+=	temp * POvar_PER_LIVE;
+			point			+=	temp * POINT_PER_LIVE;
 			item			+=	temp * ITEM_PER_LIVE;
 			liveAffection	+=	temp * AFFECTION_PER_LIVE;
 			liveFan			+=	temp * FAN_PER_LIVE;
@@ -233,11 +220,11 @@ var *simulateEvent( var *inData, var *outData )
 	}
 	
 	// 이벤트 라이브 실행
-	temp = item / eventConsumption;
+	temp = parseInt(item / eventConsumption);
 	
 	// 이벤트 라이브에선 item이 증가하지 않음. 
 	exp				+=	temp * EXP_PER_EVENT;
-	povar			+=	temp * POvar_PER_EVENT;
+	point			+=	temp * POINT_PER_EVENT;
 	money			+=	temp * MONEY_PER_EVENT;
 	liveAffection	+=	temp * AFFECTION_PER_EVENT;
 	liveFan			+=	temp * FAN_PER_EVENT;
@@ -258,26 +245,26 @@ var *simulateEvent( var *inData, var *outData )
 	}
 	
 	// 목표 점수 도달시 시뮬레이션 무한 루프 종료
-	if( povar >= targetPovar )
+	if( point >= targetPoint )
 		break;
 	}
 	
 	// 추가적인 자원 소모 없이 목표 점수를 달성했다면
-	// reachablePovar == reachedPovar 이다.
+	// reachablePoint == reachedPoint 이다.
 	if( maxDrink >= 0 ){
-		reachablePovar = povar;
+		reachablePoint = point;
 	}
 	
 	outData[0] = level,				outData[1] = exp,				outData[2] = maxDrink,			outData[3] = stamina;
 	outData[4] = ticket,			outData[5] = item,				outData[6] = money,				outData[7] = liveAffection;
 	outData[8] = workAffection,		outData[9] = liveFan,			outData[10] = workFan,			outData[11] = liveCount;
-	outData[12] = workCount,		outData[13] = eventCount,		outData[14] = reachablePovar,	outData[15] = povar;
+	outData[12] = workCount,		outData[13] = eventCount,		outData[14] = reachablePoint,	outData[15] = point;
 	
 	return outData;
 }
 
 
-var main( void )
+var main = function()
 {
 	////////////////////* 변수 선언 *////////////////////
 	
@@ -289,31 +276,33 @@ var main( void )
 	var level = 0, exp = 0, stamina = 0, ticket = 0, maxDrink = 0;
 	
 	// 재화, 점수, 목표 점수  
-	var item = 0, povar = 0, targetPovar = 0;
+	var item = 0, point = 0, targetPoint = 0;
 	
 	// 플레이 유형, 라이브 배수, 영업 소모 스태미너, 이벤트 배수  
 	var playType = 0, liveConsumption = 0, workConsumption = 0, eventConsumption = 0;
 	
 	// 데이터를 함수과 주고받을 때 사용 
-	var inData[INDATA_SIZE] = {0,};
-	var outData[OUTDATA_SIZE] = {0,};
+	var inData = new Array();
+	var outData = new Array();
 	
 	// 임시 데이터 저장용
 	var temp = 0;
 	var originalStamina = 0;	// 출력결과에 본래 스태미너를 표시하기 위해 
 	var originalItem = 0;		// 출력결과에 본래 이벤트 재화 개수를 표시하기 위해 
 	
+	var i = 0;
+	var tempStr = "";
+	
 	////////////////////* 사용자에게서 데이터 입력 *////////////////////
-	prvarf("Comet\n");
-	prvarf("{\t[ 전제 조건 ]\t\t\t\t\t\t}\n"); 
-	prvarf("{\tMM 난이도, S랭크 클리어\t\t\t\t\t}\n");
-	prvarf("{\tPUSH 악곡, 이벤트곡 5.0배 효율\t\t\t\t}\n"); 
-	prvarf("\n\n"); 
+	document.write('Comet<br />');
+	document.write('{\t[ 전제 조건 ]\t\t\t\t\t\t}<br />'); 
+	document.write('{\tMM 난이도, S랭크 클리어\t\t\t\t\t}<br />');
+	document.write('{\tPUSH 악곡, 이벤트곡 5.0배 효율\t\t\t\t}<br />'); 
+	document.write('<br /><br />'); 
 	
-	
-	prvarf("\n이벤트 유형 ( 1: 시어터, 2 : 투어, 3 : 1주년 )\n");
-	prvarf(">> ");
-	scanf("%d", &eventType);
+	do {
+		eventType = Number(prompt('<br />이벤트 유형 ( 1: 시어터, 2 : 투어, 3 : 1주년 )<br />', '-1'));
+	} while ( !(eventType === 1 || eventType === 2 || eventType === 3) );
 	
 	if( eventType == 1 ) eventType = THEATER;
 	else if( eventType == 2 ) eventType = TOUR;
@@ -326,14 +315,14 @@ var main( void )
 	if( eventType == THEATER || eventType == FIRST )		// 시어터류. 재화를 180 단위로 사용 가능. 
 	{
 		// 시어터류 이벤트에선 영업으로 점수나 재화를 얻지 못한다. 
-		POvar_PER_WORK = 0;
+		POINT_PER_WORK = 0;
 		ITEM_PER_WORK = 0;
 		
 		// 라이브에서 획득하는 점수, 재화 
-		POvar_PER_LIVE = 85;
+		POINT_PER_LIVE = 85;
 		ITEM_PER_LIVE = 85;
 		
-		POvar_PER_EVENT = 537;
+		POINT_PER_EVENT = 537;
 		ITEM_PER_EVENT = 180;	// 이벤트 라이브를 1회 돌리는데 필요한 재화
 		
 		// 매일 지급하는 재화 
@@ -352,10 +341,10 @@ var main( void )
 	else if( eventType == TOUR )	// 투어. 진척도를 재화 단위로 사용, 20단위로 사용 가능.
 	{
 		// 라이브에서 획득하는 점수, 재화 
-		POvar_PER_LIVE = 140;
-		ITEM_PER_LIVE = 30 / 5;
+		POINT_PER_LIVE = 140;
+		ITEM_PER_LIVE = parseInt(30 / 5);
 		
-		POvar_PER_EVENT = 144 * 5;
+		POINT_PER_EVENT = 144 * 5;
 		ITEM_PER_EVENT = 20;	// 이벤트 라이브를 1회 돌리는데 필요한 재화
 		
 		// 매일 지급하는 재화 
@@ -364,46 +353,39 @@ var main( void )
 	
 	if( eventType == FIRST )
 	{
-		prvarf("\n1주년 이벤트 당시의 진행 기간을 자동 설정합니다.\n");
+		document.write('<br />1주년 이벤트 당시의 진행 기간을 자동 설정합니다.<br />');
 		eventDuration = 13 * 24 * 60;
 		item += 13 * DAILY_ITEM;
 	}
 	
 	if( eventType != FIRST )
-	{ 
-		prvarf("\n이벤트 종료까지 남은 기간 입력\n");
-		prvarf("\n(이벤트 미션의 남은 기간에서 日(일) 앞에 적힌 값을 입력)\n");
-		prvarf(">> ");
-		scanf("%d", &temp);
+	{
+		do {
+			temp = Number(prompt('이벤트 종료까지 남은 기간 입력\n(이벤트 미션의 남은 기간에서 日(일) 앞에 적힌 값을 입력)', '-1'));
+		} while (temp < 0);
 		item += temp * DAILY_ITEM;				// 남은일수만큼 이벤트 재화를 지급받는다. 시뮬레이션 시작 당일은 이미 지급받았을 것이므로 제외. 
 		eventDuration = temp * 24 * 60;
 		
-		prvarf("(이벤트 미션의 남은 기간에서 時間(시간) 앞에 적힌 값을 입력)\n");
-		prvarf(">> ");
-		scanf("%d", &temp);
+		do {
+			temp = Number(prompt('이벤트 종료까지 남은 기간 입력\n(이벤트 미션의 남은 기간에서 時間(시간) 앞에 적힌 값을 입력)', '-1'));
+		} while (temp < 0);
 		if( temp >= 21 ) item += DAILY_ITEM;	// 이벤트 종료시각이 20시 59분이므로, 21시부터 24시까지는 (남은일수 - 1)日 (23 ~ 21)時間 으로 표시된다.
 									// 이 경우, 위 코드에서 실제보다 1개 적게 이벤트 재화를 지급받는 것으로 계산되었으므로 정정한다. 
 		eventDuration += temp * 60;
 	}
 	
-	prvarf("획득 재화: %d\n", item); 
-	prvarf("잔여 기간: %d분\n", eventDuration); 
+	document.write('획득 재화: ', item); 
+	document.write('잔여 기간: ', eventDuration); 
 	
 	
-	prvarf("\n자연 회복 스태미너 활용률 ( 0 ~ 100 )\n");
-	prvarf(">> "); 
-	scanf("%d", &generatedStaminaUsage);
-	stamina += ( ( eventDuration / 5 ) * generatedStaminaUsage ) / 100;
-	prvarf("자연 회복 스태미너 %d 반영함.\n", stamina); 
+	generatedStaminaUsage = Number(prompt('자연 회복 스태미너 활용률 ( 0 ~ 100 )'));
+	stamina += parseInt(( parseInt(( eventDuration / 5 )) * generatedStaminaUsage ) / 100);
+	document.write('자연 회복 스태미너', stamina, '반영함.<br />'); 
 	
 	// 플레이어 정보 입력
-	prvarf("\n레벨\n");
-	prvarf(">> "); 
-	scanf("%d", &level);
+	level = Number(prompt('레벨'));
 	
-	prvarf("\n경험치\n");
-	prvarf(">> "); 
-	scanf("%d", &exp);
+	exp = Number(prompt('경험치'));
 	
 	if( eventType == FIRST )
 	{
@@ -411,9 +393,8 @@ var main( void )
 	}
 	else if( eventType != FIRST )
 	{
-		prvarf("\n현재 스태미너\n");
-		prvarf(">> "); 
-		scanf("%d", &temp);
+		temp = Number(prompt('현재 스태미너'));
+		
 		originalStamina = temp;
 		stamina += temp;
 	}
@@ -425,9 +406,7 @@ var main( void )
 	}
 	else if( eventType == THEATER )
 	{
-		prvarf("\n현재 라이브 티켓\n");
-		prvarf(">> ");
-		scanf("%d", &ticket);
+		ticket = Number(prompt('현재 라이브 티켓'));
 	}
 	else if( eventType == TOUR )
 	{
@@ -435,27 +414,25 @@ var main( void )
 	}
 	
 	// 소지 드링크 입력
-	prvarf("\n사용할 드링크의 개수를 입력하세요.\n");
+	alert('사용할 드링크의 개수를 입력하세요.');
 	
-	for( var i = 10; i <= 30; i += 10 )
+	for( i = 10; i <= 30; i += 10 )
 	{
-		prvarf("%d 드링크: ", i);
-		scanf("%d", &temp);
+		tempStr = String(i);
+		tempStr += ' 드링크: ';
+		
+		temp = Number(prompt(tempStr));
 		stamina += i * temp;
 	}
-	prvarf("MAX 드링크: "); 
-	scanf("%d", &maxDrink);
+	maxDrink = Number(prompt('MAX 드링크: ')); 
 	
-	prvarf("\n쥬엘: ");
-	scanf("%d", &temp);
-	maxDrink += temp / 50; 
+	temp = Number(prompt('쥬엘: '));
+	maxDrink += parseInt(temp / 50); 
 	
 	// 기획득 재화와 점수 입력
 	if( eventType != FIRST )
 	{
-		prvarf("\n소지한 이벤트 재화\n"); 
-		prvarf(">> "); 
-		scanf("%d", &temp);
+		temp = Number(prompt('소지한 이벤트 재화')); 
 		
 		if( eventType == TOUR )	originalItem = temp * 20;
 		else					originalItem = temp;
@@ -468,9 +445,7 @@ var main( void )
 		if( eventType == TOUR )
 		{
 			item += temp * ITEM_PER_EVENT;
-			prvarf("\n현재 진행도\n");
-			prvarf(">> ");
-			scanf("%d", &temp);
+			temp = Number(prompt('현재 진행도'));
 			item += temp;
 			
 			originalItem += temp;
@@ -479,19 +454,15 @@ var main( void )
 	
 	if( eventType == FIRST )
 	{
-		povar = 0;
+		point = 0;
 	}
 	else
 	{
-		prvarf("\n현재 이벤트 점수\n");
-		prvarf(">> "); 
-		scanf("%d", &povar);
+		point = Number(prompt('현재 이벤트 점수: '));
 	}
 	
 	// 플레이 유형과 라이브, 영업, 이벤트 배수 입력 
-	prvarf("\n플레이 유형 ( 1: 라이브런, 2: 영업런 )\n"); 
-	prvarf(">> ");
-	scanf("%d", &playType);
+	playType = Number(prompt('플레이 유형 ( 1: 라이브런, 2: 영업런 )')); 
 	if( playType == 1 ) playType = LIVERUN;
 	else if( playType == 2 ) playType = WORKRUN;
 	
@@ -503,24 +474,22 @@ var main( void )
 		// 아래 데이터들은 정수형이라서 나누는 과정에서 오차가 발생하므로, 나중에 라이브 배율에서 함께 조정하기로 함. 
 		// AFFECTION_PER_LIVE
 		// FAN_PER_LIVE
-		// POvar_PER_LIVE
+		// POINT_PER_LIVE
 		// ITEM_PER_LIVE
 		
 		// 영업의 종류와 배수를 입력받고, 그에 따라 영업의 기초 데이터를 조정. 
-		prvarf("\n영업 1회당 소모 스태미너 ( 20, 25, 30, 40, 50, 60 중 입력 )\n");
-		prvarf(">> "); 
-		scanf("%d", &workConsumption);
+		workConsumption = Number(prompt('영업 1회당 소모 스태미너 ( 20, 25, 30, 40, 50, 60 중 입력 )'));
 		
 		//투어일 경우에만 영업으로 재화와 포인트를 획득한다. 
 		if( eventType == TOUR )
 		{
-			ITEM_PER_WORK = workConsumption / 5;
-			POvar_PER_WORK = ( workConsumption / 5 ) * 8;
+			ITEM_PER_WORK = parseInt(workConsumption / 5);
+			POINT_PER_WORK = parseInt(workConsumption / 5) * 8;
 		}
 		else
 		{
 			ITEM_PER_WORK = 0;
-			POvar_PER_WORK = 0;
+			POINT_PER_WORK = 0;
 		}
 		
 		if( workConsumption == 20 || workConsumption == 40 )
@@ -546,51 +515,46 @@ var main( void )
 		}
 	}
 	
-	
-	prvarf("\n라이브 배수\n");
+	tempStr = '라이브 배수 ';
 	
 	if( playType == WORKRUN )
 	{
-		if( eventType == FIRST )	prvarf("( 1 ~ 15배 )\n");
-		else						prvarf("( 1 ~ 10배 )\n");
+		if( eventType == FIRST )	tempStr += '( 1 ~ 15배 )';
+		else						tempStr += '( 1 ~ 10배 )';
 	}
-	if( playType == LIVERUN )		prvarf("( 1 / 2배 )\n"); 
+	if( playType == LIVERUN )		tempStr += '( 1 / 2배 )'; 
 	
-	prvarf(">> "); 
-	
-	scanf("%d", &liveConsumption);
+	liveConsumption = Number(prompt(tempStr));
 	liveConsumption *= 30;
-	temp = liveConsumption / 30;
+	temp = parseInt(liveConsumption / 30);
 	ITEM_PER_LIVE *= temp;
-	POvar_PER_LIVE *= temp;
+	POINT_PER_LIVE *= temp;
 	if( playType == WORKRUN ) FAN_PER_LIVE *= temp;
 	if( playType == WORKRUN ) AFFECTION_PER_LIVE *= temp;
 	
 	if( playType == WORKRUN )
 	{
-		AFFECTION_PER_LIVE /= 2;
-		FAN_PER_LIVE /= 2;
-		POvar_PER_LIVE = (var)ceil( (double)POvar_PER_LIVE * 0.7 );
-		ITEM_PER_LIVE = (var)ceil( (double)ITEM_PER_LIVE * 0.7 );
+		AFFECTION_PER_LIVE = parseInt(AFFECTION_PER_LIVE / 2);
+		FAN_PER_LIVE = parseInt(FAN_PER_LIVE / 2);
+		POINT_PER_LIVE = Math.ceil( POINT_PER_LIVE * 0.7 );
+		ITEM_PER_LIVE = Math.ceil( ITEM_PER_LIVE * 0.7 );
 	}
 	
 	
-	prvarf("\n이벤트 라이브 배수\n");
+	tempStr = '이벤트 라이브 배수 ';
 	
-	if( eventType == FIRST )	prvarf("( 1 / 2배 )\n"); 
-	if( eventType == TOUR )		prvarf("( 1 / 2 / 3배 )\n");
-	if( eventType == THEATER )	prvarf("( 1 / 2 / 4배 )\n"); 
+	if( eventType == FIRST )	tempStr += ('( 1 / 2배 )'); 
+	if( eventType == TOUR )		tempStr += ('( 1 / 2 / 3배 )');
+	if( eventType == THEATER )	tempStr += ('( 1 / 2 / 4배 )'); 
 	
-	prvarf(">> "); 
-	scanf("%d", &eventConsumption);
+	eventConsumption = Number(prompt(tempStr));
+	
 	eventConsumption *= ITEM_PER_EVENT;
-	temp = eventConsumption / ITEM_PER_EVENT;
-	POvar_PER_EVENT *= temp;
+	temp = parseInt(eventConsumption / ITEM_PER_EVENT);
+	POINT_PER_EVENT *= temp;
 	
 	// 목표 점수 입력 
-	prvarf("\n목표 이벤트 점수\n");
-	prvarf(">> ");
-	scanf("%d", &targetPovar);
+	targetPoint = Number(prompt('목표 이벤트 점수'));
 	
 	// 1주년 이벤트는 이벤트 곡에서의 2배 경험치, 티켓런 배율의 확장 등 수치의 변화만 있고 시어터와 동일한 방식이므로, 
 	// 코드의 간결함을 위해 입력 단계에서 세부 수치의 수정 이후에는 시어터로 간주한다. 
@@ -598,54 +562,53 @@ var main( void )
 	
 	////////////////////* 시뮬레이션 함수에 전달할 데이터 정리 *////////////////////
 	inData[0] = level,				inData[1] = exp,				inData[2] = stamina,		inData[3] = ticket,			inData[4] = maxDrink;
-	inData[5] = item,				inData[6] = povar,				inData[7] = targetPovar,	inData[8] = eventType,		inData[9] = playType;
+	inData[5] = item,				inData[6] = point,				inData[7] = targetPoint,	inData[8] = eventType,		inData[9] = playType;
 	inData[10] = liveConsumption,	inData[11] = workConsumption,	inData[12] = eventConsumption;
 	
 	
-	prvarf("상세 데이터를 보려면 1 입력, 아니면 0 입력: ");
-	scanf("%d", &temp);
-	getchar();
-	if( temp == 1 )
-	{
-		prvarf("---inData(parameters)---\n");
-		prvarf("level %d, %d\n", inData[0], level);
-		prvarf("exp %d, %d\n", inData[1], exp);
-		prvarf("stamina %d, %d\n", inData[2], stamina);
-		prvarf("ticket %d, %d\n", inData[3], ticket);
-		prvarf("maxDrink %d, %d\n", inData[4], maxDrink);
-		prvarf("item %d, %d\n", inData[5], item);
-		prvarf("povar %d, %d\n", inData[6], povar);
-		prvarf("targetPovar %d, %d\n", inData[7], targetPovar);
-		prvarf("eventType %d, %d\n", inData[8], eventType);
-		prvarf("playType %d, %d\n", inData[9], playType);
-		prvarf("liveComsumption %d, %d\n", inData[10], liveConsumption);
-		prvarf("workConsumption %d, %d\n", inData[11], workConsumption);
-		prvarf("eventConsumption %d, %d\n", inData[12], eventConsumption);
-		prvarf("---inData(parameters)---\n");
+	tempStr = prompt('상세 데이터를 표시할까요? (y/n)', 'n');
 	
-		prvarf("---fundamentalData---\n");
-		prvarf("exp per live %d\n", EXP_PER_LIVE);
-		prvarf("money per live %d\n", MONEY_PER_LIVE);
-		prvarf("fan per live %d\n", FAN_PER_LIVE);
-		prvarf("affection per live %d\n", AFFECTION_PER_LIVE);
-		prvarf("povar per live %d\n", POvar_PER_LIVE);
-		prvarf("item per live %d\n", ITEM_PER_LIVE);
-		prvarf("exp per work %d\n", EXP_PER_WORK);
-		prvarf("money per work %d\n", MONEY_PER_WORK);
-		prvarf("fan per work %d\n", FAN_PER_WORK);
-		prvarf("affection per work %d\n", AFFECTION_PER_WORK);
-		prvarf("povar per work %d\n", POvar_PER_WORK);
-		prvarf("item per work %d\n", ITEM_PER_WORK);
-		prvarf("exp per event %d\n", EXP_PER_EVENT);
-		prvarf("money per event %d\n", MONEY_PER_EVENT);
-		prvarf("fan per event %d\n", FAN_PER_EVENT);
-		prvarf("affection per event %d\n", AFFECTION_PER_EVENT);
-		prvarf("povar per event %d\n", POvar_PER_EVENT);
-		prvarf("item per event %d\n", ITEM_PER_EVENT);
-		prvarf("daily item %d\n", DAILY_ITEM);
-		prvarf("playtime %d\n", PLAYTIME);
-		prvarf("worktime %d\n", WORKTIME);
-		prvarf("---fundamentalData---\n");
+	if( tempStr == 'y' )
+	{
+		document.write('---inData(parameters)---<br />');
+		document.write('level ',level,'<br />');
+		document.write('exp ',exp,'<br />');
+		document.write('stamina ',stamina,'<br />');
+		document.write('ticket ',ticket,'<br />');
+		document.write('maxDrink ',maxDrink,'<br />');
+		document.write('item ',item,'<br />');
+		document.write('point ',point,'<br />');
+		document.write('targetPoint ',targetPoint,'<br />');
+		document.write('eventType ',eventType,'<br />');
+		document.write('playType ',playType,'<br />');
+		document.write('liveComsumption ',liveConsumption,'<br />');
+		document.write('workConsumption ',workConsumption,'<br />');
+		document.write('eventConsumption ',eventConsumption,'<br />');
+		document.write('---inData(parameters)---<br />');
+	
+		document.write('---fundamentalData---<br />');
+		document.write('exp per live ',EXP_PER_LIVE,'<br />');
+		document.write('money per live ',MONEY_PER_LIVE,'<br />');
+		document.write('fan per live ',FAN_PER_LIVE,'<br />');
+		document.write('affection per live ',AFFECTION_PER_LIVE,'<br />');
+		document.write('point per live ',POINT_PER_LIVE,'<br />');
+		document.write('item per live ',ITEM_PER_LIVE,'<br />');
+		document.write('exp per work ',EXP_PER_WORK,'<br />');
+		document.write('money per work ',MONEY_PER_WORK,'<br />');
+		document.write('fan per work ',FAN_PER_WORK,'<br />');
+		document.write('affection per work ',AFFECTION_PER_WORK,'<br />');
+		document.write('point per work ',POINT_PER_WORK,'<br />');
+		document.write('item per work ',ITEM_PER_WORK,'<br />');
+		document.write('exp per event ',EXP_PER_EVENT,'<br />');
+		document.write('money per event ',MONEY_PER_EVENT,'<br />');
+		document.write('fan per event ',FAN_PER_EVENT,'<br />');
+		document.write('affection per event ',AFFECTION_PER_EVENT,'<br />');
+		document.write('point per event ',POINT_PER_EVENT,'<br />');
+		document.write('item per event ',ITEM_PER_EVENT,'<br />');
+		document.write('daily item ',DAILY_ITEM,'<br />');
+		document.write('playtime ',PLAYTIME,'<br />');
+		document.write('worktime ',WORKTIME,'<br />');
+		document.write('---fundamentalData---<br />');
 	}
 	
 	////////////////////* 시뮬레이션 실행  *////////////////////
@@ -653,50 +616,53 @@ var main( void )
 	
 	
 	////////////////////* 시뮬레이션 결과 출력 *////////////////////
+	
 	var newLevel = outData[0], newExp = outData[1];
 	var newMaxDrink = outData[2], newStamina = outData[3];
 	var newTicket = outData[4], newItem = outData[5];
 	var money = outData[6], liveAffection = outData[7], workAffection = outData[8];
 	var liveFan = outData[9], workFan = outData[10];
 	var liveCount = outData[11], workCount = outData[12], eventCount = outData[13];
-	var reachablePovar = outData[14], reachedPovar = outData[15];
-	prvarf("\n\n");
-	prvarf("레벨: %d -> %d, 경험치: %d -> %d\n", level, newLevel, exp, newExp);
-	prvarf("\n");
-	prvarf("맥스드링크: %d -> %d, 스태미너: %d -> %d\n", maxDrink, newMaxDrink, originalStamina, newStamina);
-	prvarf("\n");
+	var reachablePoint = outData[14], reachedPoint = outData[15];
+	
+	document.write('<br /><br />');
+	document.write('레벨: ',level,' -> ',newLevel,', 경험치: ',exp,' -> ',newExp,'<br />');
+	document.write('<br />');
+	document.write('맥스드링크: ',maxDrink,' -> ',newMaxDrink,', 스태미너: ',originalStamina,' -> ',newStamina,'<br />');
+	document.write('<br />');
 	
 	if( eventType == TOUR )
-		prvarf("라이브 티켓: %d -> %d, 이벤트 재화: %d(진행도 %d) -> %d(진행도 %d)\n", ticket, newTicket, originalItem/20, originalItem%20, newItem/20, newItem%20);
+		document.write('라이브 티켓: ', ticket,' -> ', newTicket,', 이벤트 재화: ', parseInt(originalItem/20),'(진행도 ', (originalItem%20),') -> ', parseInt(newItem/20),'(진행도 ', (newItem%20),')<br />');
 	else
-		prvarf("라이브 티켓: %d -> %d, 이벤트 재화: %d -> %d\n", ticket, newTicket, originalItem, newItem);
-		
-	prvarf("\n");
-	prvarf("획득 머니: %d\n", money);
-	prvarf("획득 친애도: %d (라이브 %d / 업무 %d)\n", (liveAffection + workAffection), liveAffection, workAffection);
-	prvarf("획득 팬: %d (라이브 %d / 업무 %d)\n", (liveFan + workFan), liveFan, workFan); 
-	prvarf("\n");
-	prvarf("일반곡 플레이 횟수: %d, 영업 횟수: %d, 이벤트곡 플레이 횟수 %d\n", liveCount, workCount, eventCount);
-	prvarf("\n");
-	prvarf("보유 자원으로 도달 가능한 점수: %d, 시뮬레이션 종료시에 도달했던 점수: %d\n", reachablePovar, reachedPovar);
-	if( reachablePovar == reachedPovar ) prvarf("! 보유 자원으로 도달 가능한 점수가 부정확하게 표시되었을 수 있습니다. 목표 점수 근처까지만 시뮬레이션이 진행됩니다.\n"); 
-	prvarf("\n");
+		document.write('라이브 티켓: ', ticket,' -> ', newTicket,', 이벤트 재화: ', originalItem,' -> ', newItem,'<br />');
+	
+	document.write('<br />');
+	document.write('획득 머니: ', money,'<br />');
+	document.write('획득 친애도: ', (liveAffection + workAffection),' (라이브 ', liveAffection,' / 업무 ', workAffection,')<br />');
+	document.write('획득 팬: ', (liveFan + workFan),' (라이브 ', liveFan,' / 업무 ', workFan,')<br />'); 
+	document.write('<br />');
+	document.write('일반곡 플레이 횟수: ', liveCount, ', 영업 횟수: ', workCount, ', 이벤트곡 플레이 횟수 ', eventCount,'<br />');
+	document.write('<br />');
+	document.write('보유 자원으로 도달 가능한 점수: ', reachablePoint,', 시뮬레이션 종료시에 도달했던 점수: ', reachedPoint,'<br />');
+	
+	if( reachablePoint == reachedPoint ) document.write('! 보유 자원으로 도달 가능한 점수가 부정확하게 표시되었을 수 있습니다. 목표 점수 근처까지만 시뮬레이션이 진행됩니다.<br />'); 
+	document.write('<br />');
 	if( newMaxDrink < 0 )
 	{
-		prvarf("%d개의 쥬엘(또는 %d개의 맥스드링크)을 더 사용해야 목표 점수를 달성할 수 있습니다.\n", newMaxDrink * (-50), newMaxDrink * (-1));
+		document.write((newMaxDrink * -50),'개의 쥬엘(또는 ', (newMaxDrink * -1),'개의 맥스드링크)을 더 사용해야 목표 점수를 달성할 수 있습니다.<br />');
 	}
 	else
 	{
-		prvarf("목표 점수를 달성할 수 있습니다. %d개의 쥬엘(또는 %d개의 맥스드링크)이 남습니다.\n", newMaxDrink * 50, newMaxDrink);
+		document.write('목표 점수를 달성할 수 있습니다. ', (newMaxDrink * 50),'개의 쥬엘(또는 ', newMaxDrink,'개의 맥스드링크)이 남습니다.<br />');
 	}
 	
 	// 플레이타임 계산
-	double liveTime = 0.0, workTime = 0.0;
+	var liveTime = 0.0, workTime = 0.0;
 	var dailyLiveTime = 0, dailyWorkTime = 0;
 	
 	if( playType == LIVERUN )
 	{
-		liveTime = (double)(liveCount + eventCount) * (LEAST_PLAYTIME + 47.0 + 2.0);	//라이브 로딩시간 47초, 스태미너 회복시간 2초. 
+		liveTime = (liveCount + eventCount) * (LEAST_PLAYTIME + 47.0 + 2.0);	//라이브 로딩시간 47초, 스태미너 회복시간 2초. 
 	}
 	if( playType == WORKRUN )
 	{
@@ -704,21 +670,17 @@ var main( void )
 		
 		workTime += (5.0 + 5.0) * liveCount;	//영업런일 경우, 라이브 탭 - 영업 탭 이동시간 5초씩 소요. 영업 시간에 포함하기로 함. 
 		
-		liveTime += (double)(liveCount + eventCount) * (LEAST_PLAYTIME + 47);	//라이브 로딩시간 47초. 스태미너 회복시간은 고려하지 않음(영업에서 하므로). 
+		liveTime += (liveCount + eventCount) * (LEAST_PLAYTIME + 47.0);	//라이브 로딩시간 47초. 스태미너 회복시간은 고려하지 않음(영업에서 하므로). 
 	}
 	
 	// 1시간당 평균 플레이타임 * 24 
-	dailyLiveTime = (var)( (liveTime / (eventDuration / 60.0)) * 24.0 );
-	dailyWorkTime = (var)( (workTime / (eventDuration / 60.0)) * 24.0 );
+	dailyLiveTime = parseInt( (liveTime / (eventDuration / 60.0)) * 24.0 );
+	dailyWorkTime = parseInt( (workTime / (eventDuration / 60.0)) * 24.0 );
 	
 	var dailyPlayTime = dailyLiveTime + dailyWorkTime;
 	
-	prvarf("\n\n24시간당 평균 플레이타임은 %d분. 그 중 라이브 %d분, 영업 %d분 소요.\n", dailyPlayTime / 60, dailyLiveTime / 60, dailyWorkTime / 60); 
+	document.write('<br /><br />24시간당 평균 플레이타임은 ', parseInt(dailyPlayTime / 60),'분. 그 중 라이브 ', parseInt(dailyLiveTime / 60),'분, 영업 ', parseInt(dailyWorkTime / 60),'분 소요.<br />'); 
 	
-	prvarf("\n\n\n");
-	
-	prvarf("아무 키나 누르시면 프로그램이 종료됩니다."); 
-	system("pause>nul");
-	
-	return 0;
 }
+
+main();

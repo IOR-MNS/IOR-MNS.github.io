@@ -13,9 +13,6 @@ body {
 	/*border: 5px solid black;*/
 }
 
-html:active {
-	color: lightpink;
-}
 a {
 	color: white;
 	text-decoration: none;
