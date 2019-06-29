@@ -682,5 +682,3 @@ var main = function()
 	document.write('<br /><br />24시간당 평균 플레이타임은 ', parseInt(dailyPlayTime / 60),'분. 그 중 라이브 ', parseInt(dailyLiveTime / 60),'분, 영업 ', parseInt(dailyWorkTime / 60),'분 소요.<br />'); 
 	
 }
-
-main();
