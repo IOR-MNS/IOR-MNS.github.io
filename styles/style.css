@@ -21,7 +21,8 @@ html {
 }
 
 body {
-	width: auto;
+	/*width: auto;*/
+	max-width: 100%;
 	margin: 0 auto;
 	/*background-color: #FF9500;*/
 	padding: 0 20px 20px 20px;
@@ -66,7 +67,7 @@ h2 {
 }
 
 p, li {
-	font-size: 17px;
+	font-size: 10vmin;
 	line-height: 2;
 	letter-spacing: 1px;
 }
@@ -76,7 +77,8 @@ form {
 	margin: 1em auto;
 	padding: 1em;
 	padding-top: 0;
-	width: 200px;
+	/*width: 200px;*/
+	width: 110vmin;
 	
 	/* 폼의 외곽선을 그리기 */
 	border: 2px solid #FFF;
@@ -94,8 +96,10 @@ lable {
 input, textarea, select {
 	/* 모든 입력 필드가 같은 너비를 갖고, 같은 크기의 같은 폰트를 갖도록 함 */
 	font-family:'배민주아체';
+	font-size: 8vmin;
 	margin: auto;
-	width: 200px;
+	width: 100vmin;
+	height: 10vmin;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
