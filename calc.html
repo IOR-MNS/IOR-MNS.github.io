@@ -16,8 +16,53 @@
 				M I N A S E
 			</a>
 		</h1>
-		<button id="calculate" onclick="main();">Calculate</button>
+		<h2>
+			MLTD EVENT CALCULATOR
+		</h2>
+		<form>
+			<div>
+				<p>이벤트 유형</p>
+				<select id="eventType">
+					<option value=1 selected>PSTheater</option>
+					<option value=2>PSTour</option>
+				</select>
+			</div>
+			<div>
+				<p>플레이 유형</p>
+				<select id="playType">
+					<option value=1 selected>라이브런</option>
+					<option value=2>영업런</option>
+				</select>
+			</div>
+		</form>
+		<form>
+			<div>
+				<p>남은 시간</p>
+				<input type="number" id="leftDay" min="0" value="7" style="width:50px; text-align:right"/>
+				일
+				<input type="number" id="leftHour" min="0" value="6" style="width:50px; text-align:right"/>
+				시간
+			</div>
+			<div>
+				<p>자연회복 스태미너 사용률</p>
+				<input type="number" id="regenStaminaUsage" min="0" max="100" value="70" style="width:100px; text-align:center"/> %
+			</div>
+		</form>
+		<form>
+			<div>
+				<p>레벨</p>
+				<input type="number" id="playerLevel" min="1" max="999" value="200" style="width:100px; text-align:center"/>
+				
+				<p>경험치</p>
+				<input type="number" id="playerExp" min="0" value="0" style="width:100px; text-align:center"/><br>
+				
+				<p>현재 스태미너</p>
+				<input type="number" id="currentStamina" min="0" value="120" style="width:100px; text-align:center"/>
+			</div>
+		</form>
+		
+		<button id="test" onclick="main();">test</button>
 		<p>Copyright © 2019 MINASE Inc. All Rights Reserved.</p>
 	</body>
-	<script src="scripts/calc.js"></script>
+	<script src="scripts/test.js"></script>
 </html>

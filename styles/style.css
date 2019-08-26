@@ -1,11 +1,22 @@
+@font-face {
+	font-family:'배민연성체';
+	src:url('../fonts/bmyeonsung.ttf') format('truetype');
+}
+@font-face {
+	font-family:'배민주아체';
+	src:url('../fonts/bmjua.ttf') format('truetype');
+}
+
 html {
-	font-size: 10px;
-	font-family: 'Montserrat', sans-serif;
+	font-size: 17px;
+	font-family: '배민주아체';
+	/*font-family: 'Montserrat', sans-serif;*/
 	background-color: black; /*#FFA0D2*/
 	color: white;
 }
 
 body {
+	/*font-family: 'Noto Sans', sans-serif;*/
 	/*width: 600px;*/
 	margin: 0 auto;
 	/*background-color: #FF9500;*/
@@ -39,7 +50,7 @@ img {
 h1 {
 	margin: 0;
 	padding: 20px 0;
-	font-family: 'Noto Sans', sans-serif;
+	/*font-family: 'Noto Sans', sans-serif;*/
 	font-size: 50px;
 	text-align: center;
 	text-shadow: 3px 3px 20px lightgray;
@@ -51,7 +62,40 @@ h2 {
 }
 
 p, li {
-	font-size: 16px;
-	line-height: 2;
+	font-size: 17px;
+	/*line-height: 2;*/
 	letter-spacing: 1px;
+}
+
+form {
+	/* 폼의 안쪽 바깥쪽 여백과 너비 설정 */
+	margin: 1em auto;
+	padding: 1em;
+	padding-top: 0;
+	width: 200px;
+	
+	/* 폼의 외곽선을 그리기 */
+	border: 2px solid #FFF;
+	border-radius: 1em;
+}
+
+
+lable {
+	/* 모든 레이블이 올바르게 정렬되며 동일한 사이즈를 갖도록 */
+	display: inline-block;
+	width: 90px;
+	text-align: right;
+}
+
+input, textarea, select {
+	/* 모든 입력 필드가 같은 너비를 갖고, 같은 크기의 같은 폰트를 갖도록 함 */
+	margin: auto;
+	width: 200px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family:'배민주아체';
+}
+
+input:focus, textarea:focus {
+	background-color: lightgray;
 }
