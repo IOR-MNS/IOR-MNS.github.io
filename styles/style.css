@@ -1,9 +1,9 @@
-/*
+
 @font-face {
 	font-family:'배민연성체';
 	src:url('../fonts/bmyeonsung.ttf') format('truetype');
 }
-*/
+
 
 @font-face {
 	font-family:'배민주아체';
@@ -13,6 +13,8 @@
 html {
 	font-size: 17px;
 	font-family: '배민주아체';
+	width: 600px;
+	margin: 0 auto;
 	/*font-family: 'Montserrat', sans-serif;*/
 	background-color: black; /*#FFA0D2*/
 	color: white;
@@ -52,7 +54,7 @@ img {
 h1 {
 	margin: 0;
 	padding: 20px 0;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 50px;
 	text-align: center;
 	text-shadow: 3px 3px 20px lightgray;
