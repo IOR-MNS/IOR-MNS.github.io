@@ -11,7 +11,7 @@
 }
 
 html {
-	font-size: 17px;
+	font-size: 5vmin;
 	font-family: '배민주아체';
 	width: auto;
 	margin: 0 auto;
@@ -25,7 +25,10 @@ body {
 	max-width: 100%;
 	margin: 0 auto;
 	/*background-color: #FF9500;*/
-	padding: 0 20px 20px 20px;
+	padding-top: 0;
+	padding-right: 3vw;
+	padding-left: 3vw;
+	padding-bottom: 3vw;
 	/*border: 5px solid black;*/
 }
 
@@ -49,12 +52,13 @@ a:active {
 
 img {
 	display: block;
-	margin: 10px 0;
+	margin-top: 2%;
+	height: 3em;
 }
 
 h1 {
 	margin: 0;
-	padding: 20px 0;
+	padding-top: 1%;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 50px;
 	text-align: center;
@@ -62,12 +66,12 @@ h1 {
 	color: pink;
 }
 h2 {
-	font-size: 20px;
+	font-size: 3vmin;
 	text-align: center;
 }
 
 p, li {
-	font-size: 10vmin;
+	font-size: 5vmin;
 	line-height: 2;
 	letter-spacing: 1px;
 }
@@ -98,7 +102,7 @@ input, textarea, select {
 	font-family:'배민주아체';
 	font-size: 8vmin;
 	margin: auto;
-	width: 100vmin;
+	width: 100%;
 	height: 10vmin;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
