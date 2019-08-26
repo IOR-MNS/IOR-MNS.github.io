@@ -11,7 +11,7 @@
 }
 
 html {
-	font-size: 5vmin;
+	font-size: 4vh;
 	font-family: '배민주아체';
 	width: auto;
 	margin: 0 auto;
@@ -60,7 +60,7 @@ h1 {
 	margin: 0;
 	padding-top: 1%;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 50px;
+	font-size: 7vh;
 	text-align: center;
 	text-shadow: 3px 3px 20px lightgray;
 	color: pink;
@@ -71,7 +71,6 @@ h2 {
 }
 
 p, li {
-	font-size: 5vmin;
 	line-height: 2;
 	letter-spacing: 1px;
 }
@@ -82,7 +81,7 @@ form {
 	padding: 1em;
 	padding-top: 0;
 	/*width: 200px;*/
-	width: 110vmin;
+	width: 60vw;
 	
 	/* 폼의 외곽선을 그리기 */
 	border: 2px solid #FFF;
