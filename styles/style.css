@@ -1,7 +1,10 @@
+/*
 @font-face {
 	font-family:'배민연성체';
 	src:url('../fonts/bmyeonsung.ttf') format('truetype');
 }
+*/
+
 @font-face {
 	font-family:'배민주아체';
 	src:url('../fonts/bmjua.ttf') format('truetype');
@@ -16,8 +19,7 @@ html {
 }
 
 body {
-	/*font-family: 'Noto Sans', sans-serif;*/
-	/*width: 600px;*/
+	width: auto;
 	margin: 0 auto;
 	/*background-color: #FF9500;*/
 	padding: 0 20px 20px 20px;
@@ -50,7 +52,7 @@ img {
 h1 {
 	margin: 0;
 	padding: 20px 0;
-	/*font-family: 'Noto Sans', sans-serif;*/
+	font-family: 'Noto Sans', sans-serif;
 	font-size: 50px;
 	text-align: center;
 	text-shadow: 3px 3px 20px lightgray;
@@ -63,7 +65,7 @@ h2 {
 
 p, li {
 	font-size: 17px;
-	/*line-height: 2;*/
+	line-height: 2;
 	letter-spacing: 1px;
 }
 
@@ -89,11 +91,11 @@ lable {
 
 input, textarea, select {
 	/* 모든 입력 필드가 같은 너비를 갖고, 같은 크기의 같은 폰트를 갖도록 함 */
+	font-family:'배민주아체';
 	margin: auto;
 	width: 200px;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	font-family:'배민주아체';
 }
 
 input:focus, textarea:focus {
