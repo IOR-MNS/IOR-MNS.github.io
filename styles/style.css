@@ -1,13 +1,17 @@
 
 @font-face {
 	font-family:'배민연성체';
-	src:url('../fonts/bmyeonsung.ttf') format('truetype');
+	src:url('../fonts/bmyeonsung.woff2') format('woff2'),
+		url('../fonts/bmyeonsung.woff') format('woff'),
+		url('../fonts/bmyeonsung.ttf') format('truetype');
 }
 
 
 @font-face {
 	font-family:'배민주아체';
-	src:url('../fonts/bmjua.ttf') format('truetype');
+	src:url('../fonts/bmjua.woff2') format('woff2'),
+		url('../fonts/bmjua.woff') format('woff'),
+		url('../fonts/bmjua.ttf') format('truetype');
 }
 
 html {
