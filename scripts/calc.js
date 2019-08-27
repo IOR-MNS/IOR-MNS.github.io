@@ -733,6 +733,8 @@ var main = function( eventType, playType )
 	
 	var dailyPlayTime = dailyLiveTime + dailyWorkTime;
 	
-	document.getElementById("calcResult").innerHTML += '<br><br>24시간당 평균 플레이타임<br>' + parseInt(dailyPlayTime / 60) + '분<br>그 중 라이브 ' + parseInt(dailyLiveTime / 60) + '분, 영업 ' + parseInt(dailyWorkTime / 60) + '분 소요.<br>'; 
+	document.getElementById("calcResult").innerHTML += '<br><br>24시간당 평균 플레이타임<br>' + parseInt(dailyPlayTime / 60) + '분<br>';
+	document.getElementById("calcResult").innerHTML += '- 라이브 ' + parseInt(dailyLiveTime / 60) + '분<br>';
+	document.getElementById("calcResult").innerHTML += '- 영업 ' + parseInt(dailyWorkTime / 60) + '분<br>'; 
 	
 }
