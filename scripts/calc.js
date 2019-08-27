@@ -8,8 +8,8 @@ const OUTDATA_SIZE = 20
 const THEATER = 0
 const TOUR = 1
 const FIRST = 2
-const LIVERUN = 3
-const WORKRUN = 4
+const LIVERUN = 10
+const WORKRUN = 11
 
 // 경험치 
 const EXP_PER_MM = 306
@@ -43,7 +43,7 @@ const LEAST_PLAYTIME = 112
 const MEAN_WORKTIME = 22
 
 // 최대값들 
-const MAX_LEVEL = 400 // 2주년 이후로 999레벨로 업데이트 예정. 
+const MAX_LEVEL = 999
 const MAX_TICKET = 500
 
 // 이벤트 유형에 따라 달라지는 변수가 있다. 
@@ -76,15 +76,6 @@ var DAILY_ITEM;		// 매일 지급되는 Item
 // 사용자 기기 환경에 따라 달라진다. 
 var PLAYTIME = LEAST_PLAYTIME;		// 사용자별 플레이할 곡의 길이 설정 
 var WORKTIME = MEAN_WORKTIME;		// 사용자별 영업 소요시간 설정 
-
-
-
-// 폼에 입력된 값의 유효성 검증. 유효하다면 main함수 실행, 아니라면 사용자에게 에러 메세지 출력
-var verifyData = function()
-{
-
-}
-
 
 
 // 해당 레벨의 최대 경험치 
@@ -248,8 +239,9 @@ var simulateEvent = function( inData, outData )
 	// 레벨업 실행
 	while( 1 )
 	{
-		if( ( level >= MAX_LEVEL ) || ( exp < maxExp(level) ) )
+		if( ( level >= MAX_LEVEL ) || ( exp < maxExp(level) ) ) {
 			break;
+		}
 		
 		exp -= maxExp( level );
 		level++;
@@ -450,7 +442,7 @@ var main = function( eventType, playType )
 	else if( eventType == TOUR )	// 투어. 진척도를 재화 단위로 사용, 20단위로 사용 가능.
 	{
 		// 라이브에서 획득하는 점수, 재화 
-		POINT_PER_LIVE = 140;
+		POINT_PER_LIVE = 116;	// 1.0배짜리 노멀곡 기준
 		ITEM_PER_LIVE = parseInt(30 / 5);
 		
 		POINT_PER_EVENT = 144 * 5;
@@ -485,7 +477,9 @@ var main = function( eventType, playType )
 	//document.getElementById("calcResult").innerHTML += '자연 회복 스태미너 ' + stamina + ' 반영함.<br>'; 
 	
 	// 플레이어 정보 입력
+	// 이미 폼에서 입력됨
 	
+	//1주년 이벤트는 이미 끝났으므로 스태미너, 라이브 티켓 등 자동 설정.
 	if( eventType == FIRST )
 	{
 		stamina += maxStamina( playerLevel );
@@ -504,6 +498,10 @@ var main = function( eventType, playType )
 	else if( eventType == THEATER )
 	{
 		ticket = currentTicket;
+	}
+	else if( eventType == TOUR )
+	{
+		ticket = 0;
 	}
 	
 	// 소지 드링크 입력
@@ -530,6 +528,7 @@ var main = function( eventType, playType )
 		}
 	}
 	
+	// 1주년 이벤은 이미 끝났으므로 이벤트 점수 자동 설정. 
 	if( eventType == FIRST )
 	{
 		currentPoint = 0;
@@ -585,19 +584,22 @@ var main = function( eventType, playType )
 		}
 	}
 	
-	temp = parseInt(liveConsumption / 30);
-	ITEM_PER_LIVE *= temp;
-	POINT_PER_LIVE *= temp;
-	if( playType == WORKRUN ) FAN_PER_LIVE *= temp;
-	if( playType == WORKRUN ) AFFECTION_PER_LIVE *= temp;
-	
-	if( playType == WORKRUN )
-	{
-		AFFECTION_PER_LIVE = parseInt(AFFECTION_PER_LIVE / 2);
-		FAN_PER_LIVE = parseInt(FAN_PER_LIVE / 2);
-		POINT_PER_LIVE = Math.ceil( POINT_PER_LIVE * 0.7 );
-		ITEM_PER_LIVE = Math.ceil( ITEM_PER_LIVE * 0.7 );
-	}
+	if( eventType == TOUR && playType == WORKRUN ) {
+		liveConsumption = 0;
+	} else {
+		temp = parseInt(liveConsumption / 30);
+		ITEM_PER_LIVE *= temp;
+		POINT_PER_LIVE *= temp;
+		if( playType == WORKRUN ) FAN_PER_LIVE *= temp;
+		if( playType == WORKRUN ) AFFECTION_PER_LIVE *= temp;
+		
+		if( playType == WORKRUN )
+		{
+			AFFECTION_PER_LIVE = parseInt(AFFECTION_PER_LIVE / 2);
+			FAN_PER_LIVE = parseInt(FAN_PER_LIVE / 2);
+			POINT_PER_LIVE = Math.ceil( POINT_PER_LIVE * 0.7 );
+			ITEM_PER_LIVE = Math.ceil( ITEM_PER_LIVE * 0.7 );
+		}
 	
 	
 	eventConsumption *= ITEM_REQUIRED_PER_PLAY;
@@ -657,7 +659,6 @@ var main = function( eventType, playType )
 	document.getElementById("calcResult").innerHTML += '---fundamentalData---<br>';
 	*/
 	
-	//return;
 	////////////////////* 시뮬레이션 실행  *////////////////////
 	simulateEvent( inData, outData );
 	
