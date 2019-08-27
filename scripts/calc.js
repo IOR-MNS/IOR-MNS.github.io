@@ -407,9 +407,16 @@ var main = function( eventType, playType )
 	var originalItem = 0;		// 출력결과에 본래 이벤트 재화 개수를 표시하기 위해 
 	
 	////////////////////* 폼에서 읽어들인 데이터 가공 *////////////////////
-	document.getElementById("calcResult").innerHTML = 'Comet<br>';
+	document.getElementById("calcResult").innerHTML = 'minase calculator<br>';
 	document.getElementById("calcResult").innerHTML += '[ 전제 조건 ]<br>';
-	document.getElementById("calcResult").innerHTML += 'MM 난이도<br>S랭크 클리어<br>PUSH 곡<br>이벤트곡 5.0배 효율<br>';
+	document.getElementById("calcResult").innerHTML += '- MM 난이도<br>';
+	document.getElementById("calcResult").innerHTML += '- S랭크 클리어<br>';
+	if ( eventType == TOUR ) {
+		if ( playType == LIVERUN ) {
+			document.getElementById("calcResult").innerHTML += '- PUSH 곡<br>';
+		}
+		document.getElementById("calcResult").innerHTML += '- 이벤트곡 5.0배<br>';
+	}
 	document.getElementById("calcResult").innerHTML += '<br><br>';
 	
 	
@@ -666,19 +673,16 @@ var main = function( eventType, playType )
 	var liveCount = outData[11], workCount = outData[12], eventCount = outData[13];
 	var reachablePoint = outData[14], reachedPoint = outData[15];
 	
-	//document.getElementById("calcResult".innerHTML = '<br><br>';
-	//document.getElementById("calcResult".innerHTML = '레벨: ' + currentLevel + ' -> 'newLevel,', 경험치: ',currentExp,' -> ',newExp,'<br>';
+	document.getElementById("calcResult").innerHTML += '<br><br>';
+	document.getElementById("calcResult").innerHTML += '레벨<br>' + currentLevel + ' -> ' + newLevel + '<br><br>경험치<br>' + currentExp + ' -> ' + newExp + '<br>';
 	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '맥스드링크<br>' + maxDrink + ' -> ' + newMaxDrink + '<br><br>스태미너<br>' + originalStamina + ' -> ' + newStamina + '<br>';
-	document.getElementById("calcResult").innerHTML += '<br>';
+	document.getElementById("calcResult").innerHTML += '맥스드링크<br>' + maxDrink + ' -> ' + newMaxDrink + '<br>스태미너<br>' + originalStamina + ' -> ' + newStamina + '<br>';
 	
 	if( eventType == TOUR ) {
 		document.getElementById("calcResult").innerHTML += '라이브 티켓<br>' +  ticket + ' -> ' + newTicket + '<br>';
-		document.getElementById("calcResult").innerHTML += '<br>';
 		document.getElementById("calcResult").innerHTML += '이벤트 재화(진행도)<br>' +  parseInt(originalItem/20) + '(' + (originalItem%20) + ') -> ' + parseInt(newItem/20) + '(' + (newItem%20) + ')<br>';
 	} else {
 		document.getElementById("calcResult").innerHTML += '라이브 티켓<br>' + ticket + ' -> ' + newTicket + '<br>';
-		document.getElementById("calcResult").innerHTML += '<br>';
 		document.getElementById("calcResult").innerHTML += '이벤트 재화<br>' + originalItem + ' -> ' + newItem + '<br>';
 	}
 	
@@ -690,12 +694,12 @@ var main = function( eventType, playType )
 	document.getElementById("calcResult").innerHTML += '획득 팬<br>' + (liveFan + workFan) + '<br>- 라이브 ' + liveFan + '<br>- 업무 ' + workFan + '<br>'; 
 	document.getElementById("calcResult").innerHTML += '<br>';
 	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '일반곡 플레이 횟수<br>' + liveCount + '회<br>';
-	document.getElementById("calcResult").innerHTML += '영업 횟수<br>' + workCount + '회<br>';
-	document.getElementById("calcResult").innerHTML += '이벤트곡 플레이 횟수<br>' + eventCount + '회<br>';
+	document.getElementById("calcResult").innerHTML += '일반곡 플레이 횟수<br>- ' + liveCount + '회<br>';
+	document.getElementById("calcResult").innerHTML += '영업 횟수<br>- ' + workCount + '회<br>';
+	document.getElementById("calcResult").innerHTML += '이벤트곡 플레이 횟수<br>- ' + eventCount + '회<br>';
 	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '보유 자원으로 가능한 점수<br>' + reachablePoint + '점<br>';
-	document.getElementById("calcResult").innerHTML += '시뮬레이션에서 도달한 점수<br>' + reachedPoint + '점<br>';
+	document.getElementById("calcResult").innerHTML += '보유 자원으로 가능한 점수<br>- ' + reachablePoint + '점<br>';
+	document.getElementById("calcResult").innerHTML += '시뮬레이션에서 도달한 점수<br>- ' + reachedPoint + '점<br>';
 	
 	if( reachablePoint == reachedPoint ) {
 		document.getElementById("calcResult").innerHTML += '! 보유 자원으로 도달 가능한 점수가 부정확하게 표시되었을 수 있습니다. 목표 점수 근처까지만 시뮬레이션이 진행됩니다.<br>';
