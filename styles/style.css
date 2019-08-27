@@ -100,8 +100,14 @@ button {
 	padding-left: 3vmin;
 	border: 0.1em solid white;
 	border-radius: 3vmin;
+	transition: background-color 0.2s ease;
 	background-color: lightpink;
 	text-align: center;
+}
+
+button:focus, button:hover {
+	transition: background-color 0.2s ease;
+	background-color: #E75FB9;
 }
 
 
@@ -114,6 +120,7 @@ lable {
 
 input, textarea, select {
 	/* 모든 입력 필드가 같은 너비를 갖고, 같은 크기의 같은 폰트를 갖도록 함 */
+	transition: background-color 0.35s ease;
 	background-color: white;
 	font-family:'배민주아체';
 	font-size: 8vmin;
@@ -128,6 +135,7 @@ input, textarea, select {
 	border-radius: 3vmin;
 }
 
-input:focus, textarea:focus {
+input:focus, input:hover, textarea:focus, textarea:hover, select:focus, select:hover {
+	transition: background-color 0.2s ease;
 	background-color: lightpink;
 }

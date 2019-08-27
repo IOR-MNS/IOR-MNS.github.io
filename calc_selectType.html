@@ -7,10 +7,22 @@
 	<!--
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:700|Noto+Sans&display=swap" rel="stylesheet">
 	-->
-	
 	<style>
-		.grad01 {
+		@keyframes page_fadein {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+		html {
+			background: #EC8B8E;
+		}
+		
+		body {
 			background: linear-gradient( 355deg, lightgray, lightpink, #EC8B8E, #FD99E1 );
+			animation: .6s ease 0s 1 page_fadein;
 		}
 	</style>
 	</head>
