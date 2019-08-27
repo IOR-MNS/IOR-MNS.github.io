@@ -417,7 +417,6 @@ var main = function( eventType, playType )
 		}
 		document.getElementById("calcResult").innerHTML += '- 이벤트곡 5.0배<br>';
 	}
-	document.getElementById("calcResult").innerHTML += '<br><br>';
 	
 	
 	// 이벤트 유형에 따라 기초 데이터 설정
@@ -694,11 +693,11 @@ var main = function( eventType, playType )
 	document.getElementById("calcResult").innerHTML += '획득 팬<br>' + (liveFan + workFan) + '<br>- 라이브 ' + liveFan + '<br>- 업무 ' + workFan + '<br>'; 
 	document.getElementById("calcResult").innerHTML += '<br>';
 	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '일반곡 플레이 횟수<br>- ' + liveCount + '회<br>';
-	document.getElementById("calcResult").innerHTML += '영업 횟수<br>- ' + workCount + '회<br>';
-	document.getElementById("calcResult").innerHTML += '이벤트곡 플레이 횟수<br>- ' + eventCount + '회<br>';
+	document.getElementById("calcResult").innerHTML += '일반곡 플레이 횟수<br>- <span style="color:#FB9FCE">' + liveCount + '</span>회<br>';
+	document.getElementById("calcResult").innerHTML += '영업 횟수<br>- <span style="color:#FB9FCE">' + workCount + '</span>회<br>';
+	document.getElementById("calcResult").innerHTML += '이벤트곡 플레이 횟수<br>- <span style="color:#FB9FCE">' + eventCount + '</span>회<br>';
 	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '보유 자원으로 가능한 점수<br>- ' + reachablePoint + '점<br>';
+	document.getElementById("calcResult").innerHTML += '보유 자원으로 가능한 점수<br>- <span style="color:#FB9FCE">' + reachablePoint + '</span>점<br>';
 	document.getElementById("calcResult").innerHTML += '시뮬레이션에서 도달한 점수<br>- ' + reachedPoint + '점<br>';
 	
 	if( reachablePoint == reachedPoint ) {
@@ -707,11 +706,11 @@ var main = function( eventType, playType )
 	document.getElementById("calcResult").innerHTML += '<br>';
 	if( newMaxDrink < 0 )
 	{
-		document.getElementById("calcResult").innerHTML += (newMaxDrink * -50) + '개의 쥬엘을 더 사용해야 목표 점수를 달성할 수 있습니다.<br>';
+		document.getElementById("calcResult").innerHTML += '<span style="color: red">' + (newMaxDrink * -50) + '개의 쥬엘</span>을 더 사용해야 목표 점수를 달성할 수 있습니다.<br>';
 	}
 	else
 	{
-		document.getElementById("calcResult").innerHTML += '목표 점수를 달성하고도 ' + (newMaxDrink * 50) + '개의 쥬엘(또는 ' + newMaxDrink + '개의 맥스드링크)이 남습니다.<br>';
+		document.getElementById("calcResult").innerHTML += '<span style="color:#A3CCA3">목표 점수를 달성하고도 ' + (newMaxDrink * 50) + '개의 쥬엘(또는 ' + newMaxDrink + '개의 맥스드링크)이 남습니다.</span><br>';
 	}
 	
 	// 플레이타임 계산
@@ -737,7 +736,8 @@ var main = function( eventType, playType )
 	
 	var dailyPlayTime = dailyLiveTime + dailyWorkTime;
 	
-	document.getElementById("calcResult").innerHTML += '<br><br>24시간당 평균 플레이타임<br>' + parseInt(dailyPlayTime / 60) + '분<br>';
+	document.getElementById("calcResult").innerHTML += '<br><br>24시간당 평균 플레이타임<br>';
+	document.getElementById("calcResult").innerHTML += '<span style="color:red">' + parseInt(dailyPlayTime / 60) + '분</span><br>';
 	document.getElementById("calcResult").innerHTML += '- 라이브 ' + parseInt(dailyLiveTime / 60) + '분<br>';
 	document.getElementById("calcResult").innerHTML += '- 영업 ' + parseInt(dailyWorkTime / 60) + '분<br>'; 
 	
