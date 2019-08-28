@@ -766,6 +766,12 @@ var main = function( eventType, playType )
 		liveTime += (liveCount + eventCount) * (LEAST_PLAYTIME + 47.0);	//라이브 로딩시간 47초. 스태미너 회복시간은 고려하지 않음(영업에서 하므로). 
 	}
 	
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>플레이타임 합계<br></p>';
+	e.innerHTML += '<p><span style="color:red">' + parseInt( (liveTime + workTime) / 60 ) + '분</span><br></p>';
+	e.innerHTML += '<p>- 라이브 ' + parseInt(liveTime / 60) + '분<br></p>';
+	e.innerHTML += '<p>- 영업 ' + parseInt(workTime / 60) + '분<br></p>';
+	
 	// 1시간당 평균 플레이타임 * 24 
 	dailyLiveTime = parseInt( (liveTime / (eventDuration / 60.0)) * 24.0 );
 	dailyWorkTime = parseInt( (workTime / (eventDuration / 60.0)) * 24.0 );
@@ -773,7 +779,7 @@ var main = function( eventType, playType )
 	var dailyPlayTime = dailyLiveTime + dailyWorkTime;
 	
 	e.innerHTML += '<p><br></p>';
-	e.innerHTML += '<p>24시간당 평균 플레이타임<br></p>';
+	e.innerHTML += '<p>24시간당 환산 플레이타임<br></p>';
 	e.innerHTML += '<p><span style="color:red">' + parseInt(dailyPlayTime / 60) + '분</span><br></p>';
 	e.innerHTML += '<p>- 라이브 ' + parseInt(dailyLiveTime / 60) + '분<br></p>';
 	e.innerHTML += '<p>- 영업 ' + parseInt(dailyWorkTime / 60) + '분<br></p>'; 
