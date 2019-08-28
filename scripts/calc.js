@@ -401,26 +401,7 @@ var main = function( eventType, playType )
 	
 	////////////////////* 폼에서 읽어들인 데이터 가공 *////////////////////
 	
-	/*var test1 = document.createTextNode( 'test' );
-	var p1 = document.createElement( 'p' );
-	var test2 = document.createTextNode( 'test' );
-	var p2 = document.createElement( 'p' );
-	var test3 = document.createTextNode( 'test' );
-	var p3 = document.createElement( 'p' );
-	var test4 = document.createTextNode( 'test' );
-	var p4 = document.createElement( 'p' );
-	p1.appendChild( test1 );
-	p2.appendChild( test2 );
-	p3.appendChild( test3 );
-	p4.appendChild( test4 );
-	
-	e.appendChild( p1 );
-	e.appendChild( p2 );
-	e.appendChild( p3 );
-	e.appendChild( p4 );*/
-	
 	e.innerHTML = '<p><br></p>';
-	e.innerHTML += '<p>minase calculator<br></p>';
 	e.innerHTML += '<p>[ 전제 조건 ]<br></p>';
 	e.innerHTML += '<p>- MM 난이도<br></p>';
 	e.innerHTML += '<p>- S랭크 클리어<br></p>';
