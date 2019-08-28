@@ -419,7 +419,8 @@ var main = function( eventType, playType )
 	e.appendChild( p3 );
 	e.appendChild( p4 );*/
 	
-	e.innerHTML = '<p>minase calculator<br></p>';
+	e.innerHTML = '<p><br></p>';
+	e.innerHTML += '<p>minase calculator<br></p>';
 	e.innerHTML += '<p>[ 전제 조건 ]<br></p>';
 	e.innerHTML += '<p>- MM 난이도<br></p>';
 	e.innerHTML += '<p>- S랭크 클리어<br></p>';
@@ -780,7 +781,9 @@ var main = function( eventType, playType )
 	
 	var dailyPlayTime = dailyLiveTime + dailyWorkTime;
 	
-	e.innerHTML += '<p><br><br>24시간당 평균 플레이타임<br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>24시간당 평균 플레이타임<br></p>';
 	e.innerHTML += '<p><span style="color:red">' + parseInt(dailyPlayTime / 60) + '분</span><br></p>';
 	e.innerHTML += '<p>- 라이브 ' + parseInt(dailyLiveTime / 60) + '분<br></p>';
 	e.innerHTML += '<p>- 영업 ' + parseInt(dailyWorkTime / 60) + '분<br></p>'; 
