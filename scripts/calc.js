@@ -178,6 +178,22 @@ var simulateEvent = function( inData, outData )
 		liveCount		+=	temp;
 		
 		stamina %= liveConsumption;
+		
+		// 시어터 이벤트라면, 소지한 라이브 티켓 사용 가능
+		if( (eventType == THEATER) && (ticket >= 30) )
+		{
+			// MM 난이도로 티켓 라이브 실행
+			temp = ticket / 30;
+			
+			// 티켓 라이브에선 exp와 money가 증가하지 않음. 
+			point			+=	temp * Math.ceil( (POINT_PER_LIVE / (liveConsumption/30)) * 0.7 );
+			item			+=	temp * Math.ceil( (ITEM_PER_LIVE / (liveConsumption/30)) * 0.7 );
+			liveAffection	+=	temp * parseInt(AFFECTION_PER_LIVE / 2);
+			liveFan			+=	temp * parseInt(FAN_PER_LIVE / 2);
+			liveCount		+=	parseInt(temp / 10) + 1;
+			
+			ticket %= 30;
+		}
 	}
 	else if( playType == WORKRUN )		//영업런
 	{
