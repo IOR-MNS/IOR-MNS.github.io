@@ -300,7 +300,7 @@ var main = function( eventType, playType )
 	var currentExp = document.getElementById("currentExp").value;
 	var currentStamina = document.getElementById("currentStamina").value;
 	var currentItem = document.getElementById("currentItem").value;
-	var liveConsumption = document.getElementById("liveConsumption").value;
+	
 	var eventConsumption = document.getElementById("eventConsumption").value;
 	var drink10 = document.getElementById("drink10").value;
 	var drink20 = document.getElementById("drink20").value;
@@ -309,12 +309,22 @@ var main = function( eventType, playType )
 	var currentPoint = document.getElementById("currentPoint").value;
 	var targetPoint = document.getElementById("targetPoint").value;
 	
+	if ( ! ( eventType == TOUR && playType == WORKRUN ) ) {
+		var liveConsumption = document.getElementById("liveConsumption").value;
+	} else {
+		var liveComsumption = "0";
+	}
+	
 	if ( playType == WORKRUN ) {
-		var currentTicket = document.getElementById("currentTicket").value;
 		var workConsumption = document.getElementById("workConsumption").value;
 	} else {
-		var currentTicket = "0";
 		var workConsumption = "0";
+	}
+	
+	if ( eventType != TOUR ) {
+		var currentTicket = document.getElementById("currentTicket").value;
+	} else {
+		var currentTicket = "0";
 	}
 	
 	// 미입력 여부 확인
@@ -762,7 +772,6 @@ var main = function( eventType, playType )
 	
 	var dailyPlayTime = dailyLiveTime + dailyWorkTime;
 	
-	e.innerHTML += '<p><br></p>';
 	e.innerHTML += '<p><br></p>';
 	e.innerHTML += '<p>24시간당 평균 플레이타임<br></p>';
 	e.innerHTML += '<p><span style="color:red">' + parseInt(dailyPlayTime / 60) + '분</span><br></p>';

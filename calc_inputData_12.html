@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- PSTheater & Live-run -->
+<!-- PSTheater & Work-run -->
 <html>
 	<head>
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
 		</a>
 		
 		<h2 style="color:black">
-			PSTheater & 라이브런
+			PSTheater & 영업런
 		</h2>
 		
 		<form>
@@ -66,10 +66,27 @@
 		
 		<form>
 			<div>
-				<p>일반곡 배수 선택</p>
+				<p>영업 소모 스태 선택</p>
+				<select id="workConsumption">
+					<option value=20 selected>20 스태미너</option>
+					<option value=25>25 스태미너</option>
+					<option value=30>30 스태미너</option>
+					<option value=40>20x2 스태미너</option>
+					<option value=50>25x2 스태미너</option>
+					<option value=60>30x2 스태미너</option>
+				</select>
+				<p>티켓 사용 배수 선택</p>
 				<select id="liveConsumption">
 					<option value=30 selected>1배수</option>
 					<option value=60>2배수</option>
+					<option value=90>3배수</option>
+					<option value=120>4배수</option>
+					<option value=150>5배수</option>
+					<option value=180>6배수</option>
+					<option value=210>7배수</option>
+					<option value=240>8배수</option>
+					<option value=270>9배수</option>
+					<option value=300>10배수</option>
 				</select>
 				<p>이벤곡 배수 선택</p>
 				<select id="eventConsumption">
@@ -108,7 +125,7 @@
 		</form>
 		
 		<p align="center">
-			<button onclick="main(1, 1);animateLines(document.getElementById('calcResult'), 25);" style="margin: 0 auto">계산해줘</button>
+			<button onclick="main(1, 2);animateLines(document.getElementById('calcResult'), 25);" style="margin: 0 auto">계산해줘</button>
 		</p>
 		
 		<form>
