@@ -10,7 +10,7 @@
 	-->
 	
 	<style>
-		@keyframes page_fadein {
+		@keyframes fadein {
 			0% {
 				opacity: 0;
 			}
@@ -18,13 +18,18 @@
 				opacity: 1;
 			}
 		}
+		
 		html {
-			background: #FD99E1;
+			background: #EC8B8E;
 		}
 		
 		body {
-			background: linear-gradient( to bottom, #FD99E1, #EC8B8E, lightpink, #F099D2, #E75FB9, #333333, black );
-			animation: .8s ease 0s 1 page_fadein;
+			background: linear-gradient( 173deg, #FD99E1, #EC8B8E, lightpink, #F099D2, #E75FB9, #333333, black );
+			animation: 1.6s ease 0s 1 forwards fadein;
+		}
+		
+		#calcResult p {
+			display: none;
 		}
 	</style>
 	</head>
@@ -42,7 +47,7 @@
 				<p>남은 시간</p>
 			</div>
 			<div style="text-align: left">
-				<input type="number" id="leftDay" min="0" style="width:30%; text-align:right"/>
+				<input type="number" id="leftDay" min="0" value="1" style="width:30%; text-align:right"/>
 				일
 				<input type="number" id="leftHour" min="0" max="23" value="0" style="width:30%; text-align:right"/>
 				시간
@@ -56,7 +61,7 @@
 		<form>
 			<div>
 				<p>레벨</p>
-				<input type="number" id="currentLevel" min="1" max="999" style="width:100%"/>
+				<input type="number" id="currentLevel" min="1" max="999" value="1" style="width:100%"/>
 				
 				<p>경험치</p>
 				<input type="number" id="currentExp" min="0" value="0" style="width:100%"/>
@@ -118,22 +123,69 @@
 		</form>
 		
 		<p align="center">
-			<button onclick="main(1, 1);" style="margin: 0 auto">계산해줘</button>
+			<button onclick="main(1, 1);animateResult('calcResult');" style="margin: 0 auto">계산해줘</button>
 		</p>
 		
 		<form>
-			<div style="font-size:70%">
-				<span style="background-color:lightpink">
-					<p id="calcResult"></p>
-				</span>
-			</div>
+			<div id="calcResult" style="font-size:70%"></div>
 		</form>
 		
-		<p style="font-family:배민연성체; font-size:2vmin">
-			Copyright © 2039 MINASE Inc. All Rights Reserved.
-		</p>
+		<div class="copyright">
+			<p>
+				Copyright © 2039 MINASE Inc. All Rights Reserved.
+			</p>
+		</div>
 	</body>
-	<!-- 아래의 for문은 결과가 표시되어 페이지가 길어질 경우 배경 그라데이션이 급격하게 변화하는 것을 막기 위함 -->
-	<script>for ( i = 0; i < 54; i++ ) document.getElementById("calcResult").innerHTML += '<br>';</script>
+	
 	<script src="scripts/calc.js"></script>
+	
+	<script>
+		function fadeIn(objectElement)
+		{
+			var opacityLevel = 0;
+			var fadeInTimerID = null;
+			fadeInTimerID = setTimeout(function stepFadeIn() {
+				opacityLevel = fadeInAction(objectElement, opacityLevel, fadeInTimerID);
+				if( opacityLevel > 1 ) {
+					return;
+				}
+				fadeInTimerID = setTimeout(stepFadeIn, 10);
+			}, 10);
+		}
+		
+		function fadeInAction(objectElement, opacityLevel, fadeInTimerID)
+		{
+			opacityLevel += 0.01;
+			changeOpacity(objectElement, opacityLevel);
+			return opacityLevel;
+		}
+		
+		function changeOpacity(objectElement, opacityLevel)
+		{
+			objectElement.style.opacity = opacityLevel;
+			objectElement.style.MozOpacity = opacityLevel;
+			objectElement.style.KhtmlOpacity = opacityLevel;
+		}
+	</script>
+	<script>
+		function animateResult(objectID)
+		{
+			var e = document.getElementById(objectID);
+			var children = e.childNodes;
+			var i = 0;
+			var te = null;
+			
+			timerID = setTimeout( function stepAnimation() {
+				if (i >= children.length) {
+					return;
+				}
+				te = children[i];
+				te.style.opacity = 0;
+				te.style.display = 'inline';
+				fadeIn(te);
+				timerID = setTimeout(stepAnimation, 25);
+				i++;
+			}, 25);
+		}
+	</script>
 </html>

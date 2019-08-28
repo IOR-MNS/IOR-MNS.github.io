@@ -386,6 +386,7 @@ var main = function( eventType, playType )
 		return;
 	}
 	
+	var e = document.getElementById("calcResult");
 	
 	/* 추가로 필요한 변수들 선언 */
 	var eventDuration = 0, stamina = 0, ticket = 0, item = 0;
@@ -399,15 +400,34 @@ var main = function( eventType, playType )
 	var originalItem = 0;		// 출력결과에 본래 이벤트 재화 개수를 표시하기 위해 
 	
 	////////////////////* 폼에서 읽어들인 데이터 가공 *////////////////////
-	document.getElementById("calcResult").innerHTML = 'minase calculator<br>';
-	document.getElementById("calcResult").innerHTML += '[ 전제 조건 ]<br>';
-	document.getElementById("calcResult").innerHTML += '- MM 난이도<br>';
-	document.getElementById("calcResult").innerHTML += '- S랭크 클리어<br>';
+	
+	/*var test1 = document.createTextNode( 'test' );
+	var p1 = document.createElement( 'p' );
+	var test2 = document.createTextNode( 'test' );
+	var p2 = document.createElement( 'p' );
+	var test3 = document.createTextNode( 'test' );
+	var p3 = document.createElement( 'p' );
+	var test4 = document.createTextNode( 'test' );
+	var p4 = document.createElement( 'p' );
+	p1.appendChild( test1 );
+	p2.appendChild( test2 );
+	p3.appendChild( test3 );
+	p4.appendChild( test4 );
+	
+	e.appendChild( p1 );
+	e.appendChild( p2 );
+	e.appendChild( p3 );
+	e.appendChild( p4 );*/
+	
+	e.innerHTML = '<p>minase calculator<br></p>';
+	e.innerHTML += '<p>[ 전제 조건 ]<br></p>';
+	e.innerHTML += '<p>- MM 난이도<br></p>';
+	e.innerHTML += '<p>- S랭크 클리어<br></p>';
 	if ( eventType == TOUR ) {
 		if ( playType == LIVERUN ) {
-			document.getElementById("calcResult").innerHTML += '- PUSH 곡<br>';
+			e.innerHTML += '<p>- PUSH 곡<br></p>';
 		}
-		document.getElementById("calcResult").innerHTML += '- 이벤트곡 5.0배<br>';
+		e.innerHTML += '<p>- 이벤트곡 5.0배<br></p>';
 	}
 	
 	
@@ -454,7 +474,8 @@ var main = function( eventType, playType )
 	
 	if( eventType == FIRST )
 	{
-		document.getElementById("calcResult").innerHTML += '<br>1주년 이벤트 당시의 진행 기간을 자동 설정합니다.<br>';
+		e.innerHTML += '<p><br></p>';
+		e.innerHTML += '<p>1주년 이벤트 당시의 진행 기간을 자동 설정합니다.<br></p>';
 		eventDuration = 13 * 24 * 60;
 		item += 13 * DAILY_ITEM;
 	}
@@ -469,12 +490,12 @@ var main = function( eventType, playType )
 		eventDuration += leftHour * 60;
 	}
 	
-	//document.getElementById("calcResult").innerHTML += '획득 재화: ' + item + '<br>'; 
-	//document.getElementById("calcResult").innerHTML += '잔여 기간: ' + eventDuration + '<br>'; 
+	//e.innerHTML += '<p>획득 재화: ' + item + '<br></p>'; 
+	//e.innerHTML += '<p>잔여 기간: ' + eventDuration + '<br></p>'; 
 	
 	
 	stamina += parseInt(( parseInt(( eventDuration / 5 )) * regenStaminaUsage ) / 100);
-	//document.getElementById("calcResult").innerHTML += '자연 회복 스태미너 ' + stamina + ' 반영함.<br>'; 
+	//e.innerHTML += '<p>자연 회복 스태미너 ' + stamina + ' 반영함.<br></p>'; 
 	
 	// 플레이어 정보 입력
 	// 이미 폼에서 입력됨
@@ -600,7 +621,7 @@ var main = function( eventType, playType )
 			POINT_PER_LIVE = Math.ceil( POINT_PER_LIVE * 0.7 );
 			ITEM_PER_LIVE = Math.ceil( ITEM_PER_LIVE * 0.7 );
 		}
-	
+	}
 	
 	eventConsumption *= ITEM_REQUIRED_PER_PLAY;
 	temp = parseInt(eventConsumption / ITEM_REQUIRED_PER_PLAY);
@@ -618,45 +639,45 @@ var main = function( eventType, playType )
 	inData[10] = liveConsumption,	inData[11] = workConsumption,	inData[12] = eventConsumption;
 	
 	/*
-	document.getElementById("calcResult").innerHTML += '---inData(parameters)---<br>';
-	document.getElementById("calcResult").innerHTML += 'currentLevel ',currentLevel,'<br>';
-	document.getElementById("calcResult").innerHTML += 'currentExp ',currentExp,'<br>';
-	document.getElementById("calcResult").innerHTML += 'stamina ',stamina,'<br>';
-	document.getElementById("calcResult").innerHTML += 'ticket ',ticket,'<br>';
-	document.getElementById("calcResult").innerHTML += 'maxDrink ',maxDrink,'<br>';
-	document.getElementById("calcResult").innerHTML += 'item ',item,'<br>';
-	document.getElementById("calcResult").innerHTML += 'currentPoint ',currentPoint,'<br>';
-	document.getElementById("calcResult").innerHTML += 'targetPoint ',targetPoint,'<br>';
-	document.getElementById("calcResult").innerHTML += 'eventType ',eventType,'<br>';
-	document.getElementById("calcResult").innerHTML += 'playType ',playType,'<br>';
-	document.getElementById("calcResult").innerHTML += 'liveComsumption ',liveConsumption,'<br>';
-	document.getElementById("calcResult").innerHTML += 'workConsumption ',workConsumption,'<br>';
-	document.getElementById("calcResult").innerHTML += 'eventConsumption ',eventConsumption,'<br>';
-	document.getElementById("calcResult").innerHTML += '---inData(parameters)---<br>';
+	e.innerHTML += '<p>---inData(parameters)---<br></p>';
+	e.innerHTML += '<p>currentLevel ',currentLevel,'<br></p>';
+	e.innerHTML += '<p>currentExp ',currentExp,'<br></p>';
+	e.innerHTML += '<p>stamina ',stamina,'<br></p>';
+	e.innerHTML += '<p>ticket ',ticket,'<br></p>';
+	e.innerHTML += '<p>maxDrink ',maxDrink,'<br></p>';
+	e.innerHTML += '<p>item ',item,'<br></p>';
+	e.innerHTML += '<p>currentPoint ',currentPoint,'<br></p>';
+	e.innerHTML += '<p>targetPoint ',targetPoint,'<br></p>';
+	e.innerHTML += '<p>eventType ',eventType,'<br></p>';
+	e.innerHTML += '<p>playType ',playType,'<br></p>';
+	e.innerHTML += '<p>liveComsumption ',liveConsumption,'<br></p>';
+	e.innerHTML += '<p>workConsumption ',workConsumption,'<br></p>';
+	e.innerHTML += '<p>eventConsumption ',eventConsumption,'<br></p>';
+	e.innerHTML += '<p>---inData(parameters)---<br></p>';
 	
-	document.getElementById("calcResult").innerHTML += '---fundamentalData---<br>';
-	document.getElementById("calcResult").innerHTML += 'exp per live ',EXP_PER_LIVE,'<br>';
-	document.getElementById("calcResult").innerHTML += 'money per live ',MONEY_PER_LIVE,'<br>';
-	document.getElementById("calcResult").innerHTML += 'fan per live ',FAN_PER_LIVE,'<br>';
-	document.getElementById("calcResult").innerHTML += 'affection per live ',AFFECTION_PER_LIVE,'<br>';
-	document.getElementById("calcResult").innerHTML += 'point per live ',POINT_PER_LIVE,'<br>';
-	document.getElementById("calcResult").innerHTML += 'item per live ',ITEM_PER_LIVE,'<br>';
-	document.getElementById("calcResult").innerHTML += 'exp per work ',EXP_PER_WORK,'<br>';
-	document.getElementById("calcResult").innerHTML += 'money per work ',MONEY_PER_WORK,'<br>';
-	document.getElementById("calcResult").innerHTML += 'fan per work ',FAN_PER_WORK,'<br>';
-	document.getElementById("calcResult").innerHTML += 'affection per work ',AFFECTION_PER_WORK,'<br>';
-	document.getElementById("calcResult").innerHTML += 'point per work ',POINT_PER_WORK,'<br>';
-	document.getElementById("calcResult").innerHTML += 'item per work ',ITEM_PER_WORK,'<br>';
-	document.getElementById("calcResult").innerHTML += 'exp per event ',EXP_PER_EVENT,'<br>';
-	document.getElementById("calcResult").innerHTML += 'money per event ',MONEY_PER_EVENT,'<br>';
-	document.getElementById("calcResult").innerHTML += 'fan per event ',FAN_PER_EVENT,'<br>';
-	document.getElementById("calcResult").innerHTML += 'affection per event ',AFFECTION_PER_EVENT,'<br>';
-	document.getElementById("calcResult").innerHTML += 'point per event ',POINT_PER_EVENT,'<br>';
-	document.getElementById("calcResult").innerHTML += 'item per event ',ITEM_REQUIRED_PER_PLAY,'<br>';
-	document.getElementById("calcResult").innerHTML += 'daily item ',DAILY_ITEM,'<br>';
-	document.getElementById("calcResult").innerHTML += 'playtime ',PLAYTIME,'<br>';
-	document.getElementById("calcResult").innerHTML += 'worktime ',WORKTIME,'<br>';
-	document.getElementById("calcResult").innerHTML += '---fundamentalData---<br>';
+	e.innerHTML += '<p>---fundamentalData---<br></p>';
+	e.innerHTML += '<p>exp per live ',EXP_PER_LIVE,'<br></p>';
+	e.innerHTML += '<p>money per live ',MONEY_PER_LIVE,'<br></p>';
+	e.innerHTML += '<p>fan per live ',FAN_PER_LIVE,'<br></p>';
+	e.innerHTML += '<p>affection per live ',AFFECTION_PER_LIVE,'<br></p>';
+	e.innerHTML += '<p>point per live ',POINT_PER_LIVE,'<br></p>';
+	e.innerHTML += '<p>item per live ',ITEM_PER_LIVE,'<br></p>';
+	e.innerHTML += '<p>exp per work ',EXP_PER_WORK,'<br></p>';
+	e.innerHTML += '<p>money per work ',MONEY_PER_WORK,'<br></p>';
+	e.innerHTML += '<p>fan per work ',FAN_PER_WORK,'<br></p>';
+	e.innerHTML += '<p>affection per work ',AFFECTION_PER_WORK,'<br></p>';
+	e.innerHTML += '<p>point per work ',POINT_PER_WORK,'<br></p>';
+	e.innerHTML += '<p>item per work ',ITEM_PER_WORK,'<br></p>';
+	e.innerHTML += '<p>exp per event ',EXP_PER_EVENT,'<br></p>';
+	e.innerHTML += '<p>money per event ',MONEY_PER_EVENT,'<br></p>';
+	e.innerHTML += '<p>fan per event ',FAN_PER_EVENT,'<br></p>';
+	e.innerHTML += '<p>affection per event ',AFFECTION_PER_EVENT,'<br></p>';
+	e.innerHTML += '<p>point per event ',POINT_PER_EVENT,'<br></p>';
+	e.innerHTML += '<p>item per event ',ITEM_REQUIRED_PER_PLAY,'<br></p>';
+	e.innerHTML += '<p>daily item ',DAILY_ITEM,'<br></p>';
+	e.innerHTML += '<p>playtime ',PLAYTIME,'<br></p>';
+	e.innerHTML += '<p>worktime ',WORKTIME,'<br></p>';
+	e.innerHTML += '<p>---fundamentalData---<br></p>';
 	*/
 	
 	////////////////////* 시뮬레이션 실행  *////////////////////
@@ -673,45 +694,67 @@ var main = function( eventType, playType )
 	var liveCount = outData[11], workCount = outData[12], eventCount = outData[13];
 	var reachablePoint = outData[14], reachedPoint = outData[15];
 	
-	document.getElementById("calcResult").innerHTML += '<br><br>';
-	document.getElementById("calcResult").innerHTML += '레벨<br>' + currentLevel + ' -> ' + newLevel + '<br><br>경험치<br>' + currentExp + ' -> ' + newExp + '<br>';
-	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '맥스드링크<br>' + maxDrink + ' -> ' + newMaxDrink + '<br>스태미너<br>' + originalStamina + ' -> ' + newStamina + '<br>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>레벨<br></p>';
+	e.innerHTML += '<p>' + currentLevel + ' -> ' + newLevel + '<br></p>';
+	e.innerHTML += '<p>경험치<br></p>';
+	e.innerHTML += '<p>' + currentExp + ' -> ' + newExp + '<br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>맥스드링크<br></p>';
+	e.innerHTML += '<p>' + maxDrink + ' -> ' + newMaxDrink + '<br></p>';
+	e.innerHTML += '<p>스태미너<br></p>';
+	e.innerHTML += '<p>' + originalStamina + ' -> ' + newStamina + '<br></p>';
+	e.innerHTML += '<p>라이브 티켓<br></p>';
+		e.innerHTML += '<p>' + ticket + ' -> ' + newTicket + '<br></p>';
 	
 	if( eventType == TOUR ) {
-		document.getElementById("calcResult").innerHTML += '라이브 티켓<br>' +  ticket + ' -> ' + newTicket + '<br>';
-		document.getElementById("calcResult").innerHTML += '이벤트 재화(진행도)<br>' +  parseInt(originalItem/20) + '(' + (originalItem%20) + ') -> ' + parseInt(newItem/20) + '(' + (newItem%20) + ')<br>';
+		e.innerHTML += '<p>이벤트 재화(진행도)<br></p>';
+		e.innerHTML += '<p>' + parseInt(originalItem/20) + '(' + (originalItem%20) + ') -> ' + parseInt(newItem/20) + '(' + (newItem%20) + ')<br></p>';
 	} else {
-		document.getElementById("calcResult").innerHTML += '라이브 티켓<br>' + ticket + ' -> ' + newTicket + '<br>';
-		document.getElementById("calcResult").innerHTML += '이벤트 재화<br>' + originalItem + ' -> ' + newItem + '<br>';
+		e.innerHTML += '<p>이벤트 재화<br></p>';
+		e.innerHTML += '<p>' + originalItem + ' -> ' + newItem + '<br></p>';
 	}
 	
-	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '획득 머니<br>' + money + '<br>';
-	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '획득 친애도<br>' + (liveAffection + workAffection) + '<br>- 라이브 ' + liveAffection + '<br>- 업무 ' + workAffection + '<br>';
-	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '획득 팬<br>' + (liveFan + workFan) + '<br>- 라이브 ' + liveFan + '<br>- 업무 ' + workFan + '<br>'; 
-	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '일반곡 플레이 횟수<br>- <span style="color:#FB9FCE">' + liveCount + '</span>회<br>';
-	document.getElementById("calcResult").innerHTML += '영업 횟수<br>- <span style="color:#FB9FCE">' + workCount + '</span>회<br>';
-	document.getElementById("calcResult").innerHTML += '이벤트곡 플레이 횟수<br>- <span style="color:#FB9FCE">' + eventCount + '</span>회<br>';
-	document.getElementById("calcResult").innerHTML += '<br>';
-	document.getElementById("calcResult").innerHTML += '보유 자원으로 가능한 점수<br>- <span style="color:#FB9FCE">' + reachablePoint + '</span>점<br>';
-	document.getElementById("calcResult").innerHTML += '시뮬레이션에서 도달한 점수<br>- ' + reachedPoint + '점<br>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>획득 머니<br></p>';
+	e.innerHTML += '<p>' + money + '<br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>획득 친애도<br></p>';
+	e.innerHTML += '<p>' + (liveAffection + workAffection) + '<br></p>';
+	e.innerHTML += '<p>- 라이브 ' + liveAffection + '<br></p>';
+	e.innerHTML += '<p>- 업무 ' + workAffection + '<br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>획득 팬<br></p>';
+	e.innerHTML += '<p>' + (liveFan + workFan) + '<br></p>';
+	e.innerHTML += '<p>- 라이브 ' + liveFan + '<br></p>';
+	e.innerHTML += '<p>- 업무 ' + workFan + '<br></p>'; 
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>일반곡 플레이 횟수<br></p>';
+	e.innerHTML += '<p>- <span style="color:#FB9FCE">' + liveCount + '</span>회<br></p>';
+	e.innerHTML += '<p>영업 횟수<br></p>';
+	e.innerHTML += '<p>- <span style="color:#FB9FCE">' + workCount + '</span>회<br></p>';
+	e.innerHTML += '<p>이벤트곡 플레이 횟수<br></p>';
+	e.innerHTML += '<p>- <span style="color:#FB9FCE">' + eventCount + '</span>회<br></p>';
+	e.innerHTML += '<p><br></p>';
+	e.innerHTML += '<p>보유 자원으로 가능한 점수<br></p>';
+	e.innerHTML += '<p>- <span style="color:#FB9FCE">' + reachablePoint + '</span>점<br></p>';
+	e.innerHTML += '<p>시뮬레이션에서 도달한 점수<br></p>';
+	e.innerHTML += '<p>- ' + reachedPoint + '점<br></p>';
 	
 	if( reachablePoint == reachedPoint ) {
-		document.getElementById("calcResult").innerHTML += '! 보유 자원으로 도달 가능한 점수가 부정확하게 표시되었을 수 있습니다. 목표 점수 근처까지만 시뮬레이션이 진행됩니다.<br>';
+		e.innerHTML += '<p>! 보유 자원으로 도달 가능한 점수가 부정확하게 표시되었을 수 있습니다.<br></p>';
+		e.innerHTML += '<p>(목표 점수 근처까지만 시뮬레이션이 진행됩니다)<br></p>';
 	}
-	document.getElementById("calcResult").innerHTML += '<br>';
+	e.innerHTML += '<p><br></p>';
 	if( newMaxDrink < 0 )
 	{
-		document.getElementById("calcResult").innerHTML += '<span style="color: red">' + (newMaxDrink * -50) + '개의 쥬엘</span>을 더 사용해야 목표 점수를 달성할 수 있습니다.<br>';
+		e.innerHTML += '<p><span style="color: red">' + (newMaxDrink * -50) + '개의 쥬엘</span>을 더 사용해야 목표 점수를 달성할 수 있습니다.<br></p>';
 	}
 	else
 	{
-		document.getElementById("calcResult").innerHTML += '<span style="color:#A3CCA3">목표 점수를 달성하고도 ' + (newMaxDrink * 50) + '개의 쥬엘(또는 ' + newMaxDrink + '개의 맥스드링크)이 남습니다.</span><br>';
+		e.innerHTML += '<p><span style="color:#A3CCA3">목표 점수를 달성하고도 ' + (newMaxDrink * 50) + '개의 쥬엘(또는 ' + newMaxDrink + '개의 맥스드링크)이 남습니다.</span><br></p>';
 	}
 	
 	// 플레이타임 계산
@@ -737,9 +780,8 @@ var main = function( eventType, playType )
 	
 	var dailyPlayTime = dailyLiveTime + dailyWorkTime;
 	
-	document.getElementById("calcResult").innerHTML += '<br><br>24시간당 평균 플레이타임<br>';
-	document.getElementById("calcResult").innerHTML += '<span style="color:red">' + parseInt(dailyPlayTime / 60) + '분</span><br>';
-	document.getElementById("calcResult").innerHTML += '- 라이브 ' + parseInt(dailyLiveTime / 60) + '분<br>';
-	document.getElementById("calcResult").innerHTML += '- 영업 ' + parseInt(dailyWorkTime / 60) + '분<br>'; 
-	
+	e.innerHTML += '<p><br><br>24시간당 평균 플레이타임<br></p>';
+	e.innerHTML += '<p><span style="color:red">' + parseInt(dailyPlayTime / 60) + '분</span><br></p>';
+	e.innerHTML += '<p>- 라이브 ' + parseInt(dailyLiveTime / 60) + '분<br></p>';
+	e.innerHTML += '<p>- 영업 ' + parseInt(dailyWorkTime / 60) + '분<br></p>'; 
 }

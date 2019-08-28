@@ -143,3 +143,8 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:focus, select:h
 	transition: background-color 0.2s ease;
 	background-color: lightpink;
 }
+
+.copyright {
+	font-family:배민연성체;
+	font-size:2vmin
+}
