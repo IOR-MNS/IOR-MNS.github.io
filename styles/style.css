@@ -157,3 +157,21 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:focus, select:h
 	font-family:배민연성체;
 	font-size:2vmin;
 }
+.copyright_m {
+	font-family:배민연성체;
+	font-size:2vw;
+}
+
+#leftDay, #leftHour {
+	width:25%;
+	text-align:right;
+}
+#regenStaminaUsage, #currentItem, #drink10, #drink20, #drink30, #maxDrink, #currentPoint, #targetPoint {
+	width:80%;
+}
+#currentLevel, #currentExp, #currentStamina {
+	width:100%;
+}
+#calcResult {
+	font-size:80%;
+}
