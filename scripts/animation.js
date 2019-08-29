@@ -1,1 +1,1 @@
-function e(c){var a=0;setTimeout(function d(){var b=a;b+=.1;f(c,b);a=b;1<a||setTimeout(d,10)},10)}function f(c,a){c.style.opacity=a}window.animateLines=function(c,a){var g=c.childNodes,d=0,b=null;timerID=setTimeout(function h(){d>=g.length||(b=g[d],b.style.opacity=0,b.style.display="inline",e(b),setTimeout(h,a),d++)},a)};window.fadeIn=e;window.changeOpacity=f;
+window.animateLines=function(d,b){var c=d.childNodes,a=0;setTimeout(function e(){a>=c.length||(c[a].style.display="inline",setTimeout(e,b),a++)},b)};
