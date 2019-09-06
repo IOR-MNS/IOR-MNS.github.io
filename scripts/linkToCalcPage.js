@@ -1,1 +1,18 @@
-window.linkToCalcPage=function(){var a=document.getElementById("eventType").value,b=document.getElementById("playType").value,c="eventType="+String(a)+"&playType="+String(b);""==a&&alert("\uc774\ubca4\ud2b8 \uc720\ud615\uc744 \uace8\ub77c\uc8fc\uc138\uc694.");""==b&&alert("\ud50c\ub808\uc774 \uc720\ud615\uc744 \uace8\ub77c\uc8fc\uc138\uc694.");""!=a&&""!=b&&(location.href="calc.html?"+c)};
+function linkToCalcPage()
+{
+	var eventType = document.getElementById("eventType").value;
+	var playType = document.getElementById("playType").value;
+	var nextPage = "calc.html";
+	var queryString = "eventType=" + String(eventType) + "&playType=" + String(playType);
+	
+	if ( eventType == "" ) {
+		alert("이벤트 유형을 골라주세요.");
+	}
+	if ( playType == "" ) {
+		alert("플레이 유형을 골라주세요.");
+	}
+	
+	if ( eventType != "" && playType != "" ) {
+		location.href = nextPage + "?" + queryString;
+	}
+}

@@ -1,1 +1,40 @@
-window.parseQueryString=function(b){for(var a=0;;){if(a>=b.length)return alert("error: there is no query string in url."),!1;if("?"===b.charAt(a++))break}for(var d="",c=[];;){if(a>=b.length){c.push(d);break}"="===b.charAt(a)||"&"===b.charAt(a)?(c.push(d),d=""):d+=b.charAt(a);a++}b={};for(a=0;a+1<c.length;a+=2)b[c[a]]=c[a+1];return b};
+const parseQueryString = function(url) {
+	var i = 0;
+	while (true) {
+		if (i >= url.length) {
+			alert('error: there is no query string in url.');
+			return false;
+		}
+		if (url.charAt(i++) === '?') {
+			break;
+		}
+	}
+	
+	var tempStr = '';
+	var tempArr = new Array();
+	
+	while (true) {
+		if (i >= url.length) {
+			tempArr.push(tempStr);
+			tempStr = '';
+			break;
+		}
+		
+		if (url.charAt(i) === '=' || url.charAt(i) === '&') {
+			tempArr.push(tempStr);
+			tempStr = '';
+			i++;
+			continue;
+		}
+		
+		tempStr += url.charAt(i);
+		i++;
+	}
+	
+	var obj = {};
+	for (i = 0; (i + 1) < tempArr.length; i += 2) {
+		obj[tempArr[i]] = tempArr[i+1];
+	}
+	
+	return obj;
+}

@@ -1,4 +1,4 @@
-const makeRequest = function (content, e)
+/*const makeRequest = function (content, e)
 {
 	var httpRequest = new XMLHttpRequest();
 	
@@ -17,4 +17,16 @@ const makeRequest = function (content, e)
 	httpRequest.open('POST', location);
 	httpRequest.setRequestHeader('Content-Type', 'text/plain');
 	httpRequest.send(content);
+}*/
+
+// variable content should be 'string' or {object}
+const makeRequest = function (url)
+{
+	return fetch(url, {
+		method: 'POST',
+		body: '.',
+		headers:{
+			'Content-Type': 'text/plain'
+		}
+	});
 }
