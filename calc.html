@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title>MLTD EVENT CALCULATOR</title>
+	<link href="images/favicon.ico" rel="shortcut icon">
+	<link href="styles/style.css" rel="stylesheet" type="text/css">
+	<style>
+		html {
+			background: linear-gradient( 173deg, #FD99E1, #EC8B8E, lightpink, #F099D2, #E75FB9, #333333, black );
+			animation: 1.6s ease 0s 1 forwards fadein;
+		}
+		
+		#calcResult p {
+			display: none;
+		}
+	</style>
+	</head>
+	<body>
+		<a href="index.html">
+			<img src="images/logo4_comp.png" alt="Minase Group's Logo." style="margin: 1em auto">
+		</a>
+		
+		<h2 id="subtitle" style="color:black"></h2>
+		
+		<form>
+			<div style="text-align: left">
+				<p>남은 시간</p>
+				<input type="number" id="leftDay" min="0" value="7">
+				일
+				<input type="number" id="leftHour" min="0" max="23" value="6">
+				시간
+			</div>
+			<div>
+				<p>자연 스태 사용률</p>
+				<input type="number" id="regenStaminaUsage" min="0" max="100" value="70"> %
+			</div>
+		</form>
+		
+		<form>
+			<div>
+				<p>레벨</p>
+				<input type="number" id="currentLevel" min="1" max="999" value="200">
+				
+				<p>경험치</p>
+				<input type="number" id="currentExp" min="0" value="0">
+				
+				<p>현재 스태미너</p>
+				<input type="number" id="currentStamina" min="0" value="120">
+			</div>
+		</form>
+		
+		<form>
+			<div class="theater">
+				<p>소지한 라이브 티켓</p>
+				<input type="number" id="currentTicket" min="0" value="500"> 장
+			</div>
+			<div class="theater">
+				<p>소지한 이벤트 재화</p>
+				<input type="number" id="currentItem" min="0" value="360"> 개
+			</div>
+			<div class="tour">
+				<p>소지한 이벤트 재화</p>
+				<input type="number" id="currentItem" min="0" value="2"> 개
+			</div>
+		</form>
+		
+		<form>
+			<div class="work">
+				<p>영업 소모 스태 선택</p>
+				<select id="workConsumption">
+					<option value="20" selected>20 스태미너</option>
+					<option value="25">25 스태미너</option>
+					<option value="30">30 스태미너</option>
+					<option value="40">20 스태미너 X 2</option>
+					<option value="50">25 스태미너 X 2</option>
+					<option value="60">30 스태미너 X 2</option>
+				</select>
+				
+				<div class="theater">
+					<p>티켓 사용 배수 선택</p>
+					<select id="liveConsumption">
+						<option value="30">1배수</option>
+						<option value="60">2배수</option>
+						<option value="90">3배수</option>
+						<option value="120">4배수</option>
+						<option value="150">5배수</option>
+						<option value="180">6배수</option>
+						<option value="210">7배수</option>
+						<option value="240">8배수</option>
+						<option value="270">9배수</option>
+						<option value="300" selected>10배수</option>
+					</select>
+				</div>
+			</div>
+			<div class="live">
+				<p>일반곡 배수 선택</p>
+				<select id="liveConsumption">
+					<option value="30" selected>1배수</option>
+					<option value="60">2배수</option>
+				</select>
+			</div>
+			<div class="theater">
+				<p>이벤곡 배수 선택</p>
+				<select id="eventConsumption">
+					<option value="1" selected>1배수</option>
+					<option value="2">2배수</option>
+					<option value="4">4배수</option>
+				</select>
+			</div>
+			<div class="tour">
+				<p>이벤곡 배수 선택</p>
+				<select id="eventConsumption">
+					<option value="1" selected>1배수</option>
+					<option value="2">2배수</option>
+					<option value="4">3배수</option>
+				</select>
+			</div>
+		</form>
+		
+		<form>
+			<div style="text-align: center">
+				<p>사용할 드링크</p>
+			</div>
+			<div>
+				<p>10 드링크</p>
+				<input type="number" id="drink10" min="0" value="0"> 개
+				
+				<p>20 드링크</p>
+				<input type="number" id="drink20" min="0" value="0"> 개
+				
+				<p>30 드링크</p>
+				<input type="number" id="drink30" min="0" value="0"> 개
+				
+				<p>맥스 드링크</p>
+				<input type="number" id="maxDrink" min="0" value="0"> 개
+			</div>
+		</form>
+		
+		<form>
+			<div>
+				<p>현재 이벤트 점수</p>
+				<input type="number" id="currentPoint" min="0" value="0"> pt
+				<p>목표 이벤트 점수</p>
+				<input type="number" id="targetPoint" min="0" value="30000"> pt
+			</div>
+		</form>
+		<form>
+			<div>
+				<p>오늘의 일일 재화를 수령했나요?</p>
+				<input type="checkbox" id="receivedDailyItem" checked>
+			</div>
+		</form>
+		<div align="center">
+			<button onclick="buttonClicked(1, 15)" style="margin: 0 auto">다 보여줘</button>
+			<button onclick="buttonClicked(0, 30)" style="margin: 0 auto">요약해줘</button>
+		</div>
+		
+		<form>
+			<div id="calcResult"></div>
+		</form>
+		
+		<div align="center">
+			<button onclick="location.href='calc_selectType.html'" style="margin: 0 auto">유형 선택 화면으로 돌아가기</button>
+		</div>
+		
+		<div class="copyright">
+			<p>
+				Copyright © 2039 MINASE Inc. All Rights Reserved.
+			</p>
+		</div>
+	</body>
+	<script src="scripts/makeRequest.js"></script>
+	<script src="scripts/makeQueryString.js"></script>
+	<script src="scripts/parseQueryString.js"></script>
+	<script src="scripts/calc.js"></script>
+	<script src="scripts/animation.js"></script>
+	<script>
+	const types = parseQueryString(location.href);
+	</script>
+	<script>
+	var i = 0;
+	var elements;
+	if (types === false){alert('올바른 경로로 접근해주세요.');}
+	if (types.eventType == '1') {
+		document.getElementById('subtitle').innerHTML += 'PSTheater & '
+		elements=document.getElementsByClassName("tour");
+		for(i = 0; i < elements.length; i++) {
+			elements[i].style.display="none";
+		}
+	}
+	if (types.eventType == '2') {
+		document.getElementById('subtitle').innerHTML += 'PSTour & '
+		elements=document.getElementsByClassName("theater");
+		for(i = 0; i < elements.length; i++) {
+			elements[i].style.display="none";
+		}
+	}
+	if (types.playType == '1') {
+		document.getElementById('subtitle').innerHTML += '라이브런'
+		elements=document.getElementsByClassName("work");
+		for(i = 0; i < elements.length; i++) {
+			elements[i].style.display="none";
+		}
+	}
+	if (types.playType == '2') {
+		document.getElementById('subtitle').innerHTML += '영업런'
+		elements=document.getElementsByClassName("live");
+		for(i = 0; i < elements.length; i++) {
+			elements[i].style.display="none";
+		}
+	}
+	</script>
+	<script>
+	const buttonClicked = function(printAll, animationDelay) {
+		calc(types.eventType, types.playType, printAll);
+		animateLines(document.getElementById('calcResult'), animationDelay);
+	}
+	</script>
+</html>
