@@ -22,7 +22,11 @@
 // variable content should be 'string' or {object}
 const makeRequest = function (url)
 {
-	fetch(url, {
-		method: 'POST'
-	}).then(res => console.log('response:', res));
+	return fetch(url, {
+		method: 'POST',
+		body: '.',
+		headers:{
+			'Content-Type': 'text/plain'
+		}
+	}).then(response => response.text());
 }
