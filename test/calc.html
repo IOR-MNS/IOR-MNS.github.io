@@ -263,6 +263,7 @@
 	<script>
 	const buttonClicked = function(printAll, animationDelay) {
 		var data = fetchFormData(eventType, playType, printAll);
+		var queryString = makeQueryString(data);
 		/*var postString = '';
 		console.log(Object.keys(data));
 		for (var i = 0; i < Object.keys(data).length; i++) {
@@ -273,7 +274,8 @@
 		}*/
 		//console.log(postString);
 		//var resultText = calc(data);
-		makeRequest(JSON.stringify(data));
+		console.log('qs: calc.html?'+queryString);
+		makeRequest('calc.html?'+queryString);
 		//document.getElementById('calcResult').innerHTML = resultText;
 		//animateLines(document.getElementById('calcResult'), animationDelay);
 	}

@@ -20,10 +20,9 @@
 }*/
 
 // variable content should be 'string' or {object}
-const makeRequest = function (content)
+const makeRequest = function (url)
 {
-	fetch(location.href, {
-		method: 'POST',
-		body: content,
+	fetch(url, {
+		method: 'POST'
 	}).then(res => console.log('response:', res));
 }
