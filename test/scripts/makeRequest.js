@@ -28,5 +28,5 @@ const makeRequest = function (url)
 		headers:{
 			'Content-Type': 'text/plain'
 		}
-	}).then(response => response.text());
+	});
 }

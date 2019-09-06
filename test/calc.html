@@ -247,7 +247,6 @@
 		if ( !(eventType == 2 && playType == 2) ) {
 			formData.liveConsumption = Number(document.getElementById('liveConsumption').value);
 		}
-		console.log(document.getElementById('liveConsumption').value, formData.liveConsumption);
 		//theater
 		if (eventType == 1) {
 			formData.currentTicket = Number(document.getElementById('currentTicket').value);
@@ -261,23 +260,18 @@
 	}
 	</script>
 	<script>
-	const buttonClicked = function(printAll, animationDelay) {
-		var data = fetchFormData(eventType, playType, printAll);
-		var queryString = makeQueryString(data);
-		/*var postString = '';
-		console.log(Object.keys(data));
-		for (var i = 0; i < Object.keys(data).length; i++) {
-			postString += String(Object.keys(data)[i]) + '=' + String(data[Object.keys(data)[i]]);
-			if (i < (Object.keys(data).length - 1)) {
-				postString += '&';
-			}
-		}*/
-		//console.log(postString);
-		//var resultText = calc(data);
-		console.log('qs: calc.html?'+queryString);
-		console.log(makeRequest('calc.html?'+queryString));
-		//document.getElementById('calcResult').innerHTML = resultText;
-		//animateLines(document.getElementById('calcResult'), animationDelay);
+	const buttonClicked = async function(printAll, animationDelay) {
+		const e = document.getElementById('calcResult');
+		var data = await fetchFormData(eventType, playType, printAll);
+		var queryString = await makeQueryString(data);
+		await console.log('qs: calc.html?'+queryString);
+		var response = await makeRequest('calc.html?'+queryString);
+		await console.log('response:', response);
+		await response.text().then(function(resultText) {
+			console.log(resultText);
+			e.innerHTML = resultText;
+		});
+		await animateLines(e, animationDelay);
 	}
 	</script>
 </html>
