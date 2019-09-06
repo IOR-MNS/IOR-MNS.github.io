@@ -27,5 +27,5 @@ const makeRequest = function (content)
 		body: content,
 	}).then(res => res.json())
 	.then(response => console.log('Success:', JSON.stringify(response)))
-	.catch(error => console.error('Error:', error);
+	.catch(error => console.error('Error:', error));
 }

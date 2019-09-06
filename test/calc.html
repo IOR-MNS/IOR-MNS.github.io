@@ -263,6 +263,15 @@
 	<script>
 	const buttonClicked = function(printAll, animationDelay) {
 		var data = fetchFormData(eventType, playType, printAll);
+		var postString = '';
+		console.log(Object.keys(data));
+		for (var i = 0; i < Object.keys(data).length; i++) {
+			postString += String(Object.keys(data)[i]) + '=' + String(data[Object.keys(data)[i]]);
+			if (i < (Object.keys(data).length - 1)) {
+				postString += '&';
+			}
+		}
+		console.log(postString);
 		//var resultText = calc(data);
 		makeRequest(data);
 		//document.getElementById('calcResult').innerHTML = resultText;
