@@ -1,12 +1,1 @@
-const makeQueryString = function(data)
-{
-	var str = '';
-	
-	for (var i = 0; i < Object.keys(data).length; i++) {
-		str += String(Object.keys(data)[i]) + '=' + String(data[Object.keys(data)[i]]);
-		if (i < (Object.keys(data).length - 1)) {
-			str += '&';
-		}
-	}
-	return str;
-}
+window.makeQueryString=function(a){for(var c="",b=0;b<Object.keys(a).length;b++)c+=String(Object.keys(a)[b])+"="+String(a[Object.keys(a)[b]]),b<Object.keys(a).length-1&&(c+="&");return c};

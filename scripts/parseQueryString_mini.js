@@ -1,1 +1,0 @@
-window.parseQueryString=function(b){for(var a=0;;){if(a>=b.length)return alert("error: there is no query string in url."),!1;if("?"===b.charAt(a++))break}for(var d="",c=[];;){if(a>=b.length){c.push(d);break}"="===b.charAt(a)||"&"===b.charAt(a)?(c.push(d),d=""):d+=b.charAt(a);a++}b={};for(a=0;a+1<c.length;a+=2)b[c[a]]=c[a+1];return b};
