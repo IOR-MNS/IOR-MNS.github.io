@@ -141,7 +141,6 @@
 		</div>
 	</body>
 	<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=fetch%2Cdefault"></script>
-	<script src="scripts/makeRequest.js"></script>
 	<script src="scripts/makeQueryString.js"></script>
 	<script src="scripts/parseQueryString.js"></script>
 	<script src="scripts/animation.js"></script>
@@ -259,12 +258,17 @@
 	}
 	</script>
 	<script>
+	const showResult = function (resultText, animationDelay) {
+		document.getElementById('calcResult').innerHTML = resultText;
+		animateLines(document.getElementById('calcResult'), animationDelay);
+	}
+	
 	const buttonClicked = function(printAll, animationDelay) {
-		makeRequest('https://minase.co.kr/calc.html.worker?' + makeQueryString(fetchFormData(eventType, playType, printAll)))
-		.then(resultText => function(resultText) {
-			document.getElementById('calcResult').innerHTML = resultText;
-			animateLines(document.getElementById('calcResult'), animationDelay);
-		});
+		fetch('https://minase.co.kr/calc.html.worker?' + makeQueryString(fetchFormData(eventType, playType, printAll)), {
+				method: 'POST',
+		})
+		.then(res => res.text())
+		.then(resultText => showResult(resultText, animationDelay));
 	}
 	</script>
 </html>
