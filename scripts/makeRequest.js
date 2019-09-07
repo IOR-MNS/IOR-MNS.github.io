@@ -5,7 +5,6 @@ const makeRequest = function (url)
 			method: 'POST',
 		})
 		.then(function(response) {
-			console.log(response.text());
 			resolve(response.text());
 		});
 	});
