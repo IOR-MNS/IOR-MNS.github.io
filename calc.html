@@ -264,11 +264,15 @@
 	}
 	
 	const buttonClicked = function(printAll, animationDelay) {
-		fetch('https://minase.co.kr/calc.html.worker?' + makeQueryString(fetchFormData(eventType, playType, printAll)), {
+		fetch('calc.html.worker?' + makeQueryString(fetchFormData(eventType, playType, printAll)), {
 				method: 'POST',
 		})
-		.then(res => res.text())
-		.then(resultText => showResult(resultText, animationDelay));
+		.then(function(res) {
+			return res.text();
+		})
+		.then(function(resultText) {
+			showResult(resultText, animationDelay);
+		});
 	}
 	</script>
 </html>
