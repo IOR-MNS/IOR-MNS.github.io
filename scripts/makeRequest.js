@@ -1,1 +1,12 @@
-window.makeRequest=function(a){return fetch(a,{method:"POST",body:".",headers:{"Content-Type":"text/plain"}})};
+const makeRequest = function (url)
+{
+	return new Promise((resolve, reject) => {
+		fetch(url, {
+			method: 'POST',
+		})
+		.then(function(response) {
+			console.log(response.text());
+			resolve(response.text());
+		});
+	});
+}

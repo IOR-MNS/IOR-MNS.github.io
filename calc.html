@@ -260,10 +260,11 @@
 	</script>
 	<script>
 	const buttonClicked = function(printAll, animationDelay) {
-		makeRequest('calc.html.worker?' + makeQueryString(fetchFormData(eventType, playType, printAll))).text().then(function(resultText) {
+		makeRequest('https://minase.co.kr/calc.html.worker?' + makeQueryString(fetchFormData(eventType, playType, printAll)))
+		.then(resultText => function(resultText) {
 			document.getElementById('calcResult').innerHTML = resultText;
-			return document.getElementById('calcResult');
-		}).then(e => animateLines(e, animationDelay));
+			animateLines(document.getElementById('calcResult'), animationDelay);
+		});
 	}
 	</script>
 </html>
