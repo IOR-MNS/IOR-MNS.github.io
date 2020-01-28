@@ -24,5 +24,5 @@ const clearSelection = function () {
 	}
 	
 	// 결과출력 초기화
-	document.getElementById('calcResult').innerHTML = ''
+	document.getElementById('calcResult').innerHTML = '<form></form>'
 }
