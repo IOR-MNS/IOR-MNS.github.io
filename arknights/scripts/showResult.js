@@ -55,7 +55,7 @@ const showResult = function (resultText) {
 	// [0]: 선택된 태그이름 배열
 	// [1]: 출현가능 대원이름 배열
 	var resultData = parseResult(resultText)
-	console.log(resultData)
+	//console.log(resultData)
 	
 	var htmlText = new String()
 	

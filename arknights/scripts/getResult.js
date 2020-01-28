@@ -10,7 +10,7 @@ const fetchFormData = function () {
 		}
 	}
 	
-	console.log('checkedTags', checkedTags)
+	//console.log('checkedTags', checkedTags)
 	
 	return checkedTags
 }
@@ -20,7 +20,9 @@ const getResult = function() {
 	
 	if (queryString === false)
 	{
-		console.log('선택 태그 없음')
+		//console.log('선택 태그 없음')
+		// 태그를 선택하지 않고 결과보기를 누른 경우, 결과출력을 초기화.
+		document.getElementById('calcResult').innerHTML = '<form></form>'
 		return false
 	}
 	
