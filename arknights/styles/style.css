@@ -1,0 +1,202 @@
+@keyframes fadein {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+html {
+	min-height: 100%;
+	font-size: 6vmin;
+	font-family: 'Nanum Myeongjo';
+	line-height: 1.4em;
+	margin: 0 auto;
+	background-color: black;
+	color: white;
+	user-select: none;
+}
+
+body {
+	min-height: 100%;
+	margin: 0 auto;
+	padding-top: 0;
+	padding-right: 3vmin;
+	padding-left: 3vmin;
+	padding-bottom: 0;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+a:active {
+	color: lightpink;
+}
+
+img {
+	display: block;
+	height: 3em;
+}
+
+h1 {
+	margin: 0;
+	padding-top: 1%;
+	font-family: 'Nanum Myeongjo', sans-serif;
+	font-size: 7vmin;
+	text-align: center;
+	text-shadow: 3px 3px 20px lightgray;
+	color: pink;
+}
+
+h2 {
+	font-family: 'Nanum Myeongjo', sans-serif;
+	font-weight: 700;
+	font-size: 5vmin;
+	text-align: center;
+}
+h2 {
+	
+}
+
+/*
+form {
+	margin: 1em auto;
+	padding: 1em;
+	padding-top: 0.2em;
+	width: 60vmin;
+	border: 0.2em solid white;
+	border-radius: 1em;
+}*/
+
+form {
+	margin: 1em auto;
+	padding: 0.5em;
+	padding-top: 0.1em;
+	padding-bottom: 0.2em;
+	width: 70vmin;
+	border: 0.07em solid white;
+	border-radius: 0.5em;
+}
+
+button {
+	width: auto;
+	font-family: 'Nanum Myeongjo';
+	font-weight: 500;
+	font-size: 4.2vmin;
+	color: white;
+	padding-top: 0.8vmin;
+	padding-bottom: 0.8vmin;
+	padding-right: 2.5vmin;
+	padding-left: 2.5vmin;
+	border: 0.025em solid white;
+	border-radius: 0.5vmin;
+	transition: background-color 0.2s ease;
+	background-color: black;
+	text-align: center;
+}
+
+button:focus, button:hover {
+	transition: background-color 0.2s ease;
+	background-color: #0d79a1;
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] + label {
+	width: auto;
+	font-family: 'Nanum Myeongjo';
+	font-size: 3vmin;
+	/*font-weight: 700;*/
+	/*color: black;*/
+	padding-top: 0.7vmin;
+	padding-bottom: 0.5vmin;
+	padding-right: 1vmin;
+	padding-left: 1vmin;
+	border: 0.07em solid #333333;
+	border-radius: 1vmin;
+	transition: border-color 0.4s ease;
+	background-color: black;
+	text-align: center;
+	word-break: keep-all;
+}
+
+input[type="checkbox"]:hover + label {
+	border-color: #086a8c;
+}
+
+input[type="checkbox"]:checked + label {
+	border-color: #0c93c4;
+}
+
+.result_tag {
+	width: auto;
+	font-family: 'Nanum Myeongjo';
+	font-size: 3vmin;
+	/*font-weight: 700;*/
+	/*color: black;*/
+	padding-top: 0.7vmin;
+	padding-bottom: 0.5vmin;
+	padding-right: 1vmin;
+	padding-left: 1vmin;
+	border: 0.07em solid #444444;
+	border-radius: 1vmin;
+	transition: border-color 0.4s ease;
+	background-color: #444444;
+	text-align: center;
+	word-break: keep-all;
+}
+
+.result_op {
+	width: auto;
+	font-family: 'Nanum Myeongjo';
+	font-size: 3vmin;
+	/*font-weight: 700;*/
+	/*color: black;*/
+	padding-top: 0.7vmin;
+	padding-bottom: 0.5vmin;
+	padding-right: 1vmin;
+	padding-left: 1vmin;
+	border: 0.07em solid #333333;
+	border-radius: 1vmin;
+	transition: border-color 0.4s ease;
+	background-color: black;
+	text-align: center;
+	word-break: keep-all;
+}
+
+/*
+input, select {
+	transition: background-color 0.35s ease;
+	background-color: white;
+	font-family:'배민주아체';
+	font-size: 8vmin;
+	text-align: center;
+	margin: auto;
+	padding: 1vmin 1vmin 1vmin 1vmin;
+	width: 100%;
+	height: 10vmin;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 0 solid white;
+	border-radius: 3vmin;
+}*/
+
+/*
+input:focus, input:hover, select:focus, select:hover {
+	transition: background-color 0.2s ease;
+	background-color: lightpink;
+}*/
+
+.copyright {
+	font-size:2vmin;
+}
+
+/*
+#calcResult {
+	font-size:80%;
+}*/
