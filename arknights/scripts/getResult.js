@@ -16,7 +16,14 @@ const fetchFormData = function () {
 }
 
 const getResult = function() {
-	fetch(('recruitmentCalc.html.worker?' + makeQueryString(fetchFormData())), {
+	var queryString = makeQueryString(fetchFormData())
+	
+	if (queryString === false)
+	{
+		return false
+	}
+	
+	fetch(('recruitmentCalc.html.worker?' + queryString), {
 			method: 'POST',
 	})
 	.then(function(res) {

@@ -2,6 +2,11 @@
 // 태그마다 &으로 구분
 const makeQueryString = function(checkedTagsArr)
 {
+	if (checkedTagsArr.length == 0)
+	{
+		return false
+	}
+	
 	var queryStr = new String()
 	
 	for (var i = 0; i < (checkedTagsArr.length - 1); i++) {
