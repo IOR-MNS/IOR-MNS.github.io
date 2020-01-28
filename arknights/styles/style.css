@@ -134,17 +134,18 @@ input[type="checkbox"]:checked + label {
 }
 
 .result_tag {
-	display: block;
+	display: block-inline;
 	width: auto;
 	font-family: 'Nanum Myeongjo';
 	font-size: 3vmin;
 	/*font-weight: 700;*/
 	/*color: black;*/
+	margin-right: 0.2vmin;
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
-	border: 0.07em solid #444444;
+	border: 0.07em solid #ffffff;
 	border-radius: 1vmin;
 	transition: border-color 0.4s ease;
 	background-color: #444444;
@@ -153,17 +154,18 @@ input[type="checkbox"]:checked + label {
 }
 
 .result_op {
-	display: block;
+	display: block-inline;
 	width: auto;
 	font-family: 'Nanum Myeongjo';
 	font-size: 3vmin;
 	/*font-weight: 700;*/
 	/*color: black;*/
+	margin-right: 0.2vmin;
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
-	border: 0.07em solid #333333;
+	border: 0.07em solid #ffffff; /*333333*/
 	border-radius: 1vmin;
 	transition: border-color 0.4s ease;
 	background-color: black;
