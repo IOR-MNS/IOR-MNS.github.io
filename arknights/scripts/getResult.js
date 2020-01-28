@@ -28,7 +28,11 @@ const getResult = function() {
 	
 	console.log('qs', queryString)
 	
-	fetch(('recruitmentCalc.html.worker?' + queryString), {
+	var fetchURI = encodeURI('recruitmentCalc.html.worker?' + queryString)
+	
+	console.log('fu', fetchURI)
+	
+	fetch((fetchURI), {
 			method: 'POST',
 	})
 	.then(function(res) {
