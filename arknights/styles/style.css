@@ -136,6 +136,7 @@ input[type="checkbox"]:checked + label {
 .result_tag {
 	display: inline-block;
 	width: auto;
+	height: auto;
 	font-family: 'Nanum Myeongjo';
 	font-size: 3vmin;
 	/*font-weight: 700;*/
@@ -156,6 +157,7 @@ input[type="checkbox"]:checked + label {
 .result_op {
 	display: inline-block;
 	width: auto;
+	height: auto;
 	font-family: 'Nanum Myeongjo';
 	font-size: 3vmin;
 	/*font-weight: 700;*/
