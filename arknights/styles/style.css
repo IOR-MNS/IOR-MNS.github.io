@@ -139,7 +139,7 @@ input[type="checkbox"]:checked + label {
 	width: auto;
 	line-height: 100%;
 	font-size: 3vmin;
-	margin-right: 0.5vmin;
+	margin-right: 1vmin;
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
@@ -156,7 +156,7 @@ input[type="checkbox"]:checked + label {
 	width: auto;
 	line-height: 100%;
 	font-size: 3vmin;
-	margin-right: 0.5vmin;
+	margin-right: 1vmin;
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
