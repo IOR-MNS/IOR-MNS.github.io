@@ -77,7 +77,7 @@ form {
 	padding-top: 0.1em;
 	padding-bottom: 0.2em;
 	width: 70vmin;
-	border: 0.07em solid white;
+	border: 0.07em solid gray;
 	border-radius: 0.5em;
 }
 
@@ -134,7 +134,7 @@ input[type="checkbox"]:checked + label {
 }
 
 .result_tag {
-	display: block-inline;
+	display: inline-block;
 	width: auto;
 	font-family: 'Nanum Myeongjo';
 	font-size: 3vmin;
@@ -154,7 +154,7 @@ input[type="checkbox"]:checked + label {
 }
 
 .result_op {
-	display: block-inline;
+	display: inline-block;
 	width: auto;
 	font-family: 'Nanum Myeongjo';
 	font-size: 3vmin;
