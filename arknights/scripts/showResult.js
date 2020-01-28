@@ -57,6 +57,8 @@ const showResult = function (resultText) {
 	var resultData = parseResult(resultText)
 	console.log(resultData)
 	
+	var htmlText = new String()
+	
 	for (var i = 0; i < resultData.length; ++i)
 	{
 		// 가독성을 위해 참조변수 설정
@@ -64,12 +66,12 @@ const showResult = function (resultText) {
 		var ops = resultData[i][1]
 		
 		// 케이스의 시작. 폼 열기
-		var htmlText = '<form>'
+		htmlText += '<form>'
 		
 		// 선택 태그목록
 		for (var j = 0; j < tags.length; ++j)
 		{
-			htmlText += '<div class="result_tag">' + tags[j] + '</div>'
+			htmlText += '<span class="result_tag">' + tags[j] + '</span>'
 		}
 		
 		// 행분리
@@ -78,13 +80,13 @@ const showResult = function (resultText) {
 		// 출현가능 대원목록
 		for (var j = 0; j < ops.length; ++j)
 		{
-			htmlText += '<div class="result_op">' + ops[j] + '</div>'
+			htmlText += '<span class="result_op">' + ops[j] + '</span>'
 		}
 		
 		// 케이스의 끝. 폼 닫기
 		htmlText += '</form>'
-		
-		// 페이지에 표시
-		document.getElementById('calcResult').innerHTML += htmlText;
 	}
+	
+	// 페이지에 표시
+	document.getElementById('calcResult').innerHTML = htmlText;
 }

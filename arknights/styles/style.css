@@ -108,6 +108,11 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"] + label {
+	display: inline-block;
+	line-height: 100%;
+	margin-top: 0vmin;
+	margin-bottom: 2vmin;
+	
 	width: auto;
 	font-family: 'Nanum Myeongjo';
 	font-size: 3vmin;
@@ -125,10 +130,6 @@ input[type="checkbox"] + label {
 	word-break: keep-all;
 }
 
-input[type="checkbox"]:hover + label {
-	border-color: #086a8c;
-}
-
 input[type="checkbox"]:checked + label {
 	border-color: #0c93c4;
 }
@@ -136,19 +137,16 @@ input[type="checkbox"]:checked + label {
 .result_tag {
 	display: inline-block;
 	width: auto;
-	height: auto;
-	font-family: 'Nanum Myeongjo';
+	line-height: 100%;
 	font-size: 3vmin;
-	/*font-weight: 700;*/
-	/*color: black;*/
-	margin-right: 1em;
+	margin-top: 0;
+	margin-bottom: 0;
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
 	border: 0.07em solid #444444;
 	border-radius: 1vmin;
-	transition: border-color 0.4s ease;
 	background-color: #444444;
 	text-align: center;
 	word-break: keep-all;
@@ -157,19 +155,17 @@ input[type="checkbox"]:checked + label {
 .result_op {
 	display: inline-block;
 	width: auto;
-	height: auto;
-	font-family: 'Nanum Myeongjo';
+	line-height: 100%;
 	font-size: 3vmin;
 	/*font-weight: 700;*/
 	/*color: black;*/
-	margin-right: 1vmin;
+	/*margin-right: 1vmin;*/
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
 	border: 0.07em solid #333333; /*333333*/
 	border-radius: 1vmin;
-	transition: border-color 0.4s ease;
 	background-color: black;
 	text-align: center;
 	word-break: keep-all;

@@ -10,7 +10,7 @@ const fetchFormData = function () {
 		}
 	}
 	
-	console.log(checkedTags)
+	console.log('checkedTags', checkedTags)
 	
 	return checkedTags
 }
