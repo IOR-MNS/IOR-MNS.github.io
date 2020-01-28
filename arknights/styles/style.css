@@ -98,7 +98,7 @@ button {
 	text-align: center;
 }
 
-button:focus, button:hover {
+button:hover {
 	transition: background-color 0.2s ease;
 	background-color: #0d79a1;
 }
@@ -119,7 +119,7 @@ input[type="checkbox"] + label {
 	padding-left: 1vmin;
 	border: 0.07em solid #333333;
 	border-radius: 1vmin;
-	transition: border-color 0.4s ease;
+	transition: border-color 0.2s ease;
 	background-color: black;
 	text-align: center;
 	word-break: keep-all;
@@ -140,7 +140,7 @@ input[type="checkbox"]:checked + label {
 	font-size: 3vmin;
 	/*font-weight: 700;*/
 	/*color: black;*/
-	margin-right: 1vmin;
+	margin-right: 1em;
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
