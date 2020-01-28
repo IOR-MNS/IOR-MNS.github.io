@@ -48,6 +48,9 @@ const parseResult = function(resStr) {
 }
 
 const showResult = function (resultText) {
+	// 결과 표시 전, 기출력 내용 초기화
+	document.getElementById('calcResult').innerHTML = '';
+	
 	// resultData의 각 원소는 다음과 같음:
 	// [0]: 선택된 태그이름 배열
 	// [1]: 출현가능 대원이름 배열
@@ -66,7 +69,7 @@ const showResult = function (resultText) {
 		// 선택 태그목록
 		for (var j = 0; j < tags.length; ++j)
 		{
-			htmlText += '<span class="result_tag">' + tags[j] + '</span>'
+			htmlText += '<div class="result_tag">' + tags[j] + '</div>'
 		}
 		
 		// 행분리
@@ -75,7 +78,7 @@ const showResult = function (resultText) {
 		// 출현가능 대원목록
 		for (var j = 0; j < ops.length; ++j)
 		{
-			htmlText += '<span class="result_op">' + ops[j] + '</span>'
+			htmlText += '<div class="result_op">' + ops[j] + '</div>'
 		}
 		
 		// 케이스의 끝. 폼 닫기
