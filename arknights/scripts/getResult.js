@@ -20,6 +20,7 @@ const getResult = function() {
 	
 	if (queryString === false)
 	{
+		console.log('선택 태그 없음')
 		return false
 	}
 	
