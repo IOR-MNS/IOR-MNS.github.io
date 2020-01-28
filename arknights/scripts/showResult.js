@@ -71,7 +71,7 @@ const showResult = function (resultText) {
 		// 선택 태그목록
 		for (var j = 0; j < tags.length; ++j)
 		{
-			htmlText += '<div class="result_tag">' + tags[j] + '</div>'
+			htmlText += '<span class="result_tag">' + tags[j] + '</span>'
 		}
 		
 		// 행분리
@@ -80,7 +80,7 @@ const showResult = function (resultText) {
 		// 출현가능 대원목록
 		for (var j = 0; j < ops.length; ++j)
 		{
-			htmlText += '<div class="result_op">' + ops[j] + '</div>'
+			htmlText += '<span class="result_op">' + ops[j] + '</span>'
 		}
 		
 		// 케이스의 끝. 폼 닫기
