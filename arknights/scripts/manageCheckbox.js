@@ -1,1 +1,28 @@
-var selectionCount=0,countChecked=function(a){a.checked?selectionCount++:selectionCount--;6<selectionCount&&(a.checked=!1,selectionCount--)},clearSelection=function(){for(var a=document.querySelectorAll(".tag"),b=0;b<a.length;++b)a[b].checked=!1,selectionCount=0;document.getElementById("calcResult").innerHTML="<form></form>"};
+var selectionCount = 0
+
+const countChecked = function (checkBox) {
+	if (checkBox.checked) {
+		selectionCount++
+	}
+	else {
+		selectionCount--
+	}
+	
+	if (selectionCount > 6) {
+		checkBox.checked = false;
+		selectionCount--
+	}
+}
+
+const clearSelection = function () {
+	var checkboxList = document.querySelectorAll('.tag')
+	
+	for (var i = 0; i < checkboxList.length; ++i)
+	{
+		checkboxList[i].checked = false
+		selectionCount = 0
+	}
+	
+	// 결과출력 초기화
+	document.getElementById('calcResult').innerHTML = '<form></form>'
+}

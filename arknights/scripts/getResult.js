@@ -1,1 +1,40 @@
-var fetchFormData=function(){for(var a=document.querySelectorAll(".tag"),c=[],b=0,d=0;b<a.length;++b)!0===a[b].checked&&(c[d++]=a[b].name);return c},getResult=function(){var a=makeQueryString(fetchFormData());if(!1===a)return document.getElementById("calcResult").innerHTML="<form></form>",!1;fetch("recruitmentCalc.html.worker?"+a,{method:"POST"}).then(function(a){return a.text()}).then(function(a){showResult(a)})};
+const fetchFormData = function () {
+	var checkboxList = document.querySelectorAll('.tag')
+	var checkedTags = new Array()
+	
+	for (var i = 0, j = 0; i < checkboxList.length; ++i)
+	{
+		if (checkboxList[i].checked === true)
+		{
+			checkedTags[j++] = checkboxList[i].name
+		}
+	}
+	
+	//console.log('checkedTags', checkedTags)
+	
+	return checkedTags
+}
+
+const getResult = function() {
+	var queryString = makeQueryString(fetchFormData())
+	
+	if (queryString === false)
+	{
+		//console.log('선택 태그 없음')
+		// 태그를 선택하지 않고 결과보기를 누른 경우, 결과출력을 초기화.
+		document.getElementById('calcResult').innerHTML = '<form></form>'
+		return false
+	}
+	
+	console.log('qs', queryString)
+	
+	fetch(('recruitmentCalc.html.worker?' + queryString), {
+			method: 'POST',
+	})
+	.then(function(res) {
+		return res.text();
+	})
+	.then(function(resultText) {
+		showResult(resultText);
+	});
+}
