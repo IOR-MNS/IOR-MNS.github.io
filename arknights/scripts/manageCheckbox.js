@@ -22,4 +22,7 @@ const clearSelection = function () {
 		checkboxList[i].checked = false
 		selectionCount = 0
 	}
+	
+	// 결과출력 초기화
+	document.getElementById('calcResult').innerHTML = ''
 }

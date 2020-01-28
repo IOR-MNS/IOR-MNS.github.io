@@ -139,8 +139,8 @@ input[type="checkbox"]:checked + label {
 	width: auto;
 	line-height: 100%;
 	font-size: 3vmin;
-	margin-top: 0;
-	margin-bottom: 0;
+	/*margin-top: 0;
+	margin-bottom: 0;*/
 	padding-top: 0.7vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
