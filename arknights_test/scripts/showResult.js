@@ -81,7 +81,7 @@ const showResult = function (resultText) {
 		}
 		
 		// 행분리
-		htmlText += '<br>'
+		caseText += '<br>'
 		
 		// 출현가능 대원들을 추가
 		for (var j = 0; j < ops.length; ++j)
