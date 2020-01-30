@@ -103,20 +103,7 @@ const showResult = function (resultText) {
 		}
 		
 		// case의 least star에 따라서 폼의 클래스가 바뀜.
-		htmlText += '<form'
-		if (leastStar === 6)
-		{
-			htmlText += ' class="sixStars"'
-		}
-		else if (leastStar === 5)
-		{
-			htmlText += ' class="fiveStars"'
-		}
-		else if (leastStar === 4)
-		{
-			htmlText += ' class="fourStars"'
-		}
-		htmlText += '>'
+		htmlText += '<form class="star_' + String(leastStar) + '">'
 		
 		htmlText += caseText
 		

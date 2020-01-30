@@ -168,18 +168,24 @@ input[type="checkbox"]:checked + label {
 	word-break: keep-all;
 }
 
+/* 1, 2성 확정식 폼 보더 색상은 회색
+(최소 별갯수는 최대 별갯수가 1/2성이 아닌 이상 1/2성을 스킵하고 3성 이상이 되도록 판정하므로)*/
+form.star_1, form.star_2 {
+	border-color: #666666;
+}
+
 /* 4성 확정식 폼 보더 색상은 파란색*/
-form.fourStars {
+form.star_4 {
 	border-color: #1c70b0;
 }
 
 /* 5성 확정식 폼 보더 색상은 주황색*/
-form.fiveStars {
+form.star_5 {
 	border-color: #a84d2f;
 }
 
 /* 6성 확정식 폼 보더 색상은 붉은색*/
-form.sixStars {
+form.star_6 {
 	border-color: #bf2113;
 }
 
