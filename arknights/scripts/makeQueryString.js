@@ -1,1 +1,0 @@
-var makeQueryString=function(a){if(0==a.length)return!1;for(var c=new String,b=0;b<a.length-1;b++)c+=a[b]+"&";return c+=a[a.length-1]};

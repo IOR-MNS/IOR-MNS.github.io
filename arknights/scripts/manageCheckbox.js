@@ -1,1 +1,0 @@
-var selectionCount=0,countChecked=function(a){a.checked?selectionCount++:selectionCount--;6<selectionCount&&(a.checked=!1,selectionCount--)},clearSelection=function(){for(var a=document.querySelectorAll(".tag"),b=0;b<a.length;++b)a[b].checked=!1,selectionCount=0;document.getElementById("calcResult").innerHTML="<form></form>"};
