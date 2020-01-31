@@ -5,11 +5,9 @@ const refreshStyle = function () {
 	if (isMobile)
 	{
 		// 모바일 전용 스타일
-		alert('mobile')
 	}
 	else
 	{
-		alert('pc')
 		// PC 전용 스타일
 		$('*').addClass('pc')//css('width', '90vmin')
 		/*$('.checkboxTag').addClass('pc')//'input[type="checkbox"].tag:hover+label{border-color:#096485;}'
@@ -18,8 +16,8 @@ const refreshStyle = function () {
 }
 
 $(document).ready(function () {
-	var pcPlatformFilter = ['win16', 'win32', 'win64', 'mac', 'macintel']
-	
+	var pcPlatformFilter = ['win16', 'win32', 'win64' ,'mac', 'macintel']
+
 	if (navigator.platform)
 	{
 		if (pcPlatformFilter.indexOf(navigator.platform.toLowerCase()) < 0) 
