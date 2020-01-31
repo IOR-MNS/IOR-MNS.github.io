@@ -1,0 +1,1 @@
+var isMobile=!0,refreshStyle=function(){isMobile||$("*").addClass("pc")};$(document).ready(function(){var a=["win16","win32","win64","mac","macintel"];navigator.platform&&(isMobile=0>a.indexOf(navigator.platform.toLowerCase())?!0:!1);$(window).bind("load",refreshStyle())});
