@@ -442,11 +442,6 @@ form {
 	border-radius: 0.5em;
 }
 
-
-form.pc {
-	width: 90vmin;					/* PC 90vmin*/
-}
-
 .checkboxButton, .checkboxTag {
 	display: none;
 }
@@ -523,6 +518,7 @@ button, .checkboxButton + label {
 	width: auto;
 	line-height: 100%;
 	font-size: 3vmin;
+	font-weight: 300;
 	margin-right: 1vmin;
 	padding-top: 0.5vmin;
 	padding-bottom: 0.5vmin;
