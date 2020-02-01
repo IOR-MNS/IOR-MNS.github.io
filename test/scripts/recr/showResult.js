@@ -95,7 +95,7 @@ const showResult = function () {
 	{
 		htmlText = '<form><span class="result_tag">결과 없음</span>'
 		htmlText += '<br>'
-		htmlText += '<span class="result_op">결과 없음</span></form>'
+		htmlText += '<span id="op.-1" class="result_op">결과 없음</span></form>'
 	}
 	
 	// 페이지에 표시
