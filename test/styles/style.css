@@ -479,7 +479,7 @@ button, .checkboxButton + label {
 	
 	width: auto;
 	font-size: 3vmin;
-	padding-top: 0.7vmin;
+	padding-top: 0.5vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
@@ -524,7 +524,7 @@ button, .checkboxButton + label {
 	line-height: 100%;
 	font-size: 3vmin;
 	margin-right: 1vmin;
-	padding-top: 0.7vmin;
+	padding-top: 0.5vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
@@ -543,7 +543,7 @@ button, .checkboxButton + label {
 	line-height: 100%;
 	font-size: 3vmin;
 	margin-right: 1vmin;
-	padding-top: 0.7vmin;
+	padding-top: 0.5vmin;
 	padding-bottom: 0.5vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
@@ -629,7 +629,7 @@ form.rarity_6 {
 	font-weight: 500;
 }
 .star.rarity_1 {
-	color: #888;
+	color: #999;
 }
 .star.rarity_2 {
 	color: #aaa;
