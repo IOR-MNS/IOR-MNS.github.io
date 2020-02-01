@@ -19,48 +19,69 @@ const generateTagCodes = function (data, output, maxElemNum, outputIndex, elemNu
 	return outputIndex
 }
 
-// 주어진 tagCode의 조건을 모두 만족하는 대원들의 목록을 availOps 배열로 반환
-const checkTag = function (tagCode, availOps)
+// 주어진 tagCode의 조건을 모두 만족하는 대원들의 ID 목록을 out 배열로 반환
+const getAvailableOperatorIDs = function (tagCode, out)
 {
-	// availOps를 비움
-	availOps.length = 0
-	var availOpsIndex = 0
-	const itr = opMap.entries()
-
-	for (var i = 0; i < opMap.size; ++i)
+	// out 을 비움
+	out.length = 0
+	var outidx = 0
+	
+	const getTagCodeKR = function (tagNameKR)
 	{
-		// opMap의 i번째 대원에 대한 이름과 태그코드 배열을 참조하는 변수. 값을 변경하면 안됨.
-		const opArr = itr.next().value
+		for (var i = 0; i < data.tagData.length; ++i)
+		{
+			if (tagNameKR == data.tagData[i].name.kr)
+			{
+				return data.tagData[i].tagCode
+			}
+		}
+		console.log('calc.js, getAvailableOperatorIDs(), getTagCodeKR()에서 에러 발생')
+		console.log('입력값: ', tagNameKR)
 		
+		return false
+	}
+	
+	var na = getTagCodeKR('출현불가')
+	var top = getTagCodeKR('고급특별채용')
+	var senior = getTagCodeKR('특별채용')
+	
+	if (na === false || top === false || senior === false)
+	{
+		return false
+	}
+
+	for (var i = 0; i < data.opData.length; ++i)
+	{
+		var op = data.opData[i]
 		// 태그코드의 조건을 모두 만족하는지 확인
-		if ((tagCode & opArr[1]) == tagCode)
+		if ((tagCode & op.tagCode) == tagCode)
 		{
 			// 출현불가 대원이 아닐 경우에만 결과에 포함.
-			if ((tagMap.get('출현불가') & opArr[1]) == 0)
+			if ((na & op.tagCode) == 0)
 			{
 				// 고특채 태그가 선택된 경우, 고특채 대원만 결과에 포함함.
-				if ((tagCode & tagMap.get('고급특별채용')) != 0)
+				if ((top & tagCode) != 0)
 				{
-					if ((opArr[1] & tagMap.get('고급특별채용')) != 0)
+					if ((top & op.tagCode) != 0)
 					{
-						// 출현가능 대원 목록에 해당 대원 이름 추가
-						availOps[availOpsIndex++] = opArr[0]
+						// 출현가능 대원 목록에 해당 대원 ID 추가
+						out[outidx++] = op.id
 					}
 				}
 				// 특채 태그가 선택된 경우, 특채 대원만 결과에 포함.
-				else if ((tagCode & tagMap.get('특별채용')) != 0)
+				else if ((senior & tagCode) != 0)
 				{
-					if ((opArr[1] & tagMap.get('특별채용')) != 0)
+					if ((senior & op.tagCode) != 0)
 					{
-						availOps[availOpsIndex++] = opArr[0]
+						out[outidx++] = op.id
 					}
 				}
 				// 고특채와 특채 태그 중 하나도 선택되지 않은 경우, 고특채 대원을 결과에 포함하지 않음.
 				else
 				{
-					if ((opArr[1] & tagMap.get('고급특별채용')) == 0)
+					if ((top & op.tagCode) == 0)
 					{
-						availOps[availOpsIndex++] = opArr[0]
+						out[outidx++] = op.id
 					}
 				}
 			}
@@ -68,81 +89,111 @@ const checkTag = function (tagCode, availOps)
 	}
 }
 
-const calc = function (checkedTags) {
+const getLowestRarity = function (opIDs)
+{
+	var lowestRarity = 0
 	
-	// 받은 태그 배열의 유효성 검사
-	// 빈 배열
-	if (checkedTags.length == 0)
+	// 가능하다면 3성 이상의 대원중 가장 낮은 등급을 가져오고,
+	// 불가능하다면 정말로 가장 낮은 등급을 가져온다
+	for (var i = (opIDs.length - 1); i >= 0; --i)
 	{
-		//console.log('calc: 태그 유효성 검사 탈락: 빈 배열')
+		lowestRarity = data.opData[opIDs[i]].rarity
+		
+		// 3성 이상의 대원을 찾으면, 곧바로 break
+		if (lowestRarity >= 3)
+		{
+			break
+		}
+		
+		// 모든 대원이 3성 미만일 경우, 정말로 가장 낮은 등급을 가져옴
+		if (i === 0)
+		{
+			lowestRarity = data.opData[opIDs[opIDs.length - 1]].rarity
+			
+			break
+		}
+	}
+	
+	return lowestRarity
+}
+
+
+const calc = function (checkedTagIDs) {
+	
+	// 받은 태그ID 배열의 유효성 검사
+	// 빈 입력
+	if (checkedTagIDs.length == 0)
+	{
+		//console.log('calc: 태그 유효성 검사 탈락: 빈 입력')
 		return []
 	}
 	
-	// 잘못된 태그명이 포함됨
-	for (var i = 0; i < checkedTags.length; ++i)
+	// 잘못된 태그ID가 포함됨
+	for (var i = 0; i < checkedTagIDs.length; ++i)
 	{
-		if (validateTagName(checkedTags[i]) === false)
+		if (checkedTagIDs[i] < 0 || checkedTagIDs[i] >= data.length)
 		{
-			//console.log('calc: 태그 유효성 검사 탈락: 유효하지 않은 태그명')
+			//console.log('calc: 태그 유효성 검사 탈락: 유효하지 않은 태그ID')
 			return []
 		}
 	}
 	
 	//console.log('calc: 계산을 시작')
 	
-	var data = new Array()
-	var tagCodes = new Array()
+	var checkedTagCodes = new Array()
+	var candidateTagCodes = new Array()
 	
-	// 선택된 태그를 바탕으로 data 배열을 구성
-	for (var i = 0; i < checkedTags.length; ++i)
+	// 선택된 태그ID를 바탕으로 checkedTagCodes 배열을 구성
+	for (var i = 0; i < checkedTagIDs.length; ++i)
 	{
-		data[i] = tagMap.get(checkedTags[i])
+		checkedTagCodes[i] = data.tagData[checkedTagIDs[i]].tagCode
 	}
 	
-	// 원소가 1개뿐인 조합부터 (checkedTags.length)개인 조합까지 모두 tagCodes배열에 저장.
-	for (var maxElems = 1, outidx = 0; maxElems <= checkedTags.length; ++maxElems)
+	// 원소가 1개뿐인 조합부터 (선택된 태그갯수)개인 조합까지 모두 candidateTagCodes배열에 저장.
+	for (var maxElems = 1, outidx = 0; maxElems <= checkedTagIDs.length; ++maxElems)
 	{
-		outidx = generateTagCodes(data, tagCodes, maxElems, outidx)
+		outidx = generateTagCodes(checkedTagCodes, candidateTagCodes, maxElems, outidx)
 	}
 	
-	// 각 tagCode별로 조건을 모두 만족하는 대원들을 표시.
-	// 이때, 고특채와 출현불가 태그는 필수태그이므로 따로 검사.
+	// 각 candidateTagCodes 별로 조건을 모두 만족하는 대원들의 ID를 얻음
 	var result = new Array()
 	
-	for (var i = 0, j = 0; i < tagCodes.length; ++i)
+	for (var i = 0, j = 0; i < candidateTagCodes.length; ++i)
 	{
-		var selectedTagNames = new Array()
-		var availOpNames = new Array()
-
-		getTagNames(tagCodes[i], selectedTagNames)
-		checkTag(tagCodes[i], availOpNames)
+		var tagCode = candidateTagCodes[i]
+		var opIDs = new Array()
 		
-		if (availOpNames.length > 0)
+		getAvailableOperatorIDs(candidateTagCodes[i], opIDs)
+		
+		if (opIDs.length > 0)
 		{
 			// 각 케이스 내에서 대원들 정렬
-			// 별 갯수(내림차순)가 1순위, 이름(오름차순)이 2순위
+			// 등급(내림차순)이 1순위, 이름(오름차순)이 2순위
 
-			availOpNames.sort(function(opnameA, opnameB) {
+			opIDs.sort(function(opID_0, opID_1) {
 				// 별 갯수를 기준으로 내림차순 정렬
-				var starA = getStar(opnameA)
+				var rarity_0 = data.opData[opID_0].rarity
+				var rarity_1 = data.opData[opID_1].rarity
 
-				var starB = getStar(opnameB)
-
-				if (starA > starB)
+				if (rarity_0 > rarity_1)
 				{
 					return -1
 				}
-				if (starA < starB)
+				if (rarity_0 < rarity_1)
 				{
 					return 1
 				}
+				
+				// 언어 설정에 따라 기준이 되는 이름이 달라짐
+				var opName_0 = data.opData[opID_0].name[getLang()]
+				var opName_1 = data.opData[opID_1].name[getLang()]
 
 				// 별 갯수가 같을 경우, 이름 기준으로 오름차순 정렬
-				if (opnameA < opnameB)
+				if (opName_0 < opName_1)
 				{
 					return -1
 				}
-				if (opnameA > opnameB)
+				if (opName_0 > opName_1)
 				{
 					return 1
 				}
@@ -151,10 +202,11 @@ const calc = function (checkedTags) {
 				return 0
 			})
 
-			// 정렬된 케이스와 선택 태그 목록을 결과 배열에 넣음
-			var combinedCase = new Array()
-			combinedCase[0] = selectedTagNames
-			combinedCase[1] = availOpNames
+			// 정렬된 케이스와 선택 태그 목록을 결과 객체에 넣음
+			var combinedCase = {}
+			combinedCase.tagCode = tagCode
+			combinedCase.opIDs = opIDs
+			combinedCase.lowestRarity = getLowestRarity(opIDs)
 
 			result[j++] = combinedCase
 		}
@@ -174,61 +226,25 @@ const calc = function (checkedTags) {
     예3) 4성 3성 2성 1성이 분포한 경우, 가장 낮은 별 갯수는 3성으로 함
   */
 	result.sort(function (combinedCase_0, combinedCase_1) {
-		var opname_array_0 = combinedCase_0[1]
-
-		var opname_array_1 = combinedCase_1[1]
-
-		// 각 케이스의 가장 낮은 별 갯수는, 마지막 대원으로부터 얻을 수 있음
-		var opname_0 = '', opname_1 = '', leastStar_0 = 0, leastStar_1 = 0
-		var i = 0
-
-		i = 1
-		while (true)
-		{
-			opname_0 = opname_array_0[opname_array_0.length - i]
-			leastStar_0 = getStar(opname_0)
-
-			// 얻은 별 갯수가 3성 이상이거나, 모든 대원의 검사를 마쳤을 때(1/2성대원밖에 없는경우임)
-			if (leastStar_0 >= 3 || i >= opname_array_0.length)
-			{
-				break
-			}
-
-			++i
-		}
-
-		i = 1
-		while (true)
-		{
-			opname_1 = opname_array_1[opname_array_1.length - i]
-			leastStar_1 = getStar(opname_1)
-
-			// 얻은 별 갯수가 3성 이상이거나, 모든 대원의 검사를 마쳤을 때(1/2성대원밖에 없는경우임)
-			if (leastStar_1 >= 3 || i >= opname_array_1.length)
-			{
-				break
-			}
-
-			++i
-		}
+		var opIDs_0 = combinedCase_0.opIDs
+		var opIDs_1 = combinedCase_1.opIDs
+		var lowestRarity_0 = combinedCase_0.lowestRarity
+		var lowestRarity_1 = combinedCase_1.lowestRarity
 
 		// 가장 낮은 별 갯수 기준으로 내림차순 정렬
-		if (leastStar_0 > leastStar_1)
+		if (lowestRarity_0 > lowestRarity_1)
 		{
 			return -1
 		}
-		if (leastStar_0 < leastStar_1)
+		if (lowestRarity_0 < lowestRarity_1)
 		{
 			return 1
 		}
 
 		// 가장 낮은 별 갯수가 동일하다면, 2순위로 가장 높은 별 갯수 기준으로 내림차순 정렬
 		// 각 케이스의 가장 높은 별 갯수는 가장 먼저 있는 대원으로부터 얻을 수 있음
-		opname_0 = opname_array_0[0]
-		var greatestStar_0 = getStar(opname_0)
-
-		opname_1 = opname_array_1[0]
-		var greatestStar_1 = getStar(opname_1)
+		var greatestStar_0 = data.opData[opIDs_0[0]].rarity
+		var greatestStar_1 = data.opData[opIDs_1[0]].rarity
 
 		// 가장 높은 별 갯수 기준으로 내림차순 정렬
 		if (greatestStar_0 > greatestStar_1)
@@ -241,11 +257,11 @@ const calc = function (checkedTags) {
 		}
 
 		// 가장 낮은 별 갯수와 가장 높은 별 갯수가 모두 동일하다면, 출현가능 대원수 기준으로 오름차순 정렬(저격식 우대를 위해)
-		if (opname_array_0.length < opname_array_1.length)
+		if (opIDs_0.length < opIDs_1.length)
 		{
 			return -1
 		}
-		if (opname_array_0.length > opname_array_1.length)
+		if (opIDs_0.length > opIDs_1.length)
 		{
 			return 1
 		}
@@ -254,7 +270,5 @@ const calc = function (checkedTags) {
 		return 0
 	})
 	
-	//console.log(result)
-	//console.log('calc: 계산 완료, 결과 반환')
 	return result
 }

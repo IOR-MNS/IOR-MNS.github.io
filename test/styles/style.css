@@ -580,31 +580,72 @@ button, .checkboxButton + label {
 
 /* 1, 2성 확정식 폼 보더 색상은 회색
 (최소 별갯수는 최대 별갯수가 1/2성이 아닌 이상 1/2성을 스킵하고 3성 이상이 되도록 판정하므로)*/
-form.star_1 {
+
+form.rarity_1 {
 	border-color: #333;
 }
-
-form.star_2 {
+form.rarity_2 {
 	border-color: #555;
 }
-
-form.star_3 {
-	border-color: #ccc;
+form.rarity_3 {
+	border-color: #aaa;
+}
+form.rarity_4 {
+	border-color: #1c70b0;	/*파랑*/
+}
+form.rarity_5 {
+	border-color: #db9a0d;/*#eda60c;*//*#ffae00;*//*#ba5e18;*/ /*주황-노랑 사이*/
+}
+form.rarity_6 {
+	border-color: #c70808; /*#e0620d;*/ /*주황-빨강 사이*/
 }
 
-/* 4성 확정식 폼 보더 색상은 파랑*/
-form.star_4 {
-	border-color: #1c70b0;
+
+.result_op.rarity_1 {
+	border-color: #333;
+	color: #bbb;
+}
+.result_op.rarity_2 {
+	border-color: #555;
+	color: #ccc;
+}
+.result_op.rarity_3 {
+	border-color: rgba(255, 255, 255, 0.5); /*#999;*/
+	color: #ddd;
+}
+.result_op.rarity_4 {
+	border-color: rgba(28, 112, 176, 0.5); /*#1c70b0;*/
+	color: #eee;
+}
+.result_op.rarity_5 {
+	border-color: rgba(219, 154, 13, 0.5); /*#db9a0d;*/
+	color: #eee;
+}
+.result_op.rarity_6 {
+	border-color: rgba(199, 8, 8, 0.5); /*#c70808;*/
+	color: #eee;
 }
 
-/* 5성 확정식 폼 보더 색상은 주황-노랑 사이*/
-form.star_5 {
-	border-color: #db9a0d;/*#eda60c;*//*#ffae00;*//*#ba5e18;*/
+.star {
+	font-weight: 500;
 }
-
-/* 6성 확정식 폼 보더 색상은 주황-빨강 사이*/
-form.star_6 {
-	border-color: #c70808; /*#e0620d;*/
+.star.rarity_1 {
+	color: #888;
+}
+.star.rarity_2 {
+	color: #aaa;
+}
+.star.rarity_3 {
+	color: #ccc;
+}
+.star.rarity_4 {
+	color: #1c70b0;
+}
+.star.rarity_5 {
+	color: #db9a0d;
+}
+.star.rarity_6 {
+	color: #c70808;
 }
 
 /*

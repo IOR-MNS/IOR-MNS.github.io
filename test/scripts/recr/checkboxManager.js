@@ -27,9 +27,6 @@ const tagClicked = function (checkBox) {
 	
 	// 태그가 정상적으로 선택되었다면, 재계산하여 결과를 갱신
 	showResult()
-	
-	// 반응형 스타일 갱신
-	refreshStyle()
 }
 
 const clearSelection = function () {
@@ -43,9 +40,6 @@ const clearSelection = function () {
 	
 	// 결과출력 초기화
 	showResult()
-	
-	// 반응형 스타일 갱신
-	refreshStyle()
 }
 
 // 이하 필터 스위치 전역변수
@@ -64,9 +58,4 @@ const filterClicked = function (elem) {
 	
 	// 결과출력 갱신
 	showResult()
-	
-	// 반응형 스타일 갱신
-	refreshStyle()
-	
-	//console.log(onlyHighStarsFilter)
 }
