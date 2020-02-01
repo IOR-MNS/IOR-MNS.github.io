@@ -529,9 +529,9 @@ button, .checkboxButton + label {
 	padding-right: 1vmin;
 	padding-left: 1vmin;
 	margin-bottom: 1vmin;
-	border: 0.07em solid #444444;
+	border: 0.07em solid #333; /*rgba(68, 68, 68, 0.9);*/ /*#444444;*/
 	border-radius: 1vmin;
-	background-color: #444444;
+	background-color: #333; /*#444444;*/
 	text-align: center;
 	word-break: keep-all;
 }
