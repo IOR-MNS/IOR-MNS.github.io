@@ -606,11 +606,11 @@ form.rarity_6 {
 	color: #bbb;
 }
 .result_op.rarity_2 {
-	border-color: #555;
+	border-color: #333;
 	color: #ccc;
 }
 .result_op.rarity_3 {
-	border-color: rgba(255, 255, 255, 0.5); /*#999;*/
+	border-color: #333; /*#999;*/
 	color: #ddd;
 }
 .result_op.rarity_4 {
