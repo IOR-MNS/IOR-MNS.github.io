@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi">
+    <title>명일방주 공개채용 계산기 β</title>
+	<!--<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700&display=swap&subset=korean" rel="stylesheet">-->
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Myeongjo:400,700|Noto+Sans+KR|Noto+Serif+KR&display=swap&subset=korean" rel="stylesheet">
+	<link href="images/favicon.ico" rel="shortcut icon">
+	<link href="styles/style.css" rel="stylesheet" type="text/css">
+	<style>
+		html {
+			background: black;
+			animation: 1.6s ease 0s 1 forwards fadein;
+		}
+	</style>
+	</head>
+	<body>
+		<a href="index.html">
+			<img src="images/logo4_comp.png" alt="Minase Group's Logo." style="margin: 1em auto">
+		</a>
+		
+		<h2 id="subtitle">명일방주 공개채용 계산기 β</h2>
+		<form>
+			<div>
+				<input onclick="tagClicked(this)" type="checkbox" id="신입" name="신입" class="checkboxTag">
+				<label for="신입"><span>신입</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="특별채용" name="특별채용" class="checkboxTag">
+				<label for="특별채용"><span>특별채용</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="고급특별채용" name="고급특별채용" class="checkboxTag">
+				<label for="고급특별채용"><span>고급특별채용</span></label>
+			</div>
+		</form>
+		<form>
+			<div>
+				<input onclick="tagClicked(this)" type="checkbox" id="근거리" name="근거리" class="checkboxTag">
+				<label for="근거리"><span>근거리</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="원거리" name="원거리" class="checkboxTag">
+				<label for="원거리"><span>원거리</span></label>
+			</div>
+		</form>
+		<form>
+			<div>
+				<input onclick="tagClicked(this)" type="checkbox" id="뱅가드" name="뱅가드" class="checkboxTag">
+				<label for="뱅가드"><span>뱅가드</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="가드" name="가드" class="checkboxTag">
+				<label for="가드"><span>가드</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="디펜더" name="디펜더" class="checkboxTag">
+				<label for="디펜더"><span>디펜더</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="스나이퍼" name="스나이퍼" class="checkboxTag">
+				<label for="스나이퍼"><span>스나이퍼</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="캐스터" name="캐스터" class="checkboxTag">
+				<label for="캐스터"><span>캐스터</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="메딕" name="메딕" class="checkboxTag">
+				<label for="메딕"><span>메딕</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="서포터" name="서포터" class="checkboxTag">
+				<label for="서포터"><span>서포터</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="스페셜리스트" name="스페셜리스트" class="checkboxTag">
+				<label for="스페셜리스트"><span>스페셜리스트</span></label>
+			</div>
+		</form>
+		<form>
+			<div>
+				<input onclick="tagClicked(this)" type="checkbox" id="힐링" name="힐링" class="checkboxTag">
+				<label for="힐링"><span>힐링</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="서포트" name="서포트" class="checkboxTag">
+				<label for="서포트"><span>서포트</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="딜러" name="딜러" class="checkboxTag">
+				<label for="딜러"><span>딜러</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="범위공격" name="범위공격" class="checkboxTag">
+				<label for="범위공격"><span>범위공격</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="감속" name="감속" class="checkboxTag">
+				<label for="감속"><span>감속</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="생존형" name="생존형" class="checkboxTag">
+				<label for="생존형"><span>생존형</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="방어형" name="방어형" class="checkboxTag">
+				<label for="방어형"><span>방어형</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="디버프" name="디버프" class="checkboxTag">
+				<label for="디버프"><span>디버프</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="강제이동" name="강제이동" class="checkboxTag">
+				<label for="강제이동"><span>강제이동</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="제어형" name="제어형" class="checkboxTag">
+				<label for="제어형"><span>제어형</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="누커" name="누커" class="checkboxTag">
+				<label for="누커"><span>누커</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="소환" name="소환" class="checkboxTag">
+				<label for="소환"><span>소환</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="쾌속부활" name="쾌속부활" class="checkboxTag">
+				<label for="쾌속부활"><span>쾌속부활</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="코스트+" name="코스트+" class="checkboxTag">
+				<label for="코스트+"><span>코스트+</span></label>
+				
+				<input onclick="tagClicked(this)" type="checkbox" id="로봇" name="로봇" class="checkboxTag">
+				<label for="로봇"><span>로봇</span></label>
+			</div>
+		</form>
+		
+		<div align="center">
+			<button onclick="clearSelection()">태그 초기화</button>
+			<!--
+			<button onclick="clearSelection()" id="clearSelectionBtn" class="normalButton"></button>
+			<label for="clearSelectionBtn"><span>태그 초기화</span></label>
+			-->
+			
+			<input onclick="filterClicked(this)" type="checkbox" id="onlyHighStarsFilterBtn" class="checkboxButton">
+			<label for="onlyHighStarsFilterBtn"><span>고등급 확정식만</span></label>
+		</div>
+		
+		<div id="calcResult"><form></form></div>
+		
+		<div align="center">
+			<button onclick="location.href='index.html'">이전 화면으로 돌아가기</button>
+			<!--
+			<button onclick="location.href='index.html'" id="backBtn" class="normalButton"></button>
+			<label for="backBtn"><span>이전 화면으로 돌아가기</span></label>
+			-->
+		</div>
+		
+		<div class="copyright">
+			<p>
+				Copyright © 2039 MINASE Inc. All Rights Reserved.
+			</p>
+		</div>
+		
+	<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<!--
+	<script src="scripts/recr/init.min.js"></script>
+	<script src="scripts/recr/func.min.js"></script>
+	-->
+	
+	<script src="scripts/recr/checkPlatform.js"></script>
+	<script src="scripts/recr/data.js"></script>
+	<script src="scripts/recr/utilFuncs.js"></script>
+	<script src="scripts/recr/checkboxManager.js"></script>
+	<script src="scripts/recr/showResult.js"></script>
+	<script src="scripts/recr/calc.js"></script>
+	<script src="scripts/recr/showToolTip.js"></script>
+	
+	</body>
+</html>

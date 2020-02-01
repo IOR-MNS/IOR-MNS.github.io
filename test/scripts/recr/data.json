@@ -1,0 +1,60 @@
+{
+	"tagData": [
+		{
+			"id": 0,
+			"name_kr": "한글태그명",
+			"name_jp": "일어태그명",
+			"name_cn": "중어태그명",
+			"tagCode": 1
+		},
+		{
+			"id": 1,
+			"name_kr": "한글태그명",
+			"name_jp": "일어태그명",
+			"name_cn": "중어태그명",
+			"tagCode": 2
+		},
+		{
+			"id": 2,
+			"name_kr": "한글태그명",
+			"name_jp": "일어태그명",
+			"name_cn": "중어태그명",
+			"tagCode": 4
+		}
+	],
+	
+	"opData": [
+		{
+			"id": 0,
+			"name_kr": "한글대원명",
+			"name_jp": "일어대원명",
+			"name_cn": "중어대원명",
+			"rarity": 6,
+			"tagCode": 2163235
+		},
+		{
+			"id": 1,
+			"name_kr": "한글대원명",
+			"name_jp": "일어대원명",
+			"name_cn": "중어대원명",
+			"rarity": 6,
+			"tagCode": 2163235
+		},
+		{
+			"id": 2,
+			"name_kr": "한글대원명",
+			"name_jp": "일어대원명",
+			"name_cn": "중어대원명",
+			"rarity": 6,
+			"tagCode": 2163235
+		},
+		{
+			"id": 3,
+			"name_kr": "한글대원명",
+			"name_jp": "일어대원명",
+			"name_cn": "중어대원명",
+			"rarity": 6,
+			"tagCode": 2163235
+		}
+	]
+}
