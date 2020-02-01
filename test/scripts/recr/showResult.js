@@ -62,9 +62,15 @@ const showResult = function () {
 		
 		// 출현가능 대원들을 추가
 		var opRarity = 0
+		var prevOpRarity = 0
 		for (var j = 0; j < opIDs.length; ++j)
 		{
 			opRarity = data.opData[opIDs[j]].rarity
+			
+			if ((prevOpRarity != 0) && (prevOpRarity != opRarity))
+			{
+				htmlPiece += '<br>'
+			}
 			
 			htmlPiece += '<span id="op.' + String(opIDs[j]) +'" class="result_op rarity_' + String(opRarity) + '">'
 			htmlPiece += data.opData[opIDs[j]].name[getLang()]
@@ -72,6 +78,8 @@ const showResult = function () {
 			htmlPiece += ' ★' + String(opRarity)
 			htmlPiece += '</span>'
 			htmlPiece += '</span>'
+			
+			prevOpRarity = opRarity
 		}
 		
 		// case의 least star에 따라서 폼의 클래스가 바뀜.
