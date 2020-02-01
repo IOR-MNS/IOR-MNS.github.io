@@ -389,16 +389,16 @@ body {
 }
 
 *::-webkit-scrollbar-track {
-	display: none;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: rgba(28, 112, 176, 0.7); /*#1c70b0;*//*#0c93c4;*/
+	background-color: rgba(28, 112, 176, 0.7); /*#1c70b0;*/
 	transition: background-color 0.2s ease;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-	background-color: rgba(28, 112, 176, 1); /*#1c70b0;*//*#0c93c4;*/
+	background-color: rgba(28, 112, 176, 1); /*#1c70b0;*/
 }
 
 *::-webkit-scrollbar-button {
@@ -491,24 +491,34 @@ button, .checkboxButton + label {
 	word-break: keep-all;
 }
 
-/* 체크박스 버튼에 대한 호버링 효과는 PC에서만 */
-/* 라벨 버튼에 대한 호버링 효과들 */
-button:focus, button:hover, .checkboxButton:checked + label, .checkboxButton + label.pc:hover {
-	background-color: #0d79a1;
-}
-
 .checkboxTag:checked + label {
 	border-color: #0c93c4;
 }
 
-.checkboxTag + label.pc:hover {
-	border-color: #096485;
+/* 호버링 효과는 호버링이 가능한 환경에서만 */
+/* 라벨 버튼에 대한 호버링 효과들 */
+@media (any-hover:hover) {
+	button:hover, .checkboxButton+label:hover {
+		background-color: #0d79a1;
+	}
+	
+	.checkboxTag+label:hover {
+		border-color: #096485;
+	}
+}
+
+@media (any-hover:none) {
+	button:focus {
+		background-color: #0d79a1;
+	}
+}
+
+.checkboxButton:checked + label {
+	background-color: #0d79a1;
 }
 
 .result_tag {
-	/*font-family: 'Nanum Gothic', sans-serif;*/
 	font-family: 'Noto Sans KR', sans-serif;
-	/*font-family: 'Nanum Myeongjo', serif;*/
 	display: inline-block;
 	width: auto;
 	line-height: 100%;
@@ -527,9 +537,7 @@ button:focus, button:hover, .checkboxButton:checked + label, .checkboxButton + l
 }
 
 .result_op {
-	/*font-family: 'Nanum Gothic', sans-serif;*/
 	font-family: 'Noto Sans KR', sans-serif;
-	/*font-family: 'Nanum Myeongjo', serif;*/
 	display: inline-block;
 	width: auto;
 	line-height: 100%;
