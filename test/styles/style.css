@@ -442,6 +442,22 @@ form {
 	border-radius: 0.5em;
 }
 
+form.qualification_tag {
+	text-align: center;
+}
+
+form.attack-type_tag {
+	text-align: center;
+}
+
+form.position_tag {
+	text-align: center;
+}
+
+form.attribution_tag {
+	text-align: center;
+}
+
 .checkboxButton, .checkboxTag {
 	display: none;
 }

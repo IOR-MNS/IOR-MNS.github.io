@@ -20,7 +20,7 @@
 		</a>
 		
 		<h2 id="subtitle">명일방주 공개채용 계산기 β</h2>
-		<form>
+		<form id="tag-top" class="qualification_tag">
 			<div>
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.0" class="checkboxTag">
 				<label for="tag.0"><span>신입</span></label>
@@ -32,7 +32,7 @@
 				<label for="tag.2"><span>고급특별채용</span></label>
 			</div>
 		</form>
-		<form>
+		<form class="attack-type_tag">
 			<div>
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.3" class="checkboxTag">
 				<label for="tag.3"><span>근거리</span></label>
@@ -41,7 +41,7 @@
 				<label for="tag.4"><span>원거리</span></label>
 			</div>
 		</form>
-		<form>
+		<form class="position_tag">
 			<div>
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.5" class="checkboxTag">
 				<label for="tag.5"><span>뱅가드</span></label>
@@ -68,7 +68,7 @@
 				<label for="tag.12"><span>스페셜리스트</span></label>
 			</div>
 		</form>
-		<form>
+		<form class="attribution_tag">
 			<div>
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.13" class="checkboxTag">
 				<label for="tag.13"><span>힐링</span></label>
@@ -119,19 +119,15 @@
 		
 		<div align="center">
 			<button onclick="clearSelection()">태그 초기화</button>
-			<!--
-			<button onclick="clearSelection()" id="clearSelectionBtn" class="normalButton"></button>
-			<label for="clearSelectionBtn"><span>태그 초기화</span></label>
-			-->
-			
 			<input onclick="filterClicked(this)" type="checkbox" id="onlyHighStarsFilterBtn" class="checkboxButton">
 			<label for="onlyHighStarsFilterBtn"><span>고등급 확정식만</span></label>
 		</div>
 		
 		<div id="calcResult"><form></form></div>
+		<div align="center" id="clearSelection-footer"></div>
 		
 		<div align="center">
-			<button onclick="location.href='index.html'">이전 화면으로 돌아가기</button>
+			<button onclick="location.href='index.html'">메인 화면으로 돌아가기</button>
 			<!--
 			<button onclick="location.href='index.html'" id="backBtn" class="normalButton"></button>
 			<label for="backBtn"><span>이전 화면으로 돌아가기</span></label>
@@ -146,6 +142,8 @@
 		
 	<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	
 	<!--
 	<script src="scripts/recr/init.min.js"></script>
 	<script src="scripts/recr/func.min.js"></script>

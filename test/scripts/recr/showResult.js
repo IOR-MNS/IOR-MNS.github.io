@@ -16,14 +16,25 @@ const getCheckedTagIDs = function () {
 }
 
 const showResult = function () {
-	// 계산 결과를 받아옴
-	var resultData = calc(getCheckedTagIDs())
+	// 선택된 태그들의 ID 배열을 받아옴
+	var checkedTagIDs = getCheckedTagIDs()
 	
-	// 선택된 태그가 없거나 / 선택된 태그명이 유효하지 않을 경우
-	// 계산 결과로 빈 배열을 받은 경우
+	// 계산 결과를 받아옴
+	var resultData = calc(checkedTagIDs)
+	
+	// 선택된 태그가 없다면 결과 하단의 태그 초기화 버튼을 없애고, 그게 아니면 넣기
+	if (checkedTagIDs.length <= 0)
+	{
+		$('#clearSelection-footer').html('')
+	}
+	else
+	{
+		$('#clearSelection-footer').html('<button onclick="clearSelection()">태그 초기화</button><div><br></div>')
+	}
+	
+	// 계산 결과로 빈 배열을 받은 경우, 결과출력을 초기화.
 	if (resultData.length == 0)
 	{
-		// 결과출력을 초기화.
 		document.getElementById('calcResult').innerHTML = '<form></form>'
 		return false
 	}
@@ -88,6 +99,7 @@ const showResult = function () {
 		htmlText += htmlPiece
 		
 		htmlText += '</form>'
+		
 	}
 	
 	// htmlText가 비어있다면, 필터에 결과가 모두 걸러진 것이므로, 안내메시지 출력
@@ -95,11 +107,9 @@ const showResult = function () {
 	{
 		htmlText = '<form><span class="result_tag">결과 없음</span>'
 		htmlText += '<br>'
-		htmlText += '<span id="op.-1" class="result_op">결과 없음</span></form>'
+		htmlText += '<div><span id="op.-1" class="result_op">결과 없음</span></form></div>'
 	}
 	
 	// 페이지에 표시
-	document.getElementById('calcResult').innerHTML = htmlText
-	
-	// 반응형 스타일 갱신은 tagClicked, filterClicked 등의 함수에서 호출함
+	$('#calcResult').html(htmlText)
 }

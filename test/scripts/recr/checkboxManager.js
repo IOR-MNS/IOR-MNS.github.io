@@ -32,6 +32,7 @@ const tagClicked = function (checkBox) {
 const clearSelection = function () {
 	var checkboxList = document.querySelectorAll('.checkboxTag')
 	
+	
 	for (var i = 0; i < checkboxList.length; ++i)
 	{
 		checkboxList[i].checked = false
@@ -40,6 +41,9 @@ const clearSelection = function () {
 	
 	// 결과출력 초기화
 	showResult()
+	
+	// 스크롤 버그를 해결하기 위해, 결과출력이 초기화된 뒤에는 스크롤바 위치를 재설정
+	$('html').animate({scrollTop: $('#tag-top').offset().top}, 600, 'easeOutExpo')
 }
 
 // 이하 필터 스위치 전역변수
