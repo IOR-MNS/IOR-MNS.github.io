@@ -437,28 +437,27 @@ form {
 	padding: 0.5em;
 	padding-top: 0.1em;
 	padding-bottom: 0.2em;
-	width: 80vmin;					/* mobile 80vmin */
+	width: 80vmin;
 	border: 0.07em solid white;
 	border-radius: 0.5em;
 }
 
 /*
-form.qualification_tag {
-	text-align: center;
-}
-
-form.attack-type_tag {
-	text-align: center;
-}
-
-form.position_tag {
-	text-align: center;
-}
-
-form.attribution_tag {
+div.selectable_tag {
+	display: inline-block;
+	width: auto;
+	padding: 0;
+	margin: 0;
 	text-align: center;
 }
 */
+
+form.qualification_tag, form.attack-type_tag, form.position_tag, form.attribution_tag {
+	/*display: inline-block;*/
+	width: 70vmin;
+	text-align: left;
+}
+
 
 .checkboxButton, .checkboxTag {
 	display: none;
@@ -688,8 +687,3 @@ input:focus, input:hover, select:focus, select:hover {
 	text-align: left;
 	font-size:2vmin;
 }
-
-/*
-#calcResult {
-	font-size:80%;
-}*/

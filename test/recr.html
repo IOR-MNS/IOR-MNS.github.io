@@ -21,8 +21,7 @@
 		
 		<h2 id="subtitle">명일방주 공개채용 계산기 β</h2>
 		
-		<button onclick="toggleUI()" id="toggleUI-Btn">left</button>
-		
+		<!--<div class="selectable_tag">-->
 		<form id="tag-top" class="qualification_tag">
 			<div>
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.0" class="checkboxTag">
@@ -126,17 +125,17 @@
 				<label for="tag.27"><span>로봇</span></label>
 			</div>
 		</form>
+		<!--</div>-->
 		
-		<div align="center">
-			
-			<input onclick="filterClicked(this)" type="checkbox" id="onlyHighStarsFilterBtn" class="checkboxButton">
-			<label for="onlyHighStarsFilterBtn"><span>고등급 확정식만</span></label>
-			
+		<div align="center" id="selection-panel-footer-btn">
 			<button onclick="clearSelection()">태그 초기화</button>
+			<input onclick="filterClicked('onlyHighStars')" type="checkbox" id="selection-panel-footer-ohsf" class="checkboxButton">
+			<label for="selection-panel-footer-ohsf"><span>고등급 확정식만</span></label>
 		</div>
 		
-		<div id="calcResult"><form></form></div>
-		<div align="center" id="clearSelection-footer"></div>
+		<div id="result-panel"><form></form></div>
+		
+		<div align="center" id="result-panel-footer-btn"></div>
 		
 		<div align="center">
 			<button onclick="location.href='index.html'">메인 화면으로 돌아가기</button>

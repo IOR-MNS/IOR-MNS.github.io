@@ -22,20 +22,31 @@ const showResult = function () {
 	// 계산 결과를 받아옴
 	var resultData = calc(checkedTagIDs)
 	
-	// 선택된 태그가 없다면 결과 하단의 태그 초기화 버튼을 없애고, 그게 아니면 넣기
+	// 선택된 태그가 없다면 결과 하단의 버튼을 없애고, 그게 아니면 넣기
 	if (checkedTagIDs.length <= 0)
 	{
-		$('#clearSelection-footer').html('')
+		// 선택된 태그가 없다면, 결과 패널 아래의 버튼들을 제거
+		$('#result-panel-footer-btn').html('')
 	}
 	else
 	{
-		$('#clearSelection-footer').html('<button onclick="clearSelection()">태그 초기화</button><div><br></div>')
+		// 선택된 태그가 있다면, 결과 패널 아래에다가 버튼을 추가
+		var footer = '<button onclick="clearSelection()">태그 초기화</button>'
+		footer += ' '
+		footer += '<input onclick="filterClicked(\'onlyHighStars\')" type="checkbox" id="result-panel-footer-ohsf" class="checkboxButton"><label for="result-panel-footer-ohsf"><span>고등급 확정식만</span></label>'
+		footer += '<div><br></div>'
+		
+		$('#result-panel-footer-btn').html(footer)
+		
+		// 필터가 켜져있었다면, 새로 만들어진 버튼도 체크되어 있도록 연동
+		syncButtons()
 	}
 	
 	// 계산 결과로 빈 배열을 받은 경우, 결과출력을 초기화.
 	if (resultData.length == 0)
 	{
-		document.getElementById('calcResult').innerHTML = '<form></form>'
+		$('#result-panel').html('<form></form>')
+		
 		return false
 	}
 	
@@ -111,5 +122,5 @@ const showResult = function () {
 	}
 	
 	// 페이지에 표시
-	$('#calcResult').html(htmlText)
+	$('#result-panel').html(htmlText)
 }
