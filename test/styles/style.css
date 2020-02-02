@@ -365,14 +365,14 @@ html {
 	min-height: 100%;
 	font-size: 6vmin;
 	font-family: 'Nanum Myeongjo';
-	/*line-height: 1.4em;*/
+	
 	margin: 0 auto;
 	background-color: black;
 	color: white;
-	-webkit-user-select: none; 	/* Safari 3.1+ */
-	-moz-user-select: none; 	/* Firefox 2+ */
-	-ms-user-select: none; 		/* IE 10+ */
-	user-select: none; 			/* Standard syntax */
+	-webkit-user-select: none; 	
+	-moz-user-select: none; 	
+	-ms-user-select: none; 		
+	user-select: none; 			
 }
 
 body {
@@ -393,12 +393,12 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: rgba(28, 112, 176, 0.7); /*#1c70b0;*/
+	background-color: rgba(28, 112, 176, 0.7); 
 	transition: background-color 0.2s ease;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-	background-color: rgba(28, 112, 176, 1); /*#1c70b0;*/
+	background-color: rgba(28, 112, 176, 1); 
 }
 
 *::-webkit-scrollbar-button {
@@ -453,7 +453,7 @@ div.selectable_tag {
 */
 
 form.qualification_tag, form.attack-type_tag, form.position_tag, form.attribution_tag {
-	/*display: inline-block;*/
+	
 	width: 70vmin;
 	text-align: left;
 }
@@ -481,11 +481,10 @@ button, .checkboxButton + label {
 }
 
 .checkboxTag + label {
-	/*font-family: 'Nanum Gothic', sans-serif;*/
+	
 	font-family: 'Noto Sans KR', sans-serif;
-	/*font-family: 'Nanum Myeongjo', serif;*/
+	
 	display: inline-block;
-	/*line-height: 100%;*/
 	margin-top: 0vmin;
 	margin-bottom: 1vmin;
 	
@@ -507,8 +506,6 @@ button, .checkboxButton + label {
 	border-color: #0c93c4;
 }
 
-/* 호버링 효과는 호버링이 가능한 환경에서만 */
-/* 라벨 버튼에 대한 호버링 효과들 */
 @media (any-hover:hover) {
 	button:hover, .checkboxButton+label:hover {
 		background-color: #0d79a1;
@@ -542,9 +539,9 @@ button, .checkboxButton + label {
 	padding-right: 1vmin;
 	padding-left: 1vmin;
 	margin-bottom: 1vmin;
-	border: 0.07em solid #333; /*rgba(68, 68, 68, 0.9);*/ /*#444444;*/
+	border: 0.07em solid #333;
 	border-radius: 1vmin;
-	background-color: #333; /*#444444;*/
+	background-color: #333;
 	text-align: center;
 	word-break: keep-all;
 }
@@ -568,7 +565,6 @@ button, .checkboxButton + label {
 	word-break: keep-all;
 }
 
-/* 툴팁 */
 #tooltip {
 	display: inline-block;
 	line-height: 100%;
@@ -577,7 +573,6 @@ button, .checkboxButton + label {
 	border: none;
 	border-radius: 0.2em;
 	color: #ddd;
-	/*font-weight: bold;*/
 	font-size: 3vmin;
 	opacity: 0.95;
 	background-color: rgba(0, 0, 0, 0.7);
@@ -585,9 +580,6 @@ button, .checkboxButton + label {
 	padding-right: 0em;
 	padding-bottom: 0em;
 }
-
-/* 1, 2성 확정식 폼 보더 색상은 회색
-(최소 별갯수는 최대 별갯수가 1/2성이 아닌 이상 1/2성을 스킵하고 3성 이상이 되도록 판정하므로)*/
 
 form.rarity_1 {
 	border-color: #333;
@@ -599,13 +591,13 @@ form.rarity_3 {
 	border-color: #aaa;
 }
 form.rarity_4 {
-	border-color: #1c70b0;	/*파랑*/
+	border-color: #1c70b0;
 }
 form.rarity_5 {
-	border-color: #db9a0d;/*#eda60c;*//*#ffae00;*//*#ba5e18;*/ /*주황-노랑 사이*/
+	border-color: #db9a0d;
 }
 form.rarity_6 {
-	border-color: #c70808; /*#e0620d;*/ /*주황-빨강 사이*/
+	border-color: #c70808;
 }
 
 
@@ -618,19 +610,19 @@ form.rarity_6 {
 	color: #ccc;
 }
 .result_op.rarity_3 {
-	border-color: #333; /*#999;*/
+	border-color: #333;
 	color: #ddd;
 }
 .result_op.rarity_4 {
-	border-color: rgba(28, 112, 176, 0.6); /*#1c70b0;*/
+	border-color: rgba(28, 112, 176, 0.6);
 	color: #eee;
 }
 .result_op.rarity_5 {
-	border-color: rgba(219, 154, 13, 0.5); /*#db9a0d;*/
+	border-color: rgba(219, 154, 13, 0.5);
 	color: #eee;
 }
 .result_op.rarity_6 {
-	border-color: rgba(199, 8, 8, 0.5); /*#c70808;*/
+	border-color: rgba(199, 8, 8, 0.5);
 	color: #eee;
 }
 
@@ -659,29 +651,6 @@ form.rarity_6 {
 .star.rarity_6 {
 	color: #c70808;
 }
-
-/*
-input, select {
-	transition: background-color 0.35s ease;
-	background-color: white;
-	font-family:'배민주아체';
-	font-size: 8vmin;
-	text-align: center;
-	margin: auto;
-	padding: 1vmin 1vmin 1vmin 1vmin;
-	width: 100%;
-	height: 10vmin;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	border: 0 solid white;
-	border-radius: 3vmin;
-}*/
-
-/*
-input:focus, input:hover, select:focus, select:hover {
-	transition: background-color 0.2s ease;
-	background-color: lightpink;
-}*/
 
 .copyright {
 	text-align: left;
