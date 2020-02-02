@@ -46,6 +46,26 @@ const clearSelection = function () {
 	$('html').animate({scrollTop: $('#tag-top').offset().top}, 600, 'easeOutExpo')
 }
 
+//TEST
+var uiDir = 'left'
+const toggleUI = function ()
+{
+	var dirs = ['left', 'center', 'right']
+	
+	var nextDir = dirs.indexOf(uiDir) + 1
+	
+	if (nextDir >= dirs.length)
+	{
+		nextDir = 0
+	}
+	
+	uiDir = dirs[nextDir]
+	
+	$('#toggleUI-Btn').text(uiDir)
+	
+	$('form[class$="_tag"]').css('text-align', uiDir)
+}
+
 // 이하 필터 스위치 전역변수
 var onlyHighStarsFilter = false;
 
