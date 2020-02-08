@@ -1,0 +1,1 @@
+var getTagNames=function(c,b){for(var a=b.length=0,d=0;a<data.tagData.length;++a)0!=(c&data.tagData[a].tagCode)&&(b[d++]=data.tagData[a].name[getLang()])},getTagIDs=function(c,b){for(var a=b.length=0,d=0;a<data.tagData.length;++a)0!=(c&data.tagData[a].tagCode)&&(includedTagNames[d++]=data.tagData[a].name[getLang()])};
