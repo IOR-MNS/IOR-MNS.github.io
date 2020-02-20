@@ -53,16 +53,6 @@ form.qualification_tag, form.attack-type_tag, form.position_tag, form.attributio
 	}
 }
 
-.checkboxTag:not(:checked)+label:active {
-	background-color: #0d79a1;
-	border-color: #096485;
-}
-
-.checkboxTag:checked+label:active {
-	background-color: black;
-	border-color: #111;
-}
-
 .result_tag {
 	font-family: 'Noto Sans KR', sans-serif;
 	display: inline-block;
