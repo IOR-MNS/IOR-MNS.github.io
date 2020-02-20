@@ -41,7 +41,9 @@ form.qualification_tag, form.attack-type_tag, form.position_tag, form.attributio
 
 .checkboxTag + label {
 	font-family: 'Noto Sans KR', sans-serif;
+	
 	display: inline-block;
+	
 	margin: 0;
 	
 	width: auto;
@@ -63,7 +65,10 @@ form.qualification_tag, form.attack-type_tag, form.position_tag, form.attributio
 	border-color: #0c93c4;
 }
 
+
+
 @media (any-hover:hover) {
+	
 	.checkboxTag:not(:checked)+label:hover {
 		background-color: rgba(9, 100, 133, 0.5);
 		border-color: #096485;
@@ -73,6 +78,7 @@ form.qualification_tag, form.attack-type_tag, form.position_tag, form.attributio
 		background-color: rgba(9, 100, 133, 0.8);
 	}
 }
+
 
 .checkboxTag:not(:checked)+label:active {
 	background-color: #0d79a1;
@@ -102,9 +108,9 @@ button, .checkboxButton + label {
 	padding-bottom: 0.7vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
-	border: 0.07em solid #333;
+	border: 0.07em solid #333; 
 	border-radius: 1vmin;
-	background-color: #333;
+	background-color: #333; 
 	text-align: center;
 	word-break: keep-all;
 }
@@ -131,6 +137,7 @@ button, .checkboxButton + label {
 	word-break: keep-all;
 }
 
+
 #tooltip {
 	display: inline-block;
 	line-height: 100%;
@@ -139,6 +146,7 @@ button, .checkboxButton + label {
 	border: none;
 	border-radius: 0.2em;
 	color: #ddd;
+	
 	font-size: 3vmin;
 	opacity: 0.95;
 	background-color: rgba(0, 0, 0, 0.7);
@@ -157,38 +165,38 @@ form.rarity_3 {
 	border-color: #aaa;
 }
 form.rarity_4 {
-	border-color: #1c70b0;
+	border-color: #1c70b0;	
 }
 form.rarity_5 {
 	border-color: #db9a0d;
 }
 form.rarity_6 {
-	border-color: #c70808;
+	border-color: #c70808; 
 }
 
 
 .result_op.rarity_1 {
 	border-color: #333;
-	color: #ddd;
+	color: #ddd; 
 }
 .result_op.rarity_2 {
 	border-color: #333;
-	color: #ddd;
+	color: #ddd; 
 }
 .result_op.rarity_3 {
-	border-color: #333;
+	border-color: #333; 
 	color: #ddd;
 }
 .result_op.rarity_4 {
-	border-color: rgba(28, 112, 176, 0.6);
+	border-color: rgba(28, 112, 176, 0.6); 
 	color: #eee;
 }
 .result_op.rarity_5 {
-	border-color: rgba(219, 154, 13, 0.5);
+	border-color: rgba(219, 154, 13, 0.5); 
 	color: #eee;
 }
 .result_op.rarity_6 {
-	border-color: rgba(199, 8, 8, 0.5);
+	border-color: rgba(199, 8, 8, 0.5); 
 	color: #eee;
 }
 
@@ -221,6 +229,6 @@ form.rarity_6 {
 img.result_thumb {
 	width: 15vmin;
 	vertical-align: middle;
-	background-color: #ccc;
+	background-color:  #ccc;
 	border-radius: 1vmin;
 }
