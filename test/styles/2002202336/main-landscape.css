@@ -1,0 +1,19 @@
+/* 모바일에선 이 효과가 오히려 반응성을 해치므로, PC 등에서만 기능하도록 함 */
+button:active, .checkboxButton:not(:checked)+label:active {
+	background-color: #11a0d9;
+}
+
+.checkboxButton:checked+label:active {
+	background-color: rgba(13, 121, 161, 0.2);
+}
+
+#toast {
+	font-size: 1em;
+}
+
+img.logo {
+	height: 100px;
+	width: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
