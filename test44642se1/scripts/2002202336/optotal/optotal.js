@@ -676,7 +676,7 @@ const showSearchResult = function () {
 	
 	for (var i = 0; i < opnameArray.en.length; ++i) {
 		form	+=	'<form class="search-result-op" name="' + 'op_' + opnameArray.id[i] + '">'
-				+	'	<img src="./images/op/thumb/' + opnameArray.en[i] + '.png">'
+				+	'	<img src="./images/op/thumb/' + opnameArray.en[i].toLowerCase() + '.png">'
 				+	'	<div>' + opnameArray.kr[i] + '</div>'
 				+	'</form>'
 				+	' '
