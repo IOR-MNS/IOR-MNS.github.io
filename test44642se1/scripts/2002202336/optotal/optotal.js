@@ -154,82 +154,82 @@ const makeOpForm = function (opID) {
 	var rarity = Number(data.opData[opID].rarity)
 	opName = opName.toLowerCase()
 	
-	var form = 	'<form class="op" align="center" name="op_' + opID + '">'
-	form += '<span class="remove-op-btn">×</span>'
-	form += '<img class="op" src="./images/op/thumb/' + opName + '.png">'
-	form += '<span>정예화</span><br>'
-	form += '<select style="font-size: 60%;" class="current-elite">'
+	var form = 	'<form class="op" align="center" name="op_' + opID + '"> '
+	form += '<span class="remove-op-btn">×</span> '
+	form += '<img class="op" src="./images/op/thumb/' + opName + '.png"> '
+	form += '<span>정예화</span><br> '
+	form += '<select style="font-size: 60%;" class="current-elite"> '
 	
 	var maxElite = [0, 0, 1, 2, 2, 2][rarity - 1]
 	
 	for (var elite = 0; elite <= maxElite; ++elite) {
-		form += '<option value="' + elite + '">' + elite + '단계</option>'
+		form += '<option value="' + elite + '">' + elite + '단계</option> '
 	}
 	
-	form += '</select>'
-	form += '<span>▸</span>'
-	form += '<select style="font-size: 60%;" class="target-elite">'
+	form += '</select> '
+	form += '<span>▸</span> '
+	form += '<select style="font-size: 60%;" class="target-elite"> '
 	
 	for (var elite = 0; elite <= maxElite; ++elite) {
-		form += '<option value="' + elite + '">' + elite + '단계</option>'
+		form += '<option value="' + elite + '">' + elite + '단계</option> '
 	}
 	
-	form += '</select><br>'
-	form += '<hr>'
-	form += '<button type="button" class="set-current-op-level-to-max-btn">'
+	form += '</select><br> '
+	form += '<hr> '
+	form += '<button type="button" class="set-current-op-level-to-max-btn"> '
 	form += 'MAX'
-	form += '</button>'
-	form += '<span>레벨</span>'
-	form += '<button type="button" class="set-target-op-level-to-max-btn">'
+	form += '</button> '
+	form += '<span>레벨</span> '
+	form += '<button type="button" class="set-target-op-level-to-max-btn"> '
 	form += 'MAX'
-	form += '</button><br>'
-	form += '<input type="text" class="current-op-level" style="font-size: 60%;" value="1">'
-	form += '<span>▸</span>'
-	form += '<input type="text" class="target-op-level" style="font-size: 60%;" value="1"><br>'
-	form += '<hr>'
-	form += '<span>스킬 레벨</span><br>'
-	form += '<div style="font-size: 85%; margin-top: 0.2em">'
-	form += '<span style="font-size: 65%">1스킬</span>'
-	form += '<select style="width: 20%" class="current-skill-level">'
+	form += '</button><br> '
+	form += '<input type="text" class="current-op-level" style="font-size: 60%;" value="1"> '
+	form += '<span>▸</span> '
+	form += '<input type="text" class="target-op-level" style="font-size: 60%;" value="1"><br> '
+	form += '<hr> '
+	form += '<span>스킬 레벨</span><br> '
+	form += '<div style="font-size: 85%; margin-top: 0.2em"> '
+	form += '<span style="font-size: 65%">1스킬</span> '
+	form += '<select style="width: 20%" class="current-skill-level"> '
 	for (var sklv = 1; sklv <= 10; ++sklv) {
-		form += '<option value="' + sklv + '">' + sklv + '</option>'
+		form += '<option value="' + sklv + '">' + sklv + '</option> '
 	}
-	form += '</select>'
-	form += '<span style="font-size: 65%">▸</span>'
-	form += '<select style="width: 20%" class="target-skill-level">'
+	form += '</select> '
+	form += '<span style="font-size: 65%">▸</span> '
+	form += '<select style="width: 20%" class="target-skill-level"> '
 	for (var sklv = 1; sklv <= 10; ++sklv) {
-		form += '<option value="' + sklv + '">' + sklv + '</option>'
+		form += '<option value="' + sklv + '">' + sklv + '</option> '
 	}
-	form += '</select>'
-	form += '<br>'
-	form += '<span style="font-size: 65%">2스킬</span>'
-	form += '<select style="width: 20%;" class="current-skill-level">'
+	form += '</select> '
+	form += '<br> '
+	form += '<span style="font-size: 65%">2스킬</span> '
+	form += '<select style="width: 20%;" class="current-skill-level"> '
 	for (var sklv = 1; sklv <= 10; ++sklv) {
-		form += '<option value="' + sklv + '">' + sklv + '</option>'
+		form += '<option value="' + sklv + '">' + sklv + '</option> '
 	}
-	form += '</select>'
-	form += '<span style="font-size: 65%">▸</span>'
-	form += '<select style="width: 20%" class="target-skill-level">'
+	form += '</select> '
+	form += '<span style="font-size: 65%">▸</span> '
+	form += '<select style="width: 20%" class="target-skill-level"> '
 	for (var sklv = 1; sklv <= 10; ++sklv) {
-		form += '<option value="' + sklv + '">' + sklv + '</option>'
+		form += '<option value="' + sklv + '">' + sklv + '</option> '
 	}
-	form += '</select>'
-	form += '<br>'
-	form += '<span style="font-size: 65%">3스킬</span>'
-	form += '<select style="width: 20%;" class="current-skill-level">'
+	form += '</select> '
+	form += '<br> '
+	form += '<span style="font-size: 65%">3스킬</span> '
+	form += '<select style="width: 20%;" class="current-skill-level"> '
 	for (var sklv = 1; sklv <= 10; ++sklv) {
-		form += '<option value="' + sklv + '">' + sklv + '</option>'
+		form += '<option value="' + sklv + '">' + sklv + '</option> '
 	}
-	form += '</select>'
-	form += '<span style="font-size: 65%">▸</span>'
-	form += '<select style="width: 20%" class="target-skill-level">'
+	form += '</select> '
+	form += '<span style="font-size: 65%">▸</span> '
+	form += '<select style="width: 20%" class="target-skill-level"> '
 	for (var sklv = 1; sklv <= 10; ++sklv) {
-		form += '<option value="' + sklv + '">' + sklv + '</option>'
+		form += '<option value="' + sklv + '">' + sklv + '</option> '
 	}
-	form += '</select>'
-	form += '<br>'
-	form += '</div>'
-	form += '</form>'
+	form += '</select> '
+	form += '<br> '
+	form += '</div> '
+	form += '</form> '
 	
 	return form
 }

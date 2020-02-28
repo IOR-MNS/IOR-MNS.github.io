@@ -142,7 +142,7 @@ div.search-result form img {
 
 form input[type="text"] {
 	font-size: 70%;
-	text-align: right;
+	text-align: center;
 	width: 30%; /*2em*/
 	/*min-width: 30px;*/
 	background-color: rgba(0,0,0,0);
