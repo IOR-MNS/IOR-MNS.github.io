@@ -154,11 +154,11 @@ const makeOpForm = function (opID) {
 	var rarity = Number(data.opData[opID].rarity)
 	opName = opName.toLowerCase()
 	
-	var form = 	'<form class="op" align="center" name="op_' + opID + '">\
-	<span class="remove-op-btn">×</span>\
-	<img class="op" src="./images/op/thumb/' + opName + '.png">\
-	<span>정예화</span><br>\
-	<select style="font-size: 60%;" class="current-elite">'
+	var form = 	'<form class="op" align="center" name="op_' + opID + '">'
+	form += '<span class="remove-op-btn">×</span>'
+	form += '<img class="op" src="./images/op/thumb/' + opName + '.png">'
+	form += '<span>정예화</span><br>'
+	form += '<select style="font-size: 60%;" class="current-elite">'
 	
 	var maxElite = [0, 0, 1, 2, 2, 2][rarity - 1]
 	
@@ -166,118 +166,70 @@ const makeOpForm = function (opID) {
 		form += '<option value="' + elite + '">' + elite + '단계</option>'
 	}
 	
-	form += '</select>\
-	<span>▸</span>\
-	<select style="font-size: 60%;" class="target-elite">'
+	form += '</select>'
+	form += '<span>▸</span>'
+	form += '<select style="font-size: 60%;" class="target-elite">'
 	
 	for (var elite = 0; elite <= maxElite; ++elite) {
 		form += '<option value="' + elite + '">' + elite + '단계</option>'
 	}
 	
-	form += '</select><br>\
-	<hr>\
-	<button type="button" class="set-current-op-level-to-max-btn">\
-	MAX\
-	</button>\
-	 \
-	<span>레벨</span>\
-	 \
-	<button type="button" class="set-target-op-level-to-max-btn">\
-	MAX\
-	</button><br>\
-	<input type="text" class="current-op-level" style="font-size: 60%;" value="1">\
-	 \
-	<span>▸</span>\
-	 \
-	<input type="text" class="target-op-level" style="font-size: 60%;" value="1"><br>\
-	<hr>\
-	<span>스킬 레벨</span><br>\
-	<div style="font-size: 85%; margin-top: 0.2em">\
-		<span style="font-size: 65%">1스킬</span>\
-		<select style="width: 20%" class="current-skill-level">\
-			<option value="1">1</option>\
-			<option value="2">2</option>\
-			<option value="3">3</option>\
-			<option value="4">4</option>\
-			<option value="5">5</option>\
-			<option value="6">6</option>\
-			<option value="7">7</option>\
-			<option value="8">8</option>\
-			<option value="9">9</option>\
-			<option value="10">10</option>\
-		</select>\
-		<span style="font-size: 65%">▸</span>\
-		<select style="width: 20%" class="target-skill-level">\
-			<option value="1">1</option>\
-			<option value="2">2</option>\
-			<option value="3">3</option>\
-			<option value="4">4</option>\
-			<option value="5">5</option>\
-			<option value="6">6</option>\
-			<option value="7">7</option>\
-			<option value="8">8</option>\
-			<option value="9">9</option>\
-			<option value="10">10</option>\
-		</select>\
-		<br>\
-		\
-		<span style="font-size: 65%">2스킬</span>\
-		<select style="width: 20%;" class="current-skill-level">\
-			<option value="1">1</option>\
-			<option value="2">2</option>\
-			<option value="3">3</option>\
-			<option value="4">4</option>\
-			<option value="5">5</option>\
-			<option value="6">6</option>\
-			<option value="7">7</option>\
-			<option value="8">8</option>\
-			<option value="9">9</option>\
-			<option value="10">10</option>\
-		</select>\
-		<span style="font-size: 65%">▸</span>\
-		<select style="width: 20%" class="target-skill-level">\
-			<option value="1">1</option>\
-			<option value="2">2</option>\
-			<option value="3">3</option>\
-			<option value="4">4</option>\
-			<option value="5">5</option>\
-			<option value="6">6</option>\
-			<option value="7">7</option>\
-			<option value="8">8</option>\
-			<option value="9">9</option>\
-			<option value="10">10</option>\
-		</select>\
-		<br>\
-		\
-		<span style="font-size: 65%">3스킬</span>\
-		<select style="width: 20%;" class="current-skill-level">\
-			<option value="1">1</option>\
-			<option value="2">2</option>\
-			<option value="3">3</option>\
-			<option value="4">4</option>\
-			<option value="5">5</option>\
-			<option value="6">6</option>\
-			<option value="7">7</option>\
-			<option value="8">8</option>\
-			<option value="9">9</option>\
-			<option value="10">10</option>\
-		</select>\
-		<span style="font-size: 65%">▸</span>\
-		<select style="width: 20%" class="target-skill-level">\
-			<option value="1">1</option>\
-			<option value="2">2</option>\
-			<option value="3">3</option>\
-			<option value="4">4</option>\
-			<option value="5">5</option>\
-			<option value="6">6</option>\
-			<option value="7">7</option>\
-			<option value="8">8</option>\
-			<option value="9">9</option>\
-			<option value="10">10</option>\
-		</select>\
-		<br>\
-	</div>\
-</form>'
+	form += '</select><br>'
+	form += '<hr>'
+	form += '<button type="button" class="set-current-op-level-to-max-btn">'
+	form += 'MAX'
+	form += '</button>'
+	form += '<span>레벨</span>'
+	form += '<button type="button" class="set-target-op-level-to-max-btn">'
+	form += 'MAX'
+	form += '</button><br>'
+	form += '<input type="text" class="current-op-level" style="font-size: 60%;" value="1">'
+	form += '<span>▸</span>'
+	form += '<input type="text" class="target-op-level" style="font-size: 60%;" value="1"><br>'
+	form += '<hr>'
+	form += '<span>스킬 레벨</span><br>'
+	form += '<div style="font-size: 85%; margin-top: 0.2em">'
+	form += '<span style="font-size: 65%">1스킬</span>'
+	form += '<select style="width: 20%" class="current-skill-level">'
+	for (var sklv = 1; sklv <= 10; ++sklv) {
+		form += '<option value="' + sklv + '">' + sklv + '</option>'
+	}
+	form += '</select>'
+	form += '<span style="font-size: 65%">▸</span>'
+	form += '<select style="width: 20%" class="target-skill-level">'
+	for (var sklv = 1; sklv <= 10; ++sklv) {
+		form += '<option value="' + sklv + '">' + sklv + '</option>'
+	}
+	form += '</select>'
+	form += '<br>'
+	form += '<span style="font-size: 65%">2스킬</span>'
+	form += '<select style="width: 20%;" class="current-skill-level">'
+	for (var sklv = 1; sklv <= 10; ++sklv) {
+		form += '<option value="' + sklv + '">' + sklv + '</option>'
+	}
+	form += '</select>'
+	form += '<span style="font-size: 65%">▸</span>'
+	form += '<select style="width: 20%" class="target-skill-level">'
+	for (var sklv = 1; sklv <= 10; ++sklv) {
+		form += '<option value="' + sklv + '">' + sklv + '</option>'
+	}
+	form += '</select>'
+	form += '<br>'
+	form += '<span style="font-size: 65%">3스킬</span>'
+	form += '<select style="width: 20%;" class="current-skill-level">'
+	for (var sklv = 1; sklv <= 10; ++sklv) {
+		form += '<option value="' + sklv + '">' + sklv + '</option>'
+	}
+	form += '</select>'
+	form += '<span style="font-size: 65%">▸</span>'
+	form += '<select style="width: 20%" class="target-skill-level">'
+	for (var sklv = 1; sklv <= 10; ++sklv) {
+		form += '<option value="' + sklv + '">' + sklv + '</option>'
+	}
+	form += '</select>'
+	form += '<br>'
+	form += '</div>'
+	form += '</form>'
 	
 	return form
 }
@@ -316,7 +268,7 @@ const addOp = function (elem) {
 		/////////////////////////
 		// 자동 계산
 		$newForm.find('*').off('change').on('change', function () {
-			console.log('showResult')
+			//console.log('showResult')
 			showResult()
 		})
 		
@@ -579,7 +531,7 @@ const addOp = function (elem) {
 			var $form = $(this).parent().parent()	// 이 요소는 폼의 2단계 아래에 있으므로
 			var numOfEnabledSkills = $form.find('.target-skill-level:enabled').length
 			var currentSkillCommonLevel = Number($form.find('.current-skill-level').eq(0).val())
-			console.log(this, currentSkillCommonLevel)
+			//console.log(this, currentSkillCommonLevel)
 			
 			// 새로이 변경된 목표스렙이 6 이하라면, 
 			if (changedLevel <= 6) {

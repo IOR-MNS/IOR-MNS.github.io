@@ -41,7 +41,7 @@ const getGroupIdx = function (itemID) {
 	var name = itemData[itemID].name.kr
 	for (var i = 0; i < itemOrder.length; ++i) {
 		if (itemOrder[i].indexOf(name) >= 0) {
-			console.log(name, i)
+			//console.log(name, i)
 			return i
 		}
 	}
@@ -310,7 +310,7 @@ const showResult = function () {
 		inputData[opID].skillLevel = skillLevel
 	}
 	
-	console.log(inputData)
+	//console.log(inputData)
 	
 	// 계산 함수에 입력 데이터를 건네줌
 	var resultData = calc(inputData)
@@ -377,8 +377,6 @@ const showResult = function () {
 	resultData.skillLeveling.IDs.sort(byGroup)
 	resultData.elitePromotion.IDs.sort(byGroup)
 	resultData.total.IDs.sort(byGroup)
-	
-	console.log(resultData)
 	
 	$('#result-container').html(tt(resultData))
 }
@@ -664,8 +662,6 @@ const calc = function (inputData) {
 				var masteryMaterials = []
 				
 				// [자원ID, 수량], ... 형식으로 저장되어 있음
-				console.log(opID, j, k)
-				console.log(currentMasteryLevel, targetMasteryLevel)
 				masteryMaterials = opMaterialData[opID].skill.mastery[j][k]
 				
 				for (var m = 0; m < masteryMaterials.length; ++m) {
@@ -706,7 +702,6 @@ const calc = function (inputData) {
 		
 		// 현재 보고 있는 아이템이 용문폐라면, 용문폐에 합산하고서 다음 아이템으로 넘어감
 		if (itemData[itemID].name.kr == '용문폐') {
-			console.log('용문폐 합산함:', result.elitePromotion[itemID])
 			result.total.lmd += result.elitePromotion[itemID]
 			
 			continue
@@ -728,7 +723,6 @@ const calc = function (inputData) {
 		
 		// 현재 보고 있는 아이템이 용문폐라면, 용문폐에 합산하고서 다음 아이템으로 넘어감
 		if (itemData[itemID].name.kr == '용문폐') {
-			console.log('용문폐 합산함:', result.skillLeveling[itemID])
 			result.total.lmd += result.skillLeveling[itemID]
 		}
 		
