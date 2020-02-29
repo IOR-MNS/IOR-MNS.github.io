@@ -135,6 +135,9 @@ $(document).ready(function () {
 		
 		showSearchResult()
 	})
+	
+	// 로컬스토리지로부터 오퍼레이터 선택값, 정보입력값 복원
+	loadLocalStorage()
 })
 
 const makeOpForm = function (opID) {
@@ -243,29 +246,137 @@ const makeOpForm = function (opID) {
 	return form
 }
 
-const addOp = function (elem) {
-	var opID = $(elem).attr('name').split('_')[1]
+// 페이지 최초 로드시, 기존에 저장되어 있던 로컬스토리지 데이터가 존재한다면, 입력값 복원 후, 필요한 트리거 실행
+const loadLocalStorage = function () {
+	var propList = ['current-elite', 'target-elite', 'current-op-level', 'target-op-level', 'current-skill-level', 'target-skill-level']
 	
+	var existingProps = {}
+	existingProps.IDs = []
+	
+	// 존재하는 모든 오퍼레이터에 대해, 데이터가 존재하는지 확인
+	for (var i = 0; i < data.opData.length; ++i) {
+		var opID = i
+		
+		var prefix = 'optotal_' + opID + '_'
+		existingProps[opID] = []
+		
+		// 데이터 존재여부, 존재한다면 어느 데이터가 존재하는지 검사.
+		var dataExists = false
+		for (var j = 0; j < propList.length; ++j) {
+			var key = prefix + propList[j]
+			if (localStorage.getItem(key) !== null) {
+				existingProps[opID].push(propList[j])
+				dataExists = true
+			}
+		}
+		
+		if (dataExists) {
+			existingProps.IDs.push(opID)
+		}
+	}
+	
+	if (existingProps.IDs.length > 0) {
+		// 복원할지 물어봄
+		if (!confirm('로컬스토리지에서 오퍼레이터 ' + existingProps.IDs.length + '명의 정보가 확인되었습니다.\n복원하시겠습니까?'))
+		{
+			// 복원하지 않겠다고 하면 복원하지 않음.
+			return
+		}
+	}
+	
+	// 오퍼레이터를 복원하고, 데이터가 존재하는 항목에 한해서 입력값도 복원함. 나머지 항목은 기본값 그대로.
+	// 복원한 후, 트리거도 발동시킴.
+	for (var i = 0; i < existingProps.IDs.length; ++i) {
+		var opID = existingProps.IDs[i]
+		var prefix = 'optotal_' + opID + '_'
+		
+		// 오퍼레이터 폼 추가하기 전, 해당 오퍼레이터의 로컬스토리지 데이터 백업(기본값으로 덮어씌워지므로)
+		var values = {}
+		values.keys = []
+		
+		for (var j = 0; j < existingProps[opID].length; ++j) {
+			var prop = existingProps[opID][j]
+			var key = prefix + prop
+			
+			var val = JSON.parse(localStorage.getItem(key))
+			
+			values[prop] = val
+			values.keys.push(prop)
+		}
+		
+		// 오퍼레이터 폼 추가
+		addOp(opID, false)
+		
+		// 추가한 폼 선택
+		var $form = $('form[name="op_' + opID + '"].op')
+		
+		// 입력값 복원
+		for (var j = 0; j < values.keys.length; ++j) {
+			var key = values.keys[j]
+			var val = values[key]
+			
+			if (key === 'current-elite') {
+				$form.find('.current-elite').val(val)
+			}
+			
+			else if (key === 'target-elite') {
+				$form.find('.target-elite').val(val)
+			}
+			
+			else if (key === 'current-op-level') {
+				$form.find('.current-op-level').val(val)
+			}
+			
+			else if (key === 'target-op-level') {
+				$form.find('.target-op-level').val(val)
+			}
+			
+			else if (key === 'current-skill-level') {
+				var $sklv = $form.find('.current-skill-level')
+				
+				for (var k = 0; k < val.length; ++k) {
+					$sklv.eq(k).val(val[k])
+				}
+			}
+			
+			else if (key === 'target-skill-level') {
+				var $sklv = $form.find('.target-skill-level')
+				
+				for (var k = 0; k < val.length; ++k) {
+					$sklv.eq(k).val(val[k])
+				}
+			}
+		}
+		
+		// 필요한 트리거 발동
+		$form.find('.current-elite').trigger('change')
+	}
+}
+
+// 오퍼레이터 폼을 추가 후, 각종 리스너를 추가하고, 곧바로 필요한 트리거를 실행하고, 토스트 메시지를 표시.
+const addOp = function (opID, showToast = true) {
 	// 해당 오퍼레이터가 이미 추가되었는지 검사
 	var checkDuplication = $('#selected-op form[name|="op_' + opID + '"]')
 	
-	// 토스트 메시지 옵션 설정
-	toastr.options = {
-		"closeButton": false,
-		"debug": false,
-		"newestOnTop": false,
-		"progressBar": false,
-		"positionClass": "toast-top-full-width",
-		"preventDuplicates": false,
-		"onclick": null,
-		"showDuration": "200",
-		"hideDuration": "500",
-		"timeOut": "1000",
-		"extendedTimeOut": "500",
-		"showEasing": "swing",
-		"hideEasing": "linear",
-		"showMethod": "fadeIn",
-		"hideMethod": "fadeOut"
+	if (showToast) {
+		// 토스트 메시지 옵션 설정
+		toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-full-width",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "200",
+			"hideDuration": "500",
+			"timeOut": "1000",
+			"extendedTimeOut": "500",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
 	}
 	
 	// 아직 추가되지 않았을 경우에만 새로 추가함
@@ -274,16 +385,32 @@ const addOp = function (elem) {
 		var $newForm = $('form[name="op_' + opID + '"].op')
 		
 		/* 이벤트 리스너 추가 */
-		/////////////////////////
-		// 자동 계산
-		$newForm.find('*').off('change').on('change', function () {
-			showResult()
-		})
 		
 		/////////////////////////
 		// 지우기 버튼
 		$newForm.find('.remove-op-btn').off('click').on('click', function () {
+			// 오퍼레이터 ID 취득
+			var opID = Number($(this).parent().attr('name').split('_')[1])
+			
+			// 비정상적인 ID라면 작업 중지
+			if (Number.isNaN(opID)) {
+				console.log('에러: 오퍼레이터 아이디가 숫자로 이뤄지지 않음')
+				return
+			}
+			
+			// 오퍼레이터 폼을 삭제
 			$(this).parent().remove()
+			
+			// 로컬스토리지에서도 오퍼레이터를 삭제
+			var prefix = 'optotal_' + opID + '_'
+			var props = ['current-elite', 'target-elite', 'current-op-level', 'target-op-level', 'current-skill-level', 'target-skill-level']
+			for (var i = 0; i < props.length; ++i) {
+				localStorage.removeItem(prefix + props[i])
+			}
+			
+			// 결과를 재계산
+			showResult()
+			
 			// 남은 오퍼레이터가 없다면, 선택안내문구를 표시
 			var numOfSelectedOp = $('form[name*="op_"].op').length
 			if (numOfSelectedOp === 0) {
@@ -293,27 +420,50 @@ const addOp = function (elem) {
 		
 		////////////////////////
 		// 레벨 최대 설정 버튼
+		
+		// 현재 레벨을 최대로 설정
 		$newForm.find('.set-current-op-level-to-max-btn').off('click').on('click', function () {
 			var $form = $(this).parent()	// 이 요소는 폼의 1단계 아래에 있으므로
-			var $elem = $form.find('.current-op-level')
-
+			var $currentOpLevel = $form.find('.current-op-level')
+			
+			var opID = Number($form.attr('name').split('_')[1])
+			
+			// 비정상적인 ID라면 작업 중지
+			if (Number.isNaN(opID)) {
+				console.log('에러: 오퍼레이터 아이디가 숫자로 이뤄지지 않음')
+				return
+			}
+			
 			// 최대 레벨로 설정
 			var currentElite = Number($form.find('.current-elite').val())
 			var rarity = data.opData[$form.attr('name').split('_')[1]].rarity
 			var maxLevel = getMaxLevel(currentElite, rarity)
-			$elem.val(maxLevel)
+			$currentOpLevel.val(maxLevel)
+			
+			// 레벨 변경 트리거
 			$form.find('.current-op-level').trigger('change')
 		})
-
+		
+		// 목표 레벨을 최대로 설정
 		$newForm.find('.set-target-op-level-to-max-btn').off('click').on('click', function () {
 			var $form = $(this).parent()	// 이 요소는 폼의 1단계 아래에 있으므로
-			var $elem = $form.find('.target-op-level')
-
+			var $targetOpLevel = $form.find('.target-op-level')
+			
+			var opID = Number($form.attr('name').split('_')[1])
+			
+			// 비정상적인 ID라면 작업 중지
+			if (Number.isNaN(opID)) {
+				console.log('에러: 오퍼레이터 아이디가 숫자로 이뤄지지 않음')
+				return
+			}
+			
 			// 최대 레벨로 설정
-			var currentElite = Number($form.find('.target-elite').val())
+			var targetElite = Number($form.find('.target-elite').val())
 			var rarity = data.opData[$form.attr('name').split('_')[1]].rarity
-			var maxLevel = getMaxLevel(currentElite, rarity)
-			$elem.val(maxLevel)
+			var maxLevel = getMaxLevel(targetElite, rarity)
+			$targetOpLevel.val(maxLevel)
+			
+			// 레벨 변경 트리거
 			$form.find('.target-op-level').trigger('change')
 		})
 		
@@ -401,12 +551,22 @@ const addOp = function (elem) {
 				$($form.find('.current-skill-level')[i]).prop('disabled', true)
 			}
 			
+			/* 새로운 현재정예화단계를 로컬스토리지에 저장 */
+			var key = 'optotal_' + opID + '_current-elite'
+			var val = Number($(this).val())
+			val = Number.isNaN(val) ? 0 : val
+			
+			localStorage.setItem(key, val)
+			
 			// 작업이 미처 끝나지 않았는데 트리거를 실행해버리면, 작업이 서로 덮어씌워져 예상치 못한 결과를 얻을 수 있으므로,
 			// 모든 작업을 마치고서 트리거를 실행한다.
 			
 			$form.find('.target-elite').trigger('change')
 			$form.find('.current-op-level').trigger('change')
 			$form.find('.current-skill-level').trigger('change')
+			
+			// 결과를 재계산
+			showResult()
 		})
 		
 		// 목표 정예화 단계
@@ -470,15 +630,75 @@ const addOp = function (elem) {
 				$($form.find('.target-skill-level')[i]).prop('disabled', true)
 			}
 			
+			/* 새로운 목표정예화단계를 로컬스토리지에 저장 */
+			var key = 'optotal_' + opID + '_target-elite'
+			var val = Number($(this).val())
+			val = Number.isNaN(val) ? 2 : val
+			
+			localStorage.setItem(key, val)
+			
 			// 작업이 미처 끝나지 않았는데 트리거를 실행해버리면, 작업이 서로 덮어씌워져 예상치 못한 결과를 얻을 수 있으므로,
 			// 모든 작업을 마치고서 트리거를 실행한다.
 			
 			$form.find('.target-op-level').trigger('change')
 			$form.find('.target-skill-level').trigger('change')
+			
+			// 결과를 재계산
+			showResult()
+		})
+		
+		
+		///////////////////////
+		// 오퍼레이터 레벨 변경시
+		
+		// 현재 레벨 변경시
+		$newForm.find('input[type="text"].current-op-level').off('change').on('change', function () {
+			// 숫자가 아닌 값이라면 1로 초기화
+			// 최소치보다 낮다면 최소치로 초기화
+			// 최대치를 넘는다면 최대치로 초기화
+			var $form = $(this).parent()	// 이 요소는 폼의 1단계 아래에 있으므로
+			var opID = $form.attr('name').split('_')[1]
+			var elite = Number($form.find('.current-elite').val())
+			var rarity = data.opData[opID].rarity
+			var maxlv = getMaxLevel(elite, rarity)
+			var lv = Number($(this).val())
+			lv = Number.isNaN(lv) ? 1 : lv
+			lv = (lv < 1) ? 1 : lv
+			lv = (lv > maxlv) ? maxlv : lv
+			
+			$(this).val(lv)
+			
+			localStorage.setItem('optotal_' + opID + '_current-op-level', lv)
+			
+			showResult()
+		})
+		
+		// 목표 레벨 변경시
+		$newForm.find('input[type="text"].target-op-level').off('change').on('change', function () {
+			// 숫자가 아닌 값이라면 1로 초기화
+			// 최소치보다 낮다면 최소치로 초기화
+			// 최대치를 넘는다면 최대치로 초기화
+			var $form = $(this).parent()	// 이 요소는 폼의 1단계 아래에 있으므로
+			var opID = $form.attr('name').split('_')[1]
+			var elite = Number($form.find('.target-elite').val())
+			var rarity = data.opData[opID].rarity
+			var maxlv = getMaxLevel(elite, rarity)
+			var lv = Number($(this).val())
+			lv = Number.isNaN(lv) ? 1 : lv
+			lv = (lv < 1) ? 1 : lv
+			lv = (lv > maxlv) ? maxlv : lv
+			
+			$(this).val(lv)
+			
+			localStorage.setItem('optotal_' + opID + '_target-op-level', lv)
+			
+			showResult()
 		})
 		
 		///////////////////////
 		// 스킬레벨 변경시
+		
+		// 현재스킬레벨 변경시
 		$newForm.find('select.current-skill-level').off('change').on('change', function () {
 			// 이 요소가 비활성화되어 있다면 아무것도 하지 않음
 			if ($(this).prop('disabled') === true) {
@@ -532,9 +752,26 @@ const addOp = function (elem) {
 				}
 			}
 			
+			/* 새로운 현재스킬레벨을 로컬스토리지에 저장 */
+			var key = 'optotal_' + opID + '_current-skill-level'
+			var val = []
+			var $csklv = $form.find('.current-skill-level')
+			
+			for (var i = 0; i < $csklv.length; ++i) {
+				val.push(Number($csklv.eq(i).val()))
+			}
+			
+			val = JSON.stringify(val)
+			
+			localStorage.setItem(key, val)
+			
 			$form.find('.target-skill-level').trigger('change')
+			
+			// 결과를 재계산
+			showResult()
 		})
-
+		
+		// 목표스킬레벨 변경시
 		$newForm.find('select.target-skill-level').off('change').on('change', function () {
 			// 이 요소가 비활성화되어 있다면 아무것도 하지 않음
 			if ($(this).prop('disabled') === true) {
@@ -602,20 +839,41 @@ const addOp = function (elem) {
 					validateTargetSkillLevel(inputObj, $targetSkillLevel)
 				}
 			}
+			
+			/* 새로운 목표스킬레벨을 로컬스토리지에 저장 */
+			var key = 'optotal_' + opID + '_target-skill-level'
+			var val = []
+			var $csklv = $form.find('.target-skill-level')
+			
+			for (var i = 0; i < $csklv.length; ++i) {
+				val.push(Number($csklv.eq(i).val()))
+			}
+			
+			val = JSON.stringify(val)
+			
+			localStorage.setItem(key, val)
+			
+			// 결과를 재계산
+			showResult()
 		})
 		
 		//////////
-		// 트리거 작동시켜서 바로 스킬레벨한도나 활성화스킬갯수 등 조정
+		// 트리거를 작동시켜서 바로 스킬레벨한도나 활성화스킬갯수 등 조정
 		$newForm.find('.current-elite').trigger('change')
 		
 		// 선택안내문구가 표시되고 있었다면, 비표시 설정
 		$('#selected-op-guide').css('display', 'none')
 		
-		toastr.success(data.opData[opID].name.kr, '추가됨')
+		if (showToast) {
+			toastr.success(data.opData[opID].name.kr, '추가됨')
+		}
 	}
 	// 이미 추가되어 있다면, 더이상 중복으로 추가하지 않음
 	else {
-		toastr.error(data.opData[opID].name.kr, '이미 추가되어 있음')
+		if (showToast) {
+			toastr.error(data.opData[opID].name.kr, '이미 추가되어 있음')
+		}
+		console.log('이미 추가되어 있음', opID, data.opData[opID].name.kr)
 	}
 }
 
@@ -676,7 +934,8 @@ const showSearchResult = function () {
 	
 	// 이벤트 리스너 추가
 	$('form.search-result-op').off('click').on('click', function () {
-		addOp(this)
+		var opID = $(this).attr('name').split('_')[1]
+		addOp(opID, true)
 	})
 }
 
