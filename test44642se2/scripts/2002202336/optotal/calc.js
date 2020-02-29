@@ -86,7 +86,7 @@ const tt = function (res) {
 	var closeDiv = '</div> '
 	
 	s += '<hr class="main-line">'
-	s += '합계<br>'
+	s += '<span class="result-maintitle">합계</span><br>'
 	s += '<hr class="sub-line">'
 	s += '<span class="result-subtitle">경험치, 용문폐</span>'
 	s += '<hr>'

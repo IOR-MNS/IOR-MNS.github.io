@@ -44,8 +44,13 @@ select {
 	text-align: center;
 }
 
+.result-maintitle {
+	font-family: 'Noto Sans KR';
+}
+
 .result-subtitle {
 	color: #777;
+	font-family: 'Noto Sans KR';
 	font-weight: 500;
 }
 
@@ -91,7 +96,7 @@ select {
 .result-group {
 	display: inline-block;
 	
-	border: 0.05em solid #222;/*#777;*/
+	border: 0.04em solid #222;
 }
 
 #result-container {

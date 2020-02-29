@@ -116,14 +116,18 @@ div#result-container {
 	font-size: 18px;
 }
 
-.result-item-quantity small {
-	font-size: 13px;
+.result-item-quantity.small {
+	font-size: 15px;
 }
 
 .result-item-name {
 	min-width: 10px;
 	border-radius: 3px;
 	font-size: 15px;
+}
+
+.result-maintitle {
+	font-size: 33px;
 }
 
 .result-subtitle {

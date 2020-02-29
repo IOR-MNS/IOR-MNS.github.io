@@ -84,13 +84,13 @@ div#selected-op-container {
 }
 
 #selected-op {
-	width: 600px;
+	width: 262px;
 	max-width: 100%;
 }
 
 div#result-container {
 	border: none;
-	font-size: 33px;
+	font-size: 26px;
 	max-width: 600px;
 }
 
@@ -101,12 +101,12 @@ div#result-container {
 }
 
 .result-item-container {
-	margin-top: 5px;
-	margin-right: 5px;
+	margin-top: 7px;
+	margin-right: 7px;
 }
 
 .result-item-container img {
-	width: 80px;
+	width: 60px;
 }
 
 .result-item-quantity {
@@ -115,18 +115,21 @@ div#result-container {
 	font-size: 18px;
 }
 
-.result-item-quantity small {
+.result-item-quantity.small {
 	font-size: 13px;
 }
 
 .result-item-name {
-	min-width: 10px;
 	border-radius: 3px;
-	font-size: 15px;
+	font-size: 11px;
+}
+
+.result-maintitle {
+	font-size: 26px;
 }
 
 .result-subtitle {
-	font-size: 22px;
+	font-size: 19px;
 }
 
 .result-exp-lmd-container {
