@@ -3,7 +3,8 @@ hr {
 }
 
 .modal-content {
-	width: 70%;
+	width: 90%;
+	max-width: 700px;
 }
 
 .modal-header {
