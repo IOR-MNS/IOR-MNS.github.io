@@ -84,15 +84,20 @@ div#selected-op-container {
 	text-align: center;
 }
 
+.selected-op-header {
+	width: 655px;
+	max-width: 100%;
+}
+
 #selected-op {
-	width: 600px;
+	width: 655px;
 	max-width: 100%;
 }
 
 div#result-container {
 	border: none;
 	font-size: 33px;
-	max-width: 600px;
+	max-width: 655px;
 }
 
 .result-group {

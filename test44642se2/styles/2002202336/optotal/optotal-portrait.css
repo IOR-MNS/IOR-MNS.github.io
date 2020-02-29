@@ -83,9 +83,29 @@ div#selected-op-container {
 	text-align: center;
 }
 
-#selected-op {
-	width: 262px;
-	max-width: 100%;
+.selected-op-header {
+	width: 100%;
+}
+
+@media screen and (max-width: 419px) {
+	#selected-op {
+		width: 262px;
+		max-width: 100%;
+	}
+}
+
+@media screen and (min-width: 420px) {
+	#selected-op {
+		width: 393px;
+		max-width: 100%;
+	}
+}
+
+@media screen and (min-width: 560px) {
+	#selected-op {
+		width: 524px;
+		max-width: 100%;
+	}
 }
 
 div#result-container {

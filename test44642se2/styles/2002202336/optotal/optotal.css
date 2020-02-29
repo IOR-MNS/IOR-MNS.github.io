@@ -10,6 +10,11 @@ select {
 	text-align: center;
 }
 
+.selected-op-header {
+	display: inline-block;
+	text-align: left;
+}
+
 #selected-op {
 	display: inline-block;
 	text-align: left;
