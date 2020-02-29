@@ -66,7 +66,7 @@ const makeResultHtmlByGroup = function (resultData) {
 		
 		// 이전 아이템과 비교해서 그룹이 바뀌었을 경우, 줄바꿈 추가
 		if ((i > 0) && (prevGroupIdx != groupIdx)) {
-			resultHtml += closeDiv + '<br>' + openDiv//'<br>'
+			resultHtml += closeDiv + '<br><br>' + openDiv//'<br>'
 		}
 		
 		resultHtml += toImg(itemData[ID].name.kr, resultData[ID])

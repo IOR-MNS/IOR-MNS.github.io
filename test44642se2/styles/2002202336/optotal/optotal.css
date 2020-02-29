@@ -91,7 +91,7 @@ select {
 .result-group {
 	display: inline-block;
 	
-	border: 0.05em solid #777;
+	border: 0.05em solid #222;/*#777;*/
 }
 
 #result-container {
