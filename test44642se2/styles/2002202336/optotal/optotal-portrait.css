@@ -85,6 +85,7 @@ div#selected-op-container {
 
 .selected-op-header {
 	width: 100%;
+	max-width: 655px;
 }
 
 @media screen and (max-width: 419px) {
@@ -108,10 +109,17 @@ div#selected-op-container {
 	}
 }
 
+@media screen and (min-width: 700px) {
+	#selected-op {
+		width: 655px;
+		max-width: 100%;
+	}
+}
+
 div#result-container {
 	border: none;
 	font-size: 26px;
-	max-width: 600px;
+	max-width: 655px;
 }
 
 .result-group {
