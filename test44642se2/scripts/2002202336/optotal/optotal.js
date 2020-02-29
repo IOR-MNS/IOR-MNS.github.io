@@ -324,6 +324,9 @@ const loadLocalStorage = function () {
 			return
 		}
 	}
+	else {
+		return
+	}
 	
 	var tr = Date.now()
 	console.log('복원시작')
