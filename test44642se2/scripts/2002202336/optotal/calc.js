@@ -173,7 +173,17 @@ const tt = function (res) {
 	return s
 }
 
+// 한번 실행에 대량 10ms정도 소요되는데, 이는 평상시 유저가 사용할 때 문제되는 속도는 아니지만,
+// 기존 오퍼레이터 정보 대량 복원등의 상황에서 트리거가 여러번 발동되면서
+// 지나치게 많은 호출이 이뤄질 경우, 문제가 될 수 있다.
+// 따라서, 결과 갱신을 끄고 켤 수 있는 전역변수를 따로 만들고,
+// 결과 갱신 옵션이 꺼져있다면 갱신요청을 무시하는 방향으로 진행한다.
+var doNotRefreshResult = false
+
 const showResult = function () {
+	if (doNotRefreshResult === true) {
+		return
+	}
 	// 일단 계산 함수에 넘겨줄 입력데이터를 읽어들임
 	
 	// 입력 데이터를 총체적으로 저장할 객체
@@ -379,7 +389,7 @@ const showResult = function () {
 
 // getMaxLevel, levelignCalc는 oplv.js에서 가져옴
 const getMaxLevel = function (elite, rarity) {
-	return levelingData.maxLevel['elite_' + elite][rarity - 1]
+	return Number(levelingData.maxLevel['elite_' + elite][rarity - 1])
 }
 
 /* 
@@ -625,6 +635,7 @@ const calc = function (inputData) {
 			
 			// [자원ID, 수량], ... 형식으로 저장되어 있음
 			skillMaterials = opMaterialData[opID].skill.common[j]
+			//console.log(opID)
 			
 			for (var k = 0; k < skillMaterials.length; ++k) {
 				// 자원ID, 수량
