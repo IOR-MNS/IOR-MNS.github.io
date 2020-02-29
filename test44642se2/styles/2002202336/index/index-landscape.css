@@ -1,0 +1,15 @@
+img.logo {
+	width: 1.7em;
+	height: auto;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+h1 {
+	font-size: 4vmin;
+}
+
+form {
+	width: 60vmin;
+	border-width: 0.06em;
+}
