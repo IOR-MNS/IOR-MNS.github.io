@@ -63,6 +63,25 @@ const validateCurrentSkillLevel = function (inputObj, currentSkillLevelElem) {
 	setSkillLevelBound(lowerBound, upperBound, $currentSkillLevelElem)
 }
 
+// 대원 추가 프롬프트를 띄움
+const openModalPrompt = function () {
+	// 프롬프트 표시
+	$('.modal').css('display', 'block')
+	
+	// 프롬프트가 떠있는 동안에는 계산을 갱신할 필요가 없으므로 설정 변경
+	doNotRefreshResult = true
+}
+
+// 대원 추가 프롬프트를 닫음
+const closeModalPrompt = function () {
+	// 프롬프트 숨김
+	$('#modal').css('display', 'none')
+	
+	// 프롬프트가 닫혔다면, 계산을 갱신할 필요가 있으므로 설정 변경하고, 재계산 요청
+	doNotRefreshResult = false
+	showResult()
+}
+
 $(document).ready(function () {
 	
 	// 토스트 메시지 옵션 설정
@@ -87,18 +106,18 @@ $(document).ready(function () {
 	///////////////////////
 	// 오퍼레이터 추가 버튼 클릭시, modal prompt 열음
 	$('.add-btn').click(function () {
-		$('.modal').css('display', 'block')
+		openModalPrompt()
 	})
 	
 	// modal prompt의 content에 있는 닫기 버튼 클릭시, 닫음
 	$('.close-btn').click(function() {
-		$('#modal').css('display', 'none')
+		closeModalPrompt()
 	})
 	
 	// modal prompt의 content 바깥 클릭시, 닫음
 	$(window).click(function(event) {
 		if ($(event.target).is($('#modal'))) {
-			$('#modal').css('display', 'none')
+			closeModalPrompt()
 		}
 	})
 	
@@ -299,7 +318,7 @@ const loadLocalStorage = function () {
 	
 	if (existingProps.IDs.length > 0) {
 		// 복원할지 물어봄
-		if (!confirm('로컬스토리지에서 오퍼레이터 ' + existingProps.IDs.length + '명의 정보가 확인되었습니다.\n복원하시겠습니까?'))
+		if (!confirm('로컬스토리지에서 오퍼레이터 ' + existingProps.IDs.length + '명의 정보가 확인되었습니다.\n\n복원하시겠습니까? '))
 		{
 			// 복원하지 않겠다고 하면 복원하지 않음.
 			return
