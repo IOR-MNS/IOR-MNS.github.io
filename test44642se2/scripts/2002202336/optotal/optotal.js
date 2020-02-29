@@ -316,6 +316,7 @@ const loadLocalStorage = function () {
 		}
 	}
 	
+	/*
 	if (existingProps.IDs.length > 0) {
 		// 복원할지 물어봄
 		if (!confirm('로컬스토리지에서 오퍼레이터 ' + existingProps.IDs.length + '명의 정보가 확인되었습니다.\n\n복원하시겠습니까? '))
@@ -327,9 +328,8 @@ const loadLocalStorage = function () {
 	else {
 		return
 	}
+	*/
 	
-	var tr = Date.now()
-	console.log('복원시작')
 	// 오퍼레이터를 복원하는 동안은, 결과를 갱신하지 않음.
 	doNotRefreshResult = true
 	
@@ -411,8 +411,6 @@ const loadLocalStorage = function () {
 	// 결과를 갱신 가능하도록 설정을 되돌려놓고, 결과 갱신.
 	doNotRefreshResult = false
 	showResult()
-	
-	console.log('복원 완료', tr - Date.now())
 }
 
 // 오퍼레이터 폼을 추가 후, 각종 리스너를 추가하고, 곧바로 필요한 트리거를 실행하고, 토스트 메시지를 표시.
