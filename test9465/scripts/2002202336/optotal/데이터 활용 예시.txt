@@ -1,0 +1,37 @@
+/************* opMaterialData, itemData, opData 활용 예시 ****************/
+
+const tt = function (arr) {
+	var res = ''
+	
+	for (var i = 0; i < arr.length; ++i) {
+		if (i > 0) {
+			res += ', '
+		}
+		res += itemData[arr[i][0]].name.kr + ': ' + arr[i][1]
+	}
+	
+	return res
+}
+
+var _opID = 19
+
+var m = ''
+
+m += '아이디: ' + _opID
+m += '\n이름: ' + data.opData[_opID].name.kr
+
+for (var i = 0; i < opMaterialData[_opID].elite.length; ++i) {
+	m += '\n' + String(i+1) + '정재료: ' + tt(opMaterialData[_opID].elite[i])
+}
+
+for (var i = 0; i < opMaterialData[_opID].skill.common.length; ++i) {
+	m += '\n공통 ' + String(i+1) + '레벨재료: ' + tt(opMaterialData[_opID].skill.common[i])
+}
+
+for (var i = 0; i < opMaterialData[_opID].skill.mastery.length; ++i) {
+	for (var j = 0; j < opMaterialData[_opID].skill.mastery[i].length; ++j) {
+		m += '\n' + String(i+1) + '스 특화 ' + String(j+1) + '레벨재료: ' + tt(opMaterialData[_opID].skill.mastery[i][j])
+	}
+}
+
+console.log(m)

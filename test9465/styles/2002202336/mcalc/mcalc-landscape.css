@@ -1,0 +1,112 @@
+.modal-content {
+	width: 90%;
+	max-width: 500px;
+}
+
+.modal-header {
+	height: 30px;
+	font-size: 26px;
+}
+
+.modal-body {
+	font-size: 24px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 15px;
+	
+	height: auto;
+}
+
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+/*******/
+
+.checkboxBtn {
+	display: none;
+}
+
+.checkboxBtn + label {
+	font-family: 'Noto Sans KR', sans-serif;
+	display: inline-block;
+	margin-top: 0vmin;
+	margin-bottom: 1vmin;
+	border: 0.07em solid #333;
+	width: auto;
+	font-size: 2.2vmin;
+	padding-top: 0.7vmin;
+	padding-bottom: 0.7vmin;
+	padding-right: 1vmin;
+	padding-left: 1vmin;
+	border-radius: 0;
+	transition: border-color 0.2s ease, background-color 0.2s ease;
+	background-color: black;
+	text-align: center;
+	word-break: keep-all;
+}
+
+.checkboxBtn:checked + label {
+	background-color: rgba(9, 100, 133, 0.4);
+	border-color: #0c93c4;
+}
+
+/* 호버링 효과는 호버링이 가능한 환경에서만 */
+/* 라벨 버튼에 대한 호버링 효과들 */
+@media (any-hover:hover) {
+	/* 선택가능한 태그류 */
+	.checkboxBtn:not(:checked)+label:hover {
+		background-color: rgba(9, 100, 133, 0.5);
+		border-color: #096485;
+	}
+	
+	.checkboxBtn:checked+label:hover {
+		background-color: rgba(9, 100, 133, 0.8);
+	}
+}
+
+/* 선택가능한 태그류 */
+.checkboxBtn:not(:checked)+label:active {
+	background-color: #0d79a1;
+	border-color: #096485;
+}
+
+.checkboxBtn:checked+label:active {
+	background-color: black;
+	border-color: #111;
+}
+/********/
+
+/*
+.item_body_craft-config-btn {
+	display: inline-block;
+	position: absolute;
+	top: -4px; left: 3px;
+	
+	padding: 0; padding-top: 2px; padding-bottom: 2px;
+	margin: 0;
+	
+	width: 94px;
+	
+	border: none;
+	
+	color: #eee;
+	background-color: #333;
+	
+	font-size: 13px;
+	font-weight: 300;
+	font-family: 'Noto Sans KR';
+	text-align: center;
+}
+
+.item_body_craft-config-btn.no {
+	background-color: #333;
+}
+.item_body_craft-config-btn.as-possible {
+	background-color: rgb(13, 121, 161);
+}
+.item_body_craft-config-btn.all {
+	background-color: rgb(204, 0, 0);
+}
+*/

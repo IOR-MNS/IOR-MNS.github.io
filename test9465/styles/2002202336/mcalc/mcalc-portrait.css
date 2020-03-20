@@ -1,0 +1,179 @@
+.modal-content {
+	width: 14em;
+	max-width: 90%;
+}
+
+.modal-body {
+	font-size: 0.9em;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+	padding-bottom: 0.5em;
+	
+	height: auto;
+}
+
+/************/
+.checkboxBtn {
+	display: none;
+}
+
+.checkboxBtn + label {
+	font-family: 'Noto Sans KR', sans-serif;
+	display: inline-block;
+	margin-top: 0vmin;
+	margin-bottom: 1vmin;
+	border: 0.07em solid #333;
+	width: auto;
+	font-size: 3.5vmin;
+	padding-top: 0.5vmin;
+	padding-bottom: 0.5vmin;
+	padding-right: 1vmin;
+	padding-left: 1vmin;
+	border-radius: 0;
+	transition: border-color 0.2s ease, background-color 0.2s ease;
+	background-color: black;
+	text-align: center;
+	word-break: keep-all;
+}
+
+.checkboxBtn:checked + label {
+	background-color: rgba(9, 100, 133, 0.4);
+	border-color: #0c93c4;
+}
+
+/* 호버링 효과는 호버링이 가능한 환경에서만 */
+/* 라벨 버튼에 대한 호버링 효과들 */
+@media (any-hover:hover) {
+	/* 선택가능한 태그류 */
+	.checkboxBtn:not(:checked)+label:hover {
+		background-color: rgba(9, 100, 133, 0.5);
+		border-color: #096485;
+	}
+	
+	.checkboxBtn:checked+label:hover {
+		background-color: rgba(9, 100, 133, 0.8);
+	}
+}
+/************/
+
+/*
+div.item-container {
+	margin-top: 0;
+	margin-bottom: 5px;
+	width: 100%;
+	max-width: 600px;
+	background-color: #444;
+	text-align: left;
+}
+
+
+div.item {
+	display: inline-block;
+	margin: 0;
+	margin-top: 4%;
+	margin-right: 2%;
+	
+	font-family: 'Noto Sans KR';
+	
+	width: 100px;
+	width: 75px;
+	width: 23%;
+	
+	border-radius: 5px;
+	
+	background-color: #222;
+}
+
+
+
+div.item>div.item_thumb {
+	display: inline-block;
+	position: relative;
+	
+	margin: 0;
+	padding: 0;
+	
+	width: 100%;
+	
+	border-radius: 5px;
+	
+	background-color: #999;
+	color: white;
+	
+	text-align: center;
+}
+
+div.item_thumb>img {
+	height: 75px;
+	width: auto;
+}
+
+
+div.item_thumb>span.item_thumb_name {
+	display: inline; 
+	position: absolute; 
+	top: 0; left: 0; 
+	
+	padding: 0;
+	padding-right: 1px;
+	padding-bottom: 1px;
+	
+	font-family:'Noto Sans KR', sans-serif;
+	font-size: 12px;
+	
+	word-break: keep-all; 
+	text-align: left; 
+	
+	background-color: rgba(0, 0, 0, 0.5); 
+	
+	border-radius: 0px; 
+	border-top-left-radius: 5px; 
+	border-bottom-right-radius: 5px;
+}
+
+
+div.item_thumb>div.item_thumb_quantity {
+	position: absolute;
+	bottom: 0; right: 0; 
+	
+	padding-left: 3px; 
+	
+	font-family:'Noto Sans KR', sans-serif;
+	font-size: 17px;
+	font-weight: 500; 
+	
+	color: red;
+	background-color: black; 
+	
+	border-radius: 0px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+
+div.item>div.item_have, div.item>div.item_need {
+	display: inline-block; 
+	padding: 0; margin: 0; 
+	
+	width: 37px;
+	
+	font-size: 12px;
+}
+
+
+div.item_have>input[type="text"].item_have_input, div.item_need>input[type="text"].item_need_input {
+	margin: 0; 
+	
+	font-family: 'Noto Sans KR'; 
+	font-size: 14px; 
+	text-align: center;
+	
+	width: 33px;
+	
+	color: white; 
+	background-color: black; 
+	
+	border: 1px solid #333; 
+}
+*/
