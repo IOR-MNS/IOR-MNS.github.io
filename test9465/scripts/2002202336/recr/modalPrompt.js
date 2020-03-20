@@ -11,7 +11,8 @@ const loadConfig = function () {
 	displayRarity = JSON.parse(localStorage.getItem('recr_display_rarity'))		// boolean
 	filterRarity = JSON.parse(localStorage.getItem('recr_filter_rarity'))		// array
 	
-	displayImg = displayImg.toString().toLowerCase()
+	displayImg = (typeof displayImg !== 'string') ? 'none' : displayImg
+	displayImg = displayImg.toLowerCase()
 	displayImg = ('tiny|small|medium|large'.indexOf(displayImg) < 0) ? 'none' : displayImg
 	
 	displayName = (typeof displayName !== 'boolean') ? true : displayName
