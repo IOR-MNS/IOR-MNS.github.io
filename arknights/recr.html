@@ -6,10 +6,12 @@
     <title>공개모집 계산기</title>
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700|Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
 	<link href="images/favicon.ico" rel="shortcut icon">
-	<link href="styles/2003010821/main.css" rel="stylesheet" type="text/css">
-	<link media="(orientation: landscape)" href="styles/2003010821/main-landscape.css" rel="stylesheet" type="text/css">
-	<link media="(orientation: portrait)" href="styles/2003010821/recr/recr-portrait.css" rel="stylesheet" type="text/css">
-	<link media="(orientation: landscape)" href="styles/2003010821/recr/recr-landscape.css" rel="stylesheet" type="text/css">
+	<link href="styles/2003210948/main.css" rel="stylesheet" type="text/css">
+	<link media="(orientation: landscape)" href="styles/2003210948/main-landscape.css" rel="stylesheet" type="text/css">
+	
+	<link href="styles/2003210948/recr/recr.css" rel="stylesheet" type="text/css">
+	<link media="(orientation: portrait)" href="styles/2003210948/recr/recr-portrait.css" rel="stylesheet" type="text/css">
+	<link media="(orientation: landscape)" href="styles/2003210948/recr/recr-landscape.css" rel="stylesheet" type="text/css">
 	<style>
 		html {
 			background: black;
@@ -24,7 +26,13 @@
 		
 		<h2 id="subtitle">공개모집 계산기</h2>
 		
-		<form id="tag-top" class="qualification_tag">
+		<form id="tag-top" class="selection-panel">
+			<!--
+			<div>
+				<input type="text" id="tagSearchBar" class="tag-search-bar" placeholder="띄어쓰기로 구분하여 여러 태그 검색 및 선택">
+			</div>
+			<hr>
+			-->
 			<div>
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.0" class="checkboxTag">
 				<label for="tag.0"><span>신입</span></label>
@@ -117,13 +125,14 @@
 				<label for="tag.13"><span>힐링</span></label>
 				
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.14" class="checkboxTag">
-				<label for="tag.14"><span>서포트</span></label>
+				<label for="tag.14"><span>지원</span></label>
 				
 				<input onclick="tagClicked(this)" type="checkbox" id="tag.27" class="checkboxTag">
 				<label for="tag.27"><span>로봇</span></label>
 				
 			</div>
 		</form>
+		<!--</div>-->
 		
 		<div align="center" id="selection-panel-footer-btn">
 			<button onclick="clearSelection()">태그 초기화</button>
@@ -144,16 +153,70 @@
 				일부 데이터 제공: <a href='http://ak.mooncell.wiki'>ak.mooncell.wiki</a>
 			</p>
 		</div>
+		<img class="menu-btn" src="./images/button/menu_white.png">
 		
+		<div class="modal" id="config-modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close-btn">×</span><br>
+				</div>
+				
+				<div class="modal-body">
+					<hr style="border-color: white">
+					표시 설정<br>
+					<br>
+					이미지<br>
+					<input type="radio" name="display_img" id="display_img_none" class="checkboxTag">
+					<label for="display_img_none"><span>없음</span></label>
+					<input type="radio" name="display_img" id="display_img_tiny" class="checkboxTag">
+					<label for="display_img_tiny"><span>매우 작게</span></label>
+					<input type="radio" name="display_img" id="display_img_small" class="checkboxTag">
+					<label for="display_img_small"><span>작게</span></label>
+					<input type="radio" name="display_img" id="display_img_medium" class="checkboxTag">
+					<label for="display_img_medium"><span>중간</span></label>
+					<input type="radio" name="display_img" id="display_img_large" class="checkboxTag">
+					<label for="display_img_large"><span>크게</span></label><br>
+					<br>
+					이름<br>
+					<input type="radio" name="display_name" id="display_name_true" class="checkboxTag">
+					<label for="display_name_true"><span>표시</span></label>
+					<input type="radio" name="display_name" id="display_name_false" class="checkboxTag">
+					<label for="display_name_false"><span>비표시</span></label><br>
+					<br>
+					레어도<br>
+					<input type="radio" name="display_rarity" id="display_rarity_true" class="checkboxTag">
+					<label for="display_rarity_true"><span>표시</span></label>
+					<input type="radio" name="display_rarity" id="display_rarity_false" class="checkboxTag">
+					<label for="display_rarity_false"><span>비표시</span></label><br>
+					<br>
+					<hr style="border-color: white">
+					필터 설정<br>
+					<br>
+					오퍼레이터 레어도별 표시여부<br>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_1" class="checkboxTag">
+					<label for="filter_rarity_1"><span>1성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_2" class="checkboxTag">
+					<label for="filter_rarity_2"><span>2성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_3" class="checkboxTag">
+					<label for="filter_rarity_3"><span>3성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_4" class="checkboxTag">
+					<label for="filter_rarity_4"><span>4성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_5" class="checkboxTag">
+					<label for="filter_rarity_5"><span>5성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_6" class="checkboxTag">
+					<label for="filter_rarity_6"><span>6성</span></label>
+				</div>
+			</div>
+		</div>
 	<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-	<script src="scripts/2003010821/recr/data.js"></script>
-	<script src="scripts/2003010821/recr/utilFuncs.js"></script>
-	<script src="scripts/2003010821/recr/checkboxManager.js"></script>
-	<script src="scripts/2003010821/recr/showResult.js"></script>
-	<script src="scripts/2003010821/recr/calc.js"></script>
-	<script src="scripts/2003010821/recr/showToolTip.js"></script>
-	
+	<script src="data/data_0318.js"></script>
+	<script src="scripts/2003210948/recr/utilFuncs.js"></script>
+	<script src="scripts/2003210948/recr/checkboxManager.js"></script>
+	<script src="scripts/2003210948/recr/showResult.js"></script>
+	<script src="scripts/2003210948/recr/calc.js"></script>
+	<script src="scripts/2003210948/recr/showToolTip.js"></script>
+	<script src="scripts/2003210948/recr/modalPrompt.js"></script>
 	</body>
 </html>
