@@ -1,0 +1,1 @@
+var makeQueryString=function(a){for(var c="",b=0;b<Object.keys(a).length;b++)c+=String(Object.keys(a)[b])+"="+String(a[Object.keys(a)[b]]),b<Object.keys(a).length-1&&(c+="&");return c};

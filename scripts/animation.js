@@ -1,1 +1,0 @@
-window.animateLines=function(d,b){var c=d.childNodes,a=0;setTimeout(function e(){a>=c.length||(c[a].style.display="inline",setTimeout(e,b),a++)},b)};

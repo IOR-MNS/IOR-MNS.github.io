@@ -1,0 +1,111 @@
+.item-container {
+	margin-top: 0;
+	margin-bottom: 5px;
+	width: 100%;
+	max-width: 896px;
+	text-align: left;
+	background-color: #999;
+}
+
+.item {
+	line-height: 1.1;
+	color: black;
+	display: inline-block;
+	padding: 0;
+	
+	font-family: 'Noto Sans KR';
+	/*font-size: 0; /20px;*/
+	font-size: 20px;
+	/*width: 100px;*/
+	border-radius: 0;
+	background-color: #fff;
+}
+
+/* 상하여백: 5픽셀 고정 */
+/* 좌우여백: 최소 2픽셀, 최대 5픽셀 */
+
+@media screen and (max-width: 318px) {
+	.item {
+		margin: 5px 2px;
+	}
+}
+@media screen and (max-width: 336px) {
+	.item {
+		margin: 5px calc((100vw - (102px * 3)) / 6);
+	}
+}
+@media screen and (min-width: 337px) {
+	.item {
+		margin: 5px 5px;
+	}
+}
+
+.item_body {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 2px;
+	
+	width: 100px;
+	height: 50px;
+	border-radius: 1px;
+}
+
+.item_thumb {
+	display: inline-block;
+	position: relative;
+	
+	margin: 0;
+	padding: 0;
+	
+	width: 100px;
+	height: 100px;
+	
+	border-radius: 0;
+	
+	background-color: #444;
+	color: white;
+	
+	text-align: center;
+}
+
+.item_thumb_name {
+	display: inline-block; 
+	position: absolute; 
+	top: 0; left: 0; 
+	
+	padding: 3px;
+	
+	font-family:'Noto Sans KR', sans-serif; 
+	font-size: 15px;
+	
+	word-break: keep-all; 
+	text-align: left; 
+	
+	background-color: rgba(0, 0, 0, 0.6); 
+	
+	border-radius: 0;
+}
+
+.item_thumb_quantity {
+	position: absolute;
+	bottom: 0; right: 0; 
+	
+	padding-left: 3px; 
+	padding-right: 3px;
+	
+	min-width: 20px;
+	
+	font-family:'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	font-weight: 500; 
+	text-align: center;
+	
+	color: white;
+	background-color: black; 
+	
+	border-radius: 0;
+	border-top-left-radius: 5px;
+}
+
