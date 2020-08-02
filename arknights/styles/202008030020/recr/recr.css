@@ -65,10 +65,31 @@ hr {
 	padding: 0;
 }
 
-.tag-search-bar {
-	width: 100%;
+.tagBatchSelector {
+	width: calc(100% - 0.5em); /* main.css에서 form의 padding은 0.5em */
 	font-family: 'Noto Sans KR', sans-serif;
 	color: #eee;
 	background-color: #000;
 	border: 1px solid #333;
+}
+
+
+.checkboxTag.blink:not(:checked) + label {
+    animation: blinkTag 1.5s ease 0s infinite
+}
+
+
+@keyframes blinkTag {
+    0% {
+        border-color: rgba(51, 51, 51, 1)
+    }
+    50% {
+        border-color: rgba(199, 8, 8, 1)
+    }
+    85% {
+        border-color: rgba(199, 8, 8, 1)
+    }
+    100% {
+        border-color: rgba(51, 51, 51, 1)
+    }
 }

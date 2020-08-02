@@ -21,7 +21,7 @@ hr {
 	margin-top: 0.3em;
 }
 
-.tag-search-bar {
+.tagBatchSelector {
 	font-size: 2.2vmin;
 }
 
@@ -62,7 +62,7 @@ form {
 	padding-bottom: 0.7vmin;
 	padding-right: 1vmin;
 	padding-left: 1vmin;
-	border: 0.07em solid #333333;
+	border: 0.07em solid rgba(51, 51, 51, 1);
 	border-radius: 1vmin;
 	transition: border-color 0.2s ease, background-color 0.2s ease;
 	background-color: black;
