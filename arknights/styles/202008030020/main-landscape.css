@@ -17,7 +17,10 @@ button:active, .checkboxButton:not(:checked)+label:active {
 
 img.logo {
 	height: 100px;
-	width: auto;
+    width: auto;
+	/*width: 100px;
+    max-width: 1.7em;
+    height: auto;*/
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
