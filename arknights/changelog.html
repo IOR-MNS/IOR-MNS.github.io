@@ -13,19 +13,20 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi">
 		<title>MINASE</title>
-		<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700|Noto+Sans+KR:300,400,500|&display=swap&subset=korean" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|&display=swap&subset=korean" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
-		<link href="styles/202008030020/main.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/main-landscape.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/index/index-landscape.css" rel="stylesheet" type="text/css">
+        
+		<link href="styles/2008110038/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/2008110038/index/index.css" rel="stylesheet" type="text/css">
 		<style>
-			h1 {
+			.history-container {
 				font-family: 'Noto Sans KR', sans-serif;
+                font-size: 1rem;
 				font-weight: 400;
 				text-align: left;
 				word-break: keep-all;
 			}
-			h1 .bold {
+			.history-container .bold {
 				font-weight: 500;
 			}
 		</style>
@@ -35,8 +36,34 @@
 			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
 		</a>
 		<div align="center">
-		<div style="width: 80vw">
-<h1>
+<div class="history-container">
+
+<hr>
+<span class="bold">2020.08.11</span><br>
+<br>
+웹사이트 UI 개선<br>
+<span style="color: #bbb; font-size: 70%; line-height: 70%">
+- 모든 서비스의 UI를 전반적으로 개선<br>
+- 특히, 모바일 디바이스에서 키보드 사용 시 레이아웃이 망가지는 문제 해결<br>
+</span>
+<br>
+오퍼레이터 정보 업데이트<br>
+<span style="color: #bbb; font-size: 70%; line-height: 70%">
+-「니엔」이후 출시되는 오퍼레이터의 정보 업데이트<br>
+</span>
+<br>
+공개모집 계산기 편의성 개선<br>
+<span style="color: #bbb; font-size: 70%; line-height: 70%">
+- 일괄 선택기에서 Enter키를 누르면 포커스 해제 및 적절한 위치로 자동 스크롤<br>
+- 태그 초기화 시 자동으로 일괄 선택기에 포커스를 맞춰주는 기능 (기본값: 비활성화, 옵션에서 설정 가능)<br>
+</span>
+<br>
+오퍼레이터 자원 계산기 개선<br>
+<span style="color: #bbb; font-size: 70%; line-height: 70%">
+- 저장된 데이터가 많을 때 서비스 화면이 늦게 표시되는 문제 해결<br>
+</span>
+<br>
+
 <hr>
 <span class="bold">2020.08.03</span><br>
 <br>
@@ -47,13 +74,14 @@
 - 이 기능의 사용 여부는 설정 프롬프트에서 변경 가능<br>
 </span>
 <br>
+
 <hr>
 <span class="bold">2020.07.14</span><br>
 <br>
 오퍼레이터 자원 계산기 버그 픽스<br>
 <span style="color: #bbb; font-size: 70%; line-height: 70%">
-- 1스킬을 7레벨 초과로 설정하면, 다른 스킬의 목표 레벨까지 비정상적으로 제한되는 문제<br>
-- 특정 조건이 만족될 때, 데이터 로드 시 현재 스킬 레벨이 모두 1로 초기화되는 문제<br>
+- 1스킬을 7레벨 초과로 설정하면, 다른 스킬의 목표 레벨까지 비정상적으로 제한되는 문제 해결<br>
+- 특정 조건이 만족될 때, 데이터 로드 시 현재 스킬 레벨이 모두 1로 초기화되는 문제 해결<br>
 </span>
 <br>
 <hr>
@@ -61,8 +89,8 @@
 <br>
 웹사이트 버그 픽스<br>
 <span style="color: #bbb; font-size: 70%; line-height: 70%">
-- 일부 브라우저에서 글자가 까맣게 보이는 문제<br>
-- 일부 브라우저에서 화면 전환 애니메이션이 부드럽지 못한 문제<br>
+- 일부 브라우저에서 글자가 까맣게 보이는 문제 해결<br>
+- 일부 브라우저에서 화면 전환 애니메이션이 부드럽지 않은 문제 해결<br>
 </span>
 <br>
 <hr>
@@ -124,6 +152,7 @@
 <span style="color: #bbb; font-size: 70%; line-height: 70%">
 - 계산 결과에 정예화 비용까지 반영되었다는 점을 명확하게 안내하는 문구를 추가<br>
 </span>
+<br>
 <hr>
 <span class="bold">2020.02.21</span><br>
 <br>
@@ -143,10 +172,12 @@
 - 다른 조건이 바뀌어도 목표 레벨을 최대 레벨로 항상 유지하는 기능 추가<br>
 - 계산 결과 복사 기능 추가<br>
 </span>
+<br>
 <hr>
 <span class="bold">2020.02.09</span><br>
 <br>
 오퍼레이터 레벨링 계산기 서비스 공개<br>
+<br>
 <hr>
 <span class="bold">2020.01.31</span><br>
 <br>
@@ -157,6 +188,7 @@
 - 계산 결과에서 4성 이상 확정식만 필터링하는 기능 추가<br>
 - 각 오퍼레이터의 전체 태그를 툴팁으로 열람하는 기능 추가<br>
 </span>
+<br>
 <hr>
 <span class="bold">2020.01.30</span><br>
 <br>
@@ -165,13 +197,14 @@
 - 추천 태그조합 정렬 기준 개선<br>
 - 등급별 확정식에 대한 강조 표시<br>
 </span>
+<br>
 <hr>
 <span class="bold">2020.01.29</span><br>
 <br>
 공개모집 계산기 베타 서비스 공개<br>
+<br>
 <hr>
-</h1>
-		</div>
+</div>
 		</div>
 		<br>
 		
@@ -182,7 +215,7 @@
 		<br>
 		<div class="copyright">
 			<p>
-				Copyright © 2039 MINASE Inc. All Rights Reserved.
+				© 2020 MINASE
 			</p>
 		</div>
 

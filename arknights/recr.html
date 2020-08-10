@@ -13,135 +13,41 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>공개모집 계산기</title>
-		<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700|Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
 		<link href="images/favicon.ico" rel="shortcut icon">
-		<link href="styles/202008030020/main.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/main-landscape.css" rel="stylesheet" type="text/css">
-		
-		<link href="styles/202008030020/recr/recr.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: portrait)" href="styles/202008030020/recr/recr-portrait.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/recr/recr-landscape.css" rel="stylesheet" type="text/css">
+        
+		<link href="styles/2008110038/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/2008110038/recr/recr.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
 			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
 		</a>
 		
-		<h2 id="subtitle">공개모집 계산기</h2>
+		<h1 class="subtitle">공개모집 계산기</h1>
 		
-		<form id="tag-top" class="selection-panel">
+		<div id="tag-top" class="panel selection-panel">
 			<div id="tagBatchSelector-container">
 				<input type="text" id="tagBatchSelector" class="tagBatchSelector" placeholder="태그명의 첫 글자를 입력하세요 (예: 뱅감디제코)">
-			<hr>
+            <hr>
             </div>
-			<div>
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.0" class="checkboxTag">
-				<label for="tag.0"><span>신입</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.1" class="checkboxTag">
-				<label for="tag.1"><span>특별채용</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.2" class="checkboxTag">
-				<label for="tag.2"><span>고급특별채용</span></label>
-			</div>
+			<div id="selection-panel-qualification"></div>
 			<hr>
-			<div>
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.3" class="checkboxTag">
-				<label for="tag.3"><span>근거리</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.4" class="checkboxTag">
-				<label for="tag.4"><span>원거리</span></label>
-			</div>
+			<div id="selection-panel-range"></div>
 			<hr>
-			<div>
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.5" class="checkboxTag">
-				<label for="tag.5"><span>뱅가드</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.6" class="checkboxTag">
-				<label for="tag.6"><span>가드</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.7" class="checkboxTag">
-				<label for="tag.7"><span>디펜더</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.8" class="checkboxTag">
-				<label for="tag.8"><span>스나이퍼</span></label>
-				
-				<br>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.9" class="checkboxTag">
-				<label for="tag.9"><span>캐스터</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.10" class="checkboxTag">
-				<label for="tag.10"><span>메딕</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.11" class="checkboxTag">
-				<label for="tag.11"><span>서포터</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.12" class="checkboxTag">
-				<label for="tag.12"><span>스페셜리스트</span></label>
-			</div>
+			<div id="selection-panel-class"></div>
 			<hr>
-			<div>
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.17" class="checkboxTag">
-				<label for="tag.17"><span>감속</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.21" class="checkboxTag">
-				<label for="tag.21"><span>강제이동</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.20" class="checkboxTag">
-				<label for="tag.20"><span>디버프</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.22" class="checkboxTag">
-				<label for="tag.22"><span>제어형</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.24" class="checkboxTag">
-				<label for="tag.24"><span>소환</span></label>
-				
-				<br>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.15" class="checkboxTag">
-				<label for="tag.15"><span>딜러</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.16" class="checkboxTag">
-				<label for="tag.16"><span>범위공격</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.23" class="checkboxTag">
-				<label for="tag.23"><span>누커</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.26" class="checkboxTag">
-				<label for="tag.26"><span>코스트+</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.25" class="checkboxTag">
-				<label for="tag.25"><span>쾌속부활</span></label>
-				
-				<br>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.19" class="checkboxTag">
-				<label for="tag.19"><span>방어형</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.18" class="checkboxTag">
-				<label for="tag.18"><span>생존형</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.13" class="checkboxTag">
-				<label for="tag.13"><span>힐링</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.14" class="checkboxTag">
-				<label for="tag.14"><span>지원</span></label>
-				
-				<input onclick="tagClicked(this)" type="checkbox" id="tag.27" class="checkboxTag">
-				<label for="tag.27"><span>로봇</span></label>
-				
-			</div>
-		</form>
-		<!--</div>-->
+			<div id="selection-panel-property"></div>
+		</div>
 		
 		<div align="center" id="selection-panel-footer-btn">
 			<button onclick="clearSelection()">태그 초기화</button>
 			<input onclick="filterClicked('onlyHighStars')" type="checkbox" id="selection-panel-footer-ohsf" class="checkboxButton">
-			<label for="selection-panel-footer-ohsf"><span>고등급 확정식만</span></label>
+			<label class="button" for="selection-panel-footer-ohsf"><span>고등급 확정식만</span></label>
 		</div>
 		
-		<div id="result-panel"><form></form></div>
+		<div id="result-panel"><div class="panel"></div></div>
 		
 		<div align="center" id="result-panel-footer-btn"></div>
 		
@@ -151,7 +57,8 @@
 		<br>
 		<div class="copyright">
 			<p style="font-family: 'Noto Sans KR'">
-				일부 데이터 제공: <a href='http://ak.mooncell.wiki'>ak.mooncell.wiki</a>
+				데이터 제공:
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='http://prts.wiki'>prts.wiki</a>
 			</p>
 		</div>
 		<img class="menu-btn" src="./images/button/menu_white.png">
@@ -159,7 +66,7 @@
 		<div class="modal" id="config-modal">
 			<div class="modal-content">
 				<div class="modal-header">
-					<span class="close-btn">×</span><br>
+					<img class="close-btn" src="./images/button/close_white.png"><br><!--×-->
 				</div>
 				
 				<div class="modal-body">
@@ -167,68 +74,75 @@
                     입력 설정<br>
                     <br>
                     <span style="font-size: 80%"><span style="color: #bbb">: </span>일괄 선택기</span><br>
-					<input type="radio" name="use_batchSelector" id="use_batchSelector_true" class="checkboxTag">
-					<label for="use_batchSelector_true"><span>사용</span></label>
-					<input type="radio" name="use_batchSelector" id="use_batchSelector_false" class="checkboxTag">
-					<label for="use_batchSelector_false"><span>미사용</span></label><br>
+					<input type="radio" name="use_batchSelector" id="use_batchSelector_true" class="checkboxButton">
+					<label class="tag" for="use_batchSelector_true"><span>사용</span></label>
+					<input type="radio" name="use_batchSelector" id="use_batchSelector_false" class="checkboxButton">
+					<label class="tag" for="use_batchSelector_false"><span>미사용</span></label><br>
+					<br>
+                    <span style="font-size: 80%"><span style="color: #bbb">: </span>자동 포커스 <span style="color: #777">(태그 초기화 후)</span></span><br>
+					<input type="radio" name="autoFocus_batchSelector" id="autoFocus_batchSelector_true" class="checkboxButton">
+					<label class="tag" for="autoFocus_batchSelector_true"><span>사용</span></label>
+					<input type="radio" name="autoFocus_batchSelector" id="autoFocus_batchSelector_false" class="checkboxButton">
+					<label class="tag" for="autoFocus_batchSelector_false"><span>미사용</span></label><br>
 					<br>
                     <hr style="border-color: white">
 					표시 설정<br>
 					<br>
 					<span style="font-size: 80%"><span style="color: #bbb">: </span>이미지</span><br>
-					<input type="radio" name="display_img" id="display_img_none" class="checkboxTag">
-					<label for="display_img_none"><span>없음</span></label>
-					<input type="radio" name="display_img" id="display_img_tiny" class="checkboxTag">
-					<label for="display_img_tiny"><span>매우 작게</span></label>
-					<input type="radio" name="display_img" id="display_img_small" class="checkboxTag">
-					<label for="display_img_small"><span>작게</span></label>
-					<input type="radio" name="display_img" id="display_img_medium" class="checkboxTag">
-					<label for="display_img_medium"><span>중간</span></label>
-					<input type="radio" name="display_img" id="display_img_large" class="checkboxTag">
-					<label for="display_img_large"><span>크게</span></label><br>
+					<input type="radio" name="display_img" id="display_img_none" class="checkboxButton">
+					<label class="tag" for="display_img_none"><span>없음</span></label>
+					<input type="radio" name="display_img" id="display_img_tiny" class="checkboxButton">
+					<label class="tag" for="display_img_tiny"><span>매우 작게</span></label>
+					<input type="radio" name="display_img" id="display_img_small" class="checkboxButton">
+					<label class="tag" for="display_img_small"><span>작게</span></label>
+					<input type="radio" name="display_img" id="display_img_medium" class="checkboxButton">
+					<label class="tag" for="display_img_medium"><span>중간</span></label>
+					<input type="radio" name="display_img" id="display_img_large" class="checkboxButton">
+					<label class="tag" for="display_img_large"><span>크게</span></label><br>
 					<br>
 					<span style="font-size: 80%"><span style="color: #bbb">: </span>이름</span><br>
-					<input type="radio" name="display_name" id="display_name_true" class="checkboxTag">
-					<label for="display_name_true"><span>표시</span></label>
-					<input type="radio" name="display_name" id="display_name_false" class="checkboxTag">
-					<label for="display_name_false"><span>비표시</span></label><br>
+					<input type="radio" name="display_name" id="display_name_true" class="checkboxButton">
+					<label class="tag" for="display_name_true"><span>표시</span></label>
+					<input type="radio" name="display_name" id="display_name_false" class="checkboxButton">
+					<label class="tag" for="display_name_false"><span>비표시</span></label><br>
 					<br>
 					<span style="font-size: 80%"><span style="color: #bbb">: </span>레어도</span><br>
-					<input type="radio" name="display_rarity" id="display_rarity_true" class="checkboxTag">
-					<label for="display_rarity_true"><span>표시</span></label>
-					<input type="radio" name="display_rarity" id="display_rarity_false" class="checkboxTag">
-					<label for="display_rarity_false"><span>비표시</span></label><br>
+					<input type="radio" name="display_rarity" id="display_rarity_true" class="checkboxButton">
+					<label class="tag" for="display_rarity_true"><span>표시</span></label>
+					<input type="radio" name="display_rarity" id="display_rarity_false" class="checkboxButton">
+					<label class="tag" for="display_rarity_false"><span>비표시</span></label><br>
 					<br>
 					<hr style="border-color: white">
 					필터 설정<br>
 					<br>
 					<span style="font-size: 80%"><span style="color: #bbb">: </span>오퍼레이터 레어도별 표시여부</span><br>
-					<input type="checkbox" name="filter_rarity" id="filter_rarity_1" class="checkboxTag">
-					<label for="filter_rarity_1"><span>1성</span></label>
-					<input type="checkbox" name="filter_rarity" id="filter_rarity_2" class="checkboxTag">
-					<label for="filter_rarity_2"><span>2성</span></label>
-					<input type="checkbox" name="filter_rarity" id="filter_rarity_3" class="checkboxTag">
-					<label for="filter_rarity_3"><span>3성</span></label>
-					<input type="checkbox" name="filter_rarity" id="filter_rarity_4" class="checkboxTag">
-					<label for="filter_rarity_4"><span>4성</span></label>
-					<input type="checkbox" name="filter_rarity" id="filter_rarity_5" class="checkboxTag">
-					<label for="filter_rarity_5"><span>5성</span></label>
-					<input type="checkbox" name="filter_rarity" id="filter_rarity_6" class="checkboxTag">
-					<label for="filter_rarity_6"><span>6성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_1" class="checkboxButton">
+					<label class="tag" for="filter_rarity_1"><span>1성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_2" class="checkboxButton">
+					<label class="tag" for="filter_rarity_2"><span>2성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_3" class="checkboxButton">
+					<label class="tag" for="filter_rarity_3"><span>3성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_4" class="checkboxButton">
+					<label class="tag" for="filter_rarity_4"><span>4성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_5" class="checkboxButton">
+					<label class="tag" for="filter_rarity_5"><span>5성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_6" class="checkboxButton">
+					<label class="tag" for="filter_rarity_6"><span>6성</span></label>
 				</div>
 			</div>
 		</div>
-	<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-	<script>window.onload = function () { document.body.className += " loaded" }</script>
-	<script src="data/data_0713.js"></script>
-	<script src="scripts/202008030020/recr/utilFuncs.js"></script>
-	<script src="scripts/202008030020/recr/checkboxManager.js"></script>
-	<script src="scripts/202008030020/recr/showResult.js"></script>
-	<script src="scripts/202008030020/recr/calc.js"></script>
-	<script src="scripts/202008030020/recr/showToolTip.js"></script>
-	<script src="scripts/202008030020/recr/modalPrompt.js"></script>
-	<script src="scripts/202008030020/recr/tagBatchSelector.js"></script>
+    <script>window.onload=function(){document.body.className+=" loaded"}</script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="data/tag_200807.js"></script>
+    <script src="scripts/2008110038/recr/loadRecr.js"></script>
+    <script src="data/op_200807.js"></script>
+    <script src="scripts/2008110038/recr/utilFuncs.js"></script>
+	<script src="scripts/2008110038/recr/checkboxManager.js"></script>
+	<script src="scripts/2008110038/recr/showResult.js"></script>
+	<script src="scripts/2008110038/recr/calc.js"></script>
+	<script src="scripts/2008110038/recr/showToolTip.js"></script>
+	<script src="scripts/2008110038/recr/modalPrompt.js"></script>
+	<script src="scripts/2008110038/recr/tagBatchSelector.js"></script>
 	</body>
 </html>

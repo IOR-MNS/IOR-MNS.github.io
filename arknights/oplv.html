@@ -13,74 +13,89 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi">
 		<title>오퍼레이터 레벨링 계산기</title>
-		<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700|Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
-		<link href="styles/202008030020/main.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/main-landscape.css" rel="stylesheet" type="text/css">
-		<link href="styles/202008030020/oplv/oplv.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: portrait)" href="styles/202008030020/oplv/oplv-portrait.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/oplv/oplv-landscape.css" rel="stylesheet" type="text/css">
+        
+		<link href="styles/2008110038/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/2008110038/oplv/oplv.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
 			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
 		</a>
 		
-		<h2 id="subtitle">오퍼레이터 레벨링 계산기</h2>
-		
-		<br>
+		<p class="subtitle">오퍼레이터 레벨링 계산기</p>
 		
 		<div style="text-align: center; font-size: 4vmin;">
-			<button type="button" onclick="btnClicked(this)" class="leveling_show-detail-info-panel-btn" name="show-detail-info-panel-btn">상세 정보 입력란 보이기</button>
+			<button type="button" onclick="btnClicked(this)" class="show-detail-info-panel-btn" name="show-detail-info-panel-btn">상세 정보 입력란 보이기</button>
 			
-			<button type="button" onclick="btnClicked(this)" class="leveling_hide-detail-info-panel-btn" name="hide-detail-info-panel-btn" style="display: none">상세 정보 입력란 숨기기</button>
+			<button type="button" onclick="btnClicked(this)" class="hide-detail-info-panel-btn" name="hide-detail-info-panel-btn" style="display: none">상세 정보 입력란 숨기기</button>
 		</div>
 		
-		<div id="leveling_detail-info-panel" style="display: none">
-			<form class="leveling_input-panel" style="background-color: #222">
+		<div id="detail-info-panel" style="display: none">
+			<div class="panel input-panel" style="background-color: #222">
 				<br>
-				<div class="leveling_input-panel-subtitle">
+				<div class="input-panel-subtitle">
 					보유한 자원
 				</div>
 				
-				<hr>
+				<hr class="dotted">
 				
-				<div align="justify">
+				<div style="display: flex; justify-content: space-evenly; align-items: center">
+					<div>
+                        <div style="padding: 0.4rem 0">
+                            <div style="display: inline-block; text-align: center">
+                                <img src="images/item/expCard/tier1.png" alt="기초작전기록" class="item exp-card">
+                                <br>
+                                <input type="text" id="resource_expCard_tier1" class="exp-card detail-info-field" placeholder="0">
+                            </div>
+                            
+                            <div style="display: inline-block; text-align: center">
+                                <img src="images/item/expCard/tier2.png" alt="초급작전기록" class="item exp-card">
+                                <br>
+                                <input type="text" id="resource_expCard_tier2" class="exp-card detail-info-field" placeholder="0">
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 0.4rem 0">
+                            <div style="display: inline-block; text-align: center">
+                                <img src="images/item/expCard/tier3.png" alt="중급작전기록" class="item exp-card">
+                                <br>
+                                <input type="text" id="resource_expCard_tier3" class="exp-card detail-info-field" placeholder="0">
+                            </div>
+                            
+                            <div style="display: inline-block; text-align: center">
+                                <img src="images/item/expCard/tier4.png" alt="고급작전기록" class="item exp-card">
+                                <br>
+                                <input type="text" id="resource_expCard_tier4" class="exp-card detail-info-field" placeholder="0">
+                            </div>
+                        </div>
+					</div>
 					
-					<img src="images/item/expCard/tier1.png" alt="기초작전기록" class="item exp-card">
-					<input type="text" id="resource_expCard_tier1" class="exp-card leveling_detail-info-field" placeholder="0">
-					
-					<img src="images/item/expCard/tier2.png" alt="초급작전기록" class="item exp-card">
-					<input type="text" id="resource_expCard_tier2" class="exp-card leveling_detail-info-field" placeholder="0">
-					
-					<img src="images/item/expCard/tier3.png" alt="중급작전기록" class="item exp-card">
-					<input type="text" id="resource_expCard_tier3" class="exp-card leveling_detail-info-field" placeholder="0">
-					
-					<img src="images/item/expCard/tier4.png" alt="고급작전기록" class="item exp-card">
-					<input type="text" id="resource_expCard_tier4" class="exp-card leveling_detail-info-field" placeholder="0">
-					
-					<br>
-					<br>
-					
-					<img src="images/item/lmd/lmd.png" alt="용문폐" class="item lmd">
-					<input type="text" id="resource_lmd" class="lmd leveling_detail-info-field" placeholder="0">
+                    <div class="vr dotted" style="height: 9em"></div>
+                    
+                    <div style="display: inline-block; text-align: center">
+                        <img src="images/item/lmd/lmd.png" alt="용문폐" class="item lmd">
+                        <br>
+                        <input type="text" id="resource_lmd" class="lmd detail-info-field" placeholder="0">
+                    </div>
 					
 				</div>
 				<br>
-			</form>
+			</div>
 			
-			<form class="leveling_input-panel" style="background-color: #222">
+			<div class="panel input-panel" style="background-color: #222">
 				
 				<br>
-				<div class="leveling_input-panel-subtitle">
+				<div class="input-panel-subtitle">
 					자원 획득처
 				</div>
 				
-				<hr>
+				<hr class="dotted">
 				
 				<div align="center">
 					경험치 카드
-					<select id="stage_exp" class="leveling_input-select leveling_detail-info-field">
+					<select id="stage_exp" class="input-select detail-info-field">
 						<option value="LS-5" selected>LS-5</option>
 						<option value="LS-4">LS-4</option>
 						<option value="LS-3">LS-3</option>
@@ -91,7 +106,7 @@
 				<br>
 				<div align="center">
 					용문폐
-					<select id="stage_lmd" class="leveling_input-select leveling_detail-info-field">
+					<select id="stage_lmd" class="input-select detail-info-field">
 						<option value="CE-5" selected>CE-5</option>
 						<option value="CE-4">CE-4</option>
 						<option value="CE-3">CE-3</option>
@@ -100,25 +115,25 @@
 					</select>
 				</div>
 				<br>
-			</form>
+			</div>
 			
 			<div style="text-align: center; font-size: 4vmin;">
-				<button type="button" onclick="btnClicked(this)" class="leveling_hide-detail-info-panel-btn" name="hide-detail-info-panel-btn" style="display: none">상세 정보 입력란 숨기기</button>
+				<button type="button" onclick="btnClicked(this)" class="hide-detail-info-panel-btn" name="hide-detail-info-panel-btn" style="display: none">상세 정보 입력란 숨기기</button>
 			</div>
 		</div>
 		
 		<br>
 		
-		<form class="leveling_input-panel">
+		<div class="panel input-panel">
 			<br>
-			<div class="leveling_input-panel-subtitle">
+			<div class="input-panel-subtitle">
 			현재
 			</div>
 			
-			<hr>
+			<hr class="dotted">
 			
 			<div align="center">
-				<select id="rarity" class="leveling_input-select"> <!--style="position: relative; right: 1em;"-->
+				<select id="rarity" class="input-select"> <!--style="position: relative; right: 1em;"-->
 					<option value="6" selected>★ 6</option>
 					<option value="5">★ 5</option>
 					<option value="4">★ 4</option>
@@ -126,12 +141,12 @@
 					<option value="2">★ 2</option>
 					<option value="1">★ 1</option>
 				</select>
-				<!--<button type="button" onclick="btnClicked(this)" class="leveling_fix-current-level-to-max-btn" name="fix-current-level-to-max-btn" style="position: relative; left: 3em;">
+				<!--<button type="button" onclick="btnClicked(this)" class="fix-current-level-to-max-btn" name="fix-current-level-to-max-btn" style="position: relative; left: 3em;">
 				최대 레벨로 고정
 				</button>-->
 				<br>
 				정예화
-				<select id="from_elite" class="leveling_input-select">
+				<select id="from_elite" class="input-select">
 					<option value="0" selected>0단계</option>
 					<option value="1">1단계</option>
 					<option value="2">2단계</option>
@@ -140,23 +155,23 @@
 				<input type="text" id="from_level" class="number level" placeholder="1">레벨 (<input type="text" id="from_exp" class="number exp" placeholder="0">)
 			</div>
 			<br>
-		</form>
+		</div>
 		<div align="center">▼</div>
-		<form class="leveling_input-panel">
+		<div class="panel input-panel">
 		<br>
-			<div class="leveling_input-panel-subtitle">
+			<div class="input-panel-subtitle">
 			목표
 			</div>
 			
-			<hr>
+			<hr class="dotted">
 			
 			<div id="selectedOp" align="center">
-				<button type="button" onclick="btnClicked(this)" class="leveling_fix-target-level-to-max-btn" name="fix-target-level-to-max-btn" style="position: relative; left: 4.4em;">
+				<button type="button" onclick="btnClicked(this)" class="fix-target-level-to-max-btn" name="fix-target-level-to-max-btn">
 				최대 레벨로 고정
 				</button>
 				<br>
 				정예화
-				<select id="to_elite" class="leveling_input-select">
+				<select id="to_elite" class="input-select">
 					<option value="0" selected>0단계</option>
 					<option value="1">1단계</option>
 					<option value="2">2단계</option>
@@ -166,19 +181,16 @@
 				
 			</div>
 			<br>
-		</form>
+		</div>
 		
 		<div align="center">▼</div>
-		<!--<div align="center" style="font-size: 10vmin">=</div>-->
 		
-		<!--<div align="center"><button onclick="showResult()">계산</button></div>-->
-		
-		<div id="leveling_result-panel"><form></form></div>
+		<div id="result-panel"><div class="panel"></div></div>
 		
 		<br>
 		
 		<div align="center">
-			<button onclick="copyResult()">결과 복사하기</button>
+			<button onclick="copyResult(event)">결과 복사하기</button>
 		</div>
 		
 		<br>
@@ -191,16 +203,16 @@
 		
 		<div class="copyright">
 			<p style="font-family: 'Noto Sans KR'">
-				데이터 제공: <a href='http://ak.mooncell.wiki'>ak.mooncell.wiki</a>, <a href='https://namu.wiki'>namu.wiki</a>
+				데이터 제공:
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href="http://prts.wiki">prts.wiki</a>,
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href="https://namu.wiki">namu.wiki</a>
 			</p>
 		</div>
-	<div id="toast">토스트</div>
-	
-	<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<div class="toast"></div>
 	<script>window.onload = function () { document.body.className += " loaded" }</script>
-	<script src="data/levelingData_0713.js"></script>
-	<script src="scripts/202008030020/oplv/oplv.js"></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="data/leveling_200807.js"></script>
+	<script src="scripts/2008110038/oplv/oplv.js"></script>
 	</body>
 </html>

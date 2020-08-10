@@ -13,26 +13,24 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi">
 		<title>자원 관리/계산 β</title>
-		<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700|Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
-		<link href="styles/202008030020/main.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/main-landscape.css" rel="stylesheet" type="text/css">
-		<link href="styles/202008030020/mcalc/mcalc.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: portrait)" href="styles/202008030020/mcalc/mcalc-portrait.css" rel="stylesheet" type="text/css">
-		<link media="(orientation: landscape)" href="styles/202008030020/mcalc/mcalc-landscape.css" rel="stylesheet" type="text/css">
+        
+		<link href="styles/2008110038/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/2008110038/mcalc/mcalc.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
 			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
 		</a>
 		
-		<h2 id="subtitle">자원 관리 / 계산 β</h2>
+		<h2 class="subtitle">자원 관리 / 계산 β</h2>
 		<br>
 		
 		<div align="center">
-			<button type="button" name="toggleFilterOnlyLack" class="btn-function" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
+			<button type="button" name="toggleFilterOnlyLack" class="button square" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
 			<div class="item-container"></div>
-			<button type="button" name="toggleFilterOnlyLack" class="btn-function" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
+			<button type="button" name="toggleFilterOnlyLack" class="button square" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
 		</div>
 		
 		<br><br>
@@ -44,7 +42,8 @@
 		
 		<div class="copyright">
 			<p style="font-family: 'Noto Sans KR'">
-				데이터 제공: <a href='http://ak.mooncell.wiki'>ak.mooncell.wiki</a>
+				데이터 제공:
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='http://prts.wiki'>prts.wiki</a>
 			</p>
 		</div>
 		
@@ -53,59 +52,58 @@
 		<div class="modal" id="config-modal">
 			<div class="modal-content">
 				<div class="modal-header">
-					<span class="close-btn">×</span><br>
+					<img class="close-btn" src="./images/button/close_white.png"></span><br>
 				</div>
 				
 				<div class="modal-body">
 					<hr style="border-color: white">
 					표시 설정<br>
 					<br>
-					<input type="checkbox" name="display_name" id="display_name" class="checkboxBtn">
-					<label for="display_name"><span>이름</span></label>
-					<input type="checkbox" name="display_inputField" id="display_inputField" class="checkboxBtn">
-					<label for="display_inputField"><span>입력란</span></label><br>
+					<input type="checkbox" name="display_name" id="display_name" class="checkboxButton">
+					<label class="tag" for="display_name"><span>이름</span></label>
+					<input type="checkbox" name="display_inputField" id="display_inputField" class="checkboxButton">
+					<label class="tag" for="display_inputField"><span>입력란</span></label><br>
 					<br>
 					<hr style="border-color: white">
 					필터 설정<br>
 					<br>
-					<input type="checkbox" name="filter_grade" id="filter_grade_1" class="checkboxBtn">
-					<label for="filter_grade_1"><span>1성</span></label>
-					<input type="checkbox" name="filter_grade" id="filter_grade_2" class="checkboxBtn">
-					<label for="filter_grade_2"><span>2성</span></label>
-					<input type="checkbox" name="filter_grade" id="filter_grade_3" class="checkboxBtn">
-					<label for="filter_grade_3"><span>3성</span></label>
-					<input type="checkbox" name="filter_grade" id="filter_grade_4" class="checkboxBtn">
-					<label for="filter_grade_4"><span>4성</span></label>
-					<input type="checkbox" name="filter_grade" id="filter_grade_5" class="checkboxBtn">
-					<label for="filter_grade_5"><span>5성</span></label><br>
+					<input type="checkbox" name="filter_grade" id="filter_grade_1" class="checkboxButton">
+					<label class="tag" for="filter_grade_1"><span>1성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_2" class="checkboxButton">
+					<label class="tag" for="filter_grade_2"><span>2성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_3" class="checkboxButton">
+					<label class="tag" for="filter_grade_3"><span>3성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_4" class="checkboxButton">
+					<label class="tag" for="filter_grade_4"><span>4성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_5" class="checkboxButton">
+					<label class="tag" for="filter_grade_5"><span>5성</span></label><br>
 					
-					<input type="checkbox" name="filter_category" id="filter_category_0" class="checkboxBtn">
-					<label for="filter_category_0"><span>특수재료</span></label>
-					<input type="checkbox" name="filter_category" id="filter_category_1" class="checkboxBtn">
-					<label for="filter_category_1"><span>일반재료</span></label>
-					<input type="checkbox" name="filter_category" id="filter_category_2" class="checkboxBtn">
-					<label for="filter_category_2"><span>스킬개론</span></label>
-					<input type="checkbox" name="filter_category" id="filter_category_3" class="checkboxBtn">
-					<label for="filter_category_3"><span>칩류</span></label><br>
+					<input type="checkbox" name="filter_category" id="filter_category_0" class="checkboxButton">
+					<label class="tag" for="filter_category_0"><span>특수재료</span></label>
+					<input type="checkbox" name="filter_category" id="filter_category_1" class="checkboxButton">
+					<label class="tag" for="filter_category_1"><span>일반재료</span></label>
+					<input type="checkbox" name="filter_category" id="filter_category_2" class="checkboxButton">
+					<label class="tag" for="filter_category_2"><span>스킬개론</span></label>
+					<input type="checkbox" name="filter_category" id="filter_category_3" class="checkboxButton">
+					<label class="tag" for="filter_category_3"><span>칩류</span></label><br>
 					<br>
 					<hr style="border-color: white">
 					편의 기능<br>
 					<br>
-					<button type="button" class="btn-function caution" onclick="clearInputData()">모든 데이터 초기화</button>
-					<button type="button" class="btn-function" onclick="cutdownAllInputs()">보유량-필요량 정리</button>
-					<button type="button" name="toggleFilterOnlyLack" class="btn-function" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
+					<button type="button" class="button square caution" onclick="clearInputData()">모든 데이터 초기화</button>
+					<button type="button" class="button square" onclick="cutdownAllInputs()">보유량-필요량 정리</button>
+					<button type="button" class="button square" name="toggleFilterOnlyLack" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
 				</div>
 			</div>
 		</div>
-		
-	<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    
 	<script>window.onload = function () { document.body.className += " loaded" }</script>
-	<script src="data/itemData_0713.js"></script>
-	<script src="scripts/202008030020/mcalc/manageLocalStorage.js"></script>
-	<script src="scripts/202008030020/mcalc/mcalc.js"></script>
-	<script src="scripts/202008030020/mcalc/util.js"></script>
-	<script src="scripts/202008030020/mcalc/modalPrompt.js"></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="data/item_200807.js"></script>
+	<script src="scripts/2008110038/mcalc/manageLocalStorage.js"></script>
+	<script src="scripts/2008110038/mcalc/mcalc.js"></script>
+	<script src="scripts/2008110038/mcalc/util.js"></script>
+	<script src="scripts/2008110038/mcalc/modalPrompt.js"></script>
 	</body>
 </html>
