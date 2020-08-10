@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174914504-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-174914504-1');
+        </script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>공개모집 계산기</title>
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
+		<link href="images/favicon.ico" rel="shortcut icon">
+        
+		<link href="styles/202008102007/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202008102007/recr/recr.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<a href="index.html">
+			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
+		</a>
+		
+		<h1 class="subtitle">공개모집 계산기</h1>
+		
+		<div id="tag-top" class="panel selection-panel">
+			<div id="tagBatchSelector-container">
+				<input type="text" id="tagBatchSelector" class="tagBatchSelector" placeholder="태그명의 첫 글자를 입력하세요 (예: 뱅감디제코)">
+            <hr>
+            </div>
+			<div id="selection-panel-qualification"></div>
+			<hr>
+			<div id="selection-panel-range"></div>
+			<hr>
+			<div id="selection-panel-class"></div>
+			<hr>
+			<div id="selection-panel-property"></div>
+		</div>
+		
+		<div align="center" id="selection-panel-footer-btn">
+			<button onclick="clearSelection()">태그 초기화</button>
+			<input onclick="filterClicked('onlyHighStars')" type="checkbox" id="selection-panel-footer-ohsf" class="checkboxButton">
+			<label class="button" for="selection-panel-footer-ohsf"><span>고등급 확정식만</span></label>
+		</div>
+		
+		<div id="result-panel"><div class="panel"></div></div>
+		
+		<div align="center" id="result-panel-footer-btn"></div>
+		
+		<div align="center">
+			<button onclick="location.href='index.html'">메인 화면으로 돌아가기</button>
+		</div>
+		<br>
+		<div class="copyright">
+			<p style="font-family: 'Noto Sans KR'">
+				데이터 제공:
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='http://prts.wiki'>prts.wiki</a>
+			</p>
+		</div>
+		<img class="menu-btn" src="./images/button/menu_white.png">
+		
+		<div class="modal" id="config-modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="close-btn" src="./images/button/close_white.png"><br><!--×-->
+				</div>
+				
+				<div class="modal-body">
+					<hr style="border-color: white">
+                    입력 설정<br>
+                    <br>
+                    <span style="font-size: 80%"><span style="color: #bbb">: </span>일괄 선택기</span><br>
+					<input type="radio" name="use_batchSelector" id="use_batchSelector_true" class="checkboxButton">
+					<label class="tag" for="use_batchSelector_true"><span>사용</span></label>
+					<input type="radio" name="use_batchSelector" id="use_batchSelector_false" class="checkboxButton">
+					<label class="tag" for="use_batchSelector_false"><span>미사용</span></label><br>
+					<br>
+                    <hr style="border-color: white">
+					표시 설정<br>
+					<br>
+					<span style="font-size: 80%"><span style="color: #bbb">: </span>이미지</span><br>
+					<input type="radio" name="display_img" id="display_img_none" class="checkboxButton">
+					<label class="tag" for="display_img_none"><span>없음</span></label>
+					<input type="radio" name="display_img" id="display_img_tiny" class="checkboxButton">
+					<label class="tag" for="display_img_tiny"><span>매우 작게</span></label>
+					<input type="radio" name="display_img" id="display_img_small" class="checkboxButton">
+					<label class="tag" for="display_img_small"><span>작게</span></label>
+					<input type="radio" name="display_img" id="display_img_medium" class="checkboxButton">
+					<label class="tag" for="display_img_medium"><span>중간</span></label>
+					<input type="radio" name="display_img" id="display_img_large" class="checkboxButton">
+					<label class="tag" for="display_img_large"><span>크게</span></label><br>
+					<br>
+					<span style="font-size: 80%"><span style="color: #bbb">: </span>이름</span><br>
+					<input type="radio" name="display_name" id="display_name_true" class="checkboxButton">
+					<label class="tag" for="display_name_true"><span>표시</span></label>
+					<input type="radio" name="display_name" id="display_name_false" class="checkboxButton">
+					<label class="tag" for="display_name_false"><span>비표시</span></label><br>
+					<br>
+					<span style="font-size: 80%"><span style="color: #bbb">: </span>레어도</span><br>
+					<input type="radio" name="display_rarity" id="display_rarity_true" class="checkboxButton">
+					<label class="tag" for="display_rarity_true"><span>표시</span></label>
+					<input type="radio" name="display_rarity" id="display_rarity_false" class="checkboxButton">
+					<label class="tag" for="display_rarity_false"><span>비표시</span></label><br>
+					<br>
+					<hr style="border-color: white">
+					필터 설정<br>
+					<br>
+					<span style="font-size: 80%"><span style="color: #bbb">: </span>오퍼레이터 레어도별 표시여부</span><br>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_1" class="checkboxButton">
+					<label class="tag" for="filter_rarity_1"><span>1성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_2" class="checkboxButton">
+					<label class="tag" for="filter_rarity_2"><span>2성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_3" class="checkboxButton">
+					<label class="tag" for="filter_rarity_3"><span>3성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_4" class="checkboxButton">
+					<label class="tag" for="filter_rarity_4"><span>4성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_5" class="checkboxButton">
+					<label class="tag" for="filter_rarity_5"><span>5성</span></label>
+					<input type="checkbox" name="filter_rarity" id="filter_rarity_6" class="checkboxButton">
+					<label class="tag" for="filter_rarity_6"><span>6성</span></label>
+				</div>
+			</div>
+		</div>
+    <script>window.onload=function(){document.body.className+=" loaded"}</script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="data/tag_200807.js"></script>
+    <script src="scripts/202008102007/recr/loadRecr.js"></script>
+    <script src="data/op_200807.js"></script>
+    <script src="scripts/202008102007/recr/utilFuncs.js"></script>
+	<script src="scripts/202008102007/recr/checkboxManager.js"></script>
+	<script src="scripts/202008102007/recr/showResult.js"></script>
+	<script src="scripts/202008102007/recr/calc.js"></script>
+	<script src="scripts/202008102007/recr/showToolTip.js"></script>
+	<script src="scripts/202008102007/recr/modalPrompt.js"></script>
+	<script src="scripts/202008102007/recr/tagBatchSelector.js"></script>
+	</body>
+</html>
