@@ -16,14 +16,14 @@
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/2008110038/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/2008110038/oplv/oplv.css" rel="stylesheet" type="text/css">
+		<link href="styles/202008190306/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202008190306/oplv/oplv.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
 			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
 		</a>
-		
+    <div id="content-body">
 		<p class="subtitle">오퍼레이터 레벨링 계산기</p>
 		
 		<div style="text-align: center; font-size: 4vmin;">
@@ -41,7 +41,7 @@
 				
 				<hr class="dotted">
 				
-				<div style="display: flex; justify-content: space-evenly; align-items: center">
+				<div style="display: flex; justify-content: space-around; align-items: center">
 					<div>
                         <div style="padding: 0.4rem 0">
                             <div style="display: inline-block; text-align: center">
@@ -152,7 +152,7 @@
 					<option value="2">2단계</option>
 				</select>
 				
-				<input type="text" id="from_level" class="number level" placeholder="1">레벨 (<input type="text" id="from_exp" class="number exp" placeholder="0">)
+				<input type="text" id="from_level" class="number level" placeholder="1">레벨 (<input type="text" id="from_exp" class="number exp" placeholder="Exp.">)
 			</div>
 			<br>
 		</div>
@@ -177,7 +177,7 @@
 					<option value="2">2단계</option>
 				</select>
 				
-				<input type="text" id="to_level" class="number level" placeholder="1">레벨 (<input disabled type="text" id="to_exp" class="number exp" placeholder="0">)
+				<input type="text" id="to_level" class="number level" placeholder="1">레벨 (<input disabled type="text" id="to_exp" class="number exp" placeholder="Exp.">)
 				
 			</div>
 			<br>
@@ -198,21 +198,27 @@
 		<div align="center">
 			<button onclick="location.href='index.html'">메인 화면으로 돌아가기</button>
 		</div>
-		
+    </div>
 		<br>
 		
 		<div class="copyright">
 			<p style="font-family: 'Noto Sans KR'">
+                오류 제보:
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/izgnA9vs9Z1WRGQXA'>Google Forms</a><br>
+                <br>
+                건의 사항:
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/y6KJnM2W9hJBbBuY7'>Google Forms</a><br>
+                <br>
+                <br>
 				데이터 제공:
-                <a class="external-link" target="_blank" rel="noopener noreferrer" href="http://prts.wiki">prts.wiki</a>,
-                <a class="external-link" target="_blank" rel="noopener noreferrer" href="https://namu.wiki">namu.wiki</a>
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='http://prts.wiki'>prts.wiki</a><br>
 			</p>
 		</div>
 	<div class="toast"></div>
-	<script>window.onload = function () { document.body.className += " loaded" }</script>
+	<script>if(window.navigator.userAgent.match(/MSIE|Trident/)!==null){if(localStorage.getItem('doNotShowIEAlert')!='true'){alert('불편을 끼쳐드려 대단히 죄송합니다!\n\n보다 많은 사용자에게 더욱 좋은 경험을 제공하기 위해\n인터넷 익스플로러에 대한 지원이 중단되었습니다.\n\n원활한 이용을 위하여 크롬, 파이어폭스, 엣지 등의 최신 브라우저로 접속해주시기 바랍니다.\n\n만약 Windows 10을 이용하고 계신다면 엣지(Edge)가 기본 설치되어 있으니 이용에 참고하여 주십시오.');localStorage.setItem('doNotShowIEAlert','true')}};window.onload=function(){document.getElementById('content-body').classList.add("loaded")}</script>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="data/leveling_200807.js"></script>
-	<script src="scripts/2008110038/oplv/oplv.js"></script>
+	<script src="scripts/202008190306/oplv/oplv.js"></script>
 	</body>
 </html>
