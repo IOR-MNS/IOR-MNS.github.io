@@ -19,8 +19,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:700&display=swap&subset=korean" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202012110333/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202012110333/index/index.css" rel="stylesheet" type="text/css">
+		<link href="styles/202012120750/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202012120750/index/index.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
@@ -42,6 +42,8 @@
 		<a class="serviceLink" href="mcalc.html">재료 계산기</a>
         <hr>
 		<a class="serviceLink" href="mcalc-legacy.html">기존 재료 계산기</a>
+        <hr>
+		<a class="serviceLink historyLink" id="data-migration">데이터 내보내기 / 불러오기</a>
 		<hr>
 		<a class="serviceLink historyLink" href="changelog.html">서비스 업데이트 내역</a>
 		</div>
@@ -63,5 +65,7 @@
         <!--Copyright 2020 MINASE Inc. All Rights Reserved.-->
         
         <script>if(window.navigator.userAgent.match(/MSIE|Trident/)!==null){if(localStorage.getItem('doNotShowIEAlert')!='true'){alert('불편을 끼쳐드려 대단히 죄송합니다!\n\n보다 많은 사용자에게 더욱 좋은 경험을 제공하기 위해\n인터넷 익스플로러에 대한 지원이 중단되었습니다.\n\n원활한 이용을 위하여 크롬, 파이어폭스, 엣지 등의 최신 브라우저로 접속해주시기 바랍니다.\n\n만약 Windows 10을 이용하고 계신다면 엣지(Edge)가 기본 설치되어 있으니 이용에 참고하여 주십시오.');localStorage.setItem('doNotShowIEAlert','true')}};window.onload=function(){document.getElementById('content-body').classList.add("loaded")}</script>
+        <script src="scripts/202012120750/plugin/saveAs.js"></script>
+        <script src="scripts/202012120750/index/dataMigration.js"></script>
 	</body>
 </html>
