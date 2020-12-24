@@ -18,6 +18,31 @@
 
 /**************/
 
+.announce-panel {
+    cursor: pointer;
+    border-color: rgba(255, 127, 0, 0.7);/*#ddd;*/
+	width: 13.4rem;
+    max-width: var(--max-width);
+	text-align: center;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.35rem;
+    background-color: /*var(--background--hard-blue);*//*rgba(255, 127, 0, 0.5);*//*rgba(253, 153, 225, 0.3);*/rgba(255, 255, 255, 0);
+    transition: background-color 0.3s;
+}
+
+.announce-panel:hover {
+    background-color: rgba(255, 127, 0, 0.3);
+}
+
+.announce-panel table {
+    width: 100%;
+    color: #ddd;
+}
+
+.announce-panel hr {
+    border-color: rgba(255, 127, 0, 0.45);
+}
+
 .selection-panel {
     border-color: #ddd;
 	width: 13.4rem;/*13rem;*/

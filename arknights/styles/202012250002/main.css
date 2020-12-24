@@ -776,9 +776,10 @@ select {
 	max-height: 90vh;
     
 	text-align: center;
-	background-color: #222;
+	background-color: rgb(16, 16, 16);/*#222;*/
 	overflow: auto;
     
+    border: 0.03rem solid rgba(255, 127, 0, 0.2);
     border-radius: 0.25rem;
     box-shadow: 0 0 30px 2px #000;
 }
@@ -787,6 +788,9 @@ select {
 	/*background-color: rgb(30, 30, 30);/*#333;*/
 	width: 100%;
 	margin: 0;
+    margin-bottom: 0.7em;
+    border-bottom: 0.03rem solid rgba(255, 127, 0, 0.2);
+    background-color: #000;
 }
 
 .modal .close-btn {
@@ -819,7 +823,7 @@ select {
 }
 
 .modal-footer {
-	background-color: #666;
+	background-color: rgb(23, 23, 23);/*#666;*/
 	width: 100%;
 	margin: 0;
 	padding: 0;

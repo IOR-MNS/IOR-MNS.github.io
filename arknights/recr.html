@@ -17,8 +17,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202012241539/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202012241539/recr/recr.css" rel="stylesheet" type="text/css">
+		<link href="styles/202012250002/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202012250002/recr/recr.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
@@ -26,6 +26,26 @@
 		</a>
     <div id="content-body">
 		<h1 class="subtitle">공개모집 계산기</h1>
+        <div class="panel announce-panel" style="display:none" onclick="announceShowDetail()">
+            공개모집 풀 갱신 안내<br>
+            <div id="announce-detail" style="display:none">
+                <hr>
+                <table>
+                    <tr>
+                        <td>한국 · 일본</td>
+                        <td>20.12.30 16:00</td>
+                        <td>UTC+9</td>
+                        <td>예정</td>
+                    </tr>
+                    <tr>
+                        <td>글로벌</td>
+                        <td>20.12.30 16:00</td>
+                        <td>UTC-7</td>
+                        <td>예정</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         
 		<div id="tag-top" class="panel selection-panel">
 			<div id="tagBatchSelector-container" style="display: block;">
@@ -143,14 +163,14 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="data/tag_201211.js"></script>
     <script src="data/op_201212.js"></script>
-    <script src="data/recrWhitelist_201211.js"></script>
-	<script src="scripts/202012241539/recr/configManager.js"></script>
-    <script src="scripts/202012241539/recr/utilFuncs.js"></script>
-	<script src="scripts/202012241539/recr/showResult.js"></script>
-	<script src="scripts/202012241539/recr/calc.js"></script>
-	<script src="scripts/202012241539/recr/showToolTip.js"></script>
-	<script src="scripts/202012241539/recr/tagBatchSelector.js"></script>
-	<script src="scripts/202012241539/recr/checkboxManager.js"></script>
-    <script src="scripts/202012241539/recr/loadRecr.js"></script>
+    <script src="data/recrWhitelist_201224.js"></script>
+	<script src="scripts/202012250002/recr/configManager.js"></script>
+    <script src="scripts/202012250002/recr/utilFuncs.js"></script>
+	<script src="scripts/202012250002/recr/showResult.js"></script>
+	<script src="scripts/202012250002/recr/calc.js"></script>
+	<script src="scripts/202012250002/recr/showToolTip.js"></script>
+	<script src="scripts/202012250002/recr/tagBatchSelector.js"></script>
+	<script src="scripts/202012250002/recr/checkboxManager.js"></script>
+    <script src="scripts/202012250002/recr/loadRecr.js"></script>
 	</body>
 </html>
