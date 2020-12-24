@@ -23,15 +23,18 @@ td input,
     width: 2em;
 }
 
-#five-star-guarantee:focus {
+#five-star-guarantee:focus,
+#limited-pickup-list-price:focus {
     outline: #000;
 }
 
-button#five-star-guarantee {
+#five-star-guarantee,
+#limited-pickup-list-price {
     border: none;
     padding: 0;
 }
-button#five-star-guarantee.off {
+#five-star-guarantee.off,
+#limited-pickup-list-price.off {
     text-decoration: line-through;
 }
 
