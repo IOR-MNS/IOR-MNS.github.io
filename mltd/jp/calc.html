@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174914504-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-174914504-1');
+        </script>
+		<meta charset="utf-8">
+		<title>밀리시타 이벤트 계산기 JP</title>
+		<link href="../images/favicon.ico" rel="shortcut icon">
+		<link href="../styles/202007132023/style.css" rel="stylesheet">
+		<style>html{background:linear-gradient(173deg,#fd99e1,#ec8b8e,#ffb6c1,#f099d2,#e75fb9,#333,#000)}
+		#calcResult p{display:none}</style>
+	</head>
+	<body>
+		<a href="../index.html"><img alt="Minase Group's Logo." src="../images/logo4_comp.png" style="margin:1em auto"></a>
+		<h2 id="subtitle" style="color:#000"></h2>
+		<form>
+			<div style="text-align:left">
+				<p>남은 시간</p>
+				<input id="leftDay" type="number" min="0" value="7"> 일 
+				<input id="leftHour" type="number" min="0" value="6" max="23"> 시간
+			</div>
+			<div>
+				<p>자연 스태 사용률</p>
+				<input id="regenStaminaUsage" type="number" min="0" value="70" max="100"> %
+			</div>
+		</form>
+		
+		<form>
+			<div>
+				<p>레벨</p>
+				<input id="currentLevel" type="number" min="1" value="200" max="999">
+				<p>경험치</p>
+				<input id="currentExp" type="number" min="0" value="0">
+				<p>현재 스태미너</p>
+				<input id="currentStamina" type="number" min="0" value="120">
+			</div>
+		</form>
+		
+		<form>
+			<div class="theater">
+				<p>소지한 라이브 티켓</p>
+				<input id="currentTicket" type="number" min="0" value="500"> 장
+			</div>
+			<div>
+				<p>소지한 이벤트 재화</p>
+				<input id="currentItem" type="number" min="0"> 개
+			</div>
+		</form>
+		
+		<form>
+			<div class="work">
+				<p>영업 소모 스태 선택</p>
+				<select id="workConsumption">
+					<option value="20" selected>20 스태미너</option>
+					<option value="25">25 스태미너</option>
+					<option value="30">30 스태미너</option>
+					<option value="40">20 스태미너 X 2</option>
+					<option value="50">25 스태미너 X 2</option>
+					<option value="60">30 스태미너 X 2</option>
+				</select>
+			</div>
+			<div>
+				<p id="liveConsumptionLabel"></p>
+				<select id="liveConsumption"></select>
+			</div>
+			<div>
+				<p>이벤곡 배수 선택</p>
+				<select id="eventConsumption">
+					<option value="1" selected>1배수</option>
+					<option value="2">2배수</option>
+				</select>
+			</div>
+		</form>
+		<form>
+			<div style="text-align:center">
+				<p>사용할 드링크</p>
+			</div>
+			<div>
+				<p>10 드링크</p>
+				<input id="drink10" type="number" min="0" value="0"> 개
+				<p>20 드링크</p>
+				<input id="drink20" type="number" min="0" value="0"> 개
+				<p>30 드링크</p>
+				<input id="drink30" type="number" min="0" value="0"> 개
+				<p>맥스 드링크</p>
+				<input id="maxDrink" type="number" min="0" value="0"> 개
+			</div>
+		</form>
+		
+		<form>
+			<div>
+				<p>현재 이벤트 점수</p>
+				<input id="currentPoint" type="number" min="0" value="0"> pt
+				<p>목표 이벤트 점수</p>
+				<input id="targetPoint" type="number" min="0"> pt
+			</div>
+		</form>
+	
+		<form>
+			<div>
+				<p>오늘의 일일 재화를 수령했나요?</p>
+				<input id="receivedDailyItem" type="checkbox" checked>
+			</div>
+		</form>
+		
+		<div align="center">
+			<button onclick="buttonClicked(1,15)" style="margin:0 auto">다 보여줘</button>
+			<button onclick="buttonClicked(0,30)" style="margin:0 auto">요약해줘</button>
+		</div>
+		
+		<form>
+			<div id="calcResult"></div>
+		</form>
+		
+		<div align="center">
+			<button onclick='location.href="../calc_selectType.html"' style="margin:0 auto">유형 선택 화면으로 돌아가기</button>
+		</div>
+		
+		<div class="copyright">
+			<p>Copyright © 2039 MINASE Inc. All Rights Reserved.</p>
+		</div>
+		
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=fetch%2Cdefault" crossorigin=anonymous></script>
+        <script src="../scripts/202007132023/getResult.js"></script>
+		<script src="../scripts/202007132023/makeQueryString.js"></script>
+        <script src="../scripts/202007132023/parseQueryString.js"></script>
+        <script src="../scripts/202007132023/animation.js"></script>
+		<script src="../scripts/202007132023/configureCalcPage.js"></script>
+        <script>window.onload = function () { document.body.className += " loaded" }</script>
+	</body>
+</html>
