@@ -18,6 +18,21 @@
         
 		<link href="styles/202012310100/main.css" rel="stylesheet" type="text/css">
 		<link href="styles/202012310100/oplv/oplv.css" rel="stylesheet" type="text/css">
+        
+        <style>
+            .ad-container {text-align: center; width: 100%; margin: 1rem 0 0.5rem 0}
+            
+            .ad1, .ad2 {min-height: 90px}
+            .ad1 ins, .ad2 ins {max-width: 100%; height: 90px}
+            
+            @media (max-width: 480px) and (orientation: portrait), (max-height: 480px) and (orientation: landscape) {
+                .ad1     {min-height: 50px}
+                .ad1 ins {max-width: 100%; height: 50px}
+                
+                .ad2     {min-height: 100px}
+                .ad2 ins {max-width: 100%; height: 100px}
+            }
+        </style>
 	</head>
 	<body>
 		<a href="index.html">
@@ -25,7 +40,7 @@
 		</a>
     <div id="content-body">
 		<p class="subtitle">오퍼레이터 레벨링 계산기</p>
-		
+        
 		<div style="text-align: center; font-size: 4vmin;">
 			<button type="button" onclick="btnClicked(this)" class="show-detail-info-panel-btn" name="show-detail-info-panel-btn">상세 정보 입력란 보이기</button>
 			
@@ -192,9 +207,21 @@
 		<div align="center">
 			<button onclick="copyResult(event)">결과 복사하기</button>
 		</div>
-		
-		<br>
-		
+        
+        <div class="ad-container ad1" data-slot-id="9626526660">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 수평형 높이 90 or 50px -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5222058627622327"
+                data-ad-slot="9626526660"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
 		<div align="center">
 			<button onclick="location.href='index.html'">메인 화면으로 돌아가기</button>
 		</div>
