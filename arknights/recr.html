@@ -17,8 +17,22 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202012310100/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202012310100/recr/recr.css" rel="stylesheet" type="text/css">
+		<link href="styles/202101020952/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202101020952/recr/recr.css" rel="stylesheet" type="text/css">
+        
+        <style>
+            .ad-container {text-align: center; width: 100%; margin: 1rem 0; min-height: 90px}
+            
+            .ad1, .ad2 {width: 728px; max-width: 100%; height: 90px}
+            
+            @media (max-width: 480px) and (orientation: portrait), (max-height: 480px) and (orientation: landscape) {
+                .ad-container {min-height: 50px}
+                
+                .ad1 {width: 100%; max-width: 100%; height: 50px}
+                
+                .ad2 {width: 100%; max-width: 100%; height: 100px}
+            }
+        </style>
 	</head>
 	<body>
 		<a href="index.html">
@@ -27,23 +41,23 @@
     <div id="content-body">
 		<h1 class="subtitle">공개모집 계산기</h1>
         <div class="panel announce-panel" style="display:none" onclick="announceShowDetail()">
-            공개모집 풀 갱신 안내<br>
+            태그 입력기 개선 안내<br>
             <div id="announce-detail" style="display:none">
                 <hr>
+                아래 입력을 사용할 수 있게 되었습니다.<br>
+                <br>
                 <table>
                     <tr>
-                        <td>한국 · 일본</td>
-                        <td>20.12.30 16:00</td>
-                        <td>UTC+9</td>
-                        <td>예정</td>
+                        <td>슨 ➔ </td><td>스나이퍼</td>
+                        <td>슾 ➔ </td><td>스페셜리스트</td>
                     </tr>
                     <tr>
-                        <td>글로벌</td>
-                        <td>20.12.30 16:00</td>
-                        <td>UTC-7</td>
-                        <td>예정</td>
+                        <td>딮 ➔ </td><td>디펜더</td>
+                        <td>딥 ➔ </td><td>디버프</td>
                     </tr>
                 </table>
+                <br>
+                * 기존의 [스, 디] 입력도 여전히 지원합니다.
             </div>
         </div>
         
@@ -73,13 +87,15 @@
 			<input onclick="filterClicked('onlyHighStars')" type="checkbox" id="selection-panel-footer-ohsf" class="checkboxButton">
 			<label class="button" for="selection-panel-footer-ohsf"><span>고등급 확정식만</span></label>
 		</div>
-		
+        
 		<div id="result-panel">
-            <div class="panel guide-panel">
-                <span style="font-size:110%;font-weight:500">
-                <br>
+            <div class="panel guide-panel" onclick="guideShowDetail()">
+                <span id="guide-head" style="font-size:110%;font-weight:500">
                 사용 방법<br>
+                ...
                 </span>
+                
+                <div id="guide-detail" style="display:none">
                 <span style="font-size:95%">
                 <br>
                 공개모집에 나타난 태그를 모두 계산기에 입력하면<br>
@@ -95,8 +111,8 @@
                 </span>
                 <span style="font-size:95%">
                 <br>
-                직접 태그를 눌러서 선택하거나<br>
-                선택 패널 상단의 태그 입력기로 선택하세요.<br>
+                직접 태그를 누르거나,<br>
+                위에 있는 태그 입력기로 빠르게 선택하세요.<br>
                 <br>
                 <br>
                 </span>
@@ -105,8 +121,8 @@
                 </span>
                 <span style="font-size:95%">
                 <br>
-                태그명의 첫 글자를 입력해 빠르게 선택할 수 있으며<br>
-                입력을 마친 뒤 Enter 키를 누르면 적절한 위치로 스크롤됩니다.<br>
+                태그명의 첫 글자를 입력해 빠르게 선택할 수 있어요.<br>
+                입력을 마치고 Enter 키를 누르면 적절한 위치로 스크롤해줘요.<br>
                 <br>
                 <br>
                 </span>
@@ -115,23 +131,37 @@
                 </span>
                 <span style="font-size:95%">
                 <br>
-                오른쪽 아래의 메뉴 버튼을 눌러 원하는 대로 변경하세요.<br>
+                오른쪽 아래의 메뉴 버튼을 눌러 설정을 변경할 수 있어요.<br>
+                다양한 옵션을 켜고 끌 수 있으니, 한번 확인해보세요.
                 <br>
                 <br>
                 </span>
                 <span style="font-size:90%;font-weight:500;color:#777">
-                - 이 가이드 패널은 설정에서 해제할 수 있습니다 -
+                - 이 가이드는 설정에서 해제할 수 있습니다 -
                 <br>
                 </span>
+                </div>
             </div>
         </div>
 		
 		<div align="center" id="result-panel-footer-btn"></div>
-		
+        
+        <div class="ad-container" data-slot-id="9626526660">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            
+            <ins class="adsbygoogle ad1"
+                style="display:inline-block"
+                data-ad-client="ca-pub-5222058627622327"
+                data-ad-slot="9626526660"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
 		<div align="center">
 			<button onclick="location.href='index.html'">메인 화면으로 돌아가기</button>
 		</div>
-		<br>
+        <br>
     </div>
 		<div class="copyright">
 			<p style="font-family: 'Noto Sans KR'">
@@ -161,14 +191,14 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="data/tag_201211.js"></script>
     <script src="data/op_201212.js"></script>
-    <script src="data/recrWhitelist_201224.js"></script>
-	<script src="scripts/202012310100/recr/configManager.js"></script>
-    <script src="scripts/202012310100/recr/utilFuncs.js"></script>
-	<script src="scripts/202012310100/recr/showResult.js"></script>
-	<script src="scripts/202012310100/recr/calc.js"></script>
-	<script src="scripts/202012310100/recr/showToolTip.js"></script>
-	<script src="scripts/202012310100/recr/tagBatchSelector.js"></script>
-	<script src="scripts/202012310100/recr/checkboxManager.js"></script>
-    <script src="scripts/202012310100/recr/loadRecr.js"></script>
+    <script src="data/recrWhitelist_210102.js"></script>
+	<script src="scripts/202101020952/recr/configManager.js"></script>
+    <script src="scripts/202101020952/recr/utilFuncs.js"></script>
+	<script src="scripts/202101020952/recr/showResult.js"></script>
+	<script src="scripts/202101020952/recr/calc.js"></script>
+	<script src="scripts/202101020952/recr/showToolTip.js"></script>
+	<script src="scripts/202101020952/recr/tagBatchSelector.js"></script>
+	<script src="scripts/202101020952/recr/checkboxManager.js"></script>
+    <script src="scripts/202101020952/recr/loadRecr.js"></script>
 	</body>
 </html>
