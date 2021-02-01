@@ -16,23 +16,24 @@
         <title>MINASE : 명일방주</title>
         
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-		<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:700&display=swap&subset=korean" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+		<!--<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|&display=swap&subset=korean" rel="stylesheet" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">-->
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202101020952/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202101020952/index/index.css" rel="stylesheet" type="text/css">
+		<link href="styles/202102011924/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202102011924/index/index.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
 			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
 		</a>
     <div id="content-body">
-		<p class="intro">―</p>
+		<p class="intro">-</p><!--―-->
 		<h1 class="intro"><a class="external-link arknights" target="_blank" rel="noopener noreferrer" href='https://arknights.kr'>명일방주</a> 플레이에 유용한 서비스를 제공합니다.</h1>
-		<p class="intro">―</p>
+		<p class="intro">-</p>
 		
 		<div class="panel">
-            <a class="serviceLink" href="recr.html">공개모집 계산기</a>
+            <a class="serviceLink" href="recr.html">공개 모집 계산기</a>
         <hr class="dotted">
             <a class="serviceLink" href="oplv.html">레벨링 비용</a>
                 <div class="vr dotted"></div>
@@ -42,7 +43,7 @@
                 <div class="vr dotted"></div>
             <a class="serviceLink" href="mcalc.html">재료 계산 2.0</a>
         <hr class="dotted">
-            <a class="serviceLink" href="gacha.html">가챠 시뮬레이터</a>
+            <a class="serviceLink" href="gacha.html">가챠 확률 계산기</a>
         <hr class="dotted">
             <a class="serviceLink historyLink" id="data-migration">데이터 관리</a>
                 <div class="vr dotted"></div>
@@ -51,21 +52,46 @@
     </div>
 		<br>
         
+        <div class="modal" name="modal" id="data-management">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="close-btn" src="./images/button/close_white.png"><br>
+				</div>
+				
+				<div class="modal-body">
+                    <textarea id="data-output" placeholder="여기에 현재 저장된 데이터가 표시됩니다"></textarea><br>
+                    <button class="button square" onclick="saveData()">파일로 저장하기</button><br>
+                    <br>
+                    <br>
+                    <textarea id="data-input" placeholder="여기에 데이터를 붙여넣은 뒤 불러오세요"></textarea><br>
+                    <button class="button square" onclick="loadData()">데이터 불러오기</button><br>
+				</div>
+				
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+        
         <div class="copyright">
 			<p style="font-family: 'Noto Sans KR'">
-                © 2020-2021 MINASE<br>
-                <br>
                 <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/izgnA9vs9Z1WRGQXA'>오류 제보하기</a>
                 |
                 <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/y6KJnM2W9hJBbBuY7'>의견 보내기</a><br>
                 <br>
-                단, 명일방주와 그 저작물에 대한 권리는 마땅한 권리자(HYPERGRYPH CO., LTD | YOSTAR LIMITED)에게 귀속됨
+                <br>
+                © 2020-2021 MINASE<br>
+                <br>
+                이 웹사이트에서 다루는 게임 "명일방주"에 대한 권리는 HYPERGRYPH CO., LTD와 YOSTAR LIMITED에게 있습니다.<br>
+                <br>
+                이 웹사이트에 적용된 폰트 "Plex"에 대한 권리는 IBM Corp.에게 있으며, 폰트 "Noto"에 대한 권리는 Google Inc.에게 있습니다.<br>
+                <br>
+                "Plex"와 "Noto"는 <a class="external-link" target="_blank" rel="noopener noreferrer" href="http://scripts.sil.org/OFL">SIL Open Font License, Version 1.1</a>하에 있습니다.
 			</p>
 		</div>
         <!--Copyright 2020 MINASE Inc. All Rights Reserved.-->
         
         <script>if(window.navigator.userAgent.match(/MSIE|Trident/)!==null){if(localStorage.getItem('doNotShowIEAlert')!='true'){alert('불편을 끼쳐드려 대단히 죄송합니다!\n\n보다 많은 사용자에게 더욱 좋은 경험을 제공하기 위해\n인터넷 익스플로러에 대한 지원이 중단되었습니다.\n\n원활한 이용을 위하여 크롬, 파이어폭스, 엣지 등의 최신 브라우저로 접속해주시기 바랍니다.\n\n만약 Windows 10을 이용하고 계신다면 엣지(Edge)가 기본 설치되어 있으니 이용에 참고하여 주십시오.');localStorage.setItem('doNotShowIEAlert','true')}};window.onload=function(){document.getElementById('content-body').classList.add("loaded")}</script>
-        <script src="scripts/202101020952/plugin/saveAs.js"></script>
-        <script src="scripts/202101020952/index/dataMigration.js"></script>
+        <script src="scripts/202102011924/plugin/saveAs.js"></script>
+        <script src="scripts/202102011924/index/dataMigration.js"></script>
 	</body>
 </html>

@@ -16,8 +16,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202101020952/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202101020952/mcalc/mcalc.css" rel="stylesheet" type="text/css">
+		<link href="styles/202102011924/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202102011924/mcalc/mcalc.css" rel="stylesheet" type="text/css">
         
         <style>
             .ad-container {text-align: center; width: 100%; margin: 1rem 0 0.5rem 0; min-height: 90px}
@@ -224,15 +224,14 @@
     
 		<div class="copyright">
 			<p style="font-family: 'Noto Sans KR'">
-                © 2020-2021 MINASE<br>
-                <br>
                 <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/izgnA9vs9Z1WRGQXA'>오류 제보하기</a>
                 |
                 <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/y6KJnM2W9hJBbBuY7'>의견 보내기</a>
                 |
                 <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/9CwopZ2xT9fdSzqR7'>광고가 거슬려요</a><br>
                 <br>
-                단, 명일방주와 그 저작물에 대한 권리는 마땅한 권리자(HYPERGRYPH CO., LTD | YOSTAR LIMITED)에게 귀속됨
+                <br>
+                © 2020-2021 MINASE<br>
 			</p>
 		</div>
     </div>
@@ -304,11 +303,16 @@
 					<hr style="border-color: white">
 					편의 기능<br>
 					<br>
+                    
+                    <button type="button" class="button square" onclick="localStorage.setItem('preferred-version_mcalc', '2'); alert('선호하는 재료 계산기로 설정되었습니다.');">선호하는 재료 계산기로 설정</button>
+                    
                     <button type="button" class="button square" name="toggleFilterOnlyLack" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
                     
 					<button type="button" class="button square" onclick="cutdownAllInputs()">인벤토리 데이터 정돈</button>
 					
-                    <button type="button" class="button square caution" onclick="clearCalcData()">계산기 데이터 초기화</button>
+                    <button type="button" class="button square caution" onclick="clearInvHave()">보유량 초기화</button>
+                    <button type="button" class="button square caution" onclick="clearInvNeed()">필요량 초기화</button>
+                    <button type="button" class="button square caution" onclick="clearCalcData()">제작량 초기화</button>
 					<button type="button" class="button square caution" onclick="clearAllData()">모든 데이터 초기화</button>
 				</div>
 			</div>
@@ -318,9 +322,9 @@
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="data/item_201211.js"></script>
-	<script src="scripts/202101020952/mcalc/manageLocalStorage.js"></script>
-	<script src="scripts/202101020952/mcalc/mcalc.js"></script>
-	<script src="scripts/202101020952/mcalc/util.js"></script>
-	<script src="scripts/202101020952/mcalc/modalPrompt.js"></script>
+	<script src="scripts/202102011924/mcalc/manageLocalStorage.js"></script>
+	<script src="scripts/202102011924/mcalc/mcalc.js"></script>
+	<script src="scripts/202102011924/mcalc/util.js"></script>
+	<script src="scripts/202102011924/mcalc/modalPrompt.js"></script>
 	</body>
 </html>
