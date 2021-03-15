@@ -2,7 +2,19 @@
 <html>
 	<head>
         <script src="//d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"></script>
-        <script>Bugsnag.start({ apiKey: '6b2e0a8c5c671f6eb58c38ec9a0a9762' })</script>
+        <script>Bugsnag.start({
+            'apiKey': '6b2e0a8c5c671f6eb58c38ec9a0a9762',
+            'appVersion': '202101020952',
+            'metadata': {
+                'initialData': localStorage
+            },
+            'collectUserIp': false,
+            'onError': function (event) {
+                gtag('get', 'UA-174914504-1', 'client_id', function (client_id) {
+                    event.setUser(client_id)
+                })
+            }
+        )</script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174914504-1"></script>
         <script>
@@ -10,7 +22,7 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'UA-174914504-1');
+            gtag('config', 'UA-174914504-1', {'anonymize_ip': true});
         </script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
