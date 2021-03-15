@@ -1,11 +1,5 @@
-var glob = glob || {
-    namespace: 'recr',
-    ga_event_category: '공개모집 계산기'
-}
-window[glob.namespace] = window[glob.namespace] || {}
-
 // 주어진 데이터셋을 바탕으로, 가능한 모든 조합을 만들어서 output 배열로 반환.
-window[glob.namespace].generateTagCodes = function (data, output, maxElemNum, outputIndex, elemNum, dataIndex, tagCode)
+var generateTagCodes = function (data, output, maxElemNum, outputIndex, elemNum, dataIndex, tagCode)
 {
 	elemNum = (typeof elemNum === 'undefined') ? 0 : elemNum
 	dataIndex = (typeof dataIndex === 'undefined') ? 0 : dataIndex
@@ -27,7 +21,7 @@ window[glob.namespace].generateTagCodes = function (data, output, maxElemNum, ou
 	return outputIndex
 }
 
-window[glob.namespace].getTagCodeKR = function (tagNameKR) {
+var getTagCodeKR = function (tagNameKR) {
     for (var i = 0; i < db.tag.keys.length; ++i)
     {
         if (tagNameKR == db.tag[db.tag.keys[i]].name.kr)
@@ -41,7 +35,7 @@ window[glob.namespace].getTagCodeKR = function (tagNameKR) {
 }
 
 // 주어진 tagCode의 조건을 모두 만족하는 대원들의 ID 목록을 반환
-window[glob.namespace].getAvailableOperatorIDs = function (tagCode)
+var getAvailableOperatorIDs = function (tagCode)
 {
 	var out = []
 	var outidx = 0
@@ -92,7 +86,7 @@ window[glob.namespace].getAvailableOperatorIDs = function (tagCode)
     return out.filter(opid => recrWhiteList[userConfig.locale.region.value].indexOf(opid) >= 0)
 }
 
-window[glob.namespace].getLowestRarity = function (opIDs)
+var getLowestRarity = function (opIDs)
 {
 	var lowestRarity = 0
 	
@@ -121,7 +115,7 @@ window[glob.namespace].getLowestRarity = function (opIDs)
 }
 
 
-window[glob.namespace].calc = function (checkedTagIDs) {
+var calc = function (checkedTagIDs) {
 	// 받은 태그ID 배열의 유효성 검사
 	// 빈 입력
 	if (checkedTagIDs.length === 0)
