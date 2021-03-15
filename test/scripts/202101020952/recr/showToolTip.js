@@ -1,4 +1,69 @@
-var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.createTemplateTagFirstArg=function(a){return a.raw=a};$jscomp.createTemplateTagFirstArgWithRaw=function(a,b){a.raw=b;return a};var glob=glob||{namespace:"recr",ga_event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"};window[glob.namespace]=window[glob.namespace]||{};var gtag_opTooltipUsed=!1;
-window[glob.namespace].showResultOpTooltip=function(a){$(".tooltip").remove();var b=$(a.target).closest(".result-op").attr("id").split("_")[1];if(b in db.op){b=getTagNames(db.op[b].tagCode);for(var d="",c=0;c<b.length;++c)d+='<span class="tag result-tag">'+b[c]+"</span>";$("body").append('<p class="tooltip" data-lang="'+userConfig.locale.region.value+'">'+d+"</p>");$(".tooltip").css("top",a.pageY+"px").css("left",a.pageX+"px");gtag_opTooltipUsed||(gtag_opTooltipUsed=!0,gtag("event","\uc624\ud37c\ub808\uc774\ud130 \ud234\ud301 \ucd5c\ucd08 \ud45c\uc2dc",
-{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"}))}};window[glob.namespace].moveTooltip=function(a){$(".tooltip").css("top",a.pageY+"px").css("left",a.pageX+"px")};window[glob.namespace].removeTooltip=function(){$(".tooltip").remove()};window[glob.namespace].main_showToolTip=function(){$(document).on("click mouseover",".result-op",showResultOpTooltip);$(document).on("mousemove",".result-op",moveTooltip);$(document).on("mouseout",".result-op",removeTooltip)};
-window.errorCatcherExec=window.errorCatcherExec||[];try{window.errorCatcherExec.push("main_showToolTip")}catch(a){window.errorCatcherExec=[],window.errorCatcherExec.push("main_showToolTip")};
+var glob = glob || {
+    namespace: 'recr',
+    ga_event_category: '공개모집 계산기'
+}
+window[glob.namespace] = window[glob.namespace] || {}
+
+var gtag_opTooltipUsed = false
+
+window[glob.namespace].showResultOpTooltip = function(e) {
+    // 기존의 툴팁 모두 제거
+    $('.tooltip').remove()
+    
+    // result_op 클래스의 id는 'op_' 문자열 뒤에 해당 대원의 ID가 있도록 약속되어 있다.
+    var opID = $(e.target).closest('.result-op').attr('id').split('_')[1]
+    
+    // 만약 정상적이지 않은 범위의 opID라면 툴팁을 표시하지 않는다.
+    if (!(opID in db.op))
+    {
+        return
+    }
+    
+    // opID를 바탕으로 대원의 tagCode를 불러오고, 그것을 바탕으로 보유 태그명을 찾아낸다.
+    var tagCode = db.op[opID].tagCode
+    var tagNames = getTagNames(tagCode)
+    
+    // 얻어낸 보유 태그명들을 툴팁으로 표시한다.
+    var tooltipHtml = ''
+    for (var i = 0; i < tagNames.length; ++i)
+    {
+        tooltipHtml += `<span class="tag result-tag">${tagNames[i]}</span>`
+    }
+    
+    $('body').append(`<p class="tooltip" data-lang="${userConfig.locale.region.value}">${tooltipHtml}</p>`)
+    $('.tooltip').css('top', e.pageY + 'px').css('left', e.pageX + 'px')
+    
+    if (!gtag_opTooltipUsed) {
+        gtag_opTooltipUsed = true
+        gtag('event', '오퍼레이터 툴팁 최초 표시', {
+            'event_category': '공개모집 계산기'
+        })
+    }
+}
+
+window[glob.namespace].moveTooltip = function(e) {
+    $('.tooltip').css('top', e.pageY + 'px').css('left', e.pageX + 'px')
+}
+
+window[glob.namespace].removeTooltip = function() {
+    $('.tooltip').remove()
+}
+
+window[glob.namespace].main_showToolTip = function() {
+	// 마우스가 result_op를 가리키면, 툴팁 생성 및 표시
+	$(document).on('click mouseover', '.result-op', showResultOpTooltip)
+	
+	// 마우스 이동시 툴팁이 따라감
+	$(document).on('mousemove', '.result-op', moveTooltip)
+	
+	// 마우스가 요소 밖으로 나가면 툴팁 삭제
+	$(document).on('mouseout', '.result-op', removeTooltip)
+}
+
+window.errorCatcherExec = window.errorCatcherExec || []
+try {
+    window.errorCatcherExec.push('main_showToolTip')
+} catch (e) {
+    window.errorCatcherExec = []
+    window.errorCatcherExec.push('main_showToolTip')
+}

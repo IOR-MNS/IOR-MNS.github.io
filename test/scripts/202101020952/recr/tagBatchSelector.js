@@ -1,22 +1,216 @@
-var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.createTemplateTagFirstArg=function(a){return a.raw=a};$jscomp.createTemplateTagFirstArgWithRaw=function(a,b){a.raw=b;return a};$jscomp.arrayIteratorImpl=function(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}};$jscomp.arrayIterator=function(a){return{next:$jscomp.arrayIteratorImpl(a)}};$jscomp.makeIterator=function(a){var b="undefined"!=typeof Symbol&&Symbol.iterator&&a[Symbol.iterator];return b?b.call(a):$jscomp.arrayIterator(a)};
-$jscomp.arrayFromIterator=function(a){for(var b,c=[];!(b=a.next()).done;)c.push(b.value);return c};$jscomp.arrayFromIterable=function(a){return a instanceof Array?a:$jscomp.arrayFromIterator($jscomp.makeIterator(a))};$jscomp.ASSUME_ES5=!1;$jscomp.ASSUME_NO_NATIVE_MAP=!1;$jscomp.ASSUME_NO_NATIVE_SET=!1;$jscomp.SIMPLE_FROUND_POLYFILL=!1;$jscomp.ISOLATE_POLYFILLS=!1;
-$jscomp.defineProperty=$jscomp.ASSUME_ES5||"function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};$jscomp.getGlobal=function(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error("Cannot find global object");};$jscomp.global=$jscomp.getGlobal(this);
-$jscomp.IS_SYMBOL_NATIVE="function"===typeof Symbol&&"symbol"===typeof Symbol("x");$jscomp.TRUST_ES6_POLYFILLS=!$jscomp.ISOLATE_POLYFILLS||$jscomp.IS_SYMBOL_NATIVE;$jscomp.polyfills={};$jscomp.propertyToPolyfillSymbol={};$jscomp.POLYFILL_PREFIX="$jscp$";var $jscomp$lookupPolyfilledValue=function(a,b){var c=$jscomp.propertyToPolyfillSymbol[b];if(null==c)return a[b];c=a[c];return void 0!==c?c:a[b]};
-$jscomp.polyfill=function(a,b,c,d){b&&($jscomp.ISOLATE_POLYFILLS?$jscomp.polyfillIsolated(a,b,c,d):$jscomp.polyfillUnisolated(a,b,c,d))};$jscomp.polyfillUnisolated=function(a,b,c,d){c=$jscomp.global;a=a.split(".");for(d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))return;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&null!=b&&$jscomp.defineProperty(c,a,{configurable:!0,writable:!0,value:b})};
-$jscomp.polyfillIsolated=function(a,b,c,d){var e=a.split(".");a=1===e.length;d=e[0];d=!a&&d in $jscomp.polyfills?$jscomp.polyfills:$jscomp.global;for(var f=0;f<e.length-1;f++){var g=e[f];if(!(g in d))return;d=d[g]}e=e[e.length-1];c=$jscomp.IS_SYMBOL_NATIVE&&"es6"===c?d[e]:null;b=b(c);null!=b&&(a?$jscomp.defineProperty($jscomp.polyfills,e,{configurable:!0,writable:!0,value:b}):b!==c&&($jscomp.propertyToPolyfillSymbol[e]=$jscomp.IS_SYMBOL_NATIVE?$jscomp.global.Symbol(e):$jscomp.POLYFILL_PREFIX+e,e=
-$jscomp.propertyToPolyfillSymbol[e],$jscomp.defineProperty(d,e,{configurable:!0,writable:!0,value:b})))};$jscomp.initSymbol=function(){};
-$jscomp.polyfill("Symbol",function(a){if(a)return a;var b=function(a,b){this.$jscomp$symbol$id_=a;$jscomp.defineProperty(this,"description",{configurable:!0,writable:!0,value:b})};b.prototype.toString=function(){return this.$jscomp$symbol$id_};var c=0,d=function(a){if(this instanceof d)throw new TypeError("Symbol is not a constructor");return new b("jscomp_symbol_"+(a||"")+"_"+c++,a)};return d},"es6","es3");$jscomp.initSymbolIterator=function(){};
-$jscomp.polyfill("Symbol.iterator",function(a){if(a)return a;a=Symbol("Symbol.iterator");for(var b="Array Int8Array Uint8Array Uint8ClampedArray Int16Array Uint16Array Int32Array Uint32Array Float32Array Float64Array".split(" "),c=0;c<b.length;c++){var d=$jscomp.global[b[c]];"function"===typeof d&&"function"!=typeof d.prototype[a]&&$jscomp.defineProperty(d.prototype,a,{configurable:!0,writable:!0,value:function(){return $jscomp.iteratorPrototype($jscomp.arrayIteratorImpl(this))}})}return a},"es6",
-"es3");$jscomp.initSymbolAsyncIterator=function(){};$jscomp.iteratorPrototype=function(a){a={next:a};a[Symbol.iterator]=function(){return this};return a};$jscomp.iteratorFromArray=function(a,b){a instanceof String&&(a+="");var c=0,d={next:function(){if(c<a.length){var e=c++;return{value:b(e,a[e]),done:!1}}d.next=function(){return{done:!0,value:void 0}};return d.next()}};d[Symbol.iterator]=function(){return d};return d};
-$jscomp.polyfill("Array.prototype.keys",function(a){return a?a:function(){return $jscomp.iteratorFromArray(this,function(a){return a})}},"es6","es3");var glob=glob||{namespace:"recr",ga_event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"};window[glob.namespace]=window[glob.namespace]||{};var gtag_tagBatchSelectorUsed=!1,aliasMap={"\uc2a8":"\uc2a4\ub098\uc774\ud37c","\uc2be":"\uc2a4\ud398\uc15c\ub9ac\uc2a4\ud2b8","\ub52e":"\ub514\ud39c\ub354","\ub525":"\ub514\ubc84\ud504"};
-window[glob.namespace].batchSelectEventHandler=function(a){if(!0===a.target.checked){var b=null;JSON.parse(a.target.dataset.cgroup).forEach(function(a){b=document.getElementById("tag_"+a);b.className="checkboxButton";b.removeEventListener("click",batchSelectEventHandler)});a.target.dataset.cgroup=""}};
-window[glob.namespace].banRecommendation=function(a,b){if(0<=["autoFocusBatchSelector"].indexOf(b)){var c=JSON.parse(localStorage.getItem("recr_banned-recommendation"))||[];0>c.indexOf(b)&&(console.log(b),c.push(b),localStorage.setItem("recr_banned-recommendation",JSON.stringify(c)));a.closest(".recommended").remove()}};
-window[glob.namespace].createRecommendationPanel=function(a,b,c,d){return'<div class="panel guide-panel recommended">\n            <span style="font-size:110%;font-weight:500">\n            \ucd94\ucc9c\ud558\ub294 \uae30\ub2a5\uc774 \uc788\uc5b4\uc694!<br>\n            <br>\n            </span>\n            <span style="font-size:95%">\n            <a style="cursor:pointer;color:var(--color--skyBlue)" onclick="userConfig.'+(b+"."+a)+'.value=true;saveUserConfig();location.reload()">['+c+" \ucf1c\uae30]</a><br>\n            <br>\n            "+
-d+'<br>\n            <br>\n            <a style="cursor:pointer;color:#999" onclick="banRecommendation(this, \''+a+"')\">[\uc55e\uc73c\ub85c \uc774 \ucd94\ucc9c \ud45c\uc2dc\ud558\uc9c0 \uc54a\uae30]</a>\n            </span>\n        </div>"};
-window[glob.namespace].tagBatchSelectorGuide=function(){document.querySelectorAll(".recommended").forEach(function(a){return a.remove()});var a=JSON.parse(localStorage.getItem("recr_banned-recommendation"))||[];console.log(a);0>a.indexOf("autoFocusBatchSelector")&&!userConfig.input.autoFocusBatchSelector.value&&document.getElementById("result-panel").insertAdjacentHTML("afterbegin",createRecommendationPanel("autoFocusBatchSelector","input","\ud0dc\uadf8 \uc785\ub825\uae30 \uc790\ub3d9 \ud3ec\ucee4\uc2a4",
-'\ub4e4\uc5b4\uc624\uc790\ub9c8\uc790, \ub610\ub294 \ud0dc\uadf8\ub97c \ucd08\uae30\ud654\ud55c \ub4a4,<br>\uace7\ubc14\ub85c \ud0dc\uadf8\ub97c \uc785\ub825\ud560 \uc218 \uc788\uc5b4\uc694.<br><br><span style="color:#999">*\ubaa8\ubc14\uc77c \uae30\uae30\uc5d0\uc120 \uc77c\ubd80 \uae30\ub2a5\uc774 \uc81c\ud55c\ub420 \uc218 \uc788\uc2b5\ub2c8\ub2e4*</span>'))};
-window[glob.namespace].tagBatchSelectorKeyup=function(a){gtag_tagBatchSelectorUsed||(gtag_tagBatchSelectorUsed=!0,gtag("event","\ud0dc\uadf8 \uc120\ud0dd\uae30 \ucd5c\ucd08 \uc0ac\uc6a9",{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"}));if(13===a.keyCode){if(1==$(a.target).data("typo"))$(a.target).addClass("typo"),gtag("event","\ud0dc\uadf8 \uc120\ud0dd\uae30 \uc624\ud0c0 \uacbd\uace0 \uae30\ub2a5 \uc791\ub3d9",{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"});else{tagBatchSelectorGuide();
-$(a.target).blur();var b=0;b=0<$(".blink+label").length?$(".selection-panel").offset().top:$("#selection-panel-footer-btn").offset().top;$("html,body").animate({scrollTop:b},200)}return!1}$(a.target).removeClass("typo");$(a.target).data("typo",!1);if(0===this.value.replace(/(\s*)/g,"").length)return!1;var c=0,d=db.tag.keys.length,e=[],f={},g=[];this.value.split("").forEach(function(b){b=aliasMap[b]||b;c=0;for(g=[];c<d;++c)"sex"!==db.tag[c].type&&0===db.tag[c].name.kr.slice(0,b.length).indexOf(b)&&
-g.push(c);0===g.length&&/[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/.test(b)&&$(a.target).data("typo",!0);1===g.length?e.push(g[0]):1<g.length&&(f[b]?++f[b].cnt:f[b]={cnt:1,tags:[].concat($jscomp.arrayFromIterable(g))})});clearSelection(!1,!1);var h=null;Object.keys(f).forEach(function(a){f[a].cnt>=f[a].tags.length?e=[].concat($jscomp.arrayFromIterable(e),$jscomp.arrayFromIterable(f[a].tags)):f[a].tags.forEach(function(b){h=document.getElementById("tag_"+b);h.className+=" blink";h.dataset.cgroup=
-JSON.stringify(f[a].tags);h.addEventListener("click",batchSelectEventHandler)})});5<e.length&&$(a.target).data("typo",!0);if(0<e.length){var k=null;e.forEach(function(a){k=document.getElementById("tag_"+a);k.checked=!0;tagClicked(k,!1)});showResult()}};window[glob.namespace].main_tagBatchSelector=function(){$("#tagBatchSelector").keyup(tagBatchSelectorKeyup)};window.errorCatcherExec=window.errorCatcherExec||[];
-try{window.errorCatcherExec.push("main_tagBatchSelector")}catch(a){window.errorCatcherExec=[],window.errorCatcherExec.push("main_tagBatchSelector")};
+var glob = glob || {
+    namespace: 'recr',
+    ga_event_category: '공개모집 계산기'
+}
+window[glob.namespace] = window[glob.namespace] || {}
+
+var gtag_tagBatchSelectorUsed = false
+
+var aliasMap = {
+    '슨': '스나이퍼',
+    '슾': '스페셜리스트',
+    '딮': '디펜더',
+    '딥': '디버프'
+}
+
+// 원리적으로는 해당 그룹 중 n개가 선택되었을 때에
+// 그룹 전체의 점멸 표시를 해제하도록 설정해야 하지만
+// 현재 그룹 구성 태그는 최대 2개이므로
+// 간단하게, 그룹 중 1개 태그만 선택되어도 해제하도록 설정한다
+window[glob.namespace].batchSelectEventHandler = function (e) {
+    if (e.target.checked === true) {
+        var el = null
+        JSON.parse(e.target.dataset.cgroup).forEach(id => {
+            el = document.getElementById('tag_' + id)
+            el.className = 'checkboxButton'
+            el.removeEventListener('click', batchSelectEventHandler)
+        })
+        e.target.dataset.cgroup = ''
+    }
+}
+
+window[glob.namespace].banRecommendation = function (elem, featureID) {
+    var featureList = ['autoFocusBatchSelector']
+    
+    if (featureList.indexOf(featureID) >= 0) {
+        var bannedList = JSON.parse(localStorage.getItem('recr_banned-recommendation')) || []
+        if (bannedList.indexOf(featureID) < 0) {
+            console.log(featureID)
+            bannedList.push(featureID)
+            localStorage.setItem('recr_banned-recommendation', JSON.stringify(bannedList))
+        }
+        elem.closest('.recommended').remove()
+    }
+}
+
+window[glob.namespace].createRecommendationPanel = function (featureID, userConfigPath, title, description) {
+    var userConfigFullPath = `userConfig.${userConfigPath}.${featureID}`
+    
+    return `<div class="panel guide-panel recommended">
+            <span style="font-size:110%;font-weight:500">
+            추천하는 기능이 있어요!<br>
+            <br>
+            </span>
+            <span style="font-size:95%">
+            <a style="cursor:pointer;color:var(--color--skyBlue)" onclick="${userConfigFullPath}.value=true;saveUserConfig();location.reload()">[${title} 켜기]</a><br>
+            <br>
+            ${description}<br>
+            <br>
+            <a style="cursor:pointer;color:#999" onclick="banRecommendation(this, '${featureID}')">[앞으로 이 추천 표시하지 않기]</a>
+            </span>
+        </div>`
+}
+
+// 태그 입력기를 사용하기는 하나, 관련 편의 기능을 사용하지 않는 경우, 안내해줌
+window[glob.namespace].tagBatchSelectorGuide = function () {
+    document.querySelectorAll('.recommended').forEach(elm => elm.remove())
+    
+    var bannedList = JSON.parse(localStorage.getItem('recr_banned-recommendation')) || []
+    console.log(bannedList)
+    // 관련 편의 기능이 설정되지 않았고, 이 안내가 표시 제한되지 않았다면
+    if (bannedList.indexOf('autoFocusBatchSelector') < 0 && !userConfig.input.autoFocusBatchSelector.value) {
+        // 안내 표시
+        document.getElementById('result-panel').insertAdjacentHTML('afterbegin', createRecommendationPanel('autoFocusBatchSelector', 'input', '태그 입력기 자동 포커스', '들어오자마자, 또는 태그를 초기화한 뒤,<br>곧바로 태그를 입력할 수 있어요.<br><br><span style="color:#999">*모바일 기기에선 일부 기능이 제한될 수 있습니다*</span>'))
+    }
+}
+
+window[glob.namespace].tagBatchSelectorKeyup = function (ev) {
+    if(!gtag_tagBatchSelectorUsed) {
+        gtag_tagBatchSelectorUsed = true
+        gtag('event', '태그 선택기 최초 사용', {
+            'event_category': '공개모집 계산기'
+        })
+    }
+    
+    if (ev.keyCode === 13) {
+        // 오타가 있는 상태에서 엔터를 누른 경우, 경고 표시.
+        if ($(ev.target).data('typo') == true) {
+            $(ev.target).addClass('typo')
+            gtag('event', '태그 선택기 오타 경고 기능 작동', {
+                'event_category': '공개모집 계산기'
+            })
+        }
+        else {
+            tagBatchSelectorGuide()
+            
+            $(ev.target).blur()
+            var top = 0
+            var $blinkElems = $('.blink+label')
+            if ($blinkElems.length > 0) {
+                //top = $blinkElems.eq(0).parent().offset().top
+                top = $('.selection-panel').offset().top
+            }
+            else {
+                top = $('#selection-panel-footer-btn').offset().top
+            }
+            
+            $('html,body').animate({scrollTop: top}, 200) /*document.getElementById('selection-panel-footer-btn').focus()*/
+        }
+        return false
+    }
+    
+    $(ev.target).removeClass('typo')
+    $(ev.target).data('typo', false)
+    
+    if (this.value.replace(/(\s*)/g, '').length === 0) {
+        return false
+    }
+    
+    // 입력값을 한 글자 단위로 나누어 검색
+    var i = 0, len = db.tag.keys.length, sel = [], blink = {}, found = []
+    this.value.split('').forEach(ch => {
+        ch = aliasMap[ch] || ch
+        
+        // 첫 글자가 일치하는 태그를 모두 찾기
+        for (i = 0, found = []; i < len; ++i) {
+            // 성별 태그는 매칭하지 않음
+            if (db.tag[i].type === 'sex') {
+                continue
+            }
+            
+            // 한 글자 단위로 매칭하는 게 한, 중섭까진 어케 될텐데 일섭하고 특히 글섭은 어떻게 할지 생각할 것..
+            // 일단은 한글 태그명 기준으로만 매칭되도록 한다.
+            if (db.tag[i].name.kr.slice(0, ch.length).indexOf(ch) === 0) {
+                found.push(i)
+            }
+        }
+        
+        // 매칭되는 태그가 없었으며, 입력된 값이 한글이라면 오타 가능성 있는 것.
+        // 아직 입력 도중일 것이므로 당장 스타일을 적용하진 않음
+        if (found.length === 0 && /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(ch)) {
+            $(ev.target).data('typo', true)
+        }
+        
+        // 하나만 찾았다면, 그 태그를 자동 선택
+        if (found.length === 1) {
+            sel.push(found[0])
+        }
+        // 여러 개를 찾았다면, 해당 태그들을 점멸 표시
+        else if (found.length > 1) {
+            if (!blink[ch]) {
+                blink[ch] = {
+                    'cnt': 1,
+                    'tags': [...found]
+                }
+            }
+            else {
+                ++blink[ch].cnt
+            }
+        }
+    })
+    
+    // 현재 선택된 태그를 모두 해제하고
+    clearSelection(false, false) // 스크롤하지 않음, tagBatchSelector의 value 초기화하지 않음
+    
+    // 중복 검색된 태그 처리
+    var el = null
+    Object.keys(blink).forEach(ch => {
+        // 그룹의 구성 태그 수만큼 같은 글자가 입력되었다면 (예. "디디")
+        // 해당 그룹의 태그를 전부 자동 선택
+        if (blink[ch].cnt >= blink[ch].tags.length) {
+            sel = [...sel, ...blink[ch].tags]
+        }
+        else {
+            // 원리적으로는 해당 그룹 중 n개가 선택되었을 때에
+            // 그룹 전체의 점멸 표시를 해제하도록 설정해야 하지만
+            // 현재 그룹 구성 태그는 최대 2개이므로
+            // 간단하게, 그룹 중 1개 태그만 선택되어도 해제하도록 설정한다
+            blink[ch].tags.forEach(id => {
+                el = document.getElementById('tag_' + id)
+                el.className += ' blink'
+                el.dataset.cgroup = JSON.stringify(blink[ch].tags)
+                el.addEventListener('click', batchSelectEventHandler)
+            })
+        }
+    })
+    
+    // 태그가 5개 초과하여 인식되었다면, 오타 가능성 있는 것.
+    if (sel.length > 5) {
+        $(ev.target).data('typo', true)
+    }
+    
+    if (sel.length > 0) {
+        // 태그 자동 선택
+        var cb = null
+        sel.forEach(id => {
+            cb = document.getElementById('tag_' + id)
+            cb.checked = true
+            tagClicked(cb, false)
+        })
+        
+        // 선택된 태그에 대한 계산 수행
+        showResult()
+    }
+}
+
+window[glob.namespace].main_tagBatchSelector = function () {
+    $('#tagBatchSelector').keyup(tagBatchSelectorKeyup)
+}
+
+window.errorCatcherExec = window.errorCatcherExec || []
+try {
+    window.errorCatcherExec.push('main_tagBatchSelector')
+} catch (e) {
+    window.errorCatcherExec = []
+    window.errorCatcherExec.push('main_tagBatchSelector')
+}

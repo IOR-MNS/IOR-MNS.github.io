@@ -1,10 +1,107 @@
-var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.ASSUME_ES5=!1;$jscomp.ASSUME_NO_NATIVE_MAP=!1;$jscomp.ASSUME_NO_NATIVE_SET=!1;$jscomp.SIMPLE_FROUND_POLYFILL=!1;$jscomp.ISOLATE_POLYFILLS=!1;$jscomp.defineProperty=$jscomp.ASSUME_ES5||"function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};
-$jscomp.getGlobal=function(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error("Cannot find global object");};$jscomp.global=$jscomp.getGlobal(this);$jscomp.IS_SYMBOL_NATIVE="function"===typeof Symbol&&"symbol"===typeof Symbol("x");$jscomp.TRUST_ES6_POLYFILLS=!$jscomp.ISOLATE_POLYFILLS||$jscomp.IS_SYMBOL_NATIVE;$jscomp.polyfills={};
-$jscomp.propertyToPolyfillSymbol={};$jscomp.POLYFILL_PREFIX="$jscp$";var $jscomp$lookupPolyfilledValue=function(a,b){var c=$jscomp.propertyToPolyfillSymbol[b];if(null==c)return a[b];c=a[c];return void 0!==c?c:a[b]};$jscomp.polyfill=function(a,b,c,d){b&&($jscomp.ISOLATE_POLYFILLS?$jscomp.polyfillIsolated(a,b,c,d):$jscomp.polyfillUnisolated(a,b,c,d))};
-$jscomp.polyfillUnisolated=function(a,b,c,d){c=$jscomp.global;a=a.split(".");for(d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))return;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&null!=b&&$jscomp.defineProperty(c,a,{configurable:!0,writable:!0,value:b})};
-$jscomp.polyfillIsolated=function(a,b,c,d){var e=a.split(".");a=1===e.length;d=e[0];d=!a&&d in $jscomp.polyfills?$jscomp.polyfills:$jscomp.global;for(var f=0;f<e.length-1;f++){var g=e[f];if(!(g in d))return;d=d[g]}e=e[e.length-1];c=$jscomp.IS_SYMBOL_NATIVE&&"es6"===c?d[e]:null;b=b(c);null!=b&&(a?$jscomp.defineProperty($jscomp.polyfills,e,{configurable:!0,writable:!0,value:b}):b!==c&&($jscomp.propertyToPolyfillSymbol[e]=$jscomp.IS_SYMBOL_NATIVE?$jscomp.global.Symbol(e):$jscomp.POLYFILL_PREFIX+e,e=
-$jscomp.propertyToPolyfillSymbol[e],$jscomp.defineProperty(d,e,{configurable:!0,writable:!0,value:b})))};$jscomp.polyfill("Array.from",function(a){return a?a:function(a,c,d){c=null!=c?c:function(a){return a};var b=[],f="undefined"!=typeof Symbol&&Symbol.iterator&&a[Symbol.iterator];if("function"==typeof f){a=f.call(a);for(var g=0;!(f=a.next()).done;)b.push(c.call(d,f.value,g++))}else for(f=a.length,g=0;g<f;g++)b.push(c.call(d,a[g],g));return b}},"es6","es3");var glob=glob||{namespace:"recr",ga_event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"};
-window[glob.namespace]=window[glob.namespace]||{};var selectionCount=0;window[glob.namespace].countCheck=function(a){a.checked?selectionCount++:selectionCount--;return 5<selectionCount?(a.checked=!1,selectionCount--,!1):!0};window[glob.namespace].tagClicked=function(a,b){if(!1===countCheck(a))return!1;if(void 0===b||!0===b)showResult(),gtag("event","\uacc4\uc0b0(5\uac1c \ud0dc\uadf8 \uc120\ud0dd)",{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"})};
-window[glob.namespace].getCheckboxList=function(){return Array.from(document.querySelectorAll(".selection-panel .checkboxButton + label.tag"),function(a){return document.getElementById(a.htmlFor)})};window[glob.namespace].resetClassName=function(){getCheckboxList().forEach(function(a){a.className="checkboxButton"})};
-window[glob.namespace].clearSelection=function(a,b){gtag("event","\uc120\ud0dd \ucd08\uae30\ud654",{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"});for(var c=getCheckboxList(),d=0;d<c.length;++d)c[d].className="checkboxButton",c[d].checked=!1;selectionCount=0;showResult();void 0!==a&&!0!==a||$("html,body").animate({scrollTop:0},200);if(void 0===b||!0===b)document.getElementById("tagBatchSelector").value="";userConfig.input.autoFocusBatchSelector.value&&document.getElementById("tagBatchSelector").focus()};
-window[glob.namespace].filterClicked=function(a){"onlyHighStars"===a&&(userConfig.filter.onlyHighRarity.value=!userConfig.filter.onlyHighRarity.value);saveUserConfig();syncButtons();showResult()};window.errorCatcherExec=window.errorCatcherExec||[];try{window.errorCatcherExec.push("syncButtons")}catch(a){window.errorCatcherExec=[],window.errorCatcherExec.push("syncButtons")};
+var glob = glob || {
+    namespace: 'recr',
+    ga_event_category: '공개모집 계산기'
+}
+window[glob.namespace] = window[glob.namespace] || {}
+
+var selectionCount = 0
+
+window[glob.namespace].countCheck = function (checkBox) {
+	if (checkBox.checked) {
+		selectionCount++
+	}
+	else {
+		selectionCount--
+	}
+	
+	if (selectionCount > 5) {
+		checkBox.checked = false;
+		selectionCount--
+		
+		return false
+	}
+	
+	return true
+}
+
+window[glob.namespace].tagClicked = function (checkBox, doCalc) {
+	// 이미 태그를 최대 갯수만큼 선택한 상태에서 다시 태그를 누른 경우, 아무것도 하지 않음
+	if (countCheck(checkBox) === false)
+	{
+		return false
+	}
+	
+    if (doCalc === undefined || doCalc === true) {
+        // 태그가 정상적으로 선택되었다면, 재계산하여 결과를 갱신
+        showResult()
+        
+        gtag('event', '계산(5개 태그 선택)', {
+            'event_category': '공개모집 계산기'
+        })
+    }
+}
+
+window[glob.namespace].getCheckboxList = function () {
+    return Array.from(document.querySelectorAll('.selection-panel .checkboxButton + label.tag'), el => document.getElementById(el.htmlFor))
+}
+
+window[glob.namespace].resetClassName = function () {
+	getCheckboxList().forEach(cb => {
+        cb.className = 'checkboxButton' // 점멸 표시 등이 있을 경우, 기본값으로 초기화
+	})
+}
+
+window[glob.namespace].clearSelection = function (doScroll, clearTagBatchSelector) {
+    gtag('event', '선택 초기화', {
+        'event_category': '공개모집 계산기'
+    })
+    
+	var checkboxList = getCheckboxList()
+	
+	for (var i = 0; i < checkboxList.length; ++i)
+	{
+        checkboxList[i].className = 'checkboxButton' // 점멸 표시 등이 있을 경우, 기본값으로 초기화
+		checkboxList[i].checked = false
+	}
+	selectionCount = 0
+    
+	// 결과출력 초기화
+	showResult()
+    
+    if (doScroll === undefined || doScroll === true) {
+        // 스크롤 버그를 해결하기 위해, 결과출력이 초기화된 뒤에는 스크롤바 위치를 재설정
+        $('html,body').animate({scrollTop: 0}, 200)
+    }
+    
+    if (clearTagBatchSelector === undefined || clearTagBatchSelector === true) {
+        document.getElementById('tagBatchSelector').value = ''
+    }
+    
+    if (userConfig.input.autoFocusBatchSelector.value) {
+        document.getElementById('tagBatchSelector').focus()
+    }
+}
+
+window[glob.namespace].filterClicked = function (filterName) {
+	if (filterName === 'onlyHighStars')
+	{
+        userConfig.filter.onlyHighRarity.value = !userConfig.filter.onlyHighRarity.value
+	}
+	
+    // 설정 저장
+    saveUserConfig()
+    
+	// 여러 필터 버튼들을 동기화
+	syncButtons()
+	
+	// 결과출력 갱신
+	showResult()
+}
+
+window.errorCatcherExec = window.errorCatcherExec || []
+try {
+    window.errorCatcherExec.push('syncButtons')
+} catch (e) {
+    window.errorCatcherExec = []
+    window.errorCatcherExec.push('syncButtons')
+}

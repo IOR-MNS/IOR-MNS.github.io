@@ -1,31 +1,578 @@
-var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.createTemplateTagFirstArg=function(a){return a.raw=a};$jscomp.createTemplateTagFirstArgWithRaw=function(a,b){a.raw=b;return a};$jscomp.arrayIteratorImpl=function(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}};$jscomp.arrayIterator=function(a){return{next:$jscomp.arrayIteratorImpl(a)}};$jscomp.makeIterator=function(a){var b="undefined"!=typeof Symbol&&Symbol.iterator&&a[Symbol.iterator];return b?b.call(a):$jscomp.arrayIterator(a)};
-$jscomp.ASSUME_ES5=!1;$jscomp.ASSUME_NO_NATIVE_MAP=!1;$jscomp.ASSUME_NO_NATIVE_SET=!1;$jscomp.SIMPLE_FROUND_POLYFILL=!1;$jscomp.ISOLATE_POLYFILLS=!1;$jscomp.defineProperty=$jscomp.ASSUME_ES5||"function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};
-$jscomp.getGlobal=function(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error("Cannot find global object");};$jscomp.global=$jscomp.getGlobal(this);$jscomp.IS_SYMBOL_NATIVE="function"===typeof Symbol&&"symbol"===typeof Symbol("x");$jscomp.TRUST_ES6_POLYFILLS=!$jscomp.ISOLATE_POLYFILLS||$jscomp.IS_SYMBOL_NATIVE;$jscomp.polyfills={};
-$jscomp.propertyToPolyfillSymbol={};$jscomp.POLYFILL_PREFIX="$jscp$";var $jscomp$lookupPolyfilledValue=function(a,b){var c=$jscomp.propertyToPolyfillSymbol[b];if(null==c)return a[b];c=a[c];return void 0!==c?c:a[b]};$jscomp.polyfill=function(a,b,c,d){b&&($jscomp.ISOLATE_POLYFILLS?$jscomp.polyfillIsolated(a,b,c,d):$jscomp.polyfillUnisolated(a,b,c,d))};
-$jscomp.polyfillUnisolated=function(a,b,c,d){c=$jscomp.global;a=a.split(".");for(d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))return;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&null!=b&&$jscomp.defineProperty(c,a,{configurable:!0,writable:!0,value:b})};
-$jscomp.polyfillIsolated=function(a,b,c,d){var e=a.split(".");a=1===e.length;d=e[0];d=!a&&d in $jscomp.polyfills?$jscomp.polyfills:$jscomp.global;for(var f=0;f<e.length-1;f++){var g=e[f];if(!(g in d))return;d=d[g]}e=e[e.length-1];c=$jscomp.IS_SYMBOL_NATIVE&&"es6"===c?d[e]:null;b=b(c);null!=b&&(a?$jscomp.defineProperty($jscomp.polyfills,e,{configurable:!0,writable:!0,value:b}):b!==c&&($jscomp.propertyToPolyfillSymbol[e]=$jscomp.IS_SYMBOL_NATIVE?$jscomp.global.Symbol(e):$jscomp.POLYFILL_PREFIX+e,e=
-$jscomp.propertyToPolyfillSymbol[e],$jscomp.defineProperty(d,e,{configurable:!0,writable:!0,value:b})))};$jscomp.initSymbol=function(){};
-$jscomp.polyfill("Symbol",function(a){if(a)return a;var b=function(a,b){this.$jscomp$symbol$id_=a;$jscomp.defineProperty(this,"description",{configurable:!0,writable:!0,value:b})};b.prototype.toString=function(){return this.$jscomp$symbol$id_};var c=0,d=function(a){if(this instanceof d)throw new TypeError("Symbol is not a constructor");return new b("jscomp_symbol_"+(a||"")+"_"+c++,a)};return d},"es6","es3");$jscomp.initSymbolIterator=function(){};
-$jscomp.polyfill("Symbol.iterator",function(a){if(a)return a;a=Symbol("Symbol.iterator");for(var b="Array Int8Array Uint8Array Uint8ClampedArray Int16Array Uint16Array Int32Array Uint32Array Float32Array Float64Array".split(" "),c=0;c<b.length;c++){var d=$jscomp.global[b[c]];"function"===typeof d&&"function"!=typeof d.prototype[a]&&$jscomp.defineProperty(d.prototype,a,{configurable:!0,writable:!0,value:function(){return $jscomp.iteratorPrototype($jscomp.arrayIteratorImpl(this))}})}return a},"es6",
-"es3");$jscomp.initSymbolAsyncIterator=function(){};$jscomp.iteratorPrototype=function(a){a={next:a};a[Symbol.iterator]=function(){return this};return a};$jscomp.iteratorFromArray=function(a,b){a instanceof String&&(a+="");var c=0,d={next:function(){if(c<a.length){var e=c++;return{value:b(e,a[e]),done:!1}}d.next=function(){return{done:!0,value:void 0}};return d.next()}};d[Symbol.iterator]=function(){return d};return d};
-$jscomp.polyfill("Array.prototype.keys",function(a){return a?a:function(){return $jscomp.iteratorFromArray(this,function(a){return a})}},"es6","es3");var glob=glob||{namespace:"recr",ga_event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"};window[glob.namespace]=window[glob.namespace]||{};
-var providedConfigs=[{title:"\uc9c0\uc5ed \uc124\uc815",id:"locale",configs:[{title:"\uc11c\ubc84",id:"region",exclusive:!0,options:[{title:"\ud55c\uad6d",value:"kr",default:!0},{title:"\uc911\uad6d",value:"cn"},{title:"\uc77c\ubcf8",value:"jp"},{title:"\uae00\ub85c\ubc8c",value:"en"}]},{title:"\uc5b8\uc5b4",id:"lang",exclusive:!0,options:[{title:"\ud55c\uad6d\uc5b4",value:"kr",default:!0},{title:"\uc911\uad6d\uc5b4",value:"cn"},{title:"\uc77c\ubcf8\uc5b4",value:"jp"},{title:"\uc601\uc5b4",value:"en"}]}]},
-{title:"\uc785\ub825 \uc124\uc815",id:"input",configs:[{title:"\ud0dc\uadf8 \uc785\ub825\uae30",id:"batchSelector",exclusive:!0,options:[{title:"\uc0ac\uc6a9",value:!0,default:!0},{title:"\ubbf8\uc0ac\uc6a9",value:!1}]},{title:"\ud0dc\uadf8 \uc785\ub825\uae30 \uc790\ub3d9 \ud3ec\ucee4\uc2a4",id:"autoFocusBatchSelector",exclusive:!0,options:[{title:"\uc0ac\uc6a9",value:!0},{title:"\ubbf8\uc0ac\uc6a9",value:!1,default:!0}]}]},{title:"\ud45c\uc2dc \uc124\uc815",id:"display",configs:[{title:"\uc774\ubbf8\uc9c0",
-id:"image",exclusive:!0,options:[{title:"\uc5c6\uc74c",value:"none",default:!0},{title:"\ub9e4\uc6b0 \uc791\uac8c",value:"tiny"},{title:"\uc791\uac8c",value:"small"},{title:"\uc911\uac04",value:"medium"},{title:"\ud06c\uac8c",value:"large"}]},{title:"\uc774\ub984",id:"name",exclusive:!0,options:[{title:"\ud45c\uc2dc",value:!0,default:!0},{title:"\ube44\ud45c\uc2dc",value:!1}]},{title:"\ub808\uc5b4\ub3c4",id:"rarity",exclusive:!0,options:[{title:"\ud45c\uc2dc",value:!0,default:!0},{title:"\ube44\ud45c\uc2dc",
-value:!1}]},{title:"\uc0ac\uc6a9 \ubc29\ubc95",id:"guidePanel",exclusive:!0,options:[{title:"\ud45c\uc2dc",value:!0,default:!0},{title:"\ube44\ud45c\uc2dc",value:!1}]}]},{title:"\ud544\ud130 \uc124\uc815",id:"filter",configs:[{title:"\uace0\ub4f1\uae09 \ud655\uc815\uc2dd\ub9cc \ud45c\uc2dc",id:"onlyHighRarity",exclusive:!0,options:[{title:"\ucf1c\uae30",value:!0},{title:"\ub044\uae30",value:!1,default:!0}]},{title:"\ud5c8\uc6a9 \ub808\uc5b4\ub3c4",id:"rarity",exclusive:!1,options:[{title:"1\uc131",
-value:1,default:!0},{title:"2\uc131",value:2,default:!0},{title:"3\uc131",value:3,default:!0},{title:"4\uc131",value:4,default:!0},{title:"5\uc131",value:5,default:!0},{title:"6\uc131",value:6,default:!0}]}]}];window[glob.namespace].saveToStorage=function(a,b){localStorage.setItem("recr_"+a,JSON.stringify(b))};window[glob.namespace].loadFromStorage=function(a,b){b=void 0===b?null:b;a=localStorage.getItem("recr_"+a)||b;return null!==a?JSON.parse(a):{}};var userConfig={};
-window[glob.namespace].saveUserConfig=function(){saveToStorage("userConfig",userConfig)};
-window[glob.namespace].loadUserConfig=function(){userConfig=loadFromStorage("userConfig");for(var a=0,b=providedConfigs.length;a<b;++a){var c=providedConfigs[a];userConfig[c.id]||(userConfig[c.id]={});for(var d=0,e=c.configs.length;d<e;++d){var f=c.configs[d];if(void 0===userConfig[c.id][f.id]||void 0===userConfig[c.id][f.id].value){userConfig[c.id][f.id]={};!0===f.exclusive?userConfig[c.id][f.id].exclusive=!0:(userConfig[c.id][f.id].exclusive=!1,userConfig[c.id][f.id].value=[]);for(var g=0,h=f.options.length;g<
-h;++g)if(!0===f.options[g].default)if(!0===f.exclusive){userConfig[c.id][f.id].value=f.options[g].value;break}else userConfig[c.id][f.id].value.push(f.options[g].value)}}}};
-window[glob.namespace].setConfigModal=function(){for(var a=document.createDocumentFragment(),b=0,c=providedConfigs.length;b<c;++b){var d=providedConfigs[b],e=document.createElement("div");e.style.fontSize="90%";e.classList.add("user-config-category");e.dataset.id=d.id;e.innerHTML+='<hr style="border-color:#444;display:inline-block"><span style="font-size: 0.9em">'+d.title+"</span><br><br>";for(var f=0,g=d.configs.length;f<g;++f){var h=d.configs[f],k=document.createElement("div");k.classList.add("user-config-config");
-k.dataset.id=h.id;k.innerHTML+='<span style="font-size: 0.75em;color:#eee">'+h.title+"</span><br>";for(var m=0,r=h.options.length;m<r;++m){var p=h.options[m],q=["user-config-",d.id,h.id,m.toString()].join("-"),l=document.createElement("input");l.classList.add("checkboxButton","user-config-option");l.dataset.value=JSON.stringify(p.value);l.setAttribute("id",q);l.setAttribute("name",h.id);!0===h.exclusive?l.setAttribute("type","radio"):l.setAttribute("type","checkbox");var n=document.createElement("label");
-n.className="tag";n.innerText=p.title;n.setAttribute("for",q);k.appendChild(l);k.appendChild(n)}e.appendChild(k)}a.appendChild(e)}document.querySelector(".modal-body").appendChild(a)};
-window[glob.namespace].selectUserConfig=function(){Object.keys(userConfig);for(var a=document.querySelectorAll(".user-config-option"),b=0;b<a.length;++b){var c=a[b],d=$jscomp.makeIterator(c.getAttribute("id").split("--")[1].split("-")),e=d.next().value,f=d.next().value;d=JSON.parse(c.dataset.value);if(userConfig[e]&&userConfig[e][f])if(!0===userConfig[e][f].exclusive&&d===userConfig[e][f].value)c.checked=!0;else{e=userConfig[e][f].value;f=0;for(var g=e.length;f<g;++f)if(e[f]===d){c.checked=!0;break}}}};
-window[glob.namespace].fetchUserConfig=function(){for(var a=Object.keys(userConfig),b=0,c=a.length;b<c;++b)for(var d=Object.keys(userConfig[a[b]]),e=0,f=d.length;e<f;++e)!1===userConfig[a[b]][d[e]].exclusive&&(userConfig[a[b]][d[e]].value=[]);a=document.querySelectorAll(".user-config-option:checked");b=0;for(c=a.length;b<c;++b)e=a[b],f=$jscomp.makeIterator(e.getAttribute("id").split("--")[1].split("-")),d=f.next().value,f=f.next().value,e=JSON.parse(e.dataset.value),void 0===userConfig[d]&&(userConfig[d]=
-{}),!0===userConfig[d][f].exclusive?userConfig[d][f].value=e:userConfig[d][f].value.push(e);saveUserConfig();loadUserConfig();syncButtons()};window[glob.namespace].openConfigModal=function(){gtag("event","\uc124\uc815 \ud504\ub86c\ud504\ud2b8 \uc5f4\uae30",{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"});selectUserConfig();document.getElementById("config-modal").style.display="block";document.getElementById("config-modal").style.opacity="1"};
-window[glob.namespace].checkBatchSelectorOption=function(){var a=document.getElementById("tagBatchSelector-container"),b=userConfig.input.batchSelector.value;console.log(b);a.style.display=!1===b?"none":"block"};window[glob.namespace].checkGuidePanelOption=function(){var a=document.querySelectorAll(".guide-panel");!1===userConfig.display.guidePanel.value?(a.forEach(function(a){a.style.display="none"}),$("#result-panel").prepend('<div class="panel"></div>')):a.forEach(function(a){a.style.display="block"})};
-window[glob.namespace].closeConfigModal=function(){fetchUserConfig();checkBatchSelectorOption();checkGuidePanelOption();document.getElementById("tag-top").dataset.lang!=userConfig.locale.region.value&&configSelectionPanel();showResult();document.getElementById("config-modal").style.opacity="0";setTimeout(function(){document.getElementById("config-modal").style.display="none"},300)};
-window[glob.namespace].closeConfigModal_button=function(){gtag("event","\uc124\uc815 \ud504\ub86c\ud504\ud2b8 \ub2eb\uae30: \ubc84\ud2bc \ud074\ub9ad",{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"});closeConfigModal()};
-window[glob.namespace].closeConfigModal_outer=function(a){a.target.isSameNode(document.getElementById("config-modal"))&&(gtag("event","\uc124\uc815 \ud504\ub86c\ud504\ud2b8 \ub2eb\uae30: \uc678\ubd80 \ud074\ub9ad",{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30"}),closeConfigModal())};
-window[glob.namespace].main_configManager=function(){document.querySelector(".menu-btn").addEventListener("click",openConfigModal);document.querySelector(".close-btn").addEventListener("click",closeConfigModal_button);window.addEventListener("click",closeConfigModal_outer);setConfigModal();loadUserConfig();checkBatchSelectorOption();checkGuidePanelOption();gtag("event","\uc124\uc815\ub41c \uc11c\ubc84: "+userConfig.locale.region.value,{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30",
-non_interaction:!0});gtag("event","\uc124\uc815\ub41c \uc5b8\uc5b4: "+userConfig.locale.lang.value,{event_category:"\uacf5\uac1c\ubaa8\uc9d1 \uacc4\uc0b0\uae30",non_interaction:!0})};window.errorCatcherExec=window.errorCatcherExec||[];try{window.errorCatcherExec.push("main_configManager")}catch(a){window.errorCatcherExec=[],window.errorCatcherExec.push("main_configManager")};
+var glob = glob || {
+    namespace: 'recr',
+    ga_event_category: '공개모집 계산기'
+}
+window[glob.namespace] = window[glob.namespace] || {}
+
+// https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Trailing_commas
+const providedConfigs = [
+    {
+        title: '지역 설정',
+        id: 'locale',
+        
+        configs: [
+            {
+                title: '서버',
+                id: 'region',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '한국',
+                        value: 'kr',
+                        default: true,
+                    },
+                    {
+                        title: '중국',
+                        value: 'cn',
+                    },
+                    {
+                        title: '일본',
+                        value: 'jp',
+                    },
+                    {
+                        title: '글로벌',
+                        value: 'en',
+                    },
+                ]
+            },
+            {
+                title: '언어',
+                id: 'lang',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '한국어',
+                        value: 'kr',
+                        default: true,
+                    },
+                    {
+                        title: '중국어',
+                        value: 'cn',
+                    },
+                    {
+                        title: '일본어',
+                        value: 'jp',
+                    },
+                    {
+                        title: '영어',
+                        value: 'en',
+                    },
+                ]
+            },
+        ]
+    },
+    {
+        title: '입력 설정',
+        id: 'input',
+        
+        configs: [
+            {
+                title: '태그 입력기',
+                id: 'batchSelector',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '사용',
+                        value: true,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '미사용',
+                        value: false,
+                    },
+                ]
+            },
+            
+            {
+                title: '태그 입력기 자동 포커스',
+                id: 'autoFocusBatchSelector',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '사용',
+                        value: true,
+                    },
+                    
+                    {
+                        title: '미사용',
+                        value: false,
+                        default: true,
+                    },
+                ]
+            },
+        ]
+    },
+    
+    {
+        title: '표시 설정',
+        id: 'display',
+        
+        configs: [
+            {
+                title: '이미지',
+                id: 'image',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '없음',
+                        value: 'none',
+                        default: true,
+                    },
+                    
+                    {
+                        title: '매우 작게',
+                        value: 'tiny',
+                    },
+                    
+                    {
+                        title: '작게',
+                        value: 'small',
+                    },
+                    
+                    {
+                        title: '중간',
+                        value: 'medium',
+                    },
+                    
+                    {
+                        title: '크게',
+                        value: 'large',
+                    },
+                ]
+            },
+            
+            {
+                title: '이름',
+                id: 'name',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '표시',
+                        value: true,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '비표시',
+                        value: false,
+                    },
+                ]
+            },
+            
+            {
+                title: '레어도',
+                id: 'rarity',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '표시',
+                        value: true,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '비표시',
+                        value: false,
+                    },
+                ]
+            },
+            
+            {
+                title: '사용 방법',
+                id: 'guidePanel',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '표시',
+                        value: true,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '비표시',
+                        value: false,
+                    },
+                ]
+            },
+        ]
+    },
+    
+    {
+        title: '필터 설정',
+        id: 'filter',
+        
+        configs: [
+            {
+                title: '고등급 확정식만 표시',
+                id: 'onlyHighRarity',
+                exclusive: true,
+                
+                options: [
+                    {
+                        title: '켜기',
+                        value: true,
+                    },
+                    
+                    {
+                        title: '끄기',
+                        value: false,
+                        default: true,
+                    },
+                ]
+            },
+            
+            {
+                title: '허용 레어도',
+                id: 'rarity',
+                exclusive: false,
+                
+                options: [
+                    {
+                        title: '1성',
+                        value: 1,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '2성',
+                        value: 2,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '3성',
+                        value: 3,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '4성',
+                        value: 4,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '5성',
+                        value: 5,
+                        default: true,
+                    },
+                    
+                    {
+                        title: '6성',
+                        value: 6,
+                        default: true,
+                    },
+                ]
+            },
+        ]
+    },
+]
+
+window[glob.namespace].saveToStorage = function (key, value) {
+    localStorage.setItem('recr_' + key, JSON.stringify(value))
+}
+
+window[glob.namespace].loadFromStorage = function (key, defaultValue = null) {
+    var ret = localStorage.getItem('recr_' + key) || defaultValue
+    if (ret !== null) {
+        return JSON.parse(ret)
+    }
+    else {
+        return {}
+    }
+}
+
+var userConfig = {}
+
+window[glob.namespace].saveUserConfig = function () {
+    saveToStorage('userConfig', userConfig)
+}
+
+window[glob.namespace].loadUserConfig = function () {
+    // 저장된 설정 로드
+    userConfig = loadFromStorage('userConfig')
+    
+    // 설정의 빈 부분을 기본값으로 채움
+    for (var i = 0, len = providedConfigs.length; i < len; ++i) {
+        var category = providedConfigs[i]
+        
+        if (!userConfig[category.id]) {
+            userConfig[category.id] = {}
+        }
+        
+        for (var j = 0, jlen = category.configs.length; j < jlen; ++j) {
+            var config = category.configs[j]
+            
+            // 값이 이미 존재하면 그대로 놔둠
+            if (userConfig[category.id][config.id] !== undefined
+                && userConfig[category.id][config.id].value !== undefined) {
+                continue
+            }
+            
+            // 값이 없으면 기본값으로 채움
+            userConfig[category.id][config.id] = {}
+            
+            if (config.exclusive === true) {
+                userConfig[category.id][config.id].exclusive = true
+            }
+            else {
+                userConfig[category.id][config.id].exclusive = false
+                userConfig[category.id][config.id].value = []
+            }
+            
+            for (var k = 0, klen = config.options.length; k < klen; ++k) {
+                if (config.options[k].default === true) {
+                    if (config.exclusive === true) {
+                        userConfig[category.id][config.id].value = config.options[k].value
+                        break
+                    }
+                    else {
+                        userConfig[category.id][config.id].value.push(config.options[k].value)
+                    }
+                }
+            }
+        }
+    }
+}
+
+window[glob.namespace].setConfigModal = function () {
+    var configFragment = document.createDocumentFragment()
+
+    for (var i = 0, len = providedConfigs.length; i < len; ++i) {
+        var category = providedConfigs[i]
+        
+        var categorydom = document.createElement('div')
+        categorydom.style.fontSize = '90%'
+        categorydom.classList.add('user-config-category')
+        categorydom.dataset.id = category.id
+        categorydom.innerHTML += `<hr style="border-color:#444;display:inline-block"><span style="font-size: 0.9em">${category.title}</span><br><br>`
+        
+        for (var j = 0, jlen = category.configs.length; j < jlen; ++j) {
+            var config = category.configs[j]
+            
+            var configdom = document.createElement('div')
+            configdom.classList.add('user-config-config') 
+            configdom.dataset.id = config.id
+            configdom.innerHTML += '<span style="font-size: 0.75em;color:#eee">' + config.title + '</span><br>'
+            
+            
+            for (var k = 0, klen = config.options.length; k < klen; ++k) {
+                var option = config.options[k]
+                var optionid = ['user-config-', category.id, config.id, k.toString()].join('-')
+                
+                var optioninputdom = document.createElement('input')
+                optioninputdom.classList.add('checkboxButton', 'user-config-option')
+                optioninputdom.dataset.value = JSON.stringify(option.value)
+                optioninputdom.setAttribute('id', optionid)
+                optioninputdom.setAttribute('name', config.id)
+                
+                if (config.exclusive === true) {
+                    optioninputdom.setAttribute('type', 'radio')
+                }
+                else {
+                    optioninputdom.setAttribute('type', 'checkbox')
+                }
+                
+                
+                var optionlabeldom = document.createElement('label')
+                optionlabeldom.className = 'tag'
+                optionlabeldom.innerText = option.title
+                optionlabeldom.setAttribute('for', optionid)
+                configdom.appendChild(optioninputdom)
+                configdom.appendChild(optionlabeldom)
+            }
+            
+            categorydom.appendChild(configdom)
+        }
+        
+        configFragment.appendChild(categorydom)
+    }
+
+    document.querySelector('.modal-body').appendChild(configFragment)
+}
+
+window[glob.namespace].selectUserConfig = function () {
+    var keys = Object.keys(userConfig)
+    var options = document.querySelectorAll('.user-config-option')
+    
+    var optionID = '', val = null
+    for (var i = 0; i < options.length; ++i) {
+        var option = options[i]
+        var [categoryID, configID] = option.getAttribute('id').split('--')[1].split('-')
+        
+        var optionValue = JSON.parse(option.dataset.value)
+        
+        if (userConfig[categoryID] && userConfig[categoryID][configID]) {
+            if (userConfig[categoryID][configID].exclusive === true
+                && optionValue === userConfig[categoryID][configID].value) {
+                option.checked = true
+            }
+            else {
+                var userConfigValues = userConfig[categoryID][configID].value
+                for (var j = 0, jlen = userConfigValues.length; j < jlen; ++j) {
+                    if (userConfigValues[j] === optionValue) {
+                        option.checked = true
+                        break
+                    }
+                }
+            }
+        }
+    }
+}
+
+window[glob.namespace].fetchUserConfig = function () {
+    // 여러 값을 가질 수 있는 설정은, fetch 전 초기화
+    var keys = Object.keys(userConfig)
+    for (var i = 0, len = keys.length; i < len; ++i) {
+        var categoryKeys = Object.keys(userConfig[keys[i]])
+        
+        for (var j = 0, jlen = categoryKeys.length; j < jlen; ++j) {
+            if (userConfig[keys[i]][categoryKeys[j]].exclusive === false) {
+                userConfig[keys[i]][categoryKeys[j]].value = []
+            }
+        }
+    }
+    
+    var selectedOptions = document.querySelectorAll('.user-config-option:checked')
+    
+    for (var i = 0, len = selectedOptions.length; i < len; ++i) {
+        var option = selectedOptions[i]
+        var [categoryID, configID] = option.getAttribute('id').split('--')[1].split('-')
+        
+        var optionValue = JSON.parse(option.dataset.value)
+        
+        if (userConfig[categoryID] === undefined) {
+            userConfig[categoryID] = {}
+        }
+        
+        if (userConfig[categoryID][configID].exclusive === true) {
+            userConfig[categoryID][configID].value = optionValue
+        }
+        else {
+            userConfig[categoryID][configID].value.push(optionValue)
+        }
+    }
+    
+    saveUserConfig()
+    loadUserConfig()
+    syncButtons()
+}
+
+window[glob.namespace].openConfigModal = function () {
+    gtag('event', '설정 프롬프트 열기', {
+        'event_category': '공개모집 계산기'
+    })
+    
+	selectUserConfig()
+	document.getElementById('config-modal').style.display = 'block'
+	document.getElementById('config-modal').style.opacity = '1'
+}
+
+window[glob.namespace].checkBatchSelectorOption = function () {
+    var bsc = document.getElementById('tagBatchSelector-container')
+    var optval = userConfig.input.batchSelector.value
+    console.log(optval)
+    if (optval === false) {
+        bsc.style.display = 'none'
+    }
+    else {
+        bsc.style.display = 'block'
+    }
+}
+
+window[glob.namespace].checkGuidePanelOption = function () {
+    var gpList = document.querySelectorAll('.guide-panel')
+    var optval = userConfig.display.guidePanel.value
+    
+    if (optval === false) {
+        gpList.forEach(function(elm) {
+            elm.style.display = 'none'
+        })
+        $('#result-panel').prepend('<div class="panel"></div>')
+    }
+    else {
+        gpList.forEach(function(elm) {
+            elm.style.display = 'block'
+        })
+    }
+}
+
+window[glob.namespace].closeConfigModal = function () {
+	fetchUserConfig()
+    
+    checkBatchSelectorOption()
+    checkGuidePanelOption()
+    
+    // dataset.lang은 JSON.stringify로 시리얼라이즈하지 않았다.
+    if (document.getElementById('tag-top').dataset.lang != userConfig.locale.region.value) {
+        configSelectionPanel()
+    }
+    
+	showResult()
+    
+    document.getElementById('config-modal').style.opacity = '0'
+    setTimeout(function () {
+        document.getElementById('config-modal').style.display = 'none'
+    }, 300)
+}
+
+window[glob.namespace].closeConfigModal_button = function() {
+    gtag('event', '설정 프롬프트 닫기: 버튼 클릭', {
+        'event_category': '공개모집 계산기'
+    })
+    
+    closeConfigModal()
+}
+window[glob.namespace].closeConfigModal_outer = function(event) {
+    if (event.target.isSameNode(document.getElementById('config-modal'))) {
+        gtag('event', '설정 프롬프트 닫기: 외부 클릭', {
+            'event_category': '공개모집 계산기'
+        })
+        
+        closeConfigModal()
+    }
+}
+
+window[glob.namespace].main_configManager = function () {
+    /* 이벤트 리스너 설정 */
+    // 설정 버튼 클릭시, modal prompt 열음
+    document.querySelector('.menu-btn').addEventListener('click', openConfigModal)
+
+    // modal prompt의 content에 있는 닫기 버튼 클릭시, 닫음
+    document.querySelector('.close-btn').addEventListener('click', closeConfigModal_button)
+
+    // modal prompt의 content 바깥 클릭시, 닫음
+    window.addEventListener('click', closeConfigModal_outer)
+
+    setConfigModal()
+    loadUserConfig()
+    checkBatchSelectorOption()
+    checkGuidePanelOption()
+
+    gtag('event', '설정된 서버: ' + userConfig.locale.region.value, {
+        'event_category': '공개모집 계산기',
+        'non_interaction': true
+    })
+
+    gtag('event', '설정된 언어: ' + userConfig.locale.lang.value, {
+        'event_category': '공개모집 계산기',
+        'non_interaction': true
+    })
+}
+
+window.errorCatcherExec = window.errorCatcherExec || []
+try {
+    window.errorCatcherExec.push('main_configManager')
+} catch (e) {
+    window.errorCatcherExec = []
+    window.errorCatcherExec.push('main_configManager')
+}
