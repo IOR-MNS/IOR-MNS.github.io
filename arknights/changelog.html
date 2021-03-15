@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script src="scripts/plugin/bugsnag-7.8.2.min.js"></script>
+        <script>Bugsnag.start({
+            'apiKey': '6b2e0a8c5c671f6eb58c38ec9a0a9762',
+            'appVersion': '202103151716',
+            'collectUserIp': false,
+            'onError': function (event) {
+                event.setUser(localStorage.getItem('client_fp'))
+                event.addMetadata('initialData', JSON.parse(window.initialData || "null"))
+                event.addMetadata('data', localStorage)
+            }
+        })</script>
+        <script>window.initialData = JSON.stringify(localStorage)</script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174914504-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'UA-174914504-1');
+            gtag('config', 'UA-174914504-1', {'anonymize_ip': true});
         </script>
+        <script>
+            function initFingerprintJS() {
+                if (!localStorage.getItem('client_fp')) {
+                    FingerprintJS.load().then(fp => {
+                        fp.get().then(result => {
+                            localStorage.setItem('client_fp', result.visitorId);
+                        });
+                    });
+                }
+            }
+        </script>
+        <script
+            async
+            src="scripts/plugin/fp-3.0.6.min.js"
+            onload="initFingerprintJS()"
+        ></script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi">
 		<title>MINASE : 명일방주</title>
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|&display=swap&subset=korean" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202103131845/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202103131845/index/index.css" rel="stylesheet" type="text/css">
+		<link href="styles/202103151716/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202103151716/index/index.css" rel="stylesheet" type="text/css">
 		<style>
 			.history-container {
 				font-family: 'Noto Sans KR', sans-serif;
