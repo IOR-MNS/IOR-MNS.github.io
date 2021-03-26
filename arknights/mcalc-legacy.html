@@ -25,8 +25,8 @@
         <script>
             function initFingerprintJS() {
                 if (!localStorage.getItem('client_fp')) {
-                    FingerprintJS.load().then(fp => {
-                        fp.get().then(result => {
+                    FingerprintJS.load().then(function (fp) {
+                        fp.get().then(function (result) {
                             localStorage.setItem('client_fp', result.visitorId);
                         });
                     });
