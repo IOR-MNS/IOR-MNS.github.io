@@ -1519,8 +1519,9 @@ var gotoNextDay = function () {
     
     // n주년 일일 미션 반영
     if (e.type == '3rd' || e.type == '4th') {
-        daily[day].drink30 += 2 
-        daily[day].jwl += 25
+        // 당일 한정 드링크이므로, 드링크가 아니라 스태미너에 직접 반영함
+        daily[day].stamina += 30*2 + getMaxStamina();
+        daily[day].jwl += 25;
 
         if (e.type == '4th') {
             daily[day].item += 4000
@@ -1536,7 +1537,9 @@ var gotoNextDay = function () {
         daily[day].item -= 2 * f.eventLive.difmm.cons;
     }
     if (day == 1 && recvDailyMission == true) {
-        daily[day].drink30 -= 2;
+        // 당일 한정 드링크이므로, 드링크가 아니라 스태미너에 직접 반영함
+        daily[day].stamina -= 30*2 + getMaxStamina();
+        daily[day].jwl -= 25;
 
         if (e.type == '4th')
             daily[day].item -= 4000;

@@ -19,8 +19,8 @@
 		
 		<link href="images/favicon.ico" rel="shortcut icon">
 		
-		<link href="styles/202107040331/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202107040331/evcalc/evcalc.css" rel="stylesheet" type="text/css">
+		<link href="styles/202107040425/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202107040425/evcalc/evcalc.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<a href="index.html">
@@ -97,7 +97,7 @@
 					</div>
 					
 					<div><label for="playerData_stamina">스태미너</label>
-						<input type="number" value="120" id="playerData_stamina">
+						<input type="number" value="145" id="playerData_stamina">
 					</div>
 					
 					<div><label for="playerData_ticket">티켓</label>
@@ -105,7 +105,7 @@
 					</div>
 					
 					<div><label for="playerData_item">재화</label>
-						<input type="number" value="360" id="playerData_item">
+						<input type="number" value="0" id="playerData_item">
 					</div>
 	
 					<div><label for="playerData_jwl">쥬얼</label>
@@ -137,7 +137,7 @@
 					</div>
 					
 					<div><label for="playerData_boost">부스트</label>
-						<input type="number" value="1" id="playerData_boost">
+						<input type="number" value="0" id="playerData_boost">
 					</div>
 
 					<div><label for="staminaUsage">스태미너 사용률</label>
@@ -411,6 +411,13 @@
 				<p>* 아직 베타 서비스이므로 몇 가지 주의 사항이 있습니다.</p>
 				<ol>
 					<li>
+						일일 미션 보상으로 30 드링크 2개, MAX 드링크 1개, 쥬엘 25개를 반영합니다.
+						일일 미션 보상의 획득 조건은 따로 검사하지 않습니다.
+					</li>
+					<li>
+						이벤트 포인트 달성 보상(드링크 / 쥬엘 / 머니)은 반영하지 않습니다. 필요하다면 보상을 따로 합산하여 입력 값에 미리 반영해주세요.
+					</li>
+					<li>
 						입력값 검증을 일부 수행하지 않으므로, 입력값을 제대로 입력했는지 꼭 확인해주세요.
 					</li>
 					<li>
@@ -455,8 +462,8 @@
 		</div>
 		<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="./scripts/202107040331/calc.js"></script>
-		<script src="./scripts/202107040331/ui.js"></script>
-		<script src="./scripts/202107040331/dataManager.js"></script>	
+		<script src="./scripts/202107040425/calc.js"></script>
+		<script src="./scripts/202107040425/ui.js"></script>
+		<script src="./scripts/202107040425/dataManager.js"></script>	
 	</body>
 </html>
