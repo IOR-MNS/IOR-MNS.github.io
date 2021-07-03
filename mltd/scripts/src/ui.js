@@ -233,7 +233,7 @@ var print = function (id) {
     for (i = 1; i <= e.days; ++i) {
         stat.norma.live += daily[i].playData.staminaRun + daily[i].playData.ticketRun;
         stat.norma.work += daily[i].playData.work;
-        stat.norma.eventLive += daily[i].playData.eventLive;
+        stat.norma.eventLive += daily[i].playData.eventRun;
     }
     
     stat.affection = {
@@ -287,8 +287,8 @@ var print = function (id) {
             
             ['live', 'eventLive', 'work'].forEach(function (name2) {
                 daily[i][name1].total += daily[i][name1][name2];
-                totalValue[name1][name2] += daily[i][name1].total;
-                totalValue[name1].total += daily[i][name1].total;
+                totalValue[name1][name2] += daily[i][name1][name2];
+                totalValue[name1].total += daily[i][name1][name2];
             });
         });
     }
@@ -314,6 +314,10 @@ var print = function (id) {
         htmltxt += '<p>쥬엘: <span style="color: red">' + (-daily[e.days].jwl) + '개 부족</span></p>';
     
     htmltxt += '<p>최종 레벨/경험치: ' + daily[e.days].level + ' / ' + daily[e.days].exp + '</p>';
+
+    htmltxt += '<p>일반/티켓 라이브 횟수: ' + stat.norma.live +'회</p>';
+    htmltxt += '<p>이벤트 라이브 횟수: ' + stat.norma.eventLive + '회</p>';
+    htmltxt += '<p>스케줄 횟수: ' + stat.norma.work + '회</p>';
 
     htmltxt += '<p>총 플레이 타임: ' + secToTime(stat.playTime.total) + '</p>';
     htmltxt += '<p>--라이브: ' + secToTime(stat.playTime.live + stat.playTime.eventLive) + '</p>';
