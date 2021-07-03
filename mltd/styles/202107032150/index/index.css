@@ -1,0 +1,87 @@
+html {
+    font-family: '배민한나체Air', sans-serif;
+}
+
+/* 모바일 */
+@media (max-width: 480px) and (orientation: portrait), (max-height: 480px) and (orientation: landscape) {
+    /*
+    .panel .vr {
+        display: none;
+    }
+    
+    .serviceLink {
+        width: 100%;
+    }
+    */
+    .panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .serviceLink {
+        flex-grow: 1;
+    }
+}
+
+/* 데스크탑 */
+@media (min-width: 481px) and (orientation: portrait), (min-height: 481px) and (orientation: landscape) {
+    .panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .serviceLink {
+        flex-grow: 1;
+    }
+}
+
+.panel {
+    width: 17rem;
+    max-width: 95%;
+    font-size: 95%;
+}
+
+.intro {
+    display: block;         /* Block 디스플레이 */
+    text-align: center;     /* 텍스트 가운데 정렬 */
+    font-weight: 700;       /* 굵은 글씨        */
+    font-size: 1rem;
+}
+
+.serviceLink {
+    display: inline-block;          /* 텍스트 양끝의 빈 공간을 눌러도 이동할 수 있도록 */
+    text-align: center;             /* 텍스트 가운데 정렬                        */
+    padding: 0.7rem 0;              /* 약간의 패딩                             */
+    margin: 0;
+    width: calc(50% - 0.04rem - 1px);
+    color: var(--color--skyBlue);   /* 각 서비스로의 링크 텍스트는 깔끔한 파란색      */
+    
+    border-right: 0.04rem dotted #bbb;
+    border: none;
+}
+
+.serviceLink.historyLink {
+    color: #777;                    /* 업데이트 내역으로의 링크 텍스트는 회색        */
+}
+
+.serviceLink:hover {                /* 마우스 올리면 배경색 파랗게 변화 */
+    background: var(--background--soft-blue);
+}
+
+.external-link.arknights {
+    padding: 0;
+    background: rgba(0,0,0,0);
+    transition: color 0.3s;
+}
+
+.external-link.arknights:hover {
+    background: rgba(0,0,0,0);
+    color: var(--color--skyBlue);
+}
+
+.history-container {
+    width: 95%;
+    max-width: 25rem;
+}
