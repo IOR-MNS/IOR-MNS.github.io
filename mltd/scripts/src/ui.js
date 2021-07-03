@@ -306,6 +306,9 @@ var print = function (id) {
         htmltxt +=     '<p>--라이브: ' + daily[i]
     }*/
     htmltxt += '<hr>';
+    htmltxt += `<p>추천하는 부스트 사용 루틴:<br>일반 라이브 ${daily[e.days].initialQuota.boost.staminaRun}회 /
+    티켓 라이브 ${daily[e.days].initialQuota.boost.ticketRun}회 /
+    이벤트 라이브 ${daily[e.days].initialQuota.boost.eventRun}회</p>`
     htmltxt += '<p>최종 점수: ' + daily[e.days].playData.totalPoint + 'pt</p>'
     htmltxt += '<p>일평균 플레이 타임: ' + secToTime(stat.playTime.total / e.days) + '</p>';
     if (daily[e.days].jwl >= 0)

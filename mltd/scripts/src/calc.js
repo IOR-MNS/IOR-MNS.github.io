@@ -715,9 +715,14 @@ var getDailyData = function () {
             obj.initialQuota.ticketRun = Number(li.querySelector('[name="ticketRunQuota"]').value);
             obj.initialQuota.eventRun = (obj.eventRun.mul == 0 ? 0 : 'Infinity'); // 넘버형 Infinity로 쓰면, stringify할 때 손실되므로.
                                                                                   // 이렇게 해도, 산술연산이나 비교연산시 (상대가 넘버형이면) 자동변환되므로 문제 없음.
+            /*
             obj.initialQuota.boost.staminaRun = Number(li.querySelector('[name="staminaRunBoostQuota"]').value);
             obj.initialQuota.boost.ticketRun = Number(li.querySelector('[name="ticketRunBoostQuota"]').value);
-            obj.initialQuota.boost.eventRun = Number(li.querySelector('[name="eventRunBoostQuota"]').value);
+            obj.initialQuota.boost.eventRun = Number(li.querySelector('[name="eventRunBoostQuota"]').value);*/
+            // 자동으로 최적의 부스트 비율 탐색
+            obj.initialQuota.boost.staminaRun = boost.staminaRun;
+            obj.initialQuota.boost.ticketRun = boost.ticketRun;
+            obj.initialQuota.boost.eventRun = boost.eventRun;
             
             // leftQuota 세팅
             obj.leftQuota = JSON.parse(JSON.stringify(obj.initialQuota));
@@ -725,7 +730,7 @@ var getDailyData = function () {
             // 일일 데이터 객체 배열에 깊은 복사
             daily[i] = JSON.parse(JSON.stringify(obj));
             
-            console.log(i + '일차 데이터 기본 설정 완료:');
+            //console.log(i + '일차 데이터 기본 설정 완료:');
             //m(i + '일차 데이터 기본 설정 완료:');
             //m(JSON.stringify(daily[i]));
         }
@@ -770,8 +775,8 @@ var loadDaily = function () {
 */
 
 // 해당 레벨의 최대 스태미너 
-var getMaxStamina = function () {
-    var level = daily[day].level;
+var getMaxStamina = function (level) {
+    level = level || daily[day].level;
     
     if( level < 60 ) {
         return 60 + ( parseInt(level / 2, 10) );
@@ -838,7 +843,7 @@ var isNormaLeft = function () {
     updatePlaytime(day);
     
     if (day != e.days && daily[day].playData.time >= daily[day].maxTime) {
-        m('할당량 검사: 최대 플탐 초과로 탈락 (' + daily[day].playData.time + ', ' + daily[day].maxTime + ')');
+        //m('할당량 검사: 최대 플탐 초과로 탈락 (' + daily[day].playData.time + ', ' + daily[day].maxTime + ')');
         return false;
     }
     
@@ -857,7 +862,7 @@ var isNormaLeft = function () {
     //if (dailyPlaytime < 0) { // 일일 점수 체크는 1회차 시뮬에서만 작동. 2회차에서는 이미 시간 균등 분배가 되었으므로.
         // 일일 목표 점수 체크
         if (pointEstim() >= daily[day].playData.targetPoint) {
-            m('할당량 검사: 일일 목표 점수 초과로 탈락 (' + pointEstim() + ', ' + daily[day].playData.targetPoint + ')');
+            //m('할당량 검사: 일일 목표 점수 초과로 탈락 (' + pointEstim() + ', ' + daily[day].playData.targetPoint + ')');
             return false;
         }
     //}
@@ -876,8 +881,8 @@ var isNormaLeft = function () {
     if (pointEstim() >= targetPoint - boostPointEstim()) {
         if (daily[day].leftQuota.eventRun > 0) {
             if (isBoost && daily[day].item >= daily[day].eventRun.boost.cons) {
-                console.log('할당량 검사: 최종 목표 점수 초과 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
-                console.log('최대 플탐이 다할 때까지 이벤트 재화 녹이기', daily[day].item);
+                //console.log('할당량 검사: 최종 목표 점수 초과 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
+                //console.log('최대 플탐이 다할 때까지 이벤트 재화 녹이기', daily[day].item);
                 daily[day].initialQuota.staminaRun = 0;
                 daily[day].initialQuota.ticketRun = 0;
                 daily[day].leftQuota.staminaRun = 0;
@@ -885,8 +890,8 @@ var isNormaLeft = function () {
                 return true;
             }
             else if (daily[day].item >= daily[day].eventRun.cons) {
-                console.log('할당량 검사: 최종 목표 점수 초과 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
-                console.log('최대 플탐이 다할 때까지 이벤트 재화 녹이기', daily[day].item);
+                //console.log('할당량 검사: 최종 목표 점수 초과 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
+                //console.log('최대 플탐이 다할 때까지 이벤트 재화 녹이기', daily[day].item);
                 daily[day].initialQuota.staminaRun = 0;
                 daily[day].initialQuota.ticketRun = 0;
                 daily[day].leftQuota.staminaRun = 0;
@@ -895,7 +900,7 @@ var isNormaLeft = function () {
             }
         }
         
-        console.log('할당량 검사: 최종 목표 점수 초과로 탈락 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
+        //console.log('할당량 검사: 최종 목표 점수 초과로 탈락 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
         return false;
     }
     
@@ -1504,7 +1509,7 @@ var gotoNextDay = function () {
     daily[day].playData.totalPoint = daily[day - 1].playData.totalPoint; // 이벤트 점수 이어서 가져오기
     
     // 4주년이라면, 마지막 날은 리프레시도 없고 부스트 보상도 없음
-    console.log(e.type, day, e.days)
+    //console.log(e.type, day, e.days)
     if (!(e.type == '4th' && day == e.days)) {
         daily[day].boost += 1; // 휴식해서 1 증가하는 것을 반영
     }
@@ -1668,13 +1673,41 @@ var calcDailyPlaytime = function () {
     return Math.ceil((mini + maxi) / 2);
 }
 
+var boost = {
+    staminaRun: 0,
+    ticketRun: 0,
+    eventRun: 0,
+}
 // 시뮬레이션 수행.
 var simul = function () {
+    let t1 = Date.now();
     // 최악의 경우
     worstCase = true;
+
+    // 자동으로 최적의 부스트 비율 탐색
+    let bestValue = -Infinity, bestSet = [0,0,0], cnt=0;
+    for (boost.staminaRun = 0; boost.staminaRun <= 10; ++boost.staminaRun) {
+        for (boost.ticketRun = 0; boost.ticketRun <= 10 - boost.staminaRun; ++boost.ticketRun) {
+            boost.eventRun = 10 - (boost.staminaRun + boost.ticketRun);
+            init();
+            calc();
+
+            let tmp = (daily[e.days].jwl + daily[e.days].mdrink*50)*getMaxStamina(daily[e.days].level) + (daily[e.days].drink10*10 + daily[e.days].drink20*20 + daily[e.days].drink30 * 30);
+            if (tmp > bestValue) {
+                bestValue = tmp;
+                bestSet = [boost.staminaRun, boost.ticketRun, boost.eventRun];
+            }
+        }
+    }
+
+    console.log('bestset:', bestSet)
+    boost.staminaRun = bestSet[0];
+    boost.ticketRun = bestSet[1];
+    boost.eventRun = bestSet[2];
     init();
     calc();
     print('result-worst');
+    console.log(Date.now() - t1, 'ms 소요')
 
     /*
     // 평균적 경우
