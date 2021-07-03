@@ -333,8 +333,8 @@ var print = function (id) {
     htmltxt += '<p>--스케줄: ' + (totalValue.fan.work) + '</p>';
 
     htmltxt += '<p>10 드링크: ' + daily[e.days].drink10 + '개 남음</p>';
-    htmltxt += '<p>10 드링크: ' + daily[e.days].drink20 + '개 남음</p>';
-    htmltxt += '<p>10 드링크: ' + daily[e.days].drink30 + '개 남음</p>';
+    htmltxt += '<p>20 드링크: ' + daily[e.days].drink20 + '개 남음</p>';
+    htmltxt += '<p>30 드링크: ' + daily[e.days].drink30 + '개 남음</p>';
     htmltxt += '<p>맥스 드링크류: ' + daily[e.days].mdrink + '개 남음</p>';
 
     htmltxt += '<p>스태미너: ' + daily[e.days].stamina + ' 남음</p>';
