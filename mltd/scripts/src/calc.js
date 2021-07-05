@@ -31,6 +31,7 @@ var recvItem = false,
 
 // 입력 데이터를 정제하여 여러 변수에 저장.
 var init = function () {
+    daily = [];
     //m('init');
     t1 = Date.now(); // 시작 시간 기록
     
@@ -878,26 +879,23 @@ var isNormaLeft = function () {
     따라서, 사용자의 설정을 따르면서도 가장 효율적으로 점수를 내려면, 이후에 최소한으로 보장되는 부스트 획득 점수를 미리 고려해야만 함.
     그래서 최종 목표 점수 초과 검사를 할 때, 훗날 부스트로 얻을 점수를 뺀 값으로 검사해야 함.
     */
-    if (pointEstim() >= targetPoint - boostPointEstim()) {
-        if (daily[day].leftQuota.eventRun > 0) {
-            if (isBoost && daily[day].item >= daily[day].eventRun.boost.cons) {
-                //console.log('할당량 검사: 최종 목표 점수 초과 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
-                //console.log('최대 플탐이 다할 때까지 이벤트 재화 녹이기', daily[day].item);
-                daily[day].initialQuota.staminaRun = 0;
-                daily[day].initialQuota.ticketRun = 0;
-                daily[day].leftQuota.staminaRun = 0;
-                daily[day].leftQuota.ticketRun = 0;
-                return true;
-            }
-            else if (daily[day].item >= daily[day].eventRun.cons) {
-                //console.log('할당량 검사: 최종 목표 점수 초과 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
-                //console.log('최대 플탐이 다할 때까지 이벤트 재화 녹이기', daily[day].item);
-                daily[day].initialQuota.staminaRun = 0;
-                daily[day].initialQuota.ticketRun = 0;
-                daily[day].leftQuota.staminaRun = 0;
-                daily[day].leftQuota.ticketRun = 0;
-                return true;
-            }
+    // 이미 목표치 초과 예정이라면, 부스트 이외에는 더이상 달릴 필요가 없음.
+    if (pointEstim() + boostPointEstim() >= targetPoint) {
+        checkBoost();
+        // 부스트를 쓰기 위해 재화를 모아야 한다면 재화 마저 모으고 부스트 써야 함.
+        if (preserveItemForBoost) {
+            return true;
+        }
+
+        // 이벤런에 대한 할당량이 남아있고, 재화가 남아있다면 재화 모으는 행위를 금지하고 재화 털기만 수행
+        if ((daily[day].leftQuota.eventRun > 0) && (daily[day].item >= daily[day].eventRun.cons)) {
+            //console.log('할당량 검사: 최종 목표 점수 초과 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
+            //console.log(day, '일. 최대 플탐이 다할 때까지 이벤트 재화 녹이기: 재화 갯수 ', daily[day].item);
+            daily[day].initialQuota.staminaRun = 0;
+            daily[day].initialQuota.ticketRun = 0;
+            daily[day].leftQuota.staminaRun = 0;
+            daily[day].leftQuota.ticketRun = 0;
+            return true;
         }
         
         //console.log('할당량 검사: 최종 목표 점수 초과로 탈락 (' + pointEstim() + ', ' + (targetPoint - boostPointEstim()) + ')');
@@ -1057,16 +1055,10 @@ var doTicketRun = function () {
     //m('affection.live: ' + daily[day].affection.live + '(+' + data.earning.affection + ')');*/
     
     // 시간 반영
-    if (tabStatus != 'live') {
-        daily[day].time.etc += t.goLiveTab;
-        //m('스케줄 탭에서 라이브 탭으로 이동했었음!');
-        //m('time.etc: ' + daily[day].time.etc + '(+' + t.goLiveTab + ')');
-    }
+    moveTab('live');
     daily[day].time.live += t.doLive;
     
     //m('affection.live: ' + daily[day].time.live + '(+' + t.doLive + ')');
-    
-    tabStatus = 'live';
     
     // 티켓 소모
     daily[day].ticket -= data.cons;
@@ -1143,15 +1135,11 @@ var doEventRun = function () {
     checkExp(); // 경험치를 체크하여, 꽉 찼다면 레벨업
     
     // 시간 반영
-    if (tabStatus != 'live') {
-        daily[day].time.etc += t.goLiveTab;
-        //m('스케줄 탭에서 라이브 탭으로 이동했었음!');
-        //m('time.etc: ' + daily[day].time.etc + '(+' + t.goLiveTab + ')');
-    }
+    moveTab('live');
+
     daily[day].time.eventLive += t.doEventLive;
     //m('time.eventLive: ' + daily[day].time.eventLive + '(+' + t.doEventLive + ')');
     
-    tabStatus = 'live';
     
     // 재화 소모
     daily[day].item -= data.cons;
@@ -1230,12 +1218,7 @@ var doStaminaRun = function () {
         checkExp(); // 경험치를 체크하여, 꽉 찼다면 레벨업
         
         // 시간 반영
-        if (tabStatus != 'live') {
-            daily[day].time.etc += t.goLiveTab;
-            //m('스케줄 탭에서 라이브 탭으로 이동했었음!');
-            //m('time.etc: ' + daily[day].time.etc + '(+' + t.goLiveTab + ')');
-        }
-        tabStatus = 'live';
+        moveTab('live');
         
         daily[day].time.live += t.doLive;
         //m('time.live: ' + daily[day].time.live + '(+' + t.doLive + ')');
@@ -1287,15 +1270,12 @@ var doWork = function () {
     checkExp(); // 경험치를 체크하여, 꽉 찼다면 레벨업
     
     // 시간 반영
-    if (tabStatus != 'work') {
-        daily[day].time.etc += t.goWorkTab;
-        //m('라이브 탭에서 스케줄 탭으로 이동했었음!');
-        //m('time.etc: ' + daily[day].time.etc + '(+' + t.goWorkTab + ')');
-    }
+    moveTab('work');
+    
     daily[day].time.work += t.doWork;
     //m('time.work: ' + daily[day].time.work + '(+' + t.doWork + ')');
     
-    tabStatus = 'work';
+    
     
     // 스태미너 소모
     daily[day].stamina -= daily[day].work.cons;
@@ -1304,14 +1284,44 @@ var doWork = function () {
     return true;
 };
 
+var cnt = {
+    toWorkTab: 0,
+    toLiveTab: 0,
+    jwl: 0,
+    drink: 0,
+};
+var moveTab = function (tab) {
+    switch(tab) {
+        case 'work': {
+            if (tabStatus != 'work') {
+                daily[day].time.etc += t.goWorkTab;
+                //m('라이브 탭에서 스케줄 탭으로 이동했었음!');
+                //m('time.etc: ' + daily[day].time.etc + '(+' + t.goWorkTab + ')');
+                tabStatus = 'work';
+                cnt.toWorkTab++;
+            }
+            break;
+        }
+        case 'live': {
+            if (tabStatus != 'live') {
+                daily[day].time.etc += t.goLiveTab;
+                tabStatus = 'live';
+                cnt.toLiveTab++;
+            }
+            break;
+        }
+        default: {
+            alert('에러')
+        }
+    }
+}
+
 // 더 충전해야 하면 false,
 // 더 충전할 필요가 없으면(최대치까지 스태가 차있으면) true 반환
 var useDrink = function () {
     
     var ret = false;
     var used = false;
-    
-    daily[day].time.etc += t.useDrink;
     
     var drinkType = null;
     var drinkEffect = 0;
@@ -1364,6 +1374,7 @@ var useDrink = function () {
     // 드링크 사용 시간 적용
     if (used) {
         daily[day].time.etc += t.useDrink;
+        cnt.drink++;
     }
     
     /*
@@ -1390,6 +1401,7 @@ var useJwl = function () {
     daily[day].stamina += getMaxStamina();
     daily[day].jwl -= 50;
     daily[day].time.etc += t.useJwl;
+    cnt.jwl++;
     
     //m('useJwl: 현재 쥬얼 ' + daily[day].jwl + '개, ' + '스태미너: ' + daily[day].stamina);
     
@@ -1466,9 +1478,9 @@ var useTicket = function () {
         quota = daily[day].leftQuota;
     }
     
-    if (quota.ticketRun <= 0) { // 티켓런 할당량을 이미 끝낸 경우, false 반환
+    if (quota.ticketRun <= 0) { // 티켓런 할당량을 이미 끝낸 경우, 티켓이 모자란 건 아니므로 true 반환
         //m('useTicket: 티켓런 할당량이 이미 끝남! 실행 금지');
-        return false;
+        return false; // 일단은 false. 나중에 상태 늘려서 해결하자.
     }
     else {
         return doTicketRun();
@@ -1487,9 +1499,9 @@ var useItem = function () {
         quota = daily[day].leftQuota;
     }
     
-    if (quota.eventRun <= 0) { // 이벤런 할당량을 이미 끝낸 경우, false 반환
+    if (quota.eventRun <= 0) { // 이벤런 할당량을 이미 끝낸 경우, 재화가 모자란 건 아니므로 true 반환
         //m('useItem: 이벤런 할당량이 이미 끝남! 실행 금지');
-        return false;
+        return false; // 일단은 false. 나중에 상태 늘려서 해결하자.
     }
     return doEventRun();
 };
@@ -1554,6 +1566,12 @@ var gotoNextDay = function () {
 };
 
 var calc = function () {
+    cnt = {
+        toWorkTab: 0,
+        toLiveTab: 0,
+        jwl: 0,
+        drink: 0,
+    };
     t1 = Date.now(); // 계산 성능 측정을 위해 시작 시간 기록
     
     var i = 0;
@@ -1575,14 +1593,12 @@ var calc = function () {
                     //console.log("막날 재화 털이:", day, e.days);
                     while (useItem()){};
                 }
-                
                 break;
             }
             
             loopBack = false;
             // 재화를 모으는 상황: 결국 부스트에서 이벤런을 돌릴 것이므로 당장 일반에서 굳이 돌릴 필요 없음.
             // 재화를 모으지 않는 상황: 따로 이벤런을 적어도 1번은 돌리도록 만들어야 함.
-            //checkBoost(); // 재화를 모아야할지 먼저 자동설정 수행
             useBoost();     // useBoost: 부스트가 가용하다면, 부스트 사용. 부스트의 종료여부 체크는, 각 do계열 함수에서 수행
             /*
             if (clearDailyMission_ === true && daily[day].playData.eventRun == 0) {
@@ -1597,21 +1613,22 @@ var calc = function () {
             
             useStamina(); // useStamina: "모든" 스태미나를 사용. 반환값은 없음.
             
-            loopBack = useItem() || loopBack; // useItem: 이벤트 라이브를 1회 플레이. 성공적으로 끝내면 true 반환. 재화 모자라면 false 반환.
-            
+            // useItem: 이벤트 라이브를 1회 플레이
+            // 플레이했으면 true, 재화 부족으로 실패했으면 false, 할당량이 없어 플레이하지 않았으면 일단은 false
+            loopBack = useItem() || loopBack;
             if (loopBack === true) {
                 //m('loopBack');
                 continue;
             }
             
-            loopBack = useTicket() || loopBack; // useTicket: 티켓 라이브를 1회 플레이. 성공적으로 끝내면 true 반환. 티켓 모자라면 false 반환.
-            
+            loopBack = useTicket() || loopBack; // useTicket: 티켓 라이브를 1회 플레이. 성공여부와 상관 없이, 티켓이 모자라지 않으면 true 반환. 티켓 모자라면 false 반환.
             if (loopBack === true) { // 티켓런이나 이벤런이 1번이라도 성공했다면 다시 처음으로 돌아감.
                 //m('loopBack');
                 continue;            // 티켓이나 재화가 충분히 남아있어, 티켓런이나 이벤런을 수행할 수 있음에도 미리 드링/쥬얼을 쓸 필요는 없으므로.
             }
             
-            if (isNormaLeft() == false) { // 스태 충전하기 전, 시간 / 할당량 등 체크.
+            // 스태 충전하기 전, 시간 / 할당량 등 체크.
+            if (isNormaLeft() == false) { // isNormaLeft: 시간 / 할당량 체크
                 if (day == e.days) { // 막날이라면, 남은 이벤트 재화 모두 털고 마치기.
                     //console.log("막날 재화 털이:", day, e.days);
                     while (useItem()){};
@@ -1703,6 +1720,7 @@ var simul = function () {
         }
     }
 
+    
     console.log('bestset:', bestSet)
     boost.staminaRun = bestSet[0];
     boost.ticketRun = bestSet[1];
