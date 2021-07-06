@@ -157,133 +157,202 @@
 						<label for="recvDailyMission">이미 오늘의 일일 미션을 클리어했나요?</label> <input type="checkbox" id="recvDailyMission">
 					</div>
 				</fieldset>
-				
-				<fieldset id="dailyInputForm">
-					<legend>플레이 방법 설정</legend>
-					<!--<div style="display:none"><input type="number" name="appliedDays" value="13">일간 이 설정 적용</div>-->
-			
+
+				<fieldset id="criterion-config">
+					<legend>최적 기준 설정</legend>
 					<fieldset>
-						<legend>플레이 곡</legend>
-						<div>추천곡 플레이 (점수, 재화 1.2배) <input type="checkbox" name="playRecommend" checked></div>
+						<legend>조건별 우선순위</legend>
+						<p style="color: #fd99e1">
+							(중요하게 여기는 순서대로 우선순위 설정. 최종 포인트는 우선순위 설정과 상관 없이 최소한 목표치를 달성하니 참고하세요)
+						</p>
+						
+						<ol>
+							<li>
+								<select id="criterion-order-1">
+									<option value="jwl" selected>잔여 쥬얼 환산값</option>
+									<option value="dpt">일평균 플레이 타임</option>
+									<option value="lv">최종 레벨</option>
+									<option value="pt">최종 포인트</option>
+								</select>
+							</li>
+							<li>
+								<select id="criterion-order-2">
+									<option value="jwl">잔여 쥬얼 환산값</option>
+									<option value="dpt" selected>일평균 플레이 타임</option>
+									<option value="lv">최종 레벨</option>
+									<option value="pt">최종 포인트</option>
+								</select>
+							</li>
+							<li>
+								<select id="criterion-order-3">
+									<option value="jwl">잔여 쥬얼 환산값</option>
+									<option value="dpt">일평균 플레이 타임</option>
+									<option value="lv" selected>최종 레벨</option>
+									<option value="pt">최종 포인트</option>
+								</select>
+							</li>
+							<li>
+								<select id="criterion-order-4">
+									<option value="jwl">잔여 쥬얼 환산값</option>
+									<option value="dpt">일평균 플레이 타임</option>
+									<option value="lv">최종 레벨</option>
+									<option value="pt" selected>최종 포인트</option>
+								</select>
+							</li>
+						</ol>
 					</fieldset>
-					
 					<fieldset>
-						<legend>플레이 루틴</legend>
-						일반 라이브 <input type="number" value="0" name="staminaRunQuota">회 플레이 후, <br>
-						티켓 라이브 <input type="number" value="1" name="ticketRunQuota">회 플레이 반복
-					</fieldset>
-			
-					<fieldset>
-						<legend>난이도 / 배수</legend>
+						<legend>느슨한 비교 허용 범위</legend>
+						<p style="color: #fd99e1">
+							(0으로 설정하면 엄격한 비교 수행. 쥬얼 환산값의 허용 범위는 일반적으로 50개 이상을 추천)
+						</p>
 						<div>
-							일반 라이브: 
-							<select name="staminaRunDif">
-								<option value="2m">2M</option>
-								<option value="2mp">2M+</option>
-								<option value="4m">4M</option>
-								<option value="6m">6M</option>
-								<option value="mm" selected>MM</option>
-							</select>
-							<select name="staminaRunMul">
-								<option value="1">1배수</option>
-								<option value="2" selected>2배수</option>
-								<option value="3">3배수</option>
-							</select>
+							<label for="tolerance-jwl">잔여 쥬얼 환산값</label>
+							<input id="tolerance-jwl" value="50">개
 						</div>
-				
-						<div>티켓 라이브: 
-							<select name="ticketRunDif">
-								<option value="2m">2M</option>
-								<option value="2mp">2M+</option>
-								<option value="4m">4M</option>
-								<option value="6m">6M</option>
-								<option value="mm" selected>MM</option>
-							</select>
-							<select name="ticketRunMul">
-								<option value="10">10배수</option>
-								<option value="15" selected>15배수</option>
-							</select>
+						<div>
+							<label for="tolerance-dpt">일평균 플레이 타임</label>
+							<input id="tolerance-dpt" value="15">분
 						</div>
-				
-						<div>이벤트 라이브: 
-							<select name="eventRunDif">
-								<option value="2m">2M</option>
-								<option value="2mp">2M+</option>
-								<option value="4m">4M</option>
-								<option value="6m">6M</option>
-								<option value="mm" selected>MM</option>
-							</select>
-							<select name="eventRunMul">
-								<option value="1">1배수</option>
-								<option value="2">2배수</option>
-								<option value="4" selected>4배수</option>
-							</select>
+						<div>
+							<label for="tolerance-pt">최종 포인트</label>
+							<input id="tolerance-pt" value="2000">pt
 						</div>
-				
-						<div>스케줄: 
-							<select name="workDif">
-								<option value="20">20</option>
-								<option value="25">25</option>
-								<option value="30" selected>30</option>
-							</select>
-							<select name="workMul">
-								<option value="1">1배수</option>
-								<option value="2" selected>2배수</option>
-								<option value="3">3배수</option>
-							</select>
+						<div>
+							<label for="tolerance-lv">최종 레벨</label>
+							<input id="tolerance-lv" value="1">레벨
 						</div>
 					</fieldset>
-					<fieldset>
-						<legend>부스트 사용 중 난이도 / 배수</legend>
+				</fieldset>
+			</div>
+				
+			<fieldset id="dailyInputForm">
+				<legend>플레이 방법 설정</legend>
+				<!--<div style="display:none"><input type="number" name="appliedDays" value="13">일간 이 설정 적용</div>-->
+		
+				<fieldset>
+					<legend>플레이 곡</legend>
+					<div>추천곡 플레이 (점수, 재화 1.2배) <input type="checkbox" name="playRecommend" checked></div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>플레이 유형</legend>
+					<select name="playType">
+						<option value="staminaRun">스태미너 라이브</option>
+						<option value="ticketRun" selected>티켓 라이브</option>
+					</select>
+				</fieldset>
+		
+				<fieldset>
+					<legend>난이도 / 배수</legend>
+					<div>
 						일반 라이브: 
-						<select name="staminaRunBoostDif">
+						<select name="staminaRunDif">
 							<option value="2m">2M</option>
 							<option value="2mp">2M+</option>
 							<option value="4m">4M</option>
 							<option value="6m">6M</option>
 							<option value="mm" selected>MM</option>
 						</select>
-						<select name="staminaRunBoostMul">
+						<select name="staminaRunMul">
 							<option value="1">1배수</option>
 							<option value="2" selected>2배수</option>
 							<option value="3">3배수</option>
 						</select>
-						<br>
-						<!--<input type="number" value="0" name="staminaRunBoostQuota">회<br>-->
+					</div>
 			
-						티켓 라이브: 
-						<select name="ticketRunBoostDif">
+					<div>티켓 라이브: 
+						<select name="ticketRunDif">
 							<option value="2m">2M</option>
 							<option value="2mp">2M+</option>
 							<option value="4m">4M</option>
 							<option value="6m">6M</option>
 							<option value="mm" selected>MM</option>
 						</select>
-						<select name="ticketRunBoostMul">
+						<select name="ticketRunMul">
 							<option value="10">10배수</option>
 							<option value="15" selected>15배수</option>
 						</select>
-						<br>
-						<!--<input type="number" value="3" name="ticketRunBoostQuota">회<br>-->
+					</div>
 			
-						이벤트 라이브: 
-						<select name="eventRunBoostDif">
+					<div>이벤트 라이브: 
+						<select name="eventRunDif">
 							<option value="2m">2M</option>
 							<option value="2mp">2M+</option>
 							<option value="4m">4M</option>
 							<option value="6m">6M</option>
 							<option value="mm" selected>MM</option>
 						</select>
-						<select name="eventRunBoostMul">
+						<select name="eventRunMul">
 							<option value="1">1배수</option>
 							<option value="2">2배수</option>
 							<option value="4" selected>4배수</option>
 						</select>
-						<br>
-						<!--<input type="number" value="7" name="eventRunBoostQuota">회<br>-->
-					</fieldset>
+					</div>
+			
+					<div>스케줄: 
+						<select name="workDif">
+							<option value="20">20</option>
+							<option value="25">25</option>
+							<option value="30" selected>30</option>
+						</select>
+						<select name="workMul">
+							<option value="1">1배수</option>
+							<option value="2" selected>2배수</option>
+							<option value="3">3배수</option>
+						</select>
+					</div>
 				</fieldset>
-			</div>
+				<fieldset>
+					<legend>부스트 사용 중 난이도 / 배수</legend>
+					일반 라이브: 
+					<select name="staminaRunBoostDif">
+						<option value="2m">2M</option>
+						<option value="2mp">2M+</option>
+						<option value="4m">4M</option>
+						<option value="6m">6M</option>
+						<option value="mm" selected>MM</option>
+					</select>
+					<select name="staminaRunBoostMul">
+						<option value="1">1배수</option>
+						<option value="2" selected>2배수</option>
+						<option value="3">3배수</option>
+					</select>
+					<br>
+					<!--<input type="number" value="0" name="staminaRunBoostQuota">회<br>-->
+		
+					티켓 라이브: 
+					<select name="ticketRunBoostDif">
+						<option value="2m">2M</option>
+						<option value="2mp">2M+</option>
+						<option value="4m">4M</option>
+						<option value="6m">6M</option>
+						<option value="mm" selected>MM</option>
+					</select>
+					<select name="ticketRunBoostMul">
+						<option value="10">10배수</option>
+						<option value="15" selected>15배수</option>
+					</select>
+					<br>
+					<!--<input type="number" value="3" name="ticketRunBoostQuota">회<br>-->
+		
+					이벤트 라이브: 
+					<select name="eventRunBoostDif">
+						<option value="2m">2M</option>
+						<option value="2mp">2M+</option>
+						<option value="4m">4M</option>
+						<option value="6m">6M</option>
+						<option value="mm" selected>MM</option>
+					</select>
+					<select name="eventRunBoostMul">
+						<option value="1">1배수</option>
+						<option value="2">2배수</option>
+						<option value="4" selected>4배수</option>
+					</select>
+					<br>
+					<!--<input type="number" value="7" name="eventRunBoostQuota">회<br>-->
+				</fieldset>
+			</fieldset>
 			<!--<ol id="dailyInputForm">
 				<li>
 					<button onclick="removeConfig(event)">설정 제거</button>
@@ -409,19 +478,19 @@
 			</div>
 
 			<div class="notice section">
-                <p>2021.07.05. 14:40에 갱신됨</p>
+                <p>2021.07.06. 19:00에 갱신됨</p>
 				<p>* 아직 베타 서비스이므로 몇 가지 주의 사항이 있습니다.</p>
 				<ol>
-                    <li>
-						<span style="color: rgb(6, 161, 218)">이 서비스는 별도의 고지 없이 변경(개선 / 버그픽스)될 가능성이 있습니다. 
-                        따라서 번거로우시겠지만 계산 결과를 참고하실 일이 있다면 직접 계산기를 사용하여 최신 계산 결과를 확인하는 것을 권장합니다.</span>
+					<li>
+						<span style="color: rgb(6, 161, 218)">이 서비스는 별도의 고지 없이 변경(개선 / 버그픽스)될 가능성이 있습니다.
+						따라서 번거로우시겠지만 계산 결과를 참고하실 일이 있다면 직접 계산기를 사용하여 최신 계산 결과를 확인하는 것을 권장합니다.</span>
 					</li>
 					<li>
-						일일 미션 보상으로 30 드링크 2개, MAX 드링크 1개, 쥬엘 25개를 반영합니다.
+						일일 미션 보상으로 30 드링크 2개, MAX 드링크 1개, 쥬얼 25개를 반영합니다.
 						일일 미션 보상의 획득 조건은 따로 검사하지 않습니다.
 					</li>
 					<li>
-						이벤트 포인트 달성 보상(드링크 / 쥬엘 / 머니)은 반영하지 않습니다.
+						이벤트 포인트 달성 보상(드링크 / 쥬얼 / 머니)은 반영하지 않습니다.
 						필요하다면 보상을 따로 합산하여 입력 값에 미리 반영해주세요.
 					</li>
 					<li>
@@ -436,11 +505,13 @@
 			</div>
 			<hr>
 			<div class="result section">
-				<p><span style="color:#fd99e1">[보수적인 결과]</span>입니다:
-					<span style="color: rgb(6, 161, 218)">일반적으로 이 결과보다 더 많은 쥬엘을 소모하지 않을 것으로 예상됩니다.</span>
-					이벤트 시작부터 합리적인 선에서 가용 시간을 모두 소모하여 플레이했을 때의 결과입니다.</p>
+				<p><span style="color:#fd99e1">보수적인 결과</span>:
+					<span style="color: rgb(6, 161, 218)">일반적으로 이 결과보다 많은 쥬얼을 소모하지 않을 것으로 예상됩니다.</span>
 				<p>
-					목표치가 지나치게 낮다면 기본 제공되는 재화 / 부스트 등으로 인해 최종 점수가 목표치를 초과할 수 있습니다.
+					목표치가 낮다면 기본 제공되는 자원으로 인해 최종 포인트가 목표치를 초과할 수 있습니다.
+				</p>
+				<p>
+					일평균 플레이 타임이 현실적인 가용 시간보다 높다면, 난이도 / 배수를 더 높여보세요.
 				</p>
 				<div id="result-worst"><span style="color: gray">(결과 없음)</span></div>
 			</div>
@@ -448,7 +519,7 @@
 			<hr>
 			<div class="result section">
 				<p><span style="color:#fd99e1">낙관적인 결과</span>: 좀더 낙관적인 성향의 결과로,
-					<span style="color: rgb(6, 161, 218)">실제로는 이 결과보다 더 많은 쥬엘을 소모할 수 있으니 주의해주세요.</span></p>
+					<span style="color: rgb(6, 161, 218)">실제로는 이 결과보다 더 많은 쥬얼을 소모할 수 있으니 주의해주세요.</span></p>
 				<div id="result-average"><span style="color: gray">(결과 없음)</span></div>
 			</div>
 			-->
@@ -466,8 +537,8 @@
 		</div>
 		<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="./scripts/202107051425/calc.js"></script>
-		<script src="./scripts/202107051425/ui.js"></script>
-		<script src="./scripts/202107051425/dataManager.js"></script>	
+		<script src="./scripts/202107061900/calc.js"></script>
+		<script src="./scripts/202107061900/ui.js"></script>
+		<script src="./scripts/202107061900/dataManager.js"></script>	
 	</body>
 </html>
