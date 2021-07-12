@@ -69,23 +69,23 @@
     <div id="content-body">
 		<h1 class="subtitle">공개모집 계산기</h1>
         <div class="panel announce-panel" style="display:none" onclick="announceShowDetail()">
-            태그 입력기 개선 안내<br>
+            공개모집 풀 갱신 안내<br>
             <div id="announce-detail" style="display:none">
                 <hr>
-                아래 입력을 사용할 수 있게 되었습니다.<br>
-                <br>
                 <table>
                     <tr>
-                        <td>슨 ➔ </td><td>스나이퍼</td>
-                        <td>슾 ➔ </td><td>스페셜리스트</td>
+                        <td>한국 · 일본</td>
+                        <td id="kr-update-time">-</td>
+                        <td id="kr-timezone">(-)</td>
+                        <td id="kr-update-progress">-</td>
                     </tr>
                     <tr>
-                        <td>딮 ➔ </td><td>디펜더</td>
-                        <td>딥 ➔ </td><td>디버프</td>
+                        <td>글로벌</td>
+                        <td id="us-update-time">-</td>
+                        <td id="us-timezone">(-)</td>
+                        <td id="us-update-progress">-</td>
                     </tr>
                 </table>
-                <br>
-                * 기존의 [스, 디] 입력도 여전히 지원합니다.
             </div>
         </div>
         
@@ -218,8 +218,8 @@
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
     <script src="scripts/plugin/jquery-3.6.0.min.js"></script>
     <script src="data/tag_201211.js"></script>
-    <script src="data/op_210527.js"></script>
-    <script src="data/recrWhitelist_210501.js"></script>
+    <script src="data/op_210712.js"></script>
+    <script src="data/recrWhitelist_210712.js"></script>
 	<script src="scripts/202103151716/recr/configManager.js"></script>
     <script src="scripts/202103151716/recr/utilFuncs.js"></script>
 	<script src="scripts/202103151716/recr/showResult.js"></script>
