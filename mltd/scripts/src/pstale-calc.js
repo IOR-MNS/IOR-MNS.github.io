@@ -99,7 +99,7 @@ var getPlayInfo = function() {
     playInfo.routine.live = 3 - playInfo.routine.work;
 
     playInfo.promotion.dif = document.getElementById('promotionDif').value;
-    playInfo.promotion.mul = Number(document.getElementById('promotionMul').value);
+    playInfo.promotion.mul = 1;
 
     playInfo.elegant.dif = document.getElementById('elegantDif').value;
     playInfo.elegant.mul = 1;
