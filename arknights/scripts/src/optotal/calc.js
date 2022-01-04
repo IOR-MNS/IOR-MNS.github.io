@@ -16,9 +16,9 @@ var itemOrder = [
     
     ["칩 첨가제", "뱅가드 듀얼 칩", "가드 듀얼 칩", "디펜더 듀얼 칩", "스나이퍼 듀얼 칩", "캐스터 듀얼 칩", "메딕 듀얼 칩", "서포터 듀얼 칩", "스페셜리스트 듀얼 칩", "뱅가드 칩셋", "가드 칩셋", "디펜더 칩셋", "스나이퍼 칩셋", "캐스터 칩셋", "메딕 칩셋", "서포터 칩셋", "스페셜리스트 칩셋", "뱅가드 칩", "가드 칩", "디펜더 칩", "스나이퍼 칩", "캐스터 칩", "메딕 칩", "서포터 칩", "스페셜리스트 칩"], 
     
-    ["D32강", "바이폴라 나노플레이크 칩", "중합제", "크리스탈 전자 유닛"], 
+    ["모듈 데이터 블록", "D32강", "바이폴라 나노플레이크 칩", "중합제", "결정 전자 장치"], 
     
-    ["RMA70-24", "망간 중합체", "화이트 호스 콜", "고급 연마석", "중합젤", "열합금 팩", "크리스탈 회로", "RMA70-12", "망간 광석", "로식 콜", "연마석", "젤", "열합금", "크리스탈 소자"], 
+    ["RMA70-24", "망간 중합체", "화이트 호스 콜", "고급 연마석", "중합젤", "열합금 팩", "결정 회로", "정제된 용제", "절삭원액", "RMA70-12", "망간 광석", "로식 콜", "연마석", "젤", "열합금", "결정 부품", "반자연 용제", "화합절삭액"], 
     
     ["포도당 팩", "폴리에스테르 팩", "개량 장치", "정제 원암", "아케톤 팩", "이철 팩", "포도당 번들", "폴리에스테르 번들", "리뉴얼 장치", "원암 큐브 번들", "아케톤 응집체 번들", "이철 번들", "포도당", "폴리에스테르", "장치", "원암 큐브", "아케톤 응집체", "이철", "대체당", "에스테르 원료", "파손된 장치", "원암", "디케톤", "이철 조각"],
 ]
@@ -318,7 +318,7 @@ const tt = function (res) {
 	
 	s += '<br><br>'
 	s += '<hr class="sub-line">'
-	s += '<span class="result-subtitle">정예화 및 스킬강화 재료</span>'
+	s += '<span class="result-subtitle">모든 재료 합산</span>'
 	s += '<hr>'
 	s += makeResultHtmlByGroup(res.total)
 	s += '<hr>'
@@ -334,7 +334,7 @@ const tt = function (res) {
 	s += '<div id="detailed-result" style="display:none">'
 	
 	s += '<hr class="sub-line">'
-	s += '<span class="result-subtitle">오퍼레이터 레벨링 비용<br>(정예화 비용 제외)</span>'
+	s += '<span class="result-subtitle">레벨링 비용<br>(정예화 비용 제외)</span>'
 	s += '<hr>'
 	s += openDiv
 	s += toImg('경험치', res.total.exp, true)
@@ -353,10 +353,20 @@ const tt = function (res) {
 	//////////
 	
 	s += '<hr class="sub-line">'
-	s += '<span class="result-subtitle">스킬강화 재료</span>'
+	s += '<span class="result-subtitle">스킬 강화 재료</span>'
 	s += '<hr>'
 	s += makeResultHtmlByGroup(res.skillLeveling)
 	s += '<hr>'
+
+	//////////
+
+	s += '<hr class="sub-line">'
+	s += '<span class="result-subtitle">강화 모듈 재료</span>'
+	s += '<hr>'
+	s += makeResultHtmlByGroup(res.module)
+	s += '<hr>'
+
+	//////////
 	
 	s += '</div>'
 	
@@ -431,6 +441,7 @@ const fetchInputData = function () {
 		var elite = {}
 		var opLevel = {}
 		var skillLevel = {}
+		var module = {}
 		
         // 원본에게 종속되는 속성이 있는 어레인지 버전의 경우,
         // 종속 속성에 대한 계산은 할 필요가 없으므로, 해당 속성에 대해 false로 설정
@@ -565,6 +576,15 @@ const fetchInputData = function () {
                 skillLevel = false
             }
         }
+
+		// 모듈이 존재하지 않으면, 애초에 .module-btn 요소도 존재하지 않음. 계산에 포함하지 않아야 함.
+		if (db.op[opID].module === null) {
+			module = false
+		}
+		else {
+			// 모듈 반영 여부 확인. 이 분기에서 .module-btn 요소는 반드시 존재할 것임
+            module = opForm.querySelector('.module-btn').classList.contains('selected')
+		}
 		
 		// 이제 정예화 단계, 레벨, 스킬 레벨에 관한 입력 데이터를 전부 읽어들이고 알맞게 기록했으니,
 		// inputData 객체에 집어넣기
@@ -573,6 +593,7 @@ const fetchInputData = function () {
 		inputData[opID].elite = elite
 		inputData[opID].opLevel = opLevel
 		inputData[opID].skillLevel = skillLevel
+		inputData[opID].module = module
 	}
 	
 	return inputData
@@ -782,7 +803,7 @@ const calc = function (inputData) {
 	// 정예화 재료, 스킬작 재료
 	
 	// 계산하는 육성 종류:
-	// 레벨링(경험치/용문폐), 정예화(용문폐/정예화재료), 스킬작(스킬작재료)
+	// 레벨링(경험치/용문폐), 정예화(용문폐/정예화재료), 스킬작(스킬작재료), 모듈(강화모듈재료)
 	
 	// 일단은, 정예화, 스킬작에 대해서만 계산해보겠음. 레벨링 계산기는 전에 만들어뒀으니까 그거 쓰면 되고.
 	// 정예화, 스킬작 계산하는 건 만들었음. 이제 레벨링(정예화 용문폐는 제외한 순수 레벨링 코스트)에 대해서도 계산하면 끝남.
@@ -791,6 +812,7 @@ const calc = function (inputData) {
 	result.opLeveling = {}
 	result.skillLeveling = {}
 	result.elitePromotion = {}
+	result.module = {}
 	result.total = {}
 	
 	// 순수 레벨링 비용 계산
@@ -972,6 +994,40 @@ const calc = function (inputData) {
 	}
 	
 	// 이제 모든 대원에 대한 스킬작재료 합산이 끝났음.
+
+	// 모듈 재료 계산
+	result.module.IDs = []
+	for (var i = 0, ilen = inputData.opIDs.length; i < ilen; ++i) {
+		var opID = inputData.opIDs[i]
+
+		// 모듈이 없거나 미반영 상태라면 스킵
+		if (inputData[opID].module === false) {
+			continue
+		}
+
+		// 모듈 반영 상태라면 모듈 재료 합산
+		// 각 강화모듈 단위로 합산
+		for (let j = 0; j < db.op[opID].module.length; ++j) {
+			let moduleMaterials = db.op[opID].module[j]
+			// 현재 강화모듈의 재료를 합산
+			for (let k = 0; k < moduleMaterials.length; ++k) {
+				// itemID, quantity 순서
+				let itemset = moduleMaterials[k],
+					itemID = itemset[0],
+					quantity = itemset[1]
+				
+				// module 객체에 해당 자원이 이미 기록되어 있다면, 수량을 추가
+				if (result.module.hasOwnProperty(itemID)) {
+					result.module[itemID] += quantity
+				}
+				// module 객체에 해당 자원이 아직 기록된 적이 없다면, 새로이 set을 설정
+				else {
+					result.module[itemID] = quantity
+					result.module.IDs.push(itemID)
+				}
+			}
+		}
+	}
 	
 	// total에 모든 값들을 통합
 	result.total.exp = 0
@@ -1020,6 +1076,27 @@ const calc = function (inputData) {
 			result.total.IDs.push(itemID)
 		}
 	}
-	
+	// 모듈 재료 합산
+	for (var i = 0; i < result.module.IDs.length; ++i) {
+		var itemID = result.module.IDs[i]
+
+		// 현재 보고 있는 아이템이 용문폐라면, 용문폐에 합산하고서 다음 아이템으로 넘어감
+		if (db.item[itemID].name.kr == '용문폐') {
+			result.total.lmd += result.module[itemID]
+			
+			continue
+		}
+
+		// 현재 아이템이 이미 total에 등록되어 있다면, 수량을 추가
+		if (result.total.hasOwnProperty(itemID)) {
+			result.total[itemID] += result.module[itemID]
+		}
+		// 아직 등록되지 않았다면, 새로 등록
+		else {
+			result.total[itemID] = result.module[itemID]
+			result.total.IDs.push(itemID)
+		}
+	}
+
 	return result
 }

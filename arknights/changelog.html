@@ -4,7 +4,7 @@
         <script src="scripts/plugin/bugsnag-7.8.2.min.js"></script>
         <script>Bugsnag.start({
             'apiKey': '6b2e0a8c5c671f6eb58c38ec9a0a9762',
-            'appVersion': '202103151716',
+            'appVersion': '202201041500',
             'collectUserIp': false,
             'onError': function (event) {
                 event.setUser(localStorage.getItem('client_fp'))
@@ -25,8 +25,8 @@
         <script>
             function initFingerprintJS() {
                 if (!localStorage.getItem('client_fp')) {
-                    FingerprintJS.load().then(function (fp) {
-                        fp.get().then(function (result) {
+                    FingerprintJS.load().then(fp => {
+                        fp.get().then(result => {
                             localStorage.setItem('client_fp', result.visitorId);
                         });
                     });
@@ -44,8 +44,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|&display=swap&subset=korean" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202103151716/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202103151716/index/index.css" rel="stylesheet" type="text/css">
+		<link href="styles/202201041500/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202201041500/index/index.css" rel="stylesheet" type="text/css">
 		<style>
 			.history-container {
 				font-family: 'Noto Sans KR', sans-serif;
@@ -66,6 +66,15 @@
     <div id="content-body">
 		<div align="center">
 <div class="history-container">
+
+<hr>
+<span class="bold">2022.01.04</span><br>
+<br>
+오퍼레이터 육성 자원 계산기 기능 개선<br>
+<span style="color: #bbb; font-size: 70%; line-height: 70%">
+- 이제 오퍼레이터의 강화 모듈 재료를 계산할 수 있습니다.<br>
+</span>
+<br>
 
 <hr>
 <span class="bold">2021.03.17</span><br>

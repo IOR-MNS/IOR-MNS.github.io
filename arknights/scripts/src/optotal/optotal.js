@@ -273,10 +273,19 @@ const makeOpForm = function (opID, options = {}) {
     else {
         targetSkillLevel = [maxSkillLevel, maxSkillLevel, maxSkillLevel]
     }
+
+    var isModuleExists = (db.op[opID].module !== null) // 모듈 존재 여부
+    var module = (!!values['module'] ? values['module'] : false) // 모듈 반영 여부
     
     var html = ''
     
-    html += `<div class="remove-op thumb rarity_${rarity}"><img alt=${db.op[opID].releaseOrder} src="./images/op/thumb/${db.op[opID].releaseOrder}.png"></div><div class="elite"><span>정예화</span><br><select class="current-elite">`
+    html += `<div class="remove-op thumb rarity_${rarity}"><button class="no-margin square caution button remove-btn">제거</button><img alt=${db.op[opID].releaseOrder} src="./images/op/thumb/${db.op[opID].releaseOrder}.png">`
+    if (isModuleExists) {
+        html += `<button class="no-margin square button module-btn `
+        if (module) html += `selected">모듈 반영됨</button>`
+        else html += `">모듈 미반영됨</button>`
+    }
+    html += `</div><div class="elite"><span>정예화</span><br><select class="current-elite">`
 	
 	for (var elite = 0; elite <= maxElite; ++elite) {
         html += `<option value="${elite}"`
@@ -417,7 +426,7 @@ const loadLocalStorage = function () {
         convertOldIDToNewID()
     }
 
-    var propList = ['current-elite', 'target-elite', 'current-op-level', 'target-op-level', 'current-skill-level', 'target-skill-level']
+    var propList = ['current-elite', 'target-elite', 'current-op-level', 'target-op-level', 'current-skill-level', 'target-skill-level', 'module']
     
     var existingProps = {}
     existingProps.IDs = []
@@ -1086,7 +1095,71 @@ var opFormRecalcHandler = function (event) {
     // 재계산 수행
     showResult()
 }
+var thumbMouseoverHandler = function (event) {
+    event.currentTarget.querySelectorAll('.remove-btn, .module-btn').forEach(function(elm){
+        elm.classList.add('active')
+    })
+}
+var thumbMouseoutHandler = function (event) {
+    event.currentTarget.querySelectorAll('.remove-btn, .module-btn').forEach(function(elm){
+        elm.classList.remove('active')
+    })
+}
+/*var thumbClickHandler = function (event) {
+    // 버튼이 클릭되었다면 이 핸들러는 동작하지 않음
+    let cl = event.target.classList
+    if (cl.contains('remove-btn') || cl.contains('module-btn')) return;
 
+    // 버튼이 클릭된 게 아니라면, 모바일 유저를 위해 
+}*/
+var removeBtnClickHandler = function () {
+    gtag('event', '오퍼레이터 삭제: 버튼 클릭', {
+        'event_category': '오퍼레이터 육성 자원 계산기'
+    })
+    
+    // 오퍼레이터 ID 취득
+    var opID = this.closest('.op').getAttribute('name').split('_')[1]
+    var targetIDs = getAllIDs(opID)
+    
+    // 오퍼레이터 폼을 삭제
+    for (var i = 0; i < targetIDs.length; ++i) {
+        document.querySelector(`#selected-op [name="op_${targetIDs[i]}"]`).remove()
+        
+        // 로컬스토리지에서도 오퍼레이터를 삭제
+        var prefix = 'optotal_' + targetIDs[i] + '_'
+        var props = ['current-elite', 'target-elite', 'current-op-level', 'target-op-level', 'current-skill-level', 'target-skill-level', 'module']
+        for (var j = 0; j < props.length; ++j) {
+            localStorage.removeItem(prefix + props[j])
+        }
+    }
+    
+    // 남은 오퍼레이터가 없다면, 선택안내문구를 표시
+    if (document.querySelector('div[name*="op_"].op') === null) {
+        document.getElementById('selected-op-guide').style.display = 'block'
+    }
+    
+    // 결과를 재계산
+    showResult()
+}
+var moduleBtnClickHandler = function () {
+    // 오퍼레이터 ID 취득
+    var opID = this.closest('.op').getAttribute('name').split('_')[1]
+    var lskey = `optotal_${opID}_module` // 로컬스토리지 접근 키
+    
+    // 토글된 모듈 정보를 로컬스토리지와 화면에서 갱신
+    var module = !JSON.parse(localStorage.getItem(lskey) || 'false')
+    
+    localStorage.setItem(lskey, JSON.stringify(module))
+
+    if (module) this.classList.add('selected')
+    else this.classList.remove('selected')
+
+    this.innerText = (module ? '모듈 반영됨' : '모듈 미반영됨')
+    
+    // 결과를 재계산
+    showResult()
+}
+/*
 var removeOpMousedownHandler = function () {
     var originalID = this.closest('.op').getAttribute('name').split('_')[1].split('-')[0]
     document.querySelectorAll(`#selected-op [name^="op_${originalID}"]`).forEach(elm => elm.style.opacity = 0.4)
@@ -1119,7 +1192,7 @@ var removeOpClickHandler = function () {
         
         // 로컬스토리지에서도 오퍼레이터를 삭제
         var prefix = 'optotal_' + targetIDs[i] + '_'
-        var props = ['current-elite', 'target-elite', 'current-op-level', 'target-op-level', 'current-skill-level', 'target-skill-level']
+        var props = ['current-elite', 'target-elite', 'current-op-level', 'target-op-level', 'current-skill-level', 'target-skill-level', 'module']
         for (var j = 0; j < props.length; ++j) {
             localStorage.removeItem(prefix + props[j])
         }
@@ -1132,7 +1205,7 @@ var removeOpClickHandler = function () {
     
     // 결과를 재계산
     showResult()
-}
+}*/
 
 var setCurrentOpLevelToMaxHandler = function () {
     gtag('event', '현재 레벨 최대 설정', {
@@ -1276,13 +1349,24 @@ const addOpEventListener = function (opForm, doTrigger = false) {
     /* 이벤트 리스너 추가 */
     opForm.addEventListener('recalc', opFormRecalcHandler)
     
-    // 지우기 버튼
+    /*// 지우기 버튼
     // 아직 클릭되진 않았으나, 마우스가 눌린 상태라면 투명도 애니메이션
     opForm.querySelector('.remove-op').addEventListener('mousedown', removeOpMousedownHandler)
     opForm.querySelector('.remove-op').addEventListener('mouseover', removeOpMouseoverHandler)
     opForm.querySelector('.remove-op').addEventListener('mouseout', removeOpMouseoutHandler)
+
     // 클릭되면 지움
-    opForm.querySelector('.remove-op').addEventListener('click', removeOpClickHandler)
+    opForm.querySelector('.remove-op').addEventListener('click', removeOpClickHandler)*/
+    
+    opForm.querySelector('.thumb').addEventListener('mouseover', thumbMouseoverHandler)
+    opForm.querySelector('.thumb').addEventListener('mouseout', thumbMouseoutHandler)
+
+    // 오퍼레이터 제거 버튼 클릭 -> opForm 제거 & 재계산
+    opForm.querySelector('.remove-btn').addEventListener('click', removeBtnClickHandler)
+
+    // 모듈 버튼 클릭 -> 모듈 반영 여부 토글 & 재계산
+    if (opForm.querySelector('.module-btn'))
+        opForm.querySelector('.module-btn').addEventListener('click', moduleBtnClickHandler)
     
     // 레벨 최대 설정 버튼
     // 현재 레벨을 최대로 설정

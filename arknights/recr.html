@@ -4,7 +4,7 @@
         <script src="scripts/plugin/bugsnag-7.8.2.min.js"></script>
         <script>Bugsnag.start({
             'apiKey': '6b2e0a8c5c671f6eb58c38ec9a0a9762',
-            'appVersion': '202103151716',
+            'appVersion': '202201041500',
             'collectUserIp': false,
             'onError': function (event) {
                 event.setUser(localStorage.getItem('client_fp'))
@@ -25,8 +25,8 @@
         <script>
             function initFingerprintJS() {
                 if (!localStorage.getItem('client_fp')) {
-                    FingerprintJS.load().then(function (fp) {
-                        fp.get().then(function (result) {
+                    FingerprintJS.load().then(fp => {
+                        fp.get().then(result => {
                             localStorage.setItem('client_fp', result.visitorId);
                         });
                     });
@@ -45,8 +45,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 		<link href="images/favicon.ico" rel="shortcut icon">
         
-		<link href="styles/202103151716/main.css" rel="stylesheet" type="text/css">
-		<link href="styles/202103151716/recr/recr.css" rel="stylesheet" type="text/css">
+		<link href="styles/202201041500/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202201041500/recr/recr.css" rel="stylesheet" type="text/css">
         
         <style>
             .ad-container {text-align: center; width: 100%; margin: 1rem 0; min-height: 90px}
@@ -200,7 +200,7 @@
                 <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/9CwopZ2xT9fdSzqR7'>광고가 거슬려요</a><br>
                 <br>
                 <br>
-                © 2020-2021 MINASE<br>
+                © 2020-2022 MINASE<br>
 			</p>
 		</div>
         
@@ -217,16 +217,16 @@
 		</div>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
     <script src="scripts/plugin/jquery-3.6.0.min.js"></script>
-    <script src="data/tag_201211.js"></script>
-    <script src="data/op_210914.js"></script>
+    <script src="data/tag_220104.js"></script>
+    <script src="data/op_220104.js"></script>
     <script src="data/recrWhitelist_210930.js"></script>
-	<script src="scripts/202103151716/recr/configManager.js"></script>
-    <script src="scripts/202103151716/recr/utilFuncs.js"></script>
-	<script src="scripts/202103151716/recr/showResult.js"></script>
-	<script src="scripts/202103151716/recr/calc.js"></script>
-	<script src="scripts/202103151716/recr/showToolTip.js"></script>
-	<script src="scripts/202103151716/recr/tagBatchSelector.js"></script>
-	<script src="scripts/202103151716/recr/checkboxManager.js"></script>
-    <script src="scripts/202103151716/recr/loadRecr.js"></script>
+	<script src="scripts/202201041500/recr/configManager.js"></script>
+    <script src="scripts/202201041500/recr/utilFuncs.js"></script>
+	<script src="scripts/202201041500/recr/showResult.js"></script>
+	<script src="scripts/202201041500/recr/calc.js"></script>
+	<script src="scripts/202201041500/recr/showToolTip.js"></script>
+	<script src="scripts/202201041500/recr/tagBatchSelector.js"></script>
+	<script src="scripts/202201041500/recr/checkboxManager.js"></script>
+    <script src="scripts/202201041500/recr/loadRecr.js"></script>
 	</body>
 </html>
