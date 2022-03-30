@@ -439,6 +439,7 @@ if (innerHeight < innerWidth && innerHeight =< 480) {
    ================================================== */
 *::-webkit-scrollbar {
 	width: 0.25rem;
+    height: 0.25rem;
 }
 .modal *::-webkit-scrollbar {
     display: none;
