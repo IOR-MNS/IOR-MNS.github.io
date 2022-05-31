@@ -83,8 +83,6 @@ for (let region in updateTime) {
         `${updateTime[region].getMonth() + 1}월 ${updateTime[region].getDate()}일 ${updateTime[region].getHours()}시`
     document.getElementById(`${region}-timezone`).innerText = `(${Intl.DateTimeFormat().resolvedOptions().timeZone})`
 }
-*/
-
 
 var DBUpdated = {
     kr: false,
@@ -117,6 +115,7 @@ for (let region in updateTime) {
 if (!updateDone || Date.now() <= (updateTime.us.getTime() + 24*60*60*1000)) {
     document.querySelector('.announce-panel').style.display = 'block'
 }
+*/
 ////
 
 /*if (Date.now() <= new Date(Date.UTC(2021, 0, 9, 0))) {
