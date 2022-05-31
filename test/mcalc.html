@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script src="scripts/plugin/bugsnag-7.8.2.min.js"></script>
+        <script>Bugsnag.start({
+            'apiKey': '6b2e0a8c5c671f6eb58c38ec9a0a9762',
+            'appVersion': '202206010923',
+            'collectUserIp': false,
+            'onError': function (event) {
+                event.setUser(localStorage.getItem('client_fp'))
+                event.addMetadata('initialData', JSON.parse(window.initialData || "null"))
+                event.addMetadata('data', localStorage)
+            }
+        })</script>
+        <script>if(window.navigator.userAgent.match(/MSIE|Trident/)!==null){if(localStorage.getItem('doNotShowIEAlert')!='true'){alert('불편을 끼쳐드려 대단히 죄송합니다!\n\n보다 많은 사용자에게 더욱 좋은 경험을 제공하기 위해\n인터넷 익스플로러에 대한 지원이 중단되었습니다.\n\n원활한 이용을 위하여 크롬, 파이어폭스, 엣지 등의 최신 브라우저로 접속해주시기 바랍니다.\n\n만약 Windows 10을 이용하고 계신다면 엣지(Edge)가 기본 설치되어 있으니 이용에 참고하여 주십시오.');localStorage.setItem('doNotShowIEAlert','true');location.href="landing-oldBrowser.html"}};window.onload=function(){document.getElementById('content-body').classList.add("loaded")}</script>
+        <script>window.initialData = JSON.stringify(localStorage)</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174914504-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-174914504-1', {'anonymize_ip': true});
+        </script>
+        <script>
+            function initFingerprintJS() {
+                if (!localStorage.getItem('client_fp')) {
+                    FingerprintJS.load().then(fp => {
+                        fp.get().then(result => {
+                            localStorage.setItem('client_fp', result.visitorId);
+                        });
+                    });
+                }
+            }
+        </script>
+        <script
+            async
+            src="scripts/plugin/fp-3.0.6.min.js"
+            onload="initFingerprintJS()"
+        ></script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi">
+		<title>명일방주 재료 계산기 β</title>
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap&subset=korean" rel="stylesheet">
+		<link href="images/favicon.ico" rel="shortcut icon">
+        
+		<link href="styles/202206010923/main.css" rel="stylesheet" type="text/css">
+		<link href="styles/202206010923/mcalc/mcalc.css" rel="stylesheet" type="text/css">
+        
+        <style>
+            .ad-container {text-align: center; width: 100%; margin: 1rem 0 0.5rem 0; min-height: 90px}
+            
+            .ad1, .ad2 {width: 728px; max-width: 100%; height: 90px}
+            
+            @media (max-width: 480px) and (orientation: portrait), (max-height: 480px) and (orientation: landscape) {
+                .ad-container {min-height: 50px}
+                
+                .ad1 {width: 100%; max-width: 100%; height: 50px}
+                
+                .ad2 {width: 100%; max-width: 100%; height: 100px}
+            }
+        </style>
+	</head>
+	<body>
+		<a href="index.html">
+			<img class="logo" src="images/logo4_comp.png" alt="Minase Group's Logo.">
+		</a>
+    <div id="content-body">
+		<h2 class="subtitle">재료 계산기 β</h2>
+		
+        <div class="ad-container" data-slot-id="1913109058">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            
+            <ins class="adsbygoogle ad1"
+                style="display:inline-block"
+                data-ad-client="ca-pub-5222058627622327"
+                data-ad-slot="1913109058"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+		
+		<div align="center">
+            <div class="panel guide" style="display:none">
+                <div>
+                    <br>
+                    <span style="font-size:90%;font-weight:500;color:#777">
+                    메인 화면의 '재료 계산 1.0'를 통해 기존 계산기를 사용할 수 있습니다.<br>
+                    </span>
+                </div>
+                
+                <div>
+                    <span style="font-size:125%;font-weight:500">
+                    <br>
+                    처음 사용해보시는 분들을 위한 가이드<br>
+                    </span>
+                    <br>
+                    <br>
+                </div>
+                
+                <div>
+                    <span style="font-size:110%;font-weight:500">
+                    <br>
+                    부족한 아이템만 표시<br>
+                    </span>
+                    <span style="font-size:95%">
+                    <br>
+                    화면에 아이템이 너무 많아서 복잡한가요?<br>
+                    필요한 것만 골라서 보세요.<br>
+                    <br>
+                    <br>
+                    </span>
+                </div>
+                
+                <div>
+                    <span style="font-size:110%;font-weight:500">
+                    <br>
+                    인벤토리 탭<br>
+                    </span>
+                    <span style="font-size:95%">
+                    <br>
+                    아이템의 보유량과 필요량을 입력하세요.<br>
+                    여기에 입력한 데이터를 기반으로 계산이 이뤄집니다.<br>
+                    <br>
+                    <br>
+                    </span>
+                </div>
+                
+                <div>
+                    <span style="font-size:110%;font-weight:500">
+                    <br>
+                    계산 탭<br>
+                    </span>
+                    <span style="font-size:95%">
+                    <br>
+                    상위 아이템의 필요량을 하위 재료들로 분해해서 볼 수 있어요.<br>
+                    <br>
+                    원하는 재료에 다다를 때까지 상위 아이템을 분해한 뒤,<br>
+                    마지막에 남은 재료들의 필요량을 확인하면 끝!<br>
+                    <br>
+                    <br>
+                    </span>
+                </div>
+                
+                <div>
+                    <span style="font-size:110%;font-weight:500">
+                    <br>
+                    딱 필요한 만큼 분해하기<br>
+                    </span>
+                    <span style="font-size:95%">
+                    <br>
+                    계산 탭에서 아이템의 수량을 터치해보세요.<br>
+                    딱 필요한 만큼 분해할 수 있도록 입력값이 설정됩니다.<br>
+                    <br>
+                    <br>
+                    </span>
+                </div>
+                
+                <div>
+                    <span style="font-size:110%;font-weight:500">
+                    <br>
+                    자동으로 분해하기<br>
+                    </span>
+                    <span style="font-size:95%">
+                    <br>
+                    일일이 직접 분해하기 귀찮으시다면 이 기능을 활용해보세요.<br>
+                    상위 아이템을 원하는 등급 이하의 재료들로 자동 분해할 수 있습니다.<br>
+                    <br>
+                    설정에 들어가서 자동 분해 기능을 활성화해보세요.<br>
+                    <br>
+                    </span>
+                    <span style="font-size:90%;font-weight:500;color:#777">
+                    「연마석」등 분해가 불가능한 재료는 설정된 등급을<br>
+                    넘더라도 분해되지 못하고 남아있을 수 있습니다.<br>
+                    <br>
+                    '필요량의 분해' 또는 '분해'는 하위 재료로<br>
+                    상위 아이템을 제작하는 것을 의미합니다.<br>
+                    </span>
+                    <br>
+                    <br>
+                </div>
+                
+                <div>
+                    <span style="font-size:110%;font-weight:500">
+                    <br>
+                    오퍼레이터 육성 자원 계산기<br>
+                    </span>
+                    <span style="font-size:95%">
+                    <br>
+                    오퍼레이터 육성에 필요한 자원을 모아서 보여주는 서비스로,<br>
+                    본 서비스에 결과 데이터를 전송하여 함께 활용하실 수 있습니다.<br>
+                    <br>
+                    <br>
+                    </span>
+                </div>
+                
+                <div>
+                    <span style="font-size:110%;font-weight:500">
+                    <br>
+                    메뉴 버튼<br>
+                    </span>
+                    <span style="font-size:95%">
+                    <br>
+                    오른쪽 아래의 메뉴 버튼을 눌러 설정을 바꿔보세요.<br>
+                    <br>
+                    <br>
+                    </span>
+                    <span style="font-size:90%;font-weight:500;color:#777">
+                    <br>
+                    - 이 가이드는 설정에서 <a style="cursor:pointer;color:#ddd" onclick="hideGuide()">해제</a>할 수 있습니다 -<br>
+                    <br>
+                    </span>
+                </div>
+            </div>
+            
+			<button type="button" name="toggleFilterOnlyLack" class="button square" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
+            
+            <div class="tab-container">
+                <div class="tab" data-tab-name="inv">인벤토리</div><div class="tab" data-tab-name="calc">계산</div>
+            </div>
+            
+			<div class="item-container inv" data-tab-name="inv"></div>
+            <div class="item-container calc" data-tab-name="calc"></div>
+            
+            
+            <div class="tab-container">
+                <div class="tab" data-tab-name="inv">인벤토리</div><div class="tab" data-tab-name="calc">계산</div>
+            </div>
+            
+			<button type="button" name="toggleFilterOnlyLack" class="button square" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
+		</div>
+        
+		<div class="ad-container" data-slot-id="6247299251">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            
+            <ins class="adsbygoogle ad1"
+                style="display:inline-block"
+                data-ad-client="ca-pub-5222058627622327"
+                data-ad-slot="6247299251"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+		
+        <br>
+        
+		<div align="center">
+			<button onclick="location.href='index.html'">메인 화면으로 돌아가기</button>
+		</div>
+        
+		<br>
+    
+		<div class="copyright">
+			<p style="font-family: 'Noto Sans KR'">
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/izgnA9vs9Z1WRGQXA'>오류 제보하기</a>
+                |
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/y6KJnM2W9hJBbBuY7'>의견 보내기</a>
+                |
+                <a class="external-link" target="_blank" rel="noopener noreferrer" href='https://forms.gle/9CwopZ2xT9fdSzqR7'>광고가 거슬려요</a><br>
+                <br>
+                <br>
+                © 2020-2022 MINASE<br>
+			</p>
+		</div>
+    </div>
+		<img class="menu-btn" src="./images/button/menu_white.png">
+		
+		<div class="modal" id="config-modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="close-btn" src="./images/button/close_white.png"><br>
+				</div>
+				
+				<div class="modal-body">
+					<hr style="border-color: white">
+					표시 설정<br>
+					<br>
+					<input type="checkbox" name="display_name" id="display_name" class="checkboxButton">
+					<label class="tag" for="display_name"><span>이름</span></label>
+                    
+					<input type="checkbox" name="display_inputField" id="display_inputField" class="checkboxButton">
+					<label class="tag" for="display_inputField"><span>입력란</span></label>
+                    
+                    <input type="checkbox" name="display_guide" id="display_guide" class="checkboxButton">
+					<label class="tag" for="display_guide"><span>가이드</span></label><br>
+                    
+					<br>
+					<hr style="border-color: white">
+					필터 설정<br>
+					<br>
+					<input type="checkbox" name="filter_grade" id="filter_grade_1" class="checkboxButton">
+					<label class="tag" for="filter_grade_1"><span>1성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_2" class="checkboxButton">
+					<label class="tag" for="filter_grade_2"><span>2성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_3" class="checkboxButton">
+					<label class="tag" for="filter_grade_3"><span>3성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_4" class="checkboxButton">
+					<label class="tag" for="filter_grade_4"><span>4성</span></label>
+					<input type="checkbox" name="filter_grade" id="filter_grade_5" class="checkboxButton">
+					<label class="tag" for="filter_grade_5"><span>5성</span></label><br>
+					
+					<input type="checkbox" name="filter_category" id="filter_category_0" class="checkboxButton">
+					<label class="tag" for="filter_category_0"><span>특수재료</span></label>
+					<input type="checkbox" name="filter_category" id="filter_category_1" class="checkboxButton">
+					<label class="tag" for="filter_category_1"><span>일반재료</span></label>
+					<input type="checkbox" name="filter_category" id="filter_category_2" class="checkboxButton">
+					<label class="tag" for="filter_category_2"><span>스킬개론</span></label>
+					<input type="checkbox" name="filter_category" id="filter_category_3" class="checkboxButton">
+					<label class="tag" for="filter_category_3"><span>칩류</span></label><br>
+					<br>
+                    <hr style="border-color: white">
+					자동 분해 설정<br>
+                    <div style="font-size:60%;color:#777">
+					<br>
+                    계산 탭의 기존 입력 데이터가 초기화되며,<br>
+                    수동으로 제작량을 변경할 수 없게 됩니다.<br>
+                    <br>
+                    </div>
+					<select id="breakdown_grade" onchange="checkBreakdownValue(this)">
+                        <option value="0" selected>비활성화</option>
+                        <option value="1">1성 이하로</option>
+                        <option value="2">2성 이하로</option>
+                        <option value="3">3성 이하로</option>
+                        <option value="4">4성 이하로</option>
+                        <!--
+                        아이템의 최고 등급은 5등급이므로, 5등급 이하로 분해시 분해를 하지 않은 것과 동일하다.
+                        따라서, 5등급 이하로 분해하는 옵션은 제공하지 않는다.
+                        -->
+                    </select><br>
+                    <br>
+					<hr style="border-color: white">
+					편의 기능<br>
+					<br>
+                    
+                    <button type="button" class="button square" onclick="localStorage.setItem('preferred-version_mcalc', '2'); alert('선호하는 재료 계산기로 설정되었습니다.');">선호하는 재료 계산기로 설정</button>
+                    
+                    <button type="button" class="button square" name="toggleFilterOnlyLack" onclick="toggleFilterOnlyLack()">부족한 아이템만 표시 <span style="color:#de0d0d">OFF</span></button>
+                    
+					<button type="button" class="button square" onclick="cutdownAllInputs()">인벤토리 데이터 정돈</button>
+					
+                    <button type="button" class="button square caution" onclick="clearInvHave()">보유량 초기화</button>
+                    <button type="button" class="button square caution" onclick="clearInvNeed()">필요량 초기화</button>
+                    <button type="button" class="button square caution" onclick="clearCalcData()">제작량 초기화</button>
+					<button type="button" class="button square caution" onclick="clearAllData()">모든 데이터 초기화</button>
+				</div>
+			</div>
+		</div>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
+    <script src="scripts/plugin/jquery-3.6.0.min.js"></script>
+	<script src="data/item_220531.js"></script>
+	<script src="scripts/202206010923/mcalc/manageLocalStorage.js"></script>
+	<script src="scripts/202206010923/mcalc/mcalc.js"></script>
+	<script src="scripts/202206010923/mcalc/util.js"></script>
+	<script src="scripts/202206010923/mcalc/modalPrompt.js"></script>
+	</body>
+</html>
