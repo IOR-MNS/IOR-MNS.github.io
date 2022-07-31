@@ -33,6 +33,9 @@ var configSelectionPanel = function () {
     if (clearSelection) {
         clearSelection(false, true)
     }
+
+    //  공개모집 리스트 버전 표시
+    document.getElementById('dbversion').innerText = `${region.toUpperCase()} | ${recrWhiteList.version[region]}`
 }
 
 configSelectionPanel()

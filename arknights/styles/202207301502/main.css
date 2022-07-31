@@ -482,6 +482,37 @@ body {
 	margin: 0 var(--body--horizontal-margin);   /* 약간의 좌우 마진  */
 }
 
+/****************** 페이지 로더 시작 ******************/
+#loader {
+    z-index: 99999;
+}
+#loader.hidden {
+    display: none !important;
+}
+
+/* 확장하는 선형 */
+.loader-line {
+    display: inline-block;
+    position: fixed;
+    left: calc(50% - 1px); top: calc(50% - 2px);
+    width: /*80px;*/2px;
+    /*height: 80px;*/height: 4px; background-color: #096485;
+    opacity: 0;
+    transition: opacity 0.7s;
+    animation: loader-line 1.2s ease-in-out 1.2s infinite; /* 페이지 로딩이 1.2초 이상 지연되면 로딩 애니메이션 표시 */
+}
+
+@keyframes loader-line {
+    0% {
+      opacity: 1;
+      transform: scaleX(0.1);
+    }
+    100% {
+      transform: scaleX(100);
+    }
+}
+/****************** 페이지 로더 끝 ******************/
+
 #content-body {
     transition: opacity 0.3s;    /* 페이지 전환 시 fade-in 효과를 주기 위해 */
     opacity: 0;                 /* 페이지 전환 시 fade-in 효과를 주기 위해 */
