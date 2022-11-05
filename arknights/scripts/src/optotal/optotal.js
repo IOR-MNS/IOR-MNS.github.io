@@ -229,6 +229,7 @@ var centerSelect = function (elm) {
 // 정예화 단계: (current-elite, target-elite): Integer
 // 레벨: (current-op-level, target-op-level): Integer
 // 1-3스킬 레벨: (current-skill-level, target-skill-level) : Array of Integer
+// 모듈 스테이지: (module) : Object (key: String(module code), value: Array of Integer(material ID, quantity))
 const makeOpForm = function (opID, options = {}) {
     var values = {}, asElement = true
     
@@ -240,6 +241,8 @@ const makeOpForm = function (opID, options = {}) {
     var maxElite = [0, 0, 1, 2, 2, 2][rarity - 1]
     var maxLevel = getMaxLevel(maxElite, rarity)
     var maxSkillLevel = [4, 7, 7][maxElite]
+    var maxModuleLevel = getMaxModuleLevel(opID)
+    var moduleNum = getNumOfModules(opID)
 	var opName = db.op[opID].name.en.toLowerCase()
     
     var currentElite = (Number.isInteger(values['current-elite']) ? values['current-elite'] : 0)
@@ -250,8 +253,8 @@ const makeOpForm = function (opID, options = {}) {
     
     var currentSkillLevel = []
     if (values['current-skill-level']) {
-        values['current-skill-level'].forEach(function (csl) {
-            currentSkillLevel.push(1 <= csl && csl <= 10 ? csl : 1)
+        values['current-skill-level'].forEach(function (sklv) {
+            currentSkillLevel.push(1 <= sklv && sklv <= 10 ? sklv : 1)
         })
         for (var i = 0, len = 3 - currentSkillLevel.length; i < len; ++i) {
             currentSkillLevel.push(1)
@@ -263,8 +266,8 @@ const makeOpForm = function (opID, options = {}) {
     
     var targetSkillLevel = []
     if (values['target-skill-level']) {
-        values['target-skill-level'].forEach(function (csl) {
-            targetSkillLevel.push(1 <= csl && csl <= 10 ? csl : maxSkillLevel)
+        values['target-skill-level'].forEach(function (sklv) {
+            targetSkillLevel.push(1 <= sklv && sklv <= 10 ? sklv : maxSkillLevel)
         })
         for (var i = 0, len = 3 - targetSkillLevel.length; i < len; ++i) {
             targetSkillLevel.push(maxSkillLevel)
@@ -274,18 +277,33 @@ const makeOpForm = function (opID, options = {}) {
         targetSkillLevel = [maxSkillLevel, maxSkillLevel, maxSkillLevel]
     }
 
-    var isModuleExists = (db.op[opID].module !== null) // 모듈 존재 여부
-    var module = (!!values['module'] ? values['module'] : false) // 모듈 반영 여부
-    
+    var isModuleExists = (db.op[opID].module !== null) // 오퍼레이터의 모듈 존재 여부
+    var module = (!!values['module'] && Object.keys(values['module']).length > 0 ? values['module'] : null) // 사용자의 모듈 설정 데이터 로드
+    // 저장된 모듈 값 검증
+    if (module) {
+        for (let moduleCode in module) {
+            let mdlv = module[moduleCode][0]
+            if (mdlv < 0 || mdlv > maxModuleLevel) {
+                module[moduleCode][0] = 0
+            }
+            mdlv = module[moduleCode][1]
+            if (mdlv < 0 || mdlv > maxModuleLevel) {
+                module[moduleCode][0] = maxModuleLevel
+            }
+        }
+    }
+
     var html = ''
     
     html += `<div class="remove-op thumb rarity_${rarity}"><button class="no-margin square caution button remove-btn">제거</button><img alt=${db.op[opID].releaseOrder} src="./images/op/thumb/${db.op[opID].releaseOrder}.png">`
-    if (isModuleExists) {
+    /*if (isModuleExists) {
         html += `<button class="no-margin square button module-btn `
-        if (module) html += `selected">모듈 반영됨</button>`
-        else html += `">모듈 미반영됨</button>`
-    }
-    html += `</div><div class="elite"><span>정예화</span><br><select class="current-elite">`
+        if (module) {
+            html += `selected">모듈 설정됨</button>`
+        }
+        else html += `">모듈 미설정됨</button>`
+    }*/
+    html += `</div><div class="elite"><span class="category">정예화</span><br><select class="current-elite">`
 	
 	for (var elite = 0; elite <= maxElite; ++elite) {
         html += `<option value="${elite}"`
@@ -307,7 +325,7 @@ const makeOpForm = function (opID, options = {}) {
         
         html += `>${elite}단계</option>`
 	}
-    html += '</select></div><div class="opLevel"><hr><button type="button" class="set-current-op-level-to-max-btn">MAX</button><span> 레벨 </span><button type="button" class="set-target-op-level-to-max-btn">MAX</button><br>'
+    html += '</select></div><div class="opLevel"><hr><button type="button" class="set-current-op-level-to-max-btn">MAX</button><span class="category"> 레벨 </span><button type="button" class="set-target-op-level-to-max-btn">MAX</button><br>'
     
     html += `<input type="text" class="current-op-level" value="${currentOpLevel}">`
     
@@ -318,7 +336,7 @@ const makeOpForm = function (opID, options = {}) {
     var maxNumOfSkills = getNumOfSkills(opID)
     
     if (maxNumOfSkills > 0) {
-        html += '<span>스킬 레벨</span><br>'
+        html += '<span class="category">스킬 레벨</span><br>'
         
         html += '<div class="skill">'
         
@@ -356,8 +374,55 @@ const makeOpForm = function (opID, options = {}) {
             }
             html += '</select>'
         }
+        html += '</div>'
     }
-    html += '</div></div>'
+
+    if (isModuleExists) {
+        if (!module) module = {}
+        html += '<hr><span class="category">강화 모듈</span><br>'
+        
+        html += '<div class="module">'
+        let moduleCodes = Object.keys(db.op[opID].module).sort() // 모듈은 코드 기준으로 내림차순 정렬
+        for (let i = 0; i < moduleCodes.length; ++i) {
+            let moduleCode = moduleCodes[i]
+            // 기본입력값은 0에서 최대랭크(0->3)
+            if (!module[moduleCode]) module[moduleCode] = [0, maxModuleLevel]
+
+            if (i > 1) {
+                html += '<br>'
+            }
+            
+            html += `<span>${moduleCode} </span>`
+            html += `<select class="current-module-level" data-module-code="${moduleCode}">`
+            
+            for (let moduleLevel = 0; moduleLevel <= maxModuleLevel; ++moduleLevel) {
+                html += `<option value="${moduleLevel}"`
+                
+                if (moduleLevel === module[moduleCode][0]) {
+                    html += 'selected'
+                }
+                
+                html += `>${moduleLevel}</option>`
+            }
+            html += '</select>'
+            
+            html += '<span> ▸ </span>'
+            html += `<select class="target-module-level" data-module-code="${moduleCode}">`
+            
+            for (let moduleLevel = 0; moduleLevel <= maxModuleLevel; ++moduleLevel) {
+                html += `<option value="${moduleLevel}"`
+                
+                if (moduleLevel === module[moduleCode][1]) {
+                    html += 'selected'
+                }
+                
+                html += `>${moduleLevel}</option>`
+            }
+            html += '</select>'
+        }
+        html += '</div>'
+    }
+    html += '</div>'
     
     if (asElement) {
         var elem = document.createElement('div')
@@ -460,20 +525,40 @@ const loadLocalStorage = function () {
     }
     document.getElementById('selected-op-guide').style.display = 'none'
     
-    // 레어도순 정렬, ID순 정렬, 출시순서순 정렬
+    // 레어도, 스킬 수, 모듈 수, ID, 출시순서순 정렬
     existingProps.IDs.sort(function (ID1, ID2) {
-        if (Number(db.op[ID1].rarity) > Number(db.op[ID2].rarity)) return -1
-        if (Number(db.op[ID1].rarity) < Number(db.op[ID2].rarity)) return 1
+        let a, b
+
+        // 레어도
+        a = Number(db.op[ID1].rarity)
+        b = Number(db.op[ID2].rarity)
+        if (a > b) return -1
+        if (a < b) return 1
+
+        // 스킬 수
+        a = getNumOfSkills(ID1)
+        b = getNumOfSkills(ID2)
+        if (a > b) return -1
+        if (a < b) return 1
+
+        // 모듈 수
+        a = (!db.op[ID1].module ? 0 : Object.keys(db.op[ID1].module).length)
+        b = (!db.op[ID2].module ? 0 : Object.keys(db.op[ID2].module).length)
+        if (a > b) return -1
+        if (a < b) return 1
         
+        // ID, 출시순서
         ID1 = ID1.split('-')
         ID2 = ID2.split('-')
         
+        // ID
         if (ID1[0] < ID2[0]) return -1
         if (ID1[0] > ID2[0]) return 1
         
         if (ID1.length === 1) ID1.push(0)
         if (ID2.length === 1) ID2.push(0)
         
+        // 출시순서
         if (Number(ID1[1]) < Number(ID2[1])) return -1
         return 1
     })
@@ -573,6 +658,7 @@ var triggerEvent = function (elem, eventName, info = null) {
 
 /* =============== op event handlers =============== */
 var getMaxElite = function(rarity){ return [0,0,1,2,2,2][rarity-1]}
+var getMaxModuleLevel = function(opID){ return 3 }
 var getNumOfSkills = function (opID, elite = null) {
     var rarity = db.op[opID].rarity
     
@@ -608,6 +694,13 @@ var getNumOfSkills = function (opID, elite = null) {
     
     return ret
 }
+
+var getNumOfModules = function(opID) {
+    let module = db.op[opID].module
+    if (!module) return 0
+    return Object.keys(module).length
+}
+
 var getMaxSkillLevel = function(elite){ return [4,7,10][elite]}
 
 var opFormRecalcHandler = function (event) {
@@ -617,12 +710,14 @@ var opFormRecalcHandler = function (event) {
     var isOriginal = (opID === originalID)
     
     // 자신을 포함하여, 관련된 원본/어레인지의 속성값 모두 저장
+    // 원본/어레인지간 깊은 복사를 위해서, 그리고 오퍼레이터 속성을 편하게 다루기 위해서 변수로 저장.
     var similarOps = {}
     document.querySelectorAll(`#selected-op [name^="op_${originalID}"]`).forEach(function (elm) {
         let id = elm.getAttribute('name').split('_')[1]
         
         similarOps[id] = {}
         
+        // DOM
         similarOps[id].form = elm
         similarOps[id].currentEliteElem = elm.querySelectorAll('.current-elite')[0]
         similarOps[id].targetEliteElem = elm.querySelectorAll('.target-elite')[0]
@@ -630,7 +725,10 @@ var opFormRecalcHandler = function (event) {
         similarOps[id].targetLevelElem = elm.querySelectorAll('.target-op-level')[0]
         similarOps[id].currentSkillLevelElems = elm.querySelectorAll('.current-skill-level')
         similarOps[id].targetSkillLevelElems = elm.querySelectorAll('.target-skill-level')
+        similarOps[id].currentModuleLevelElems = elm.querySelectorAll('.current-module-level')
+        similarOps[id].targetModuleLevelElems = elm.querySelectorAll('.target-module-level')
         
+        // 값
         similarOps[id].currentElite = Number(elm.querySelector('.current-elite').value)
         similarOps[id].targetElite = Number(elm.querySelector('.target-elite').value)
         
@@ -639,6 +737,14 @@ var opFormRecalcHandler = function (event) {
         
         similarOps[id].currentSkillLevels = Array.from(elm.querySelectorAll('.current-skill-level'), sklvElm => Number(sklvElm.value))
         similarOps[id].targetSkillLevels = Array.from(elm.querySelectorAll('.target-skill-level'), sklvElm => Number(sklvElm.value))
+
+        similarOps[id].module = {}
+        elm.querySelectorAll('.current-module-level').forEach(a=>{
+            similarOps[id].module[a.dataset.moduleCode] = [Number(a.value)]
+        })
+        elm.querySelectorAll('.target-module-level').forEach(a=>{
+            similarOps[id].module[a.dataset.moduleCode].push(Number(a.value))
+        })
     })
     
     var isNull = {}
@@ -646,6 +752,7 @@ var opFormRecalcHandler = function (event) {
         // 원본에 종속되는 속성의 목록 생성
         isNull.elite = (db.op[opID].elite === null) // elite가 종속되었다면, 레벨 또한 종속되었다고 볼 수 있음.
         isNull.skill = (db.op[opID].skill === null)
+        // ! 모듈도 종속되는지는 아직 모름.
     }
     
     // 어레인지 버전이라면, isNull에 등록된 속성들이 원본에게 종속되도록 설정.
@@ -688,15 +795,19 @@ var opFormRecalcHandler = function (event) {
     // 마치 새로운 4, 5스킬이 생긴 것처럼.
     // 해당 사항의 처리는, 스킬레벨 유효성 검사시 원본과 다른 어레인지까지 고려함으로써 수행하겠음.
     
+    
+    /*
+    // 실제로 값이 변했는지 판정하고, 변하지 않았다면 계산하지 않고 끝내는 코드
+    // 근데 이 코드는 동작할 일이 없음. 이 함수는 값이 변해야만 호출되므로.
     var currentInputValue = [
         similarOps[opID].currentElite, similarOps[opID].targetElite,
         similarOps[opID].currentLevel, similarOps[opID].targetLevel,
-        ...similarOps[opID].currentSkillLevels, ...similarOps[opID].targetSkillLevels
+        ...similarOps[opID].currentSkillLevels, ...similarOps[opID].targetSkillLevels,
     ]
     
     var prevInputValue = this.dataset.inputValue
     if (prevInputValue) {
-        prevInputValue = prevInputValue.split(',').map(Number)
+        //prevInputValue = prevInputValue.split(',').map(Number)
     }
     else {
         prevInputValue = []
@@ -714,11 +825,12 @@ var opFormRecalcHandler = function (event) {
         console.log(opID, 'nodiff: return')
         return
     }
-    
+    */
     
     var rarity = Number(db.op[opID].rarity)
     
-    var maxNumOfSkills = getNumOfSkills(opID)
+    var maxNumOfSkills = getNumOfSkills(opID),
+        maxModuleLevel = getMaxModuleLevel(opID)
     
     // 입력받은 event 정보에 따라서 어떤 구성요소를 검증할지 선택
     var from = null
@@ -736,28 +848,38 @@ var opFormRecalcHandler = function (event) {
     if (from.type === 'all') {
         var checkElite = true,
             checkLevel = true,
-            checkSkill = true
+            checkSkill = true,
+            checkModule = true
     }
     else {
         if (from.type === 'elite') {
             var checkElite = true,
                 checkLevel = true,
-                checkSkill = true
+                checkSkill = true,
+                checkModule = false
         }
         else if (from.type === 'level') {
             var checkElite = false,
                 checkLevel = true,
-                checkSkill = false
+                checkSkill = false,
+                checkModule = false
         }
         else if (from.type === 'skill') {
             var checkElite = false,
                 checkLevel = false,
-                checkSkill = true
+                checkSkill = true,
+                checkModule = false
             
             if (!Number.isInteger(from.index) || from.index < 0 || from.index >= 3) {
                 console.error('인덱스 오류:', from.index)
                 return
             }
+        }
+        else if (from.type === 'module') {
+            var checkElite = false,
+                checkLevel = false,
+                checkSkill = false,
+                checkModule = true
         }
         else {
             console.error('타입 오류:', from.type)
@@ -934,6 +1056,32 @@ var opFormRecalcHandler = function (event) {
         // 이걸로 목표 스킬레벨 확정됨.
     }
 
+    // 모듈 값 검증
+    if (checkModule) {
+        // 0 미만이거나 maxModuleLevel 초과인 것, 그리고 목표값이 현재값 미만인 것에 대해 검증/수정
+        for (let id in similarOps) {
+            let module = similarOps[id].module, moduleCodes = []
+
+            if (from.moduleCode) // 특정 모듈에 대한 변경이면 해당 모듈만 검증
+                moduleCodes = [from.moduleCode]
+            else                 // 모듈이 특정되지 않은 변경이면 모든 모듈 검증
+                moduleCodes = Object.keys(module)
+            
+            for (let moduleCode in moduleCodes) {
+                moduleCode = moduleCodes[moduleCode]
+                let c = module[moduleCode][0], t = module[moduleCode][1]
+                
+                if (c < 0 || c > maxModuleLevel) c = 0
+                if (t < 0 || t > maxModuleLevel) t = maxModuleLevel
+
+                if (t < c) t = c
+
+                module[moduleCode][0] = c
+                module[moduleCode][1] = t
+            }
+        }
+    }
+
     if (checkLevel) {
         // 마지막으로 레벨
         // 최소치, 최대치를 넘기지 않도록 제한
@@ -1056,6 +1204,38 @@ var opFormRecalcHandler = function (event) {
         }
     }
 
+    // 모듈
+    if (checkModule) {
+        for (let id in similarOps) {
+            // 현재 값 미만의 목표 값을 고를 수 없게 option만 disable하면 됨.
+            // 그리고, 내부계산결과를 DOM에 반영
+            let module = similarOps[id].module,
+                moduleCodes = []
+                
+            if (from.moduleCode)    // 특정 모듈에 대한 변경이면 해당 모듈만 처리
+                moduleCodes = [from.moduleCode]
+            else                    // 모듈이 특정되지 않은 변경이면 모든 모듈 처리
+                moduleCodes = Object.keys(module)
+            
+            for (let moduleCode in moduleCodes) {
+                moduleCode = moduleCodes[moduleCode]
+                // 모듈코드에 해당하는 모듈 DOM 요소
+                let currentModuleElm = document.querySelector(`.current-module-level[data-module-code=${moduleCode}]`),
+                targetModuleElm = document.querySelector(`.target-module-level[data-module-code=${moduleCode}]`),
+                targetOptions = targetModuleElm.querySelectorAll('option'),
+                c = module[moduleCode][0], t = module[moduleCode][1] // c: 현재값, t: 목표값
+                
+                // 목표값은 현재값 이상이어야 함
+                for (let i = 0; i <= maxModuleLevel; ++i) {
+                    if (i < c) targetOptions[i].disabled = true
+                    else       targetOptions[i].disabled = false
+                }
+                currentModuleElm.value = c
+                targetModuleElm.value = t
+            }
+        }
+    }
+
     // 레벨
     if (checkLevel) {
         for (let id in similarOps) {
@@ -1065,22 +1245,27 @@ var opFormRecalcHandler = function (event) {
     }
     
     // dataset와 localStorage에 새로운 값 저장
+    // inputValue dataset은, 과거 입력값과 현재 입력값을 비교하여 실제 입력값 변동 여부를 판정하기 위해서만 쓰이고 있는데
+    // 해당 판정은 의미가 없어서 주석처리해놓은 상태임. 따라서 해당 dataset 또한 사용하지 않도록 하겠음.
     for (let id in similarOps) {
-        similarOps[id].form.dataset.inputValue = [
+        /*similarOps[id].form.dataset.inputValue = [
             similarOps[id].currentElite, similarOps[id].targetElite,
             similarOps[id].currentLevel, similarOps[id].targetLevel,
-            ...similarOps[id].currentSkillLevels, ...similarOps[id].targetSkillLevels
-        ].join(',')
+            ...similarOps[id].currentSkillLevels, ...similarOps[id].targetSkillLevels,
+            //JSON.stringify(similarOps[id].module)
+        ].join(',')*/
         
         let prefix = 'optotal_' + id + '_'
         
-        localStorage.setItem(prefix + 'current-elite',      JSON.stringify(similarOps[id].currentElite))
-        localStorage.setItem(prefix + 'current-op-level',   JSON.stringify(similarOps[id].currentLevel))
-        localStorage.setItem(prefix + 'current-skill-level',JSON.stringify(similarOps[id].currentSkillLevels))
+        localStorage.setItem(prefix + 'current-elite',       JSON.stringify(similarOps[id].currentElite))
+        localStorage.setItem(prefix + 'current-op-level',    JSON.stringify(similarOps[id].currentLevel))
+        localStorage.setItem(prefix + 'current-skill-level', JSON.stringify(similarOps[id].currentSkillLevels))
         
-        localStorage.setItem(prefix + 'target-elite',       JSON.stringify(similarOps[id].targetElite))
-        localStorage.setItem(prefix + 'target-op-level',    JSON.stringify(similarOps[id].targetLevel))
-        localStorage.setItem(prefix + 'target-skill-level', JSON.stringify(similarOps[id].targetSkillLevels))
+        localStorage.setItem(prefix + 'target-elite',        JSON.stringify(similarOps[id].targetElite))
+        localStorage.setItem(prefix + 'target-op-level',     JSON.stringify(similarOps[id].targetLevel))
+        localStorage.setItem(prefix + 'target-skill-level',  JSON.stringify(similarOps[id].targetSkillLevels))
+
+        localStorage.setItem(prefix + 'module',              JSON.stringify(similarOps[id].module))
     }
     
     // 원본이라면, 모든 어레인지를 새로고침해야 함.
@@ -1141,10 +1326,14 @@ var removeBtnClickHandler = function () {
     // 결과를 재계산
     showResult()
 }
-var moduleBtnClickHandler = function () {
+/*var moduleBtnClickHandler = function () {
     // 오퍼레이터 ID 취득
     var opID = this.closest('.op').getAttribute('name').split('_')[1]
     var lskey = `optotal_${opID}_module` // 로컬스토리지 접근 키
+    
+    // 저장된 모듈 정보가 반영된 입력폼 표시
+
+
     
     // 토글된 모듈 정보를 로컬스토리지와 화면에서 갱신
     var module = !JSON.parse(localStorage.getItem(lskey) || 'false')
@@ -1154,11 +1343,12 @@ var moduleBtnClickHandler = function () {
     if (module) this.classList.add('selected')
     else this.classList.remove('selected')
 
-    this.innerText = (module ? '모듈 반영됨' : '모듈 미반영됨')
+    this.innerText = (module ? '모듈 설정됨' : '모듈 미설정됨')
+    
     
     // 결과를 재계산
     showResult()
-}
+}*/
 /*
 var removeOpMousedownHandler = function () {
     var originalID = this.closest('.op').getAttribute('name').split('_')[1].split('-')[0]
@@ -1331,7 +1521,7 @@ var currentSkillLevelChangeHandler = function (event) {
     })
 }
 
-var targetSkillLevelChangeHandler = function () {
+var targetSkillLevelChangeHandler = function (event) {
     if (this.disabled) { return }
     
     triggerEvent(this.closest('.op'), 'recalc', {
@@ -1339,6 +1529,30 @@ var targetSkillLevelChangeHandler = function () {
             type: 'skill',
             position: 'target',
             index: Number(event.target.dataset.index)
+        }
+    })
+}
+
+var currentModuleLevelChangeHandler = function (event) {
+    if (this.disabled) { return }
+
+    triggerEvent(this.closest('.op'), 'recalc', {
+        from: {
+            type: 'module',
+            position: 'current',
+            moduleCode: event.target.dataset.moduleCode
+        }
+    })
+}
+
+var targetModuleLevelChangeHandler = function (event) {
+    if (this.disabled) { return }
+
+    triggerEvent(this.closest('.op'), 'recalc', {
+        from: {
+            type: 'module',
+            position: 'target',
+            moduleCode: event.target.dataset.moduleCode
         }
     })
 }
@@ -1364,9 +1578,11 @@ const addOpEventListener = function (opForm, doTrigger = false) {
     // 오퍼레이터 제거 버튼 클릭 -> opForm 제거 & 재계산
     opForm.querySelector('.remove-btn').addEventListener('click', removeBtnClickHandler)
 
-    // 모듈 버튼 클릭 -> 모듈 반영 여부 토글 & 재계산
+    /*
+    // 모듈 버튼 클릭 -> 모듈 설정하는 드롭박스 표시
     if (opForm.querySelector('.module-btn'))
         opForm.querySelector('.module-btn').addEventListener('click', moduleBtnClickHandler)
+    */
     
     // 레벨 최대 설정 버튼
     // 현재 레벨을 최대로 설정
@@ -1395,6 +1611,16 @@ const addOpEventListener = function (opForm, doTrigger = false) {
     // 목표스킬레벨 변경시
     opForm.querySelectorAll('.target-skill-level').forEach(function (elem) {
         elem.addEventListener('change', targetSkillLevelChangeHandler)
+    })
+
+    // 모듈레벨 변경시
+    // 현재모듈레벨 변경시
+    opForm.querySelectorAll('.current-module-level').forEach(function (elem) {
+        elem.addEventListener('change', currentModuleLevelChangeHandler)
+    })
+    // 목표모듈레벨 변경시
+    opForm.querySelectorAll('.target-module-level').forEach(function (elem) {
+        elem.addEventListener('change', targetModuleLevelChangeHandler)
     })
     
     if (doTrigger) {

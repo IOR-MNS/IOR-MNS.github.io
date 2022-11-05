@@ -14,13 +14,37 @@ var itemOrder = [
     
     ["스킬개론 제3권", "스킬개론 제2권", "스킬개론 제1권"], 
     
-    ["칩 첨가제", "뱅가드 듀얼 칩", "가드 듀얼 칩", "디펜더 듀얼 칩", "스나이퍼 듀얼 칩", "캐스터 듀얼 칩", "메딕 듀얼 칩", "서포터 듀얼 칩", "스페셜리스트 듀얼 칩", "뱅가드 칩셋", "가드 칩셋", "디펜더 칩셋", "스나이퍼 칩셋", "캐스터 칩셋", "메딕 칩셋", "서포터 칩셋", "스페셜리스트 칩셋", "뱅가드 칩", "가드 칩", "디펜더 칩", "스나이퍼 칩", "캐스터 칩", "메딕 칩", "서포터 칩", "스페셜리스트 칩"], 
+    ["칩 첨가제", 
+	"뱅가드 듀얼 칩", "뱅가드 칩셋", "뱅가드 칩", 
+	"가드 듀얼 칩", "가드 칩셋", "가드 칩", 
+	"디펜더 듀얼 칩", "디펜더 칩셋", "디펜더 칩", 
+	"스나이퍼 듀얼 칩", "스나이퍼 칩셋", "스나이퍼 칩", 
+	"캐스터 듀얼 칩", "캐스터 칩셋", "캐스터 칩", 
+	"메딕 듀얼 칩", "메딕 칩셋", "메딕 칩", 
+	"서포터 듀얼 칩", "서포터 칩셋", "서포터 칩", 
+	"스페셜리스트 듀얼 칩", "스페셜리스트 칩셋", "스페셜리스트 칩"], 
     
-    ["모듈 데이터 블록", "D32강", "바이폴라 나노플레이크 칩", "중합제", "결정 전자 장치"], 
+    ["모듈 데이터 칩", "데이터 보충 조각", "데이터 보충 기구"],
+
+	["D32강", "바이폴라 나노플레이크 칩", "중합제", "결정 전자 장치"], 
     
-    ["RMA70-24", "망간 중합체", "화이트 호스 콜", "고급 연마석", "중합젤", "열합금 팩", "결정 회로", "정제된 용제", "절삭원액", "RMA70-12", "망간 광석", "로식 콜", "연마석", "젤", "열합금", "결정 부품", "반자연 용제", "화합절삭액"], 
+    ["RMA70-24", "RMA70-12", 
+	"망간 중합체", "망간 광석", 
+	"화이트 호스 콜", "로식 콜", 
+	"고급 연마석", "연마석", 
+	"중합젤", "젤", 
+	"열합금 팩", "열합금", 
+	"결정 회로", "결정 부품", 
+	"정제된 용제", "반합성 용제", 
+	"절삭원액", "중합 절삭유",
+	"공업용 소금 결정", "공업용 소금 팩", "공업용 소금 번들"], 
     
-    ["포도당 팩", "폴리에스테르 팩", "개량 장치", "정제 원암", "아케톤 팩", "이철 팩", "포도당 번들", "폴리에스테르 번들", "리뉴얼 장치", "원암 큐브 번들", "아케톤 응집체 번들", "이철 번들", "포도당", "폴리에스테르", "장치", "원암 큐브", "아케톤 응집체", "이철", "대체당", "에스테르 원료", "파손된 장치", "원암", "디케톤", "이철 조각"],
+    ["포도당 팩", "포도당 번들", "포도당", "대체당", 
+	"폴리에스테르 팩", "폴리에스테르 번들", "폴리에스테르", "에스테르 원료", 
+	"개량 장치", "리뉴얼 장치", "장치", "파손된 장치", 
+	"정제 원암", "원암 큐브 번들", "원암 큐브", "원암", 
+	"아케톤 팩", "아케톤 응집체 번들", "아케톤 응집체","디케톤", 
+	"이철 팩", "이철 번들", "이철", "이철 조각"],
 ]
 
 const getGroupIdx = function (itemID) {
@@ -189,8 +213,8 @@ const recalcExpLmd = function () {
     let expStage = localStorage.getItem('optotal_exp-stage'),
         lmdStage = localStorage.getItem('optotal_lmd-stage')
     
-    if (!(expStage in db.oplv.stage.exp)) expStage = 'LS-5'
-    if (!(lmdStage in db.oplv.stage.lmd)) lmdStage = 'CE-5'
+    if (!(expStage in db.oplv.stage.exp)) expStage = 'LS-6'
+    if (!(lmdStage in db.oplv.stage.lmd)) lmdStage = 'CE-6'
     
     var expSanity = db.oplv.stage.exp[expStage].sanity
 	var expReward = db.oplv.stage.exp[expStage].reward // lowerBound, upperBound, expectation
@@ -253,8 +277,8 @@ const tt = function (res) {
     let expStage = localStorage.getItem('optotal_exp-stage'),
         lmdStage = localStorage.getItem('optotal_lmd-stage')
     
-    if (!(expStage in db.oplv.stage.exp)) expStage = 'LS-5'
-    if (!(lmdStage in db.oplv.stage.lmd)) lmdStage = 'CE-5'
+    if (!(expStage in db.oplv.stage.exp)) expStage = 'LS-6'
+    if (!(lmdStage in db.oplv.stage.lmd)) lmdStage = 'CE-6'
     
     var expSanity = db.oplv.stage.exp[expStage].sanity
 	var expReward = db.oplv.stage.exp[expStage].reward // lowerBound, upperBound, expectation
@@ -577,13 +601,19 @@ const fetchInputData = function () {
             }
         }
 
-		// 모듈이 존재하지 않으면, 애초에 .module-btn 요소도 존재하지 않음. 계산에 포함하지 않아야 함.
+		// 모듈이 존재하지 않으면, 애초에 .module 섹터도 존재하지 않음. 계산에 포함하지 않아야 함.
 		if (db.op[opID].module === null) {
 			module = false
 		}
 		else {
-			// 모듈 반영 여부 확인. 이 분기에서 .module-btn 요소는 반드시 존재할 것임
-            module = opForm.querySelector('.module-btn').classList.contains('selected')
+			// .module 섹터의 정보를 읽어서 계산에 반영
+			module = {}
+			for (let moduleCode in db.op[opID].module) {
+				let c, t
+				c = Number(opForm.querySelector(`.current-module-level[data-module-code=${moduleCode}]`).value)
+				t = Number(opForm.querySelector(`.target-module-level[data-module-code=${moduleCode}]`).value)
+				module[moduleCode] = [c, t]
+			}
 		}
 		
 		// 이제 정예화 단계, 레벨, 스킬 레벨에 관한 입력 데이터를 전부 읽어들이고 알맞게 기록했으니,
@@ -659,6 +689,7 @@ const sortResultData = function (resultData) {
 		}
 	}
 	
+	resultData.module.IDs.sort(byGroup)
 	resultData.skillLeveling.IDs.sort(byGroup)
 	resultData.elitePromotion.IDs.sort(byGroup)
 	resultData.total.IDs.sort(byGroup)
@@ -800,7 +831,7 @@ const levelingCalc = function (formdata) {
 const calc = function (inputData) {
 	// 계산하는 자원 종류:
 	// 경험치, 용문폐,
-	// 정예화 재료, 스킬작 재료
+	// 정예화 재료, 스킬작 재료, 강화모듈 재료
 	
 	// 계산하는 육성 종류:
 	// 레벨링(경험치/용문폐), 정예화(용문폐/정예화재료), 스킬작(스킬작재료), 모듈(강화모듈재료)
@@ -1007,27 +1038,40 @@ const calc = function (inputData) {
 
 		// 모듈 반영 상태라면 모듈 재료 합산
 		// 각 강화모듈 단위로 합산
-		for (let j = 0; j < db.op[opID].module.length; ++j) {
-			let moduleMaterials = db.op[opID].module[j]
-			// 현재 강화모듈의 재료를 합산
-			for (let k = 0; k < moduleMaterials.length; ++k) {
-				// itemID, quantity 순서
-				let itemset = moduleMaterials[k],
-					itemID = itemset[0],
-					quantity = itemset[1]
-				
-				// module 객체에 해당 자원이 이미 기록되어 있다면, 수량을 추가
-				if (result.module.hasOwnProperty(itemID)) {
-					result.module[itemID] += quantity
-				}
-				// module 객체에 해당 자원이 아직 기록된 적이 없다면, 새로이 set을 설정
-				else {
-					result.module[itemID] = quantity
-					result.module.IDs.push(itemID)
-				}
+		for (let moduleCode in db.op[opID].module) {
+			let moduleData = db.op[opID].module[moduleCode], // 강화모듈 하나 선택됨
+				c = inputData[opID].module[moduleCode][0],	 // 각각 현재값, 목표값
+				t = inputData[opID].module[moduleCode][1]
+			
+			// 현재레벨부터 목표레벨까지의 재료를 합산
+			// moduleData의 인덱스는 0부터 2까지 있음.
+			// 0은 1랭크, 1은 2랭크, 2는 3랭크로 올리기 위해 필요한 재료를 담고 있음
+			// 즉, 사실상 mdlv에 1을 더해야 강화하는 랭크가 되는 것임.
+			// 현재값이 0이라고 하면, mdlv의 초기값은 현재값+1 = 1랭크로 설정되게 한다.
+			// 목표값이 1이라고 하면, mdlv는 1 미만, 즉 0까지만 올라가는데 이는 1랭크까지만 강화하게 하는 것이다.
+			// 따라서 현재값 0, 목표값 1이라면 모듈의 1랭크 재료만 합산하게 된다.
+			for (let mdlv = c; mdlv < t; ++mdlv) {
+				let materials = moduleData[mdlv] // 강화모듈의 레벨 하나 선택됨
+				materials.forEach(itemset => {
+					let itemID = itemset[0],
+						quantity = itemset[1]
+					
+					// module 객체에 해당 자원이 이미 기록되어 있다면, 수량을 추가
+					if (result.module.hasOwnProperty(itemID)) {
+						result.module[itemID] += quantity
+					}
+					// module 객체에 해당 자원이 아직 기록된 적이 없다면, 새로이 set을 설정
+					else {
+						result.module[itemID] = quantity
+						result.module.IDs.push(itemID)
+					}
+				})
 			}
+			// 현재 대원의 강화모듈 하나에 대한 합산 끝남
 		}
+		// 현재 대원의 모든 강화모듈에 대한 합산 끝남
 	}
+	// 모든 대원의 모든 강화모듈에 대한 합산 끝남
 	
 	// total에 모든 값들을 통합
 	result.total.exp = 0
