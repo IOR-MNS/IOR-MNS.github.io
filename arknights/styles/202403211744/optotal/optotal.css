@@ -4,7 +4,7 @@
     --op--height: auto;/*calc(var(--op--width) * 3.2);/*calc(var(--op--width) * 2.55); */
     --op--margin-top: 0.4rem;
     --op--margin-right: 0.2rem;
-    --op-container--width: calc((var(--op--width) + var(--op--margin-right)) * 5);
+    --op-container--width: calc((var(--op--width) + var(--op--margin-right)) * 7);
 }
 
 .modal-content {
@@ -268,7 +268,7 @@ button.selected,
 .result-group {
 	display: inline-block;
 	
-	border: 0.07em solid #222;
+	border: none; /*0.07em solid #222;*/
     
     /*padding-left: 5px;
 	margin-top: 3px;*/

@@ -104,7 +104,7 @@ hr {
 	margin-top: 0;
 	margin-bottom: 0.2rem;
 	width: 100%;
-	max-width: calc((var(--item--total-width) * 10) + 1px);
+	max-width: calc((var(--item--total-width) * 9) + 1px); /* 한 줄에 아이템이 최대 몇 개까지 표시될 지 결정 */
 	text-align: left;
 	background-color: #111;
 }

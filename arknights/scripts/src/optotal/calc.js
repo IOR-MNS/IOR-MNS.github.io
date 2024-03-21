@@ -26,7 +26,7 @@ var itemOrder = [
     
     ["모듈 데이터 칩", "데이터 보충 조각", "데이터 보충 기구"],
 
-	["D32강", "바이폴라 나노플레이크 칩", "중합제", "결정 전자 장치"], 
+	["D32강", "바이폴라 나노플레이크 칩", "중합제", "결정 전자 장치", "핵결정체 소결물"], 
     
     ["RMA70-24", "RMA70-12", 
 	"망간 중합체", "망간 광석", 
@@ -37,7 +37,9 @@ var itemOrder = [
 	"결정 회로", "결정 부품", 
 	"정제된 용제", "반합성 용제", 
 	"절삭유 원액", "중합 절삭유",
-	"공업용 소금 결정", "공업용 소금 팩", "공업용 소금 번들"], 
+	"합성 소금 팩", "합성 소금 번들",
+	"고리형 탄화수소 프리팹", "고리형 탄화수소 중합체",
+	"경화 섬유판", "갈소 섬유"], 
     
     ["포도당 팩", "포도당 번들", "포도당", "대체당", 
 	"폴리에스테르 팩", "폴리에스테르 번들", "폴리에스테르", "에스테르 원료", 
@@ -146,6 +148,11 @@ const makeResultHtmlByGroup = function (resultData) {
 	
 	var resultHtml = openDiv
 	
+	//resultData.IDs.sort((a,b)=>a-b).forEach((id)=>{
+	//	resultHtml += toImg(db.item[id].name.kr, resultData[id])
+	//})
+	
+	//
 	var prevGroupIdx = -1
 	
 	for (var i = 0; i < resultData.IDs.length; ++i) {
@@ -163,7 +170,7 @@ const makeResultHtmlByGroup = function (resultData) {
 		resultHtml += toImg(db.item[ID].name.kr, resultData[ID])
 		
 		prevGroupIdx = groupIdx
-	}
+	}//
 	
 	resultHtml += closeDiv
 	
