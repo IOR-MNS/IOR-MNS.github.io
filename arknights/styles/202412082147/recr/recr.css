@@ -1,0 +1,339 @@
+:root {
+    --max-width: calc(100% - (var(--body--horizontal-margin) * 2) - (var(--panel--border-width) * 2));
+    --result-panel--width: calc(100% - (var(--body--horizontal-margin) * 2) - (var(--panel--border-width) * 2));
+}
+
+/* 데스크톱
+   ========================================================================== */
+@media (min-width: 481px) and (orientation: portrait), (min-height: 481px) and (orientation: landscape) {
+    :root {
+        --result-panel--width: 560px;
+    }
+    
+    .announce-panel:hover {
+        background-color: rgba(255, 127, 0, 0.3);
+    }
+    
+    .guide-panel.expandable:hover {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.17);
+    }
+}
+
+.modal-content {
+    width: 12em;
+    /*max-width: 92%;*/
+}
+
+/**************/
+
+.subtitle {
+    margin-bottom: 0;
+}
+
+.announce-panel {
+    cursor: pointer;
+    border-color: var(--color--soft-orange);/*#ddd;*/
+	width: 13.4rem;
+    max-width: var(--max-width);
+	text-align: center;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.35rem;
+    background-color: /*var(--background--hard-blue);*//*rgba(255, 127, 0, 0.5);*//*rgba(253, 153, 225, 0.3);*/rgba(255, 255, 255, 0);
+    transition: background-color 0.3s;
+}
+
+#announce-detail {
+    text-align: center;
+    font-size: 80%;
+}
+
+.announce-panel table {
+    width: 100%;
+    color: #ddd;
+}
+
+.announce-panel hr {
+    border-color: rgba(255, 127, 0, 0.45);
+}
+
+.guide-panel {
+    font-size: 0.7rem;
+    text-align: center;
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+.recommended {
+    border-color: rgba(255, 127, 0, 0.7);
+}
+
+.selection-panel {
+    margin-top: 0;
+    border-color: #ddd;
+	width: 13.4rem;/*13rem;*/
+    max-width: var(--max-width);
+	text-align: left;
+    padding: 0.2rem 0.35rem;
+}
+
+[data-lang='jp'] .tag {
+    font-family: 'Noto Sans JP';
+}
+[data-lang='cn'] .tag {
+    font-family: 'Noto Sans SC';
+}
+
+#result-panel .panel {
+	width: var(--result-panel--width);
+    max-width: var(--max-width);
+	padding: 0.3rem 0.5rem;
+}
+
+hr {
+	border-top: 0.06rem solid #333;
+	/*border-radius: 0.05rem;*/
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+	padding: 0;
+}
+
+.tagBatchSelector {
+	width: calc(100% - 0.5em); /* main.css에서 form의 padding은 0.5em */
+	color: #eee;
+	background-color: #000;
+	border: 1px solid #333;
+    font-size: 0.6rem;
+}
+
+.tagBatchSelector.typo {
+    background-color: var(--color--soft-red);
+}
+
+.tag.result-tag {
+    /*font-weight: 300;*/
+    margin: 0 0.2rem 0.2rem 0;
+	background-color: #333;
+}
+
+.tooltip .result-tag {
+    margin: 0.1rem;
+}
+
+.tag.result-op {
+    padding: 0;
+    /*border-width: 0.04rem;*/
+    /*margin: 0.35rem 0.2rem 0.3rem 0;*/
+    margin: 0.07rem 0.1rem;
+	transition: opacity 0.2s ease;
+    overflow: hidden;
+}
+
+.result-tag,
+.result-op.no-img {
+    padding: 0.15rem 0.25rem 0.18rem 0.25rem;
+	/*margin-right: 1vmin;
+	margin-bottom: 0.3vmin;
+	padding-top: 0.7vmin 1vmin;*/
+}
+
+/*
+.result-op img {
+	border-top-left-radius: 0.25rem;
+	border-bottom-left-radius: 0.25rem;
+}
+*/
+
+.result_op_thumb.tiny {
+	height: 2.2em;
+	width: auto;
+    border-right: 0.04em solid #222;
+}
+
+.result_op_thumb.small {
+	height: 3em;
+	width: auto;
+    border-right: 0.04em solid #222;
+}
+
+.result_op_thumb.medium {
+	height: 5em;
+	width: auto;
+    border-right: 0.04em solid #222;
+}
+
+.result_op_thumb.large {
+	height: 7em;
+	width: auto;
+    border-bottom: 0.04em solid #222;
+}
+.panel.only-image .result_op_thumb {
+    border: none;
+}
+
+/* 아무것도 하지 않음
+.result_op_text.none {
+    
+}
+*/
+
+.result_op_text {
+    display: inline-block;
+}
+
+.result_op_text.tiny {
+    align-self: center;
+	width: 6em;
+	text-align: center;
+}
+
+.result_op_text.tiny.only-name {
+	/*padding: 0.5rem 0;*/
+}
+
+.result_op_text.small {
+    align-self: center;
+	width: 6em;
+	text-align: center;
+    line-height: 1.2;
+}
+
+.result_op_text.medium {
+    align-self: center;
+	width: 6em;
+	text-align: center;
+    line-height: 1.3;
+}
+
+/*[data-lang='jp'] .result_op_text:not(.large) {
+    font-size: 70%;
+    width: 9em;
+}*/
+
+.result_op_text.large {
+	display: block;
+    align-self: center;
+    text-align: center;
+	margin-top: 0.3rem;
+	margin-bottom: 0.3rem;
+    line-height: 1.3;
+}
+
+/*덮어씌워야 하므로 가장 아래에 위치해야 함*/
+.result_op_text.only-rarity {
+	width: 2em;
+}
+
+#result-panel .panel.rarity_1 {
+	border-color: #333;
+}
+#result-panel .panel.rarity_2 {
+	border-color: #555;
+}
+#result-panel .panel.rarity_3 {
+	border-color: #aaa;
+}
+#result-panel .panel.rarity_4 {
+	border-color: #1c70b0;	/*파랑*/
+}
+#result-panel .panel.rarity_5 {
+	border-color: #db9a0d;/*#eda60c;*//*#ffae00;*//*#ba5e18;*/ /*주황-노랑 사이*/
+}
+#result-panel .panel.rarity_6 {
+	border-color: #c70808; /*#e0620d;*/ /*주황-빨강 사이*/
+}
+
+.result-op.rarity_1,
+.result-op.rarity_1 .result_op_thumb {
+	border-color: #333;
+	color: #ddd; /*bbb*/
+	background-color: #000;
+}
+
+.result-op.rarity_2,
+.result-op.rarity_2 .result_op_thumb {
+	border-color: #333;
+	color: #ddd;
+	background-color: #000;
+}
+.result-op.rarity_3,
+.result-op.rarity_3 .result_op_thumb {
+	border-color: #333;
+	color: #ddd;
+	background-color: #111;
+}
+.result-op.rarity_4,
+.result-op.rarity_4 .result_op_thumb {
+	border-color: rgba(28, 112, 176, 0.6); /*#1c70b0;*/
+	color: #eee;
+	background-color: rgba(28, 112, 176, 0.15);
+}
+.result-op.rarity_5,
+.result-op.rarity_5 .result_op_thumb {
+	border-color: rgba(219, 154, 13, 0.5); /*#db9a0d;*/
+	color: #eee;
+	background-color: rgba(219, 154, 13, 0.1);
+}
+.result-op.rarity_6,
+.result-op.rarity_6 .result_op_thumb {
+	border-color: rgba(199, 8, 8, 0.5); /*#c70808;*/
+	color: #eee;
+	background-color: rgba(199, 8, 8, 0.1);
+}
+
+.result-op:hover,
+.result-op:focus {
+	/*border-color: #096485;*/
+    opacity: 0.7;
+}
+
+.star {
+    font-weight: 500;
+}
+
+.result-op.no-img .result_op_text:not(.only-rarity) .star {
+    margin-left: 0.3em;
+}
+
+.star.rarity_1 {
+	color: #999;
+}
+.star.rarity_2 {
+	color: #aaa;
+}
+.star.rarity_3 {
+	color: #ccc;
+}
+.star.rarity_4 {
+	color: #1c70b0;
+}
+.star.rarity_5 {
+	color: #db9a0d;
+}
+.star.rarity_6 {
+	color: #c70808;
+}
+
+.checkboxButton.blink:not(:checked) + label {
+    animation: blinkTag 1.5s ease 0s infinite
+}
+
+.transparent {
+    opacity: 0.5
+}
+
+@keyframes blinkTag {
+    0% {
+        border-color: rgba(51, 51, 51, 1)
+    }
+    50% {
+        border-color: rgba(199, 8, 8, 1)
+    }
+    85% {
+        border-color: rgba(199, 8, 8, 1)
+    }
+    100% {
+        border-color: rgba(51, 51, 51, 1)
+    }
+}

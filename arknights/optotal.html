@@ -5,7 +5,7 @@
 	<script src="scripts/plugin/bugsnag-7.8.2.min.js"></script>
 	<script>Bugsnag.start({
 			'apiKey': '6b2e0a8c5c671f6eb58c38ec9a0a9762',
-			'appVersion': '202412020000',
+			'appVersion': '202412082147',
 			'collectUserIp': false,
 			'onError': function (event) {
 				event.setUser(localStorage.getItem('client_fp'))
@@ -43,8 +43,8 @@
 		rel="stylesheet">
 	<link href="images/favicon.ico" rel="shortcut icon">
 
-	<link href="styles/202412020000/main.css" rel="stylesheet" type="text/css">
-	<link href="styles/202412020000/optotal/optotal.css" rel="stylesheet" type="text/css">
+	<link href="styles/202412082147/main.css" rel="stylesheet" type="text/css">
+	<link href="styles/202412082147/optotal/optotal.css" rel="stylesheet" type="text/css">
 
 	<style>
 		.ad-container {
@@ -88,7 +88,8 @@
 	</a>
 	<div class="loader-line" id="loader"></div>
 	<div id="content-body">
-		<p class="subtitle">오퍼레이터 육성 자원 계산기 β</p>
+		
+		<h1 class="subtitle">오퍼레이터 육성 자원 계산기 β<div class="dbversion" id="dbversion_op"></div></h1>
 
 		<div class="ad-container" data-slot-id="9408455693"></div>
 
@@ -264,15 +265,16 @@
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default" crossorigin="anonymous"></script>
 	<script src="scripts/plugin/jquery-3.6.0.min.js"></script>
 
-	<script src="data/op_2024_11_25_03_26_26_265_.js"></script>
-	<script src="data/tag_2024_11_25_03_26_26_265_.js"></script>
-	<script src="data/item_2024_11_25_03_26_26_265_.js"></script>
+	<script src="data/op_2024_12_07_22_14_18_397_.js"></script>
+	<script src="data/tag_2024_12_07_22_14_18_397_.js"></script>
+	<script src="data/item_2024_12_07_22_14_18_397_.js"></script>
 	<script src="data/leveling_221105.js"></script>
-	<script src="scripts/202412020000/optotal/calc.js"></script>
-	<script src="scripts/202412020000/optotal/optotal.js"></script>
-	<script src="scripts/202412020000/optotal/showTooltip.js"></script>
+	<script src="scripts/202412082147/optotal/calc.js"></script>
+	<script src="scripts/202412082147/optotal/optotal.js"></script>
+	<script src="scripts/202412082147/optotal/showTooltip.js"></script>
+	<script>if (document.getElementById("dbversion_op") && db.op.version) { document.getElementById("dbversion_op").innerText = `최종갱신일자 | ${db.op.version}` }</script>
 	<!--
-        <script src="scripts/202412020000/optotal/itemGroupOrder.js"></script>
+        <script src="scripts/202412082147/optotal/itemGroupOrder.js"></script>
         -->
 </body>
 
